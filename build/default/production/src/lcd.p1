@@ -1,124 +1,11 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"27 i2c_master.c
-[; ;i2c_master.c: 27: static volatile I2C_transmit_data current_packet;
-[c E9283 0 1 2 3 .. ]
-[n E9283 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
-"20
-[; ;i2c_master.c: 20: typedef struct {
-[s S1381 `*uc 1 `i 1 `uc 1 `E9283 1 ]
-[n S1381 . data length address result ]
-"28
-[; ;i2c_master.c: 28: static volatile I2C_master_status I2C_status;
-[c E9299 0 1 2 3 4 5 6 .. ]
-[n E9299 . IDLE SEND_ADDRESS ACKNOWLEDGE_ADDR SEND_DATA RECEIVE_DATA ACKNOWLEDGE_RECV STOPPED  ]
-"15706 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 15706: extern volatile unsigned char SSP1MSK __attribute__((address(0xF93)));
-[v _SSP1MSK `Vuc ~T0 @X0 0 e@3987 ]
-"15586
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 15586: extern volatile unsigned char SSP1ADD __attribute__((address(0xF92)));
-[v _SSP1ADD `Vuc ~T0 @X0 0 e@3986 ]
-"15776
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 15776: extern volatile unsigned char SSP1STAT __attribute__((address(0xF94)));
-[v _SSP1STAT `Vuc ~T0 @X0 0 e@3988 ]
-"16537
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16537: extern volatile unsigned char SSP1CON3 __attribute__((address(0xF97)));
-[v _SSP1CON3 `Vuc ~T0 @X0 0 e@3991 ]
-"16350
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16350: extern volatile unsigned char SSP1CON2 __attribute__((address(0xF96)));
-[v _SSP1CON2 `Vuc ~T0 @X0 0 e@3990 ]
-"16230
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16230: extern volatile unsigned char SSP1CON1 __attribute__((address(0xF95)));
-[v _SSP1CON1 `Vuc ~T0 @X0 0 e@3989 ]
-"30254
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 30254: extern volatile __bit SSP1IF __attribute__((address(0x7640)));
-[v _SSP1IF `Vb ~T0 @X0 0 e@30272 ]
-"3406
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3406:     struct {
-[s S210 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S210 . SSPIE BCLIE . TXIE RCIE ]
-"3413
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3413:     struct {
-[s S211 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S211 . SSP1IE BCL1IE . TX1IE RC1IE ]
-"3420
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3420:     struct {
-[s S212 :1 `uc 1 ]
-[n S212 . RXB0IE ]
-"3423
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3423:     struct {
-[s S213 :1 `uc 1 :1 `uc 1 ]
-[n S213 . . RXB1IE ]
-"3427
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3427:     struct {
-[s S214 :1 `uc 1 :1 `uc 1 ]
-[n S214 . . RXBNIE ]
-"3431
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3431:     struct {
-[s S215 :4 `uc 1 :1 `uc 1 ]
-[n S215 . . TXB2IE ]
-"3435
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3435:     struct {
-[s S216 :4 `uc 1 :1 `uc 1 ]
-[n S216 . . TXBNIE ]
-"3405
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3405: typedef union {
-[u S209 `S210 1 `S211 1 `S212 1 `S213 1 `S214 1 `S215 1 `S216 1 ]
-[n S209 . . . . . . . . ]
-"3440
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3440: extern volatile PIE3bits_t PIE3bits __attribute__((address(0xEC0)));
-[v _PIE3bits `VS209 ~T0 @X0 0 e@3776 ]
-"16356
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16356:     struct {
-[s S816 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S816 . SEN RSEN PEN RCEN ACKEN ACKDT ACKSTAT GCEN ]
-"16366
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16366:     struct {
-[s S817 :1 `uc 1 :5 `uc 1 ]
-[n S817 . . ADMSK ]
-"16370
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16370:     struct {
-[s S818 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S818 . . ADMSK1 ADMSK2 ADMSK3 ADMSK4 ADMSK5 ]
-"16378
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16378:     struct {
-[s S819 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S819 . SEN1 ADMSK11 ADMSK21 ADMSK31 ACKEN1 ACKDT1 ACKSTAT1 GCEN1 ]
-"16388
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16388:     struct {
-[s S820 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S820 . . RSEN1 PEN1 RCEN1 ADMSK41 ADMSK51 ]
-"16355
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16355: typedef union {
-[u S815 `S816 1 `S817 1 `S818 1 `S819 1 `S820 1 ]
-[n S815 . . . . . . ]
-"16397
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16397: extern volatile SSP1CON2bits_t SSP1CON2bits __attribute__((address(0xF96)));
-[v _SSP1CON2bits `VS815 ~T0 @X0 0 e@3990 ]
-"30398
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 30398: extern volatile __bit STOP __attribute__((address(0x7CA4)));
-[v _STOP `Vb ~T0 @X0 0 e@31908 ]
-"15566
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 15566: extern volatile unsigned char SSP1BUF __attribute__((address(0xF91)));
-[v _SSP1BUF `Vuc ~T0 @X0 0 e@3985 ]
-"16236
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16236:     struct {
-[s S812 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S812 . SSPM CKP SSPEN SSPOV WCOL ]
-"16243
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16243:     struct {
-[s S813 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S813 . SSPM0 SSPM1 SSPM2 SSPM3 ]
-"16249
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16249:     struct {
-[s S814 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S814 . SSPM01 SSPM11 SSPM21 SSPM31 CKP1 SSPEN1 SSPOV1 WCOL1 ]
-"16235
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16235: typedef union {
-[u S811 `S812 1 `S813 1 `S814 1 ]
-[n S811 . . . . ]
-"16260
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16260: extern volatile SSP1CON1bits_t SSP1CON1bits __attribute__((address(0xF95)));
-[v _SSP1CON1bits `VS811 ~T0 @X0 0 e@3989 ]
+"58 src/lcd.c
+[; ;src/lcd.c: 58:     I2C_master_write(msg, 2, 0x3C);
+[c E9294 0 1 2 3 .. ]
+[n E9294 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
+"18 src/../headers/i2c_master.h
+[; ;src/../headers/i2c_master.h: 18: I2C_master_result I2C_master_write(char * data, int length, char address);
+[v _I2C_master_write `(E9294 ~T0 @X0 0 ef3`*uc`i`uc ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1370,489 +1257,1481 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"27 i2c_master.c
-[; ;i2c_master.c: 27: static volatile I2C_transmit_data current_packet;
-[v _current_packet `VS1381 ~T0 @X0 1 s ]
-"28
-[; ;i2c_master.c: 28: static volatile I2C_master_status I2C_status;
-[v _I2C_status `VE9299 ~T0 @X0 1 s ]
-"30
-[; ;i2c_master.c: 30: void I2C_master_init() {
-[v _I2C_master_init `(v ~T0 @X0 1 ef ]
-{
-[e :U _I2C_master_init ]
-[f ]
-"31
-[; ;i2c_master.c: 31:     SSP1MSK = 0x00;
-[e = _SSP1MSK -> -> 0 `i `uc ]
-"33
-[; ;i2c_master.c: 33:     SSP1ADD = 0x03;
-[e = _SSP1ADD -> -> 3 `i `uc ]
-"35
-[; ;i2c_master.c: 35:     SSP1STAT = 0x80;
-[e = _SSP1STAT -> -> 128 `i `uc ]
-"37
-[; ;i2c_master.c: 37:     SSP1CON3 = 0x00;
-[e = _SSP1CON3 -> -> 0 `i `uc ]
-"39
-[; ;i2c_master.c: 39:     SSP1CON2 = 0x00;
-[e = _SSP1CON2 -> -> 0 `i `uc ]
-"41
-[; ;i2c_master.c: 41:     SSP1CON1 = 0x28;
-[e = _SSP1CON1 -> -> 40 `i `uc ]
-"44
-[; ;i2c_master.c: 44:     SSP1IF = 0;
-[e = _SSP1IF -> -> 0 `i `b ]
-"45
-[; ;i2c_master.c: 45:     PIE3bits.SSP1IE = 1;
-[e = . . _PIE3bits 1 0 -> -> 1 `i `uc ]
-"46
-[; ;i2c_master.c: 46: }
-[e :UE 1382 ]
-}
+"13 src/../headers/character.h
+[; ;src/../headers/character.h: 13: static char lcd_font[] = {
+[v _lcd_font `uc ~T0 @X0 -> 576 `i s ]
+[i _lcd_font
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 95 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 7 `i `uc
+-> -> 0 `i `uc
+-> -> 7 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 20 `i `uc
+-> -> 127 `i `uc
+-> -> 20 `i `uc
+-> -> 127 `i `uc
+-> -> 20 `i `uc
+-> -> 0 `i `uc
+-> -> 36 `i `uc
+-> -> 42 `i `uc
+-> -> 127 `i `uc
+-> -> 42 `i `uc
+-> -> 18 `i `uc
+-> -> 0 `i `uc
+-> -> 35 `i `uc
+-> -> 19 `i `uc
+-> -> 8 `i `uc
+-> -> 100 `i `uc
+-> -> 98 `i `uc
+-> -> 0 `i `uc
+-> -> 54 `i `uc
+-> -> 73 `i `uc
+-> -> 85 `i `uc
+-> -> 34 `i `uc
+-> -> 80 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 5 `i `uc
+-> -> 3 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 28 `i `uc
+-> -> 34 `i `uc
+-> -> 65 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 65 `i `uc
+-> -> 34 `i `uc
+-> -> 28 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 8 `i `uc
+-> -> 42 `i `uc
+-> -> 28 `i `uc
+-> -> 42 `i `uc
+-> -> 8 `i `uc
+-> -> 0 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 62 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 0 `i `uc
+-> -> 160 `i `uc
+-> -> 96 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 0 `i `uc
+-> -> 96 `i `uc
+-> -> 96 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 32 `i `uc
+-> -> 16 `i `uc
+-> -> 8 `i `uc
+-> -> 4 `i `uc
+-> -> 2 `i `uc
+-> -> 0 `i `uc
+-> -> 62 `i `uc
+-> -> 81 `i `uc
+-> -> 73 `i `uc
+-> -> 69 `i `uc
+-> -> 62 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 66 `i `uc
+-> -> 127 `i `uc
+-> -> 64 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 98 `i `uc
+-> -> 81 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 70 `i `uc
+-> -> 0 `i `uc
+-> -> 34 `i `uc
+-> -> 65 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 54 `i `uc
+-> -> 0 `i `uc
+-> -> 24 `i `uc
+-> -> 20 `i `uc
+-> -> 18 `i `uc
+-> -> 127 `i `uc
+-> -> 16 `i `uc
+-> -> 0 `i `uc
+-> -> 39 `i `uc
+-> -> 69 `i `uc
+-> -> 69 `i `uc
+-> -> 69 `i `uc
+-> -> 57 `i `uc
+-> -> 0 `i `uc
+-> -> 60 `i `uc
+-> -> 74 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 48 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+-> -> 113 `i `uc
+-> -> 9 `i `uc
+-> -> 5 `i `uc
+-> -> 3 `i `uc
+-> -> 0 `i `uc
+-> -> 54 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 54 `i `uc
+-> -> 0 `i `uc
+-> -> 6 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 41 `i `uc
+-> -> 30 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 54 `i `uc
+-> -> 54 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 172 `i `uc
+-> -> 108 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 8 `i `uc
+-> -> 20 `i `uc
+-> -> 34 `i `uc
+-> -> 65 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 20 `i `uc
+-> -> 20 `i `uc
+-> -> 20 `i `uc
+-> -> 20 `i `uc
+-> -> 20 `i `uc
+-> -> 0 `i `uc
+-> -> 65 `i `uc
+-> -> 34 `i `uc
+-> -> 20 `i `uc
+-> -> 8 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 1 `i `uc
+-> -> 81 `i `uc
+-> -> 9 `i `uc
+-> -> 6 `i `uc
+-> -> 0 `i `uc
+-> -> 50 `i `uc
+-> -> 73 `i `uc
+-> -> 121 `i `uc
+-> -> 65 `i `uc
+-> -> 62 `i `uc
+-> -> 0 `i `uc
+-> -> 126 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 126 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 54 `i `uc
+-> -> 0 `i `uc
+-> -> 62 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 34 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 34 `i `uc
+-> -> 28 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 65 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+-> -> 62 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 81 `i `uc
+-> -> 114 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 65 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 32 `i `uc
+-> -> 64 `i `uc
+-> -> 65 `i `uc
+-> -> 63 `i `uc
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 8 `i `uc
+-> -> 20 `i `uc
+-> -> 34 `i `uc
+-> -> 65 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 64 `i `uc
+-> -> 64 `i `uc
+-> -> 64 `i `uc
+-> -> 64 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 2 `i `uc
+-> -> 12 `i `uc
+-> -> 2 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 4 `i `uc
+-> -> 8 `i `uc
+-> -> 16 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+-> -> 62 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 62 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 6 `i `uc
+-> -> 0 `i `uc
+-> -> 62 `i `uc
+-> -> 65 `i `uc
+-> -> 81 `i `uc
+-> -> 33 `i `uc
+-> -> 94 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 9 `i `uc
+-> -> 25 `i `uc
+-> -> 41 `i `uc
+-> -> 70 `i `uc
+-> -> 0 `i `uc
+-> -> 38 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 50 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+-> -> 127 `i `uc
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+-> -> 63 `i `uc
+-> -> 64 `i `uc
+-> -> 64 `i `uc
+-> -> 64 `i `uc
+-> -> 63 `i `uc
+-> -> 0 `i `uc
+-> -> 31 `i `uc
+-> -> 32 `i `uc
+-> -> 64 `i `uc
+-> -> 32 `i `uc
+-> -> 31 `i `uc
+-> -> 0 `i `uc
+-> -> 63 `i `uc
+-> -> 64 `i `uc
+-> -> 56 `i `uc
+-> -> 64 `i `uc
+-> -> 63 `i `uc
+-> -> 0 `i `uc
+-> -> 99 `i `uc
+-> -> 20 `i `uc
+-> -> 8 `i `uc
+-> -> 20 `i `uc
+-> -> 99 `i `uc
+-> -> 0 `i `uc
+-> -> 3 `i `uc
+-> -> 4 `i `uc
+-> -> 120 `i `uc
+-> -> 4 `i `uc
+-> -> 3 `i `uc
+-> -> 0 `i `uc
+-> -> 97 `i `uc
+-> -> 81 `i `uc
+-> -> 73 `i `uc
+-> -> 69 `i `uc
+-> -> 67 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 4 `i `uc
+-> -> 8 `i `uc
+-> -> 16 `i `uc
+-> -> 32 `i `uc
+-> -> 0 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 4 `i `uc
+-> -> 2 `i `uc
+-> -> 1 `i `uc
+-> -> 2 `i `uc
+-> -> 4 `i `uc
+-> -> 0 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+-> -> 2 `i `uc
+-> -> 4 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 32 `i `uc
+-> -> 84 `i `uc
+-> -> 84 `i `uc
+-> -> 84 `i `uc
+-> -> 120 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 72 `i `uc
+-> -> 68 `i `uc
+-> -> 68 `i `uc
+-> -> 56 `i `uc
+-> -> 0 `i `uc
+-> -> 56 `i `uc
+-> -> 68 `i `uc
+-> -> 68 `i `uc
+-> -> 40 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 56 `i `uc
+-> -> 68 `i `uc
+-> -> 68 `i `uc
+-> -> 72 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+-> -> 56 `i `uc
+-> -> 84 `i `uc
+-> -> 84 `i `uc
+-> -> 84 `i `uc
+-> -> 24 `i `uc
+-> -> 0 `i `uc
+-> -> 8 `i `uc
+-> -> 126 `i `uc
+-> -> 9 `i `uc
+-> -> 2 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 24 `i `uc
+-> -> 164 `i `uc
+-> -> 164 `i `uc
+-> -> 164 `i `uc
+-> -> 124 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 8 `i `uc
+-> -> 4 `i `uc
+-> -> 4 `i `uc
+-> -> 120 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 125 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 128 `i `uc
+-> -> 132 `i `uc
+-> -> 125 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 16 `i `uc
+-> -> 40 `i `uc
+-> -> 68 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 64 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 124 `i `uc
+-> -> 4 `i `uc
+-> -> 24 `i `uc
+-> -> 4 `i `uc
+-> -> 120 `i `uc
+-> -> 0 `i `uc
+-> -> 124 `i `uc
+-> -> 8 `i `uc
+-> -> 4 `i `uc
+-> -> 124 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 56 `i `uc
+-> -> 68 `i `uc
+-> -> 68 `i `uc
+-> -> 56 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 252 `i `uc
+-> -> 36 `i `uc
+-> -> 36 `i `uc
+-> -> 24 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 24 `i `uc
+-> -> 36 `i `uc
+-> -> 36 `i `uc
+-> -> 252 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 124 `i `uc
+-> -> 8 `i `uc
+-> -> 4 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 72 `i `uc
+-> -> 84 `i `uc
+-> -> 84 `i `uc
+-> -> 36 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 4 `i `uc
+-> -> 127 `i `uc
+-> -> 68 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 60 `i `uc
+-> -> 64 `i `uc
+-> -> 64 `i `uc
+-> -> 124 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 28 `i `uc
+-> -> 32 `i `uc
+-> -> 64 `i `uc
+-> -> 32 `i `uc
+-> -> 28 `i `uc
+-> -> 0 `i `uc
+-> -> 60 `i `uc
+-> -> 64 `i `uc
+-> -> 48 `i `uc
+-> -> 64 `i `uc
+-> -> 60 `i `uc
+-> -> 0 `i `uc
+-> -> 68 `i `uc
+-> -> 40 `i `uc
+-> -> 16 `i `uc
+-> -> 40 `i `uc
+-> -> 68 `i `uc
+-> -> 0 `i `uc
+-> -> 28 `i `uc
+-> -> 160 `i `uc
+-> -> 160 `i `uc
+-> -> 124 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 68 `i `uc
+-> -> 100 `i `uc
+-> -> 84 `i `uc
+-> -> 76 `i `uc
+-> -> 68 `i `uc
+-> -> 0 `i `uc
+-> -> 8 `i `uc
+-> -> 54 `i `uc
+-> -> 65 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 65 `i `uc
+-> -> 54 `i `uc
+-> -> 8 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+-> -> 2 `i `uc
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 5 `i `uc
+-> -> 5 `i `uc
+-> -> 2 `i `uc
+-> -> 0 `i `uc
+..
+]
+"12 src/lcd.c
+[; ;src/lcd.c: 12: char buffer [0x04 * 0x80] = {
+[v _buffer `uc ~T0 @X0 -> 512 `i e ]
+[i _buffer
+:U ..
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 128 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 192 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 224 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 240 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 248 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 252 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 254 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+..
+]
 "47
-[; ;i2c_master.c: 47: void I2C_stop(I2C_master_result result) {
-[v _I2C_stop `(v ~T0 @X0 1 ef1`E9283 ]
-{
-[e :U _I2C_stop ]
-[v _result `E9283 ~T0 @X0 1 r1 ]
-[f ]
-"48
-[; ;i2c_master.c: 48:     current_packet.result = result;
-[e = . _current_packet 3 _result ]
-"49
-[; ;i2c_master.c: 49:     current_packet.length = 0;
-[e = . _current_packet 1 -> 0 `i ]
-"50
-[; ;i2c_master.c: 50:     SSP1CON2bits.PEN = 1;
-[e = . . _SSP1CON2bits 0 2 -> -> 1 `i `uc ]
-"51
-[; ;i2c_master.c: 51:     I2C_status = STOP;
-[e = _I2C_status -> _STOP `E9299 ]
-"52
-[; ;i2c_master.c: 52: }
-[e :UE 1383 ]
-}
-"53
-[; ;i2c_master.c: 53: void I2C_wait() {
-[v _I2C_wait `(v ~T0 @X0 1 ef ]
-{
-[e :U _I2C_wait ]
-[f ]
-"54
-[; ;i2c_master.c: 54:     while(current_packet.result == PENDING) {
-[e $U 1385  ]
-[e :U 1386 ]
-{
-"56
-[; ;i2c_master.c: 56:     }
-}
-[e :U 1385 ]
-"54
-[; ;i2c_master.c: 54:     while(current_packet.result == PENDING) {
-[e $ == -> . _current_packet 3 `ui -> . `E9283 3 `ui 1386  ]
-[e :U 1387 ]
-"57
-[; ;i2c_master.c: 57:     while(I2C_status != IDLE) {
-[e $U 1388  ]
-[e :U 1389 ]
-{
-"59
-[; ;i2c_master.c: 59:     }
-}
-[e :U 1388 ]
-"57
-[; ;i2c_master.c: 57:     while(I2C_status != IDLE) {
-[e $ != -> _I2C_status `ui -> . `E9299 0 `ui 1389  ]
-[e :U 1390 ]
-"60
-[; ;i2c_master.c: 60: }
-[e :UE 1384 ]
-}
-"61
-[; ;i2c_master.c: 61: void I2C_MASTER_ISR() {
-[v _I2C_MASTER_ISR `(v ~T0 @X0 1 ef ]
-{
-[e :U _I2C_MASTER_ISR ]
-[f ]
-"62
-[; ;i2c_master.c: 62:     static int xfer_count = 0;
-[v F9321 `i ~T0 @X0 1 s xfer_count ]
-[i F9321
+[; ;src/lcd.c: 47: static int cursor_x = 0;
+[v _cursor_x `i ~T0 @X0 1 s ]
+[i _cursor_x
 -> 0 `i
 ]
+"48
+[; ;src/lcd.c: 48: static int cursor_y = 0;
+[v _cursor_y `i ~T0 @X0 1 s ]
+[i _cursor_y
+-> 0 `i
+]
+"54
+[; ;src/lcd.c: 54: void command(unsigned char cmd) {
+[v _command `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _command ]
+[v _cmd `uc ~T0 @X0 1 r1 ]
+[f ]
+"55
+[; ;src/lcd.c: 55:     char msg[2];
+[v _msg `uc ~T0 @X0 -> 2 `i a ]
+"56
+[; ;src/lcd.c: 56:     msg[0] = 0x00;
+[e = *U + &U _msg * -> -> -> 0 `i `ui `ux -> -> # *U &U _msg `ui `ux -> -> 0 `i `uc ]
+"57
+[; ;src/lcd.c: 57:     msg[1] = cmd;
+[e = *U + &U _msg * -> -> -> 1 `i `ui `ux -> -> # *U &U _msg `ui `ux -> _cmd `uc ]
+"58
+[; ;src/lcd.c: 58:     I2C_master_write(msg, 2, 0x3C);
+[e ( _I2C_master_write (3 , , &U _msg -> 2 `i -> -> 60 `i `uc ]
+"59
+[; ;src/lcd.c: 59: }
+[e :UE 1381 ]
+}
+"63
+[; ;src/lcd.c: 63: void lcd_init() {
+[v _lcd_init `(v ~T0 @X0 1 ef ]
+{
+[e :U _lcd_init ]
+[f ]
 "64
-[; ;i2c_master.c: 64:     SSP1IF = 0;
-[e = _SSP1IF -> -> 0 `i `b ]
+[; ;src/lcd.c: 64:     command(0xAE);
+[e ( _command (1 -> -> 174 `i `uc ]
 "65
-[; ;i2c_master.c: 65:     switch(I2C_status) {
-[e $U 1393  ]
-{
+[; ;src/lcd.c: 65:     command(0xD5);
+[e ( _command (1 -> -> 213 `i `uc ]
 "66
-[; ;i2c_master.c: 66:         case IDLE:
-[e :U 1394 ]
-"67
-[; ;i2c_master.c: 67:             if(current_packet.length != 0) {
-[e $ ! != . _current_packet 1 -> 0 `i 1395  ]
-{
+[; ;src/lcd.c: 66:     command(0x80);
+[e ( _command (1 -> -> 128 `i `uc ]
+"68
+[; ;src/lcd.c: 68:     command(0xD3);
+[e ( _command (1 -> -> 211 `i `uc ]
 "69
-[; ;i2c_master.c: 69:                 xfer_count = 0;
-[e = F9321 -> 0 `i ]
-"70
-[; ;i2c_master.c: 70:                 SSP1CON2bits.SEN = 1;
-[e = . . _SSP1CON2bits 0 0 -> -> 1 `i `uc ]
+[; ;src/lcd.c: 69:     command(0x00);
+[e ( _command (1 -> -> 0 `i `uc ]
 "71
-[; ;i2c_master.c: 71:                 I2C_status = SEND_ADDRESS;
-[e = _I2C_status . `E9299 1 ]
+[; ;src/lcd.c: 71:     command(0xA8);
+[e ( _command (1 -> -> 168 `i `uc ]
 "72
-[; ;i2c_master.c: 72:             }
+[; ;src/lcd.c: 72:     command(128 - 1);
+[e ( _command (1 -> - -> 128 `i -> 1 `i `uc ]
+"74
+[; ;src/lcd.c: 74:     command(0x40 | 0x0);
+[e ( _command (1 -> | -> 64 `i -> 0 `i `uc ]
+"76
+[; ;src/lcd.c: 76:     command(0x20);
+[e ( _command (1 -> -> 32 `i `uc ]
+"77
+[; ;src/lcd.c: 77:     command(0x00);
+[e ( _command (1 -> -> 0 `i `uc ]
+"79
+[; ;src/lcd.c: 79:     command(0xA0);
+[e ( _command (1 -> -> 160 `i `uc ]
+"81
+[; ;src/lcd.c: 81:     command(0xC0);
+[e ( _command (1 -> -> 192 `i `uc ]
+"83
+[; ;src/lcd.c: 83:     command(0xDA);
+[e ( _command (1 -> -> 218 `i `uc ]
+"84
+[; ;src/lcd.c: 84:     command(0x02);
+[e ( _command (1 -> -> 2 `i `uc ]
+"86
+[; ;src/lcd.c: 86:     command(0x81);
+[e ( _command (1 -> -> 129 `i `uc ]
+"87
+[; ;src/lcd.c: 87:     command(0xCF);
+[e ( _command (1 -> -> 207 `i `uc ]
+"89
+[; ;src/lcd.c: 89:     command(0xA4);
+[e ( _command (1 -> -> 164 `i `uc ]
+"91
+[; ;src/lcd.c: 91:     command(0xA6);
+[e ( _command (1 -> -> 166 `i `uc ]
+"93
+[; ;src/lcd.c: 93:     command(0x8D);
+[e ( _command (1 -> -> 141 `i `uc ]
+"94
+[; ;src/lcd.c: 94:     command(0x14);
+[e ( _command (1 -> -> 20 `i `uc ]
+"96
+[; ;src/lcd.c: 96:     command(0xAF);
+[e ( _command (1 -> -> 175 `i `uc ]
+"98
+[; ;src/lcd.c: 98: }
+[e :UE 1382 ]
+}
+"102
+[; ;src/lcd.c: 102: void lcd_update() {
+[v _lcd_update `(v ~T0 @X0 1 ef ]
+{
+[e :U _lcd_update ]
+[f ]
+"103
+[; ;src/lcd.c: 103:     int i, j, max;
+[v _i `i ~T0 @X0 1 a ]
+[v _j `i ~T0 @X0 1 a ]
+[v _max `i ~T0 @X0 1 a ]
+"104
+[; ;src/lcd.c: 104:     char data[33];
+[v _data `uc ~T0 @X0 -> 33 `i a ]
+"106
+[; ;src/lcd.c: 106:     command(0x21);
+[e ( _command (1 -> -> 33 `i `uc ]
+"107
+[; ;src/lcd.c: 107:     command(0x00);
+[e ( _command (1 -> -> 0 `i `uc ]
+"108
+[; ;src/lcd.c: 108:     command(128 - 1);
+[e ( _command (1 -> - -> 128 `i -> 1 `i `uc ]
+"111
+[; ;src/lcd.c: 111:     command(0x22);
+[e ( _command (1 -> -> 34 `i `uc ]
+"112
+[; ;src/lcd.c: 112:     command(0x00);
+[e ( _command (1 -> -> 0 `i `uc ]
+"113
+[; ;src/lcd.c: 113:     command(0xFF);
+[e ( _command (1 -> -> 255 `i `uc ]
+"114
+[; ;src/lcd.c: 114:     max = 0x04 * 0x80;
+[e = _max * -> 4 `i -> 128 `i ]
+"115
+[; ;src/lcd.c: 115:     for(i = 0; i < max; i += 32) {
+{
+[e = _i -> 0 `i ]
+[e $U 1387  ]
+[e :U 1384 ]
+{
+"116
+[; ;src/lcd.c: 116:         data[0] = 0x40;
+[e = *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux -> -> 64 `i `uc ]
+"117
+[; ;src/lcd.c: 117:         for(j = 0; j < 32; j++) {
+{
+[e = _j -> 0 `i ]
+[e $ < _j -> 32 `i 1388  ]
+[e $U 1389  ]
+[e :U 1388 ]
+{
+"118
+[; ;src/lcd.c: 118:             data[j + 1] = buffer[i + j];
+[e = *U + &U _data * -> -> + _j -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux *U + &U _buffer * -> -> + _i _j `ui `ux -> -> # *U &U _buffer `ui `ux ]
+"119
+[; ;src/lcd.c: 119:         }
+}
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 32 `i 1388  ]
+[e :U 1389 ]
+}
+"120
+[; ;src/lcd.c: 120:         I2C_master_write(data, 33, 0x3C);
+[e ( _I2C_master_write (3 , , &U _data -> 33 `i -> -> 60 `i `uc ]
+"121
+[; ;src/lcd.c: 121:     }
+}
+[e =+ _i -> 32 `i ]
+[e :U 1387 ]
+[e $ < _i _max 1384  ]
+[e :U 1385 ]
+}
+"122
+[; ;src/lcd.c: 122: }
+[e :UE 1383 ]
+}
+"132
+[; ;src/lcd.c: 132: void set_pixel(unsigned char i, unsigned char j, unsigned char val) {
+[v _set_pixel `(v ~T0 @X0 1 ef3`uc`uc`uc ]
+{
+[e :U _set_pixel ]
+[v _i `uc ~T0 @X0 1 r1 ]
+[v _j `uc ~T0 @X0 1 r2 ]
+[v _val `uc ~T0 @X0 1 r3 ]
+[f ]
+"133
+[; ;src/lcd.c: 133:     unsigned int index = j + (i/8) * 0x80;
+[v _index `ui ~T0 @X0 1 a ]
+[e = _index -> + -> _j `i * / -> _i `i -> 8 `i -> 128 `i `ui ]
+"134
+[; ;src/lcd.c: 134:     unsigned int offset = i % 8;
+[v _offset `ui ~T0 @X0 1 a ]
+[e = _offset -> % -> _i `i -> 8 `i `ui ]
+"135
+[; ;src/lcd.c: 135:     if( val == 0 ) {
+[e $ ! == -> _val `i -> 0 `i 1392  ]
+{
+"136
+[; ;src/lcd.c: 136:         buffer[index] &= ~(1 << offset);
+[e =& *U + &U _buffer * -> _index `ux -> -> # *U &U _buffer `ui `ux -> ~ << -> 1 `i _offset `uc ]
+"137
+[; ;src/lcd.c: 137:     } else if(val == 1 ) {
+}
+[e $U 1393  ]
+[e :U 1392 ]
+[e $ ! == -> _val `i -> 1 `i 1394  ]
+{
+"138
+[; ;src/lcd.c: 138:         buffer[index] |= (1 << offset);
+[e =| *U + &U _buffer * -> _index `ux -> -> # *U &U _buffer `ui `ux -> << -> 1 `i _offset `uc ]
+"139
+[; ;src/lcd.c: 139:     } else {
+}
+[e $U 1395  ]
+[e :U 1394 ]
+{
+"140
+[; ;src/lcd.c: 140:         buffer[index] ^= (1 << offset);
+[e =^ *U + &U _buffer * -> _index `ux -> -> # *U &U _buffer `ui `ux -> << -> 1 `i _offset `uc ]
+"141
+[; ;src/lcd.c: 141:     }
 }
 [e :U 1395 ]
-"73
-[; ;i2c_master.c: 73:             break;
-[e $U 1392  ]
-"74
-[; ;i2c_master.c: 74:         case SEND_ADDRESS:
-[e :U 1396 ]
-"75
-[; ;i2c_master.c: 75:             (SSP1BUF = current_packet.address);
-[e = _SSP1BUF -> . _current_packet 2 `uc ]
-"76
-[; ;i2c_master.c: 76:             if(current_packet.address & 0x1) {
-[e $ ! != & -> . _current_packet 2 `i -> 1 `i -> 0 `i 1397  ]
-{
-"78
-[; ;i2c_master.c: 78:                I2C_status = ACKNOWLEDGE_ADDR;
-[e = _I2C_status . `E9299 2 ]
-"79
-[; ;i2c_master.c: 79:             } else {
+[e :U 1393 ]
+"142
+[; ;src/lcd.c: 142: }
+[e :UE 1391 ]
 }
+"143
+[; ;src/lcd.c: 143: void lcd_clear() {
+[v _lcd_clear `(v ~T0 @X0 1 ef ]
+{
+[e :U _lcd_clear ]
+[f ]
+"144
+[; ;src/lcd.c: 144:     int i;
+[v _i `i ~T0 @X0 1 a ]
+"145
+[; ;src/lcd.c: 145:     for(i = 0; i < 0x04 * 0x80; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i * -> 4 `i -> 128 `i 1397  ]
 [e $U 1398  ]
 [e :U 1397 ]
 {
-"81
-[; ;i2c_master.c: 81:                I2C_status = SEND_DATA;
-[e = _I2C_status . `E9299 3 ]
-"82
-[; ;i2c_master.c: 82:             }
-}
-[e :U 1398 ]
-"83
-[; ;i2c_master.c: 83:             break;
-[e $U 1392  ]
-"84
-[; ;i2c_master.c: 84:         case ACKNOWLEDGE_ADDR:
-[e :U 1399 ]
-"85
-[; ;i2c_master.c: 85:             if(SSP1CON2bits.ACKSTAT) {
-[e $ ! != -> . . _SSP1CON2bits 0 6 `i -> 0 `i 1400  ]
-{
-"87
-[; ;i2c_master.c: 87:                 SSP1CON2bits.ACKSTAT = 0;
-[e = . . _SSP1CON2bits 0 6 -> -> 0 `i `uc ]
-"88
-[; ;i2c_master.c: 88:                 I2C_stop(RECEIVE_ERROR);
-[e ( _I2C_stop (1 . `E9283 2 ]
-"89
-[; ;i2c_master.c: 89:             } else {
-}
-[e $U 1401  ]
-[e :U 1400 ]
-{
-"91
-[; ;i2c_master.c: 91:                 I2C_status = RECEIVE_DATA;
-[e = _I2C_status . `E9299 4 ]
-"92
-[; ;i2c_master.c: 92:             }
-}
-[e :U 1401 ]
-"93
-[; ;i2c_master.c: 93:             break;
-[e $U 1392  ]
-"94
-[; ;i2c_master.c: 94:         case SEND_DATA:
-[e :U 1402 ]
-"95
-[; ;i2c_master.c: 95:             if(SSP1CON2bits.ACKSTAT) {
-[e $ ! != -> . . _SSP1CON2bits 0 6 `i -> 0 `i 1403  ]
-{
-"97
-[; ;i2c_master.c: 97:                 SSP1CON2bits.ACKSTAT = 0;
-[e = . . _SSP1CON2bits 0 6 -> -> 0 `i `uc ]
-"98
-[; ;i2c_master.c: 98:                 I2C_stop(SEND_ERROR);
-[e ( _I2C_stop (1 . `E9283 1 ]
-"99
-[; ;i2c_master.c: 99:             } else {
-}
-[e $U 1404  ]
-[e :U 1403 ]
-{
-"101
-[; ;i2c_master.c: 101:                 if(xfer_count < current_packet.length) {
-[e $ ! < F9321 . _current_packet 1 1405  ]
-{
-"103
-[; ;i2c_master.c: 103:                     (SSP1BUF = *(current_packet.data + xfer_count));
-[e = _SSP1BUF -> *U + . _current_packet 0 * -> F9321 `x -> -> # *U . _current_packet 0 `i `x `uc ]
-"105
-[; ;i2c_master.c: 105:                     xfer_count++;
-[e ++ F9321 -> 1 `i ]
-"106
-[; ;i2c_master.c: 106:                     I2C_status = SEND_DATA;
-[e = _I2C_status . `E9299 3 ]
-"107
-[; ;i2c_master.c: 107:                 } else {
-}
-[e $U 1406  ]
-[e :U 1405 ]
-{
-"109
-[; ;i2c_master.c: 109:                     I2C_stop(SUCCESS);
-[e ( _I2C_stop (1 . `E9283 0 ]
-"110
-[; ;i2c_master.c: 110:                 }
-}
-[e :U 1406 ]
-"111
-[; ;i2c_master.c: 111:             }
-}
-[e :U 1404 ]
-"112
-[; ;i2c_master.c: 112:             break;
-[e $U 1392  ]
-"113
-[; ;i2c_master.c: 113:         case RECEIVE_DATA:
-[e :U 1407 ]
-"114
-[; ;i2c_master.c: 114:             SSP1CON2bits.RCEN = 1;
-[e = . . _SSP1CON2bits 0 3 -> -> 1 `i `uc ]
-"115
-[; ;i2c_master.c: 115:             I2C_status = ACKNOWLEDGE_RECV;
-[e = _I2C_status . `E9299 5 ]
-"116
-[; ;i2c_master.c: 116:             break;
-[e $U 1392  ]
-"117
-[; ;i2c_master.c: 117:         case ACKNOWLEDGE_RECV:
-[e :U 1408 ]
-"118
-[; ;i2c_master.c: 118:             (*(current_packet.data + xfer_count) = SSP1BUF);
-[e = *U + . _current_packet 0 * -> F9321 `x -> -> # *U . _current_packet 0 `i `x -> _SSP1BUF `uc ]
-"119
-[; ;i2c_master.c: 119:             xfer_count++;
-[e ++ F9321 -> 1 `i ]
-"120
-[; ;i2c_master.c: 120:             if(xfer_count < current_packet.length) {
-[e $ ! < F9321 . _current_packet 1 1409  ]
-{
-"122
-[; ;i2c_master.c: 122:                 SSP1CON2bits.ACKDT = 0;
-[e = . . _SSP1CON2bits 0 5 -> -> 0 `i `uc ]
-"123
-[; ;i2c_master.c: 123:                 SSP1CON2bits.ACKEN = 1;
-[e = . . _SSP1CON2bits 0 4 -> -> 1 `i `uc ]
-"124
-[; ;i2c_master.c: 124:                 I2C_status = RECEIVE_DATA;
-[e = _I2C_status . `E9299 4 ]
-"125
-[; ;i2c_master.c: 125:             } else {
-}
-[e $U 1410  ]
-[e :U 1409 ]
-{
-"127
-[; ;i2c_master.c: 127:                 SSP1CON2bits.ACKDT = 1;
-[e = . . _SSP1CON2bits 0 5 -> -> 1 `i `uc ]
-"128
-[; ;i2c_master.c: 128:                 SSP1CON2bits.ACKEN = 1;
-[e = . . _SSP1CON2bits 0 4 -> -> 1 `i `uc ]
-"129
-[; ;i2c_master.c: 129:                 I2C_stop(SUCCESS);
-[e ( _I2C_stop (1 . `E9283 0 ]
-"130
-[; ;i2c_master.c: 130:             }
-}
-[e :U 1410 ]
-"131
-[; ;i2c_master.c: 131:             break;
-[e $U 1392  ]
-"132
-[; ;i2c_master.c: 132:         case STOPPED:
-[e :U 1411 ]
-"133
-[; ;i2c_master.c: 133:             xfer_count = 0;
-[e = F9321 -> 0 `i ]
-"134
-[; ;i2c_master.c: 134:             I2C_status = IDLE;
-[e = _I2C_status . `E9299 0 ]
-"135
-[; ;i2c_master.c: 135:             break;
-[e $U 1392  ]
-"136
-[; ;i2c_master.c: 136:         default:
-[e :U 1412 ]
-"137
-[; ;i2c_master.c: 137:             break;
-[e $U 1392  ]
-"138
-[; ;i2c_master.c: 138:     }
-}
-[e $U 1392  ]
-[e :U 1393 ]
-[e [\ -> _I2C_status `ui , $ -> . `E9299 0 `ui 1394
- , $ -> . `E9299 1 `ui 1396
- , $ -> . `E9299 2 `ui 1399
- , $ -> . `E9299 3 `ui 1402
- , $ -> . `E9299 4 `ui 1407
- , $ -> . `E9299 5 `ui 1408
- , $ -> . `E9299 6 `ui 1411
- 1412 ]
-[e :U 1392 ]
-"139
-[; ;i2c_master.c: 139: }
-[e :UE 1391 ]
-}
-"140
-[; ;i2c_master.c: 140: char I2C_master_enabled() {
-[v _I2C_master_enabled `(uc ~T0 @X0 1 ef ]
-{
-[e :U _I2C_master_enabled ]
-[f ]
-"141
-[; ;i2c_master.c: 141:     return (SSP1CON1bits.SSPEN);
-[e ) -> . . _SSP1CON1bits 0 2 `uc ]
-[e $UE 1413  ]
-"142
-[; ;i2c_master.c: 142: }
-[e :UE 1413 ]
-}
-"144
-[; ;i2c_master.c: 144: void create_read_packet(char * buffer, int length, char address) {
-[v _create_read_packet `(v ~T0 @X0 1 ef3`*uc`i`uc ]
-{
-[e :U _create_read_packet ]
-[v _buffer `*uc ~T0 @X0 1 r1 ]
-[v _length `i ~T0 @X0 1 r2 ]
-[v _address `uc ~T0 @X0 1 r3 ]
-[f ]
-"145
-[; ;i2c_master.c: 145:     current_packet.data = buffer;
-[e = . _current_packet 0 _buffer ]
 "146
-[; ;i2c_master.c: 146:     current_packet.length = length;
-[e = . _current_packet 1 _length ]
+[; ;src/lcd.c: 146:         buffer[i] = 0x00;
+[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `i `uc ]
 "147
-[; ;i2c_master.c: 147:     current_packet.address = (address << 1);
-[e = . _current_packet 2 -> << -> _address `i -> 1 `i `uc ]
-"148
-[; ;i2c_master.c: 148:     current_packet.address |= 0x01;
-[e =| . _current_packet 2 -> -> 1 `i `Vuc ]
-"149
-[; ;i2c_master.c: 149:     current_packet.result = PENDING;
-[e = . _current_packet 3 . `E9283 3 ]
-"150
-[; ;i2c_master.c: 150: }
-[e :UE 1414 ]
+[; ;src/lcd.c: 147:     }
 }
-"151
-[; ;i2c_master.c: 151: void create_write_packet(char * data, int length, char address) {
-[v _create_write_packet `(v ~T0 @X0 1 ef3`*uc`i`uc ]
+[e ++ _i -> 1 `i ]
+[e $ < _i * -> 4 `i -> 128 `i 1397  ]
+[e :U 1398 ]
+}
+"148
+[; ;src/lcd.c: 148:     lcd_update();
+[e ( _lcd_update ..  ]
+"149
+[; ;src/lcd.c: 149: }
+[e :UE 1396 ]
+}
+"150
+[; ;src/lcd.c: 150: void lcd_putc(unsigned char c) {
+[v _lcd_putc `(v ~T0 @X0 1 ef1`uc ]
 {
-[e :U _create_write_packet ]
-[v _data `*uc ~T0 @X0 1 r1 ]
-[v _length `i ~T0 @X0 1 r2 ]
-[v _address `uc ~T0 @X0 1 r3 ]
+[e :U _lcd_putc ]
+[v _c `uc ~T0 @X0 1 r1 ]
 [f ]
+"151
+[; ;src/lcd.c: 151:     int i = 0, index = cursor_x + cursor_y * 0x80;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[v _index `i ~T0 @X0 1 a ]
+[e = _index + _cursor_x * _cursor_y -> 128 `i ]
 "152
-[; ;i2c_master.c: 152:     current_packet.data = data;
-[e = . _current_packet 0 _data ]
+[; ;src/lcd.c: 152:     int char_index;
+[v _char_index `i ~T0 @X0 1 a ]
 "153
-[; ;i2c_master.c: 153:     current_packet.length = length;
-[e = . _current_packet 1 _length ]
+[; ;src/lcd.c: 153:     if (c < 32 || c > 127) c = ' ';
+[e $ ! || < -> _c `i -> 32 `i > -> _c `i -> 127 `i 1401  ]
+[e = _c -> -> 32 `ui `uc ]
+[e :U 1401 ]
 "154
-[; ;i2c_master.c: 154:     current_packet.address = (address << 1);
-[e = . _current_packet 2 -> << -> _address `i -> 1 `i `uc ]
+[; ;src/lcd.c: 154:  char_index = ((c - 32) * 6);
+[e = _char_index * - -> _c `i -> 32 `i -> 6 `i ]
 "155
-[; ;i2c_master.c: 155:     current_packet.result = PENDING;
-[e = . _current_packet 3 . `E9283 3 ]
+[; ;src/lcd.c: 155:     for(i = 0; i < 6; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 6 `i 1402  ]
+[e $U 1403  ]
+[e :U 1402 ]
+{
 "156
-[; ;i2c_master.c: 156: }
-[e :UE 1415 ]
+[; ;src/lcd.c: 156:      buffer[index + i] = lcd_font[char_index + i];
+[e = *U + &U _buffer * -> -> + _index _i `ui `ux -> -> # *U &U _buffer `ui `ux *U + &U _lcd_font * -> -> + _char_index _i `ui `ux -> -> # *U &U _lcd_font `ui `ux ]
+"157
+[; ;src/lcd.c: 157:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 6 `i 1402  ]
+[e :U 1403 ]
 }
 "158
-[; ;i2c_master.c: 158: I2C_master_result I2C_master_write(char * data, int length, char address) {
-[v _I2C_master_write `(E9283 ~T0 @X0 1 ef3`*uc`i`uc ]
-{
-[e :U _I2C_master_write ]
-[v _data `*uc ~T0 @X0 1 r1 ]
-[v _length `i ~T0 @X0 1 r2 ]
-[v _address `uc ~T0 @X0 1 r3 ]
-[f ]
+[; ;src/lcd.c: 158:     cursor_x += 6;
+[e =+ _cursor_x -> 6 `i ]
 "159
-[; ;i2c_master.c: 159:     if(!I2C_master_enabled()) {
-[e $ ! ! != -> ( _I2C_master_enabled ..  `i -> 0 `i 1417  ]
+[; ;src/lcd.c: 159:     if(cursor_x > 120) {
+[e $ ! > _cursor_x -> 120 `i 1405  ]
 {
 "160
-[; ;i2c_master.c: 160:         return SEND_ERROR;
-[e ) . `E9283 1 ]
-[e $UE 1416  ]
+[; ;src/lcd.c: 160:         cursor_x = 0;
+[e = _cursor_x -> 0 `i ]
 "161
-[; ;i2c_master.c: 161:     }
-}
-[e :U 1417 ]
+[; ;src/lcd.c: 161:         cursor_y += 1;
+[e =+ _cursor_y -> 1 `i ]
 "162
-[; ;i2c_master.c: 162:     create_write_packet(data, length, address);
-[e ( _create_write_packet (3 , , _data _length _address ]
+[; ;src/lcd.c: 162:     }
+}
+[e :U 1405 ]
 "163
-[; ;i2c_master.c: 163:     SSP1IF = 1;
-[e = _SSP1IF -> -> 1 `i `b ]
+[; ;src/lcd.c: 163:     if(cursor_y > 3) {
+[e $ ! > _cursor_y -> 3 `i 1406  ]
+{
 "164
-[; ;i2c_master.c: 164:     I2C_wait();
-[e ( _I2C_wait ..  ]
+[; ;src/lcd.c: 164:         cursor_y = 0;
+[e = _cursor_y -> 0 `i ]
 "165
-[; ;i2c_master.c: 165:     return current_packet.result;
-[e ) . _current_packet 3 ]
-[e $UE 1416  ]
+[; ;src/lcd.c: 165:     }
+}
+[e :U 1406 ]
 "166
-[; ;i2c_master.c: 166: }
-[e :UE 1416 ]
+[; ;src/lcd.c: 166: }
+[e :UE 1400 ]
 }
 "167
-[; ;i2c_master.c: 167: I2C_master_result I2C_master_read(char * buffer, int length, char address) {
-[v _I2C_master_read `(E9283 ~T0 @X0 1 ef3`*uc`i`uc ]
+[; ;src/lcd.c: 167: void lcd_puts(unsigned char * s) {
+[v _lcd_puts `(v ~T0 @X0 1 ef1`*uc ]
 {
-[e :U _I2C_master_read ]
-[v _buffer `*uc ~T0 @X0 1 r1 ]
-[v _length `i ~T0 @X0 1 r2 ]
-[v _address `uc ~T0 @X0 1 r3 ]
+[e :U _lcd_puts ]
+[v _s `*uc ~T0 @X0 1 r1 ]
 [f ]
 "168
-[; ;i2c_master.c: 168:     if(!I2C_master_enabled()) {
-[e $ ! ! != -> ( _I2C_master_enabled ..  `i -> 0 `i 1419  ]
+[; ;src/lcd.c: 168:     while(*s) {
+[e $U 1408  ]
+[e :U 1409 ]
 {
 "169
-[; ;i2c_master.c: 169:         return RECEIVE_ERROR;
-[e ) . `E9283 2 ]
-[e $UE 1418  ]
+[; ;src/lcd.c: 169:         lcd_putc(*s);
+[e ( _lcd_putc (1 *U _s ]
 "170
-[; ;i2c_master.c: 170:     }
-}
-[e :U 1419 ]
+[; ;src/lcd.c: 170:         s++;
+[e ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
 "171
-[; ;i2c_master.c: 171:     create_read_packet(buffer, length, address);
-[e ( _create_read_packet (3 , , _buffer _length _address ]
+[; ;src/lcd.c: 171:     }
+}
+[e :U 1408 ]
+"168
+[; ;src/lcd.c: 168:     while(*s) {
+[e $ != -> *U _s `i -> 0 `i 1409  ]
+[e :U 1410 ]
 "172
-[; ;i2c_master.c: 172:     SSP1IF = 1;
-[e = _SSP1IF -> -> 1 `i `b ]
-"173
-[; ;i2c_master.c: 173:     I2C_wait();
-[e ( _I2C_wait ..  ]
-"174
-[; ;i2c_master.c: 174:     return current_packet.result;
-[e ) . _current_packet 3 ]
-[e $UE 1418  ]
-"175
-[; ;i2c_master.c: 175: }
-[e :UE 1418 ]
+[; ;src/lcd.c: 172: }
+[e :UE 1407 ]
 }

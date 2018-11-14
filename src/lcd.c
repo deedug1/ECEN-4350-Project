@@ -1,7 +1,8 @@
-#include "lcd.h"
+
 #include <xc.h>
-#include "i2c_master.h"
-#include "character.h"
+#include "../headers/lcd.h"
+#include "../headers/i2c_master.h"
+#include "../headers/character.h"
 #define LCD_ADDR 0x3C
 #define ROWS 0x04
 #define COLS 0x80

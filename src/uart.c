@@ -6,8 +6,7 @@
  */
 
 #include <xc.h>
-#include "uart.h"
-#include "i2c_master.h"
+#include "../headers/uart.h"
 #define UART_RECEIVE(A) (A = RC1REG) 
 #define UART_SEND(A) (TX1REG = A)
 #define UART_BUFFER_SIZE 8

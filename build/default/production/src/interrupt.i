@@ -1,4 +1,4 @@
-# 1 "uart.c"
+# 1 "src/interrupt.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,14 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "uart.c" 2
-
-
-
-
-
-
-
+# 1 "src/interrupt.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15642,21 +15635,10 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 8 "uart.c" 2
+# 1 "src/interrupt.c" 2
 
-# 1 "./uart.h" 1
-# 17 "./uart.h"
-void UART_init();
-void UART_RX_ISR();
-void UART_TX_ISR();
-void UART_write(char data);
-char UART_read();
-char UART_can_tx();
-char UART_can_rx();
-# 9 "uart.c" 2
-
-# 1 "./i2c_master.h" 1
-# 13 "./i2c_master.h"
+# 1 "src/../headers/i2c_master.h" 1
+# 13 "src/../headers/i2c_master.h"
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
@@ -15664,118 +15646,38 @@ void I2C_master_init(void);
 void I2C_MASTER_ISR(void);
 I2C_master_result I2C_master_write(char * data, int length, char address);
 I2C_master_result I2C_master_read(char * buffer, int length, char address);
-# 10 "uart.c" 2
+# 2 "src/interrupt.c" 2
+
+# 1 "src/../headers/uart.h" 1
+# 17 "src/../headers/uart.h"
+void UART_init();
+void UART_RX_ISR();
+void UART_TX_ISR();
+void UART_write(char data);
+char UART_read();
+char UART_can_tx();
+char UART_can_rx();
+# 3 "src/interrupt.c" 2
 
 
 
-
-typedef struct {
-    char buffer[8];
-    int size;
-    int head;
-    int tail;
-} UART_buf;
-
-static volatile UART_buf RX_buf;
-static volatile UART_buf TX_buf;
-void UART_init() {
-
-    PIE3bits.RC1IE = 0;
-    PIE3bits.TX1IE = 0;
-
-
-    BAUD1CON = 0x08;
-
-    RC1STA = 0x90;
-
-    TX1STA = 0x24;
-
-
-
-
-
-
-    SP1BRGH = 0x00;
-
-    SP1BRGL = 0x22;
-
-
-    RX_buf.size = 0;
-    RX_buf.tail = 0;
-    RX_buf.head = 0;
-
-    TX_buf.size = 0;
-    TX_buf.tail = 0;
-    TX_buf.head = 0;
-
-    PIE3bits.RC1IE = 1;
-
-}
-void UART_RX_ISR() {
-
-
-    (RX_buf.buffer[RX_buf.head++] = RC1REG);
-    RX_buf.size++;
-
-    if(RX_buf.head >= 8) {
-        RX_buf.head = 0;
-    }
+void interrupt_init() {
+    INTCONbits.IPEN = 0;
+    INTCONbits.PEIE = 1;
+    INTCONbits.GIE = 1;
 }
 
-void UART_TX_ISR() {
-    if(TX_buf.size != 0) {
+void __attribute__((picinterrupt(""))) MAIN_ISR() {
 
-        (TX1REG = TX_buf.buffer[TX_buf.tail++]);
-        TX_buf.size--;
+    if(INTCONbits.PEIE == 1) {
+        if(PIE3bits.SSP1IE == 1 && SSP1IF == 1) {
+            I2C_MASTER_ISR();
+        } else if(PIE3bits.RC1IE == 1 && PIR3bits.RC1IF == 1) {
+            UART_RX_ISR();
+        } else if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1) {
+            UART_TX_ISR();
+        } else {
 
-        if(TX_buf.tail >= 8) {
-            TX_buf.tail = 0;
-        }
-    } else {
-
-        PIE3bits.TX1IE = 0;
-    }
-}
-void UART_write(char data) {
-    while(TX_buf.size >= 8) {
-
-    }
-
-    if(PIE3bits.TX1IE == 0){
-        (TX1REG = data);
-    } else {
-
-        PIE3bits.TX1IE = 0;
-        TX_buf.buffer[TX_buf.head++] = data;
-        TX_buf.size++;
-
-        if(TX_buf.head >= 8) {
-            TX_buf.head = 0;
         }
     }
-    PIE3bits.TX1IE = 1;
-}
-char UART_read() {
-    char data = 0;
-
-
-    while(RX_buf.size <= 0) {
-
-    }
-    PIE3bits.RC1IE = 0;
-    data = RX_buf.buffer[RX_buf.tail++];
-    RX_buf.size--;
-
-    if(RX_buf.tail >= 8) {
-        RX_buf.head = 0;
-    }
-    PIE3bits.RC1IE = 1;
-    return data;
-}
-
-char UART_can_rx() {
-    return RX_buf.size > 0;
-}
-char UART_can_tx() {
-    return TX_buf.size < 8;
 }

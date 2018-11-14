@@ -1,6 +1,5 @@
 #include <xc.h>
-#include <pic18f25q10.h>
-#include "i2c_master.h"
+#include "../headers/i2c_master.h"
 
 #define START_ENABLE SSP1CON2bits.SEN
 #define STOP_ENABLE  SSP1CON2bits.PEN

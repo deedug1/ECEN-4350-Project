@@ -1,7 +1,6 @@
 #include <xc.h>
-#include "i2c_master.h"
-#include "uart.h"
-
+#include "../headers/i2c_master.h"
+#include "../headers/uart.h"
 
 
 void interrupt_init() {

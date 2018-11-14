@@ -5,13 +5,12 @@
  * Created on November 8, 2018, 6:21 PM
  */
 
-#include <stdio.h>
 #include <xc.h>
-#include "mc_init.h"
-#include "lcd.h"
-#include "i2c_master.h"
-#include "interrupt.h"
-#include "uart.h"
+#include "../headers/mc_init.h"
+#include "../headers/lcd.h"
+#include "../headers/i2c_master.h"
+#include "../headers/interrupt.h"
+#include "../headers/uart.h"
 
 void wait() {
     int i, j;
@@ -24,7 +23,7 @@ void wait() {
 /*
  * 
  */
-int main(int argc, char** argv) {
+int main() {
     char i;
     controller_init();
     interrupt_init();

@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "src/mc_init.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,167 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdio.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\musl_xc8.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdio.h" 2 3
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\features.h" 1 3
-# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdio.h" 2 3
-# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdio.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef void * va_list[1];
-
-
-
-
-typedef void * __isoc_va_list[1];
-# 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned size_t;
-# 145 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long ssize_t;
-# 244 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long off_t;
-# 397 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct _IO_FILE FILE;
-# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdio.h" 2 3
-# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdio.h" 3
-typedef union _G_fpos64_t {
- char __opaque[16];
- double __align;
-} fpos_t;
-
-extern FILE *const stdin;
-extern FILE *const stdout;
-extern FILE *const stderr;
-
-
-
-
-
-FILE *fopen(const char *restrict, const char *restrict);
-FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
-int fclose(FILE *);
-
-int remove(const char *);
-int rename(const char *, const char *);
-
-int feof(FILE *);
-int ferror(FILE *);
-int fflush(FILE *);
-void clearerr(FILE *);
-
-int fseek(FILE *, long, int);
-long ftell(FILE *);
-void rewind(FILE *);
-
-int fgetpos(FILE *restrict, fpos_t *restrict);
-int fsetpos(FILE *, const fpos_t *);
-
-size_t fread(void *restrict, size_t, size_t, FILE *restrict);
-size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
-
-int fgetc(FILE *);
-int getc(FILE *);
-int getchar(void);
-int ungetc(int, FILE *);
-
-int fputc(int, FILE *);
-int putc(int, FILE *);
-int putchar(int);
-
-char *fgets(char *restrict, int, FILE *restrict);
-
-char *gets(char *);
-
-
-int fputs(const char *restrict, FILE *restrict);
-int puts(const char *);
-
-
-#pragma printf_check(printf) const
-#pragma printf_check(vprintf) const
-#pragma printf_check(sprintf) const
-#pragma printf_check(snprintf) const
-#pragma printf_check(vsprintf) const
-#pragma printf_check(vsnprintf) const
-
-
-int printf(const char *restrict, ...);
-int fprintf(FILE *restrict, const char *restrict, ...);
-int sprintf(char *restrict, const char *restrict, ...);
-int snprintf(char *restrict, size_t, const char *restrict, ...);
-
-int vprintf(const char *restrict, __isoc_va_list);
-int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
-int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
-
-int scanf(const char *restrict, ...);
-int fscanf(FILE *restrict, const char *restrict, ...);
-int sscanf(const char *restrict, const char *restrict, ...);
-int vscanf(const char *restrict, __isoc_va_list);
-int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
-
-void perror(const char *);
-
-int setvbuf(FILE *restrict, char *restrict, int, size_t);
-void setbuf(FILE *restrict, char *restrict);
-
-char *tmpnam(char *);
-FILE *tmpfile(void);
-
-
-
-
-FILE *fmemopen(void *restrict, size_t, const char *restrict);
-FILE *open_memstream(char **, size_t *);
-FILE *fdopen(int, const char *);
-FILE *popen(const char *, const char *);
-int pclose(FILE *);
-int fileno(FILE *);
-int fseeko(FILE *, off_t, int);
-off_t ftello(FILE *);
-int dprintf(int, const char *restrict, ...);
-int vdprintf(int, const char *restrict, __isoc_va_list);
-void flockfile(FILE *);
-int ftrylockfile(FILE *);
-void funlockfile(FILE *);
-int getc_unlocked(FILE *);
-int getchar_unlocked(void);
-int putc_unlocked(int, FILE *);
-int putchar_unlocked(int);
-ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
-ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
-int renameat(int, const char *, int, const char *);
-char *ctermid(char *);
-
-
-
-
-
-
-
-char *tempnam(const char *, const char *);
-# 8 "main.c" 2
-
+# 1 "src/mc_init.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -180,10 +20,25 @@ extern double __fpnormalize(double);
 
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdlib.h" 1 3
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\musl_xc8.h" 1 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdlib.h" 2 3
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\features.h" 1 3
+# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdlib.h" 2 3
 # 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdlib.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 1 3
 # 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
 typedef long int wchar_t;
+# 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned size_t;
 # 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\stdlib.h" 2 3
 
 
@@ -15780,81 +15635,91 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 9 "main.c" 2
+# 1 "src/mc_init.c" 2
 
-# 1 "./mc_init.h" 1
-# 18 "./mc_init.h"
+# 1 "src/../headers/mc_init.h" 1
+# 18 "src/../headers/mc_init.h"
 void pps_init(void);
 void port_init(void);
 void controller_init(void);
 void oscillator_init(void);
-# 10 "main.c" 2
-
-# 1 "./lcd.h" 1
-# 49 "./lcd.h"
-void lcd_putc(unsigned char c);
-void lcd_puts(unsigned char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
-void lcd_init(void);
-void lcd_update(void);
-void lcd_clear(void);
-# 11 "main.c" 2
-
-# 1 "./i2c_master.h" 1
-# 13 "./i2c_master.h"
-typedef enum {
-    SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
-}I2C_master_result;
-void I2C_master_init(void);
-void I2C_MASTER_ISR(void);
-I2C_master_result I2C_master_write(char * data, int length, char address);
-I2C_master_result I2C_master_read(char * buffer, int length, char address);
-# 12 "main.c" 2
-
-# 1 "./interrupt.h" 1
-# 12 "./interrupt.h"
-void interrupt_init(void);
-# 13 "main.c" 2
-
-# 1 "./uart.h" 1
-# 17 "./uart.h"
-void UART_init();
-void UART_RX_ISR();
-void UART_TX_ISR();
-void UART_write(char data);
-char UART_read();
-char UART_can_tx();
-char UART_can_rx();
-# 14 "main.c" 2
+# 2 "src/mc_init.c" 2
 
 
-void wait() {
-    int i, j;
-    for(i = 0; i < 255; i++) {
-        for(j = 0; j < 255; j++) {
-            __nop();
-        }
-    }
+
+void port_init() {
+
+
+    LATA = 0x00;
+    ANSELA = 0xFF;
+    TRISA = 0xFF;
+    WPUA = 0x00;
+    ODCONA = 0x00;
+    SLRCONA = 0xFF;
+
+
+    LATB = 0x00;
+    ANSELB = 0xFF;
+    TRISB = 0xFF;
+    WPUB = 0x00;
+    ODCONB = 0x00;
+    SLRCONB = 0xFF;
+
+
+    LATC = 0x00;
+    ANSELC = 0xF0;
+    TRISC = 0xFD;
+    WPUC = 0x00;
+    ODCONC = 0x00;
+    SLRCONC = 0xFF;
+
+}
+
+void pps_init() {
+    char state = GIE;
+    GIE = 0;
+    PPSLOCK = 0x55;
+    PPSLOCK = 0XAA;
+    PPSLOCK = 0X00;
+
+
+
+
+    RC2PPS = 0x0E;
+    SSP1DATPPS = 0x12;
+    RC3PPS = 0x0D;
+    SSP1CLKPPS = 0x13;
+
+
+    RX1PPS = 0x10;
+    RC1PPS = 0x09;
+
+
+
+
+
+    PPSLOCK = 0x55;
+    PPSLOCK = 0XAA;
+    PPSLOCK = 0X01;
+    GIE = state;
+}
+void oscillator_init() {
+
+    OSCCON1 = 0x60;
+    OSCCON3 = 0x00;
+
+    OSCFRQ = 0x05;
+
+    OSCTUNE = 0x00;
 }
 
 
 
-int main(int argc, char** argv) {
-    char i;
-    controller_init();
-    interrupt_init();
-    I2C_master_init();
-    UART_init();
 
 
+void controller_init() {
+    oscillator_init();
+    pps_init();
 
-
-    for(i = 0; i < 255; i++) {
-        UART_write(i);
-    }
-    while(1) {
-
-        __asm(" sleep");
-    }
-
+    port_init();
 }
