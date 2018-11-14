@@ -77,7 +77,7 @@ void UART_TX_ISR() {
         TX_INTE = 0;
     }
 }
-void UART_write(char data) {
+void UART_putc(char data) {
     while(TX_buf.size >= UART_BUFFER_SIZE) {
         // Wait for room in TX_buf
     }
@@ -96,7 +96,15 @@ void UART_write(char data) {
     }
     TX_INTE = 1;
 }
-char UART_read() {
+void UART_puts(char * data, int len) {
+    
+    while(len --> 0) {
+        UART_putc(*data);
+        data++;
+    }
+}
+
+char UART_getc() {
     char data = 0;
     
     // Wait for room in RX_buf
@@ -113,7 +121,12 @@ char UART_read() {
     RX_INTE = 1;
     return data;
 }
-
+void UART_gets(char * buf, int len) {
+    while(len --> 0) {
+        *buf = UART_getc();
+        buf++;
+    }
+}
 char UART_can_rx() {
     return RX_buf.size > 0;
 }

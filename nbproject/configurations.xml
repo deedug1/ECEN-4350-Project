@@ -10,6 +10,7 @@
       <itemPath>character.h</itemPath>
       <itemPath>uart.h</itemPath>
       <itemPath>headers/i2c_master.h</itemPath>
+      <itemPath>headers/esp8266.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -24,6 +25,7 @@
       <itemPath>interrupt.c</itemPath>
       <itemPath>uart.c</itemPath>
       <itemPath>src/i2c_master.c</itemPath>
+      <itemPath>src/esp8266.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
