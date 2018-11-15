@@ -15649,8 +15649,10 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 void UART_init();
 void UART_RX_ISR();
 void UART_TX_ISR();
-void UART_write(char data);
-char UART_read();
+void UART_putc(char data);
+void UART_puts(char * data, int len);
+char UART_getc();
+void UART_gets(char * buf, int len);
 char UART_can_tx();
 char UART_can_rx();
 # 9 "src/uart.c" 2
@@ -15725,7 +15727,7 @@ void UART_TX_ISR() {
         PIE3bits.TX1IE = 0;
     }
 }
-void UART_write(char data) {
+void UART_putc(char data) {
     while(TX_buf.size >= 8) {
 
     }
@@ -15744,7 +15746,15 @@ void UART_write(char data) {
     }
     PIE3bits.TX1IE = 1;
 }
-char UART_read() {
+void UART_puts(char * data, int len) {
+
+    while(len --> 0) {
+        UART_putc(*data);
+        data++;
+    }
+}
+
+char UART_getc() {
     char data = 0;
 
 
@@ -15761,7 +15771,12 @@ char UART_read() {
     PIE3bits.RC1IE = 1;
     return data;
 }
-
+void UART_gets(char * buf, int len) {
+    while(len --> 0) {
+        *buf = UART_getc();
+        buf++;
+    }
+}
 char UART_can_rx() {
     return RX_buf.size > 0;
 }

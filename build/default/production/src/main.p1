@@ -16,8 +16,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/../headers/uart.h: 17: void UART_init();
 [v _UART_init `(v ~T0 @X0 0 e? ]
 "20
-[; ;src/../headers/uart.h: 20: void UART_write(char data);
-[v _UART_write `(v ~T0 @X0 0 ef1`uc ]
+[; ;src/../headers/uart.h: 20: void UART_putc(char data);
+[v _UART_putc `(v ~T0 @X0 0 ef1`uc ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1347,8 +1347,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 1389 ]
 {
 "37
-[; ;src/main.c: 37:         UART_write(i);
-[e ( _UART_write (1 _i ]
+[; ;src/main.c: 37:         UART_putc(i);
+[e ( _UART_putc (1 _i ]
 "38
 [; ;src/main.c: 38:     }
 }

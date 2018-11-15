@@ -98,7 +98,9 @@ PENDING 3
 "66
 [v _UART_TX_ISR UART_TX_ISR `(v  1 e 1 0 ]
 "80
-[v _UART_write UART_write `(v  1 e 1 0 ]
+[v _UART_putc UART_putc `(v  1 e 1 0 ]
+"107
+[v _UART_getc UART_getc `(uc  1 e 1 0 ]
 "52 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [v _PPSLOCK PPSLOCK `VEuc  1 e 1 @3739 ]
 "1716
@@ -136,27 +138,27 @@ PENDING 3
 ]
 [u S75 . 1 `S49 1 . 1 0 `S55 1 . 1 0 `S61 1 . 1 0 `S63 1 . 1 0 `S66 1 . 1 0 `S69 1 . 1 0 `S72 1 . 1 0 ]
 [v _PIE3bits PIE3bits `VES75  1 e 1 @3776 ]
-[s S360 . 1 `uc 1 SSPIF 1 0 :1:0 
+[s S363 . 1 `uc 1 SSPIF 1 0 :1:0 
 `uc 1 BCLIF 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 TXIF 1 0 :1:4 
 `uc 1 RCIF 1 0 :1:5 
 ]
 "3835
-[s S366 . 1 `uc 1 SSP1IF 1 0 :1:0 
+[s S369 . 1 `uc 1 SSP1IF 1 0 :1:0 
 `uc 1 BCL1IF 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[s S372 . 1 `uc 1 . 1 0 :1:0 
+[s S375 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RXBNIF 1 0 :1:1 
 ]
-[s S375 . 1 `uc 1 . 1 0 :4:0 
+[s S378 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TXBNIF 1 0 :1:4 
 ]
-[u S378 . 1 `S360 1 . 1 0 `S366 1 . 1 0 `S372 1 . 1 0 `S375 1 . 1 0 ]
-[v _PIR3bits PIR3bits `VES378  1 e 1 @3784 ]
+[u S381 . 1 `S363 1 . 1 0 `S369 1 . 1 0 `S375 1 . 1 0 `S378 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES381  1 e 1 @3784 ]
 "4623
 [v _OSCCON1 OSCCON1 `VEuc  1 e 1 @3795 ]
 "4763
@@ -296,7 +298,7 @@ PENDING 3
 [v _TX1STA TX1STA `VEuc  1 e 1 @3997 ]
 "17567
 [v _BAUD1CON BAUD1CON `VEuc  1 e 1 @3998 ]
-[s S286 . 1 `uc 1 INT0EDG 1 0 :1:0 
+[s S289 . 1 `uc 1 INT0EDG 1 0 :1:0 
 `uc 1 INT1EDG 1 0 :1:1 
 `uc 1 INT2EDG 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -305,16 +307,16 @@ PENDING 3
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "25416
-[s S294 . 1 `uc 1 . 1 0 :6:0 
+[s S297 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S298 . 1 `uc 1 . 1 0 :6:0 
+[s S301 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S302 . 1 `S286 1 . 1 0 `S294 1 . 1 0 `S298 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES302  1 e 1 @4082 ]
+[u S305 . 1 `S289 1 . 1 0 `S297 1 . 1 0 `S301 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES305  1 e 1 @4082 ]
 "27713
 [v _GIE GIE `VEb  1 e 0 @32663 ]
 "30254
@@ -334,11 +336,11 @@ PENDING 3
 [v _cursor_x cursor_x `i  1 s 2 cursor_x ]
 "48
 [v _cursor_y cursor_y `i  1 s 2 cursor_y ]
-[s S538 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
+[s S541 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
 "20 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
-[v _RX_buf RX_buf `VES538  1 s 14 RX_buf ]
+[v _RX_buf RX_buf `VES541  1 s 14 RX_buf ]
 "21
-[v _TX_buf TX_buf `VES538  1 s 14 TX_buf ]
+[v _TX_buf TX_buf `VES541  1 s 14 TX_buf ]
 "26 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
 {
@@ -374,11 +376,11 @@ PENDING 3
 "69
 } 0
 "80 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
-[v _UART_write UART_write `(v  1 e 1 0 ]
+[v _UART_putc UART_putc `(v  1 e 1 0 ]
 {
-[v UART_write@data data `uc  1 a 1 wreg ]
-[v UART_write@data data `uc  1 a 1 wreg ]
-[v UART_write@data data `uc  1 a 1 5 ]
+[v UART_putc@data data `uc  1 a 1 wreg ]
+[v UART_putc@data data `uc  1 a 1 wreg ]
+[v UART_putc@data data `uc  1 a 1 5 ]
 "98
 } 0
 "22

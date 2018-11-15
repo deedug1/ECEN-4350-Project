@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+$C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 idloc IDLOC 0 200000 200000 100 1
 init CODE 0 AA AA 4 1
 reset_vec CODE 0 0 0 4 1
@@ -282,38 +282,38 @@ $dist/default/production\4350_project.X.production.o
 7C8 text0 CODE >41:C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 7CE text0 CODE >42:C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 7D2 text0 CODE >44:C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
-8B6 cinit CODE >6343:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8B6 cinit CODE >6345:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8B6 cinit CODE >6348:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8B6 cinit CODE >6385:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8B8 cinit CODE >6386:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8BA cinit CODE >6387:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8BC cinit CODE >6388:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8BE cinit CODE >6389:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8C0 cinit CODE >6390:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8C2 cinit CODE >6391:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8C6 cinit CODE >6392:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8CA cinit CODE >6393:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8CA cinit CODE >6394:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8CC cinit CODE >6395:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8D0 cinit CODE >6396:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8D2 cinit CODE >6397:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8D4 cinit CODE >6398:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8D6 cinit CODE >6399:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8D8 cinit CODE >6400:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8DA cinit CODE >6404:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8DE cinit CODE >6405:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8E0 cinit CODE >6406:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8E0 cinit CODE >6407:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8E2 cinit CODE >6408:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8E4 cinit CODE >6409:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8E6 cinit CODE >6415:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8E6 cinit CODE >6417:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8E8 cinit CODE >6418:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8EA cinit CODE >6420:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8EC cinit CODE >6421:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8EE cinit CODE >6422:C:\Users\jstpa\AppData\Local\Temp\sl0c.
-8F0 cinit CODE >6423:C:\Users\jstpa\AppData\Local\Temp\sl0c.
+8B6 cinit CODE >7177:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8B6 cinit CODE >7179:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8B6 cinit CODE >7182:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8B6 cinit CODE >7219:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8B8 cinit CODE >7220:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8BA cinit CODE >7221:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8BC cinit CODE >7222:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8BE cinit CODE >7223:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8C0 cinit CODE >7224:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8C2 cinit CODE >7225:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8C6 cinit CODE >7226:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8CA cinit CODE >7227:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8CA cinit CODE >7228:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8CC cinit CODE >7229:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8D0 cinit CODE >7230:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8D2 cinit CODE >7231:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8D4 cinit CODE >7232:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8D6 cinit CODE >7233:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8D8 cinit CODE >7234:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8DA cinit CODE >7238:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8DE cinit CODE >7239:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8E0 cinit CODE >7240:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8E0 cinit CODE >7241:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8E2 cinit CODE >7242:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8E4 cinit CODE >7243:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8E6 cinit CODE >7249:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8E6 cinit CODE >7251:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8E8 cinit CODE >7252:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8EA cinit CODE >7254:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8EC cinit CODE >7255:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8EE cinit CODE >7256:C:\Users\jstpa\AppData\Local\Temp\s7eg.
+8F0 cinit CODE >7257:C:\Users\jstpa\AppData\Local\Temp\s7eg.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -332,7 +332,7 @@ __Hspace_0 30000C 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __Hspace_1 800 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __Hspace_2 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\4350_project.X.production.o
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\4350_project.X.production.o
 main@i 30 0 COMRAM 1 cstackCOMRAM dist/default/production\4350_project.X.production.o
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\4350_project.X.production.o
@@ -344,10 +344,10 @@ _STOP 7CA4 0 ABS 0 - dist/default/production\4350_project.X.production.o
 _WPUA F0B 0 ABS 0 - dist/default/production\4350_project.X.production.o
 _WPUB F13 0 ABS 0 - dist/default/production\4350_project.X.production.o
 _WPUC F1B 0 ABS 0 - dist/default/production\4350_project.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+___sp 0 0 STACK 2 stack C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 _main 780 0 CODE 0 text0 dist/default/production\4350_project.X.production.o
 btemp 31 0 COMRAM 1 temp dist/default/production\4350_project.X.production.o
-start AA 0 CODE 0 init C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+start AA 0 CODE 0 init C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 __size_of_main 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\4350_project.X.production.o
 __size_of_I2C_stop 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
@@ -356,16 +356,15 @@ __HdataBIGRAM 0 0 ABS 0 dataBIGRAM dist/default/production\4350_project.X.produc
 ttemp5 32 0 COMRAM 1 temp dist/default/production\4350_project.X.production.o
 ttemp6 35 0 COMRAM 1 temp dist/default/production\4350_project.X.production.o
 ttemp7 39 0 COMRAM 1 temp dist/default/production\4350_project.X.production.o
-__accesstop 60 0 ABS 0 - C:\Users\jstpa\AppData\Local\Temp\sl0c.o
-intlevel0 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\sl0c.o
-intlevel1 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\sl0c.o
-intlevel2 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\sl0c.o
-intlevel3 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+__accesstop 60 0 ABS 0 - C:\Users\jstpa\AppData\Local\Temp\s7eg.o
+intlevel0 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\s7eg.o
+intlevel1 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\s7eg.o
+intlevel2 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\s7eg.o
+intlevel3 0 0 CODE 0 text C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\4350_project.X.production.o
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\4350_project.X.production.o
 wtemp8 32 0 COMRAM 1 temp dist/default/production\4350_project.X.production.o
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\4350_project.X.production.o
-_UART_write 696 0 CODE 0 text6 dist/default/production\4350_project.X.production.o
 __pidataBIGRAM AE 0 CODE 0 idataBIGRAM dist/default/production\4350_project.X.production.o
 __size_of_pps_init 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\4350_project.X.production.o
@@ -374,8 +373,8 @@ _ANSELA F0C 0 ABS 0 - dist/default/production\4350_project.X.production.o
 _ANSELB F14 0 ABS 0 - dist/default/production\4350_project.X.production.o
 _ANSELC F1C 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __LdataBIGRAM 0 0 ABS 0 dataBIGRAM dist/default/production\4350_project.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\jstpa\AppData\Local\Temp\sl0c.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\jstpa\AppData\Local\Temp\s7eg.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 _I2C_stop 952 0 CODE 0 text13 dist/default/production\4350_project.X.production.o
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\4350_project.X.production.o
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\4350_project.X.production.o
@@ -386,8 +385,6 @@ __Hintcodelo AA 0 CODE 0 intcodelo dist/default/production\4350_project.X.produc
 __LidataBIGRAM 0 0 ABS 0 idataBIGRAM dist/default/production\4350_project.X.production.o
 pps_init@state 2F 0 COMRAM 1 cstackCOMRAM dist/default/production\4350_project.X.production.o
 _pps_init 7D6 0 CODE 0 text3 dist/default/production\4350_project.X.production.o
-__end_of_UART_write 71E 0 CODE 0 text6 dist/default/production\4350_project.X.production.o
-UART_write@data 2F 0 COMRAM 1 cstackCOMRAM dist/default/production\4350_project.X.production.o
 I2C_MASTER_ISR@xfer_count 27 0 COMRAM 1 bssCOMRAM dist/default/production\4350_project.X.production.o
 __end_of_I2C_MASTER_ISR 696 0 CODE 0 text12 dist/default/production\4350_project.X.production.o
 __Lintcodelo AA 0 CODE 0 intcodelo dist/default/production\4350_project.X.production.o
@@ -443,7 +440,7 @@ __Htext8 0 0 ABS 0 text8 dist/default/production\4350_project.X.production.o
 __end_of_port_init 932 0 CODE 0 text4 dist/default/production\4350_project.X.production.o
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\4350_project.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\4350_project.X.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 _BAUD1CON F9E 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __size_of_port_init 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __Hcomram 0 0 ABS 0 comram dist/default/production\4350_project.X.production.o
@@ -511,6 +508,7 @@ __HidataBIGRAM 0 0 ABS 0 idataBIGRAM dist/default/production\4350_project.X.prod
 __Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\4350_project.X.production.o
 __Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\4350_project.X.production.o
 _lcd_font 3C0 0 BIGRAM 1 dataBIGRAM dist/default/production\4350_project.X.production.o
+UART_putc@data 2F 0 COMRAM 1 cstackCOMRAM dist/default/production\4350_project.X.production.o
 __Lintentry 0 0 ABS 0 intentry dist/default/production\4350_project.X.production.o
 __Hramtop 800 0 RAM 0 ramtop dist/default/production\4350_project.X.production.o
 __Hrparam 0 0 COMRAM 1 rparam dist/default/production\4350_project.X.production.o
@@ -522,7 +520,6 @@ __Htext12 0 0 ABS 0 text12 dist/default/production\4350_project.X.production.o
 __Htext13 0 0 ABS 0 text13 dist/default/production\4350_project.X.production.o
 I2C_stop@result 2A 0 COMRAM 1 cstackCOMRAM dist/default/production\4350_project.X.production.o
 _PIE3bits EC0 0 ABS 0 - dist/default/production\4350_project.X.production.o
-__size_of_UART_write 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __ptext10 71E 0 CODE 0 text10 dist/default/production\4350_project.X.production.o
 __ptext11 874 0 CODE 0 text11 dist/default/production\4350_project.X.production.o
 __ptext12 4EE 0 CODE 0 text12 dist/default/production\4350_project.X.production.o
@@ -537,8 +534,8 @@ __size_of_I2C_master_init 0 0 ABS 0 - dist/default/production\4350_project.X.pro
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\4350_project.X.production.o
 __end_of_controller_init 98E 0 CODE 0 text2 dist/default/production\4350_project.X.production.o
 __size_of_UART_TX_ISR 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
-stackhi 3BF 0 ABS 0 - C:\Users\jstpa\AppData\Local\Temp\sl0c.o
-stacklo 60 0 ABS 0 - C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+stackhi 3BF 0 ABS 0 - C:\Users\jstpa\AppData\Local\Temp\s7eg.o
+stacklo 60 0 ABS 0 - C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 _SSP1CLKPPS EB2 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __Lintcode 8 0 CODE 0 intcode dist/default/production\4350_project.X.production.o
 _OSCCON1 ED3 0 ABS 0 - dist/default/production\4350_project.X.production.o
@@ -560,9 +557,11 @@ __size_of_I2C_MASTER_ISR 0 0 ABS 0 - dist/default/production\4350_project.X.prod
 __Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\4350_project.X.production.o
 __Lramtop 800 0 RAM 0 ramtop dist/default/production\4350_project.X.production.o
 __end_of_UART_init 874 0 CODE 0 text7 dist/default/production\4350_project.X.production.o
+__end_of_UART_putc 71E 0 CODE 0 text6 dist/default/production\4350_project.X.production.o
 __Lrparam 0 0 COMRAM 1 rparam dist/default/production\4350_project.X.production.o
 __pcinit 8B6 0 CODE 0 cinit dist/default/production\4350_project.X.production.o
 __size_of_UART_init 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
+__size_of_UART_putc 0 0 ABS 0 - dist/default/production\4350_project.X.production.o
 __ptext0 780 0 CODE 0 text0 dist/default/production\4350_project.X.production.o
 __ptext1 98E 0 CODE 0 text1 dist/default/production\4350_project.X.production.o
 __ptext2 980 0 CODE 0 text2 dist/default/production\4350_project.X.production.o
@@ -578,7 +577,7 @@ __Ltext10 0 0 ABS 0 text10 dist/default/production\4350_project.X.production.o
 __Ltext11 0 0 ABS 0 text11 dist/default/production\4350_project.X.production.o
 __Ltext12 0 0 ABS 0 text12 dist/default/production\4350_project.X.production.o
 __Ltext13 0 0 ABS 0 text13 dist/default/production\4350_project.X.production.o
-__ramtop 800 0 RAM 0 ramtop C:\Users\jstpa\AppData\Local\Temp\sl0c.o
+__ramtop 800 0 RAM 0 ramtop C:\Users\jstpa\AppData\Local\Temp\s7eg.o
 _cursor_x 25 0 COMRAM 1 bssCOMRAM dist/default/production\4350_project.X.production.o
 _cursor_y 23 0 COMRAM 1 bssCOMRAM dist/default/production\4350_project.X.production.o
 _I2C_status 29 0 COMRAM 1 bssCOMRAM dist/default/production\4350_project.X.production.o
@@ -587,6 +586,7 @@ __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\4350_project.X.p
 _interrupt_init 98E 0 CODE 0 text1 dist/default/production\4350_project.X.production.o
 __Lreset_vec 0 0 CODE 0 reset_vec dist/default/production\4350_project.X.production.o
 _UART_init 826 0 CODE 0 text7 dist/default/production\4350_project.X.production.o
+_UART_putc 696 0 CODE 0 text6 dist/default/production\4350_project.X.production.o
 _SLRCONA F09 0 ABS 0 - dist/default/production\4350_project.X.production.o
 _SLRCONB F11 0 ABS 0 - dist/default/production\4350_project.X.production.o
 _SLRCONC F19 0 ABS 0 - dist/default/production\4350_project.X.production.o

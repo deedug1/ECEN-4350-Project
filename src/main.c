@@ -34,7 +34,7 @@ int main() {
 //    }
     
     for(i = 0; i < 255; i++) {
-        UART_write(i);
+        UART_putc(i);
     }
     while(1) {
         // Program complete

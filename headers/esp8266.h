@@ -13,12 +13,19 @@
 #define ATCIPSTART "AT+CIPSTART=" // Start socket
 #define ATCIPCLOSE "AT+CIPClOSE"  // Close socket 
 #define ATCIPSEND "AT+CIPSEND=" // Send data
+#define COMMAND_END "\r\n"
 
-void ESP8266_init();
+typedef enum {
+    
+}ESP8266_socket_type;
+
+
+void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
-void ESP8266_open_socket(int socket_type, char * ip, int port);
+void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data, int len);
-void ESP8266_close_socket();
+void ESP8266_close_socket(void);
+char ESP8266_responseOK(void);
 
 #ifdef	__cplusplus
 extern "C" {

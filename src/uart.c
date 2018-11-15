@@ -96,9 +96,9 @@ void UART_putc(char data) {
     }
     TX_INTE = 1;
 }
-void UART_puts(char * data, int len) {
+void UART_puts(char * data) {
     
-    while(len --> 0) {
+    while(*data != 0) {
         UART_putc(*data);
         data++;
     }

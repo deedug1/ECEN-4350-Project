@@ -15683,8 +15683,10 @@ void interrupt_init(void);
 void UART_init();
 void UART_RX_ISR();
 void UART_TX_ISR();
-void UART_write(char data);
-char UART_read();
+void UART_putc(char data);
+void UART_puts(char * data, int len);
+char UART_getc();
+void UART_gets(char * buf, int len);
 char UART_can_tx();
 char UART_can_rx();
 # 13 "src/main.c" 2
@@ -15712,7 +15714,7 @@ int main() {
 
 
     for(i = 0; i < 255; i++) {
-        UART_write(i);
+        UART_putc(i);
     }
     while(1) {
 

@@ -4,13 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>lcd.h</itemPath>
-      <itemPath>mc_init.h</itemPath>
-      <itemPath>interrupt.h</itemPath>
-      <itemPath>character.h</itemPath>
-      <itemPath>uart.h</itemPath>
       <itemPath>headers/i2c_master.h</itemPath>
       <itemPath>headers/esp8266.h</itemPath>
+      <itemPath>headers/lcd.h</itemPath>
+      <itemPath>headers/character.h</itemPath>
+      <itemPath>headers/interrupt.h</itemPath>
+      <itemPath>headers/mc_init.h</itemPath>
+      <itemPath>headers/uart.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -19,13 +19,13 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>lcd.c</itemPath>
-      <itemPath>main.c</itemPath>
-      <itemPath>mc_init.c</itemPath>
-      <itemPath>interrupt.c</itemPath>
-      <itemPath>uart.c</itemPath>
       <itemPath>src/i2c_master.c</itemPath>
       <itemPath>src/esp8266.c</itemPath>
+      <itemPath>src/interrupt.c</itemPath>
+      <itemPath>src/lcd.c</itemPath>
+      <itemPath>src/main.c</itemPath>
+      <itemPath>src/mc_init.c</itemPath>
+      <itemPath>src/uart.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -18,7 +18,7 @@ void UART_init();
 void UART_RX_ISR();
 void UART_TX_ISR();
 void UART_putc(char data);
-void UART_puts(char * data, int len);
+void UART_puts(char * data);
 char UART_getc();
 void UART_gets(char * buf, int len);
 char UART_can_tx();

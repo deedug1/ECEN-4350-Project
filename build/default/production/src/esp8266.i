@@ -1,4 +1,4 @@
-# 1 "src/interrupt.c"
+# 1 "src/esp8266.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/interrupt.c" 2
+# 1 "src/esp8266.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15635,18 +15635,16 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 1 "src/interrupt.c" 2
+# 1 "src/esp8266.c" 2
 
-# 1 "src/../headers/i2c_master.h" 1
-# 13 "src/../headers/i2c_master.h"
-typedef enum {
-    SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
-}I2C_master_result;
-void I2C_master_init(void);
-void I2C_MASTER_ISR(void);
-I2C_master_result I2C_master_write(char * data, int length, char address);
-I2C_master_result I2C_master_read(char * buffer, int length, char address);
-# 2 "src/interrupt.c" 2
+# 1 "src/../headers/esp8266.h" 1
+# 17 "src/../headers/esp8266.h"
+void ESP8266_init();
+void ESP8266_connect(char * name, char * pass);
+void ESP8266_open_socket(int socket_type, char * ip, int port);
+void ESP8266_send_data(char * data, int len);
+void ESP8266_close_socket();
+# 2 "src/esp8266.c" 2
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
@@ -15659,27 +15657,12 @@ char UART_getc();
 void UART_gets(char * buf, int len);
 char UART_can_tx();
 char UART_can_rx();
-# 3 "src/interrupt.c" 2
+# 3 "src/esp8266.c" 2
 
 
 
-void interrupt_init() {
-    INTCONbits.IPEN = 0;
-    INTCONbits.PEIE = 1;
-    INTCONbits.GIE = 1;
-}
 
-void __attribute__((picinterrupt(""))) MAIN_ISR() {
 
-    if(INTCONbits.PEIE == 1) {
-        if(PIE3bits.SSP1IE == 1 && SSP1IF == 1) {
-            I2C_MASTER_ISR();
-        } else if(PIE3bits.RC1IE == 1 && PIR3bits.RC1IF == 1) {
-            UART_RX_ISR();
-        } else if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1) {
-            UART_TX_ISR();
-        } else {
+void ESP8266_connect(char * name, char * pass) {
 
-        }
-    }
 }
