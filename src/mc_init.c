@@ -50,7 +50,6 @@ void pps_init() {
     RC1PPS = 0x09;      // RC1 --> Tx
 
     
-    
     // End PPS
     
     PPSLOCK = 0x55; // Lock PPS

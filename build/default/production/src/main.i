@@ -15660,6 +15660,8 @@ void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);
+void lcd_newline(void);
+void lcd_vertical_shift(void);
 # 10 "src/main.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
@@ -15680,18 +15682,36 @@ void interrupt_init(void);
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
-void UART_init();
-void UART_RX_ISR();
-void UART_TX_ISR();
+void UART_init(void);
+void UART_RX_ISR(void);
+void UART_TX_ISR(void);
 void UART_putc(char data);
-void UART_puts(char * data, int len);
-char UART_getc();
+void UART_puts(char * data);
+char UART_getc(void);
 void UART_gets(char * buf, int len);
-char UART_can_tx();
-char UART_can_rx();
+char UART_can_tx(void);
+char UART_can_rx(void);
 # 13 "src/main.c" 2
 
+# 1 "src/../headers/esp8266.h" 1
+# 19 "src/../headers/esp8266.h"
+typedef enum {
+    TCP, UDP
+}ESP8266_socket_type;
 
+
+void ESP8266_init(void);
+void ESP8266_connect(char * name, char * pass);
+void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
+void ESP8266_send_data(char * data);
+void ESP8266_close_socket(void);
+char ESP8266_responseOK(void);
+# 14 "src/main.c" 2
+
+
+
+char * garbage = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=21 \r\n";
+static char should_send = 0;
 void wait() {
     int i, j;
     for(i = 0; i < 255; i++) {
@@ -15700,11 +15720,20 @@ void wait() {
         }
     }
 }
+void empty_rx_buf() {
+    char c;
+    while(!UART_can_rx()) {
+
+    }
+    while(UART_can_rx()) {
+        c = UART_getc();
+    }
+
+}
 
 
 
 int main() {
-    char i;
     controller_init();
     interrupt_init();
     I2C_master_init();
@@ -15713,9 +15742,16 @@ int main() {
 
 
 
-    for(i = 0; i < 255; i++) {
-        UART_putc(i);
-    }
+    ESP8266_init();
+    empty_rx_buf();
+    ESP8266_connect("test_ap", "incredible14!");
+    empty_rx_buf();
+    ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
+    empty_rx_buf();
+    ESP8266_send_data(garbage);
+    empty_rx_buf();
+    ESP8266_close_socket();
+    empty_rx_buf();
     while(1) {
 
         __asm(" sleep");

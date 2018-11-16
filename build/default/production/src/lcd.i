@@ -15646,6 +15646,8 @@ void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);
+void lcd_newline(void);
+void lcd_vertical_shift(void);
 # 3 "src/lcd.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
@@ -15767,7 +15769,7 @@ static char lcd_font[] = {
 
 
 
-char buffer [0x04 * 0x80] = {
+char lcd_buffer [0x04 * 0x80] = {
    0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80,
    0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0,
    0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0,
@@ -15873,7 +15875,7 @@ void lcd_update() {
     for(i = 0; i < max; i += 32) {
         data[0] = 0x40;
         for(j = 0; j < 32; j++) {
-            data[j + 1] = buffer[i + j];
+            data[j + 1] = lcd_buffer[i + j];
         }
         I2C_master_write(data, 33, 0x3C);
     }
@@ -15883,17 +15885,17 @@ void set_pixel(unsigned char i, unsigned char j, unsigned char val) {
     unsigned int index = j + (i/8) * 0x80;
     unsigned int offset = i % 8;
     if( val == 0 ) {
-        buffer[index] &= ~(1 << offset);
+        lcd_buffer[index] &= ~(1 << offset);
     } else if(val == 1 ) {
-        buffer[index] |= (1 << offset);
+        lcd_buffer[index] |= (1 << offset);
     } else {
-        buffer[index] ^= (1 << offset);
+        lcd_buffer[index] ^= (1 << offset);
     }
 }
 void lcd_clear() {
     int i;
     for(i = 0; i < 0x04 * 0x80; i++) {
-        buffer[i] = 0x00;
+        lcd_buffer[i] = 0x00;
     }
     lcd_update();
 }
@@ -15903,7 +15905,7 @@ void lcd_putc(unsigned char c) {
     if (c < 32 || c > 127) c = ' ';
  char_index = ((c - 32) * 6);
     for(i = 0; i < 6; i++) {
-     buffer[index + i] = lcd_font[char_index + i];
+     lcd_buffer[index + i] = lcd_font[char_index + i];
     }
     cursor_x += 6;
     if(cursor_x > 120) {
@@ -15918,5 +15920,23 @@ void lcd_puts(unsigned char * s) {
     while(*s) {
         lcd_putc(*s);
         s++;
+    }
+}
+void lcd_newline() {
+    if(cursor_y >= 3) {
+        cursor_y = 3;
+        lcd_vertical_shift();
+    } else {
+        cursor_y += 1;
+        cursor_x = 0;
+    }
+}
+void lcd_vertical_shift() {
+    int i = 0;
+    for(; i < 3 * 0x80; i++) {
+        lcd_buffer[i] = lcd_buffer[i + 0x80];
+    }
+    for(; i < 0x04 * 0x80; i++) {
+        lcd_buffer[i] = 0;
     }
 }

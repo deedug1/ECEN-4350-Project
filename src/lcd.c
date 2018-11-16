@@ -9,7 +9,7 @@
 #define PAGES 0x04
 #define LCDWIDTH 128
 #define LCDHEIGHT 32
-char buffer [ROWS * COLS] = {
+char lcd_buffer [ROWS * COLS] = {
    0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80,
    0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0,
    0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0, 0xE0,
@@ -97,7 +97,7 @@ void lcd_init() {
     
 }
 /**
- * Update the display with the buffer
+ * Update the display with the lcd_buffer
  */
 void lcd_update() {
     int i, j, max;
@@ -115,7 +115,7 @@ void lcd_update() {
     for(i = 0; i < max; i += 32) {
         data[0] = CONTROL_DATA;
         for(j = 0; j < 32; j++) {
-            data[j + 1] = buffer[i + j];
+            data[j + 1] = lcd_buffer[i + j];
         }
         I2C_master_write(data, 33, LCD_ADDR);
     }
@@ -133,17 +133,17 @@ void set_pixel(unsigned char i, unsigned char j, unsigned char val) {
     unsigned int index = j + (i/8) * COLS;
     unsigned int offset = i % 8;
     if( val == BLACK ) {
-        CLEARBIT(buffer[index], offset);
+        CLEARBIT(lcd_buffer[index], offset);
     } else if(val == WHITE ) {
-        SETBIT(buffer[index], offset);
+        SETBIT(lcd_buffer[index], offset);
     } else { // Invert
-        INVBIT(buffer[index], offset);
+        INVBIT(lcd_buffer[index], offset);
     }
 }
 void lcd_clear() {
     int i;
     for(i = 0; i < ROWS * COLS; i++) {
-        buffer[i] = 0x00;
+        lcd_buffer[i] = 0x00;
     }
     lcd_update();
 }
@@ -153,7 +153,7 @@ void lcd_putc(unsigned char c) {
     if (c < 32 || c > 127) c = ' ';
 	char_index = ((c - 32) * 6);
     for(i = 0; i < 6; i++) {
-     buffer[index + i] = lcd_font[char_index + i];   
+     lcd_buffer[index + i] = lcd_font[char_index + i];   
     }
     cursor_x += CHAR_WIDTH;
     if(cursor_x > 120) {
@@ -168,5 +168,23 @@ void lcd_puts(unsigned char * s) {
     while(*s) {
         lcd_putc(*s);
         s++;
+    }
+}
+void lcd_newline() {
+    if(cursor_y >= 3) {
+        cursor_y = 3;
+        lcd_vertical_shift();
+    } else {
+        cursor_y += 1;
+        cursor_x = 0;
+    }
+}
+void lcd_vertical_shift() {
+    int i = 0;
+    for(; i < 3 * COLS; i++) {
+        lcd_buffer[i] = lcd_buffer[i + COLS]; 
+    }
+    for(; i < ROWS * COLS; i++) {
+        lcd_buffer[i] = 0;
     }
 }

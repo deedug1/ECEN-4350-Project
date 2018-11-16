@@ -15637,32 +15637,156 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
 # 1 "src/esp8266.c" 2
 
-# 1 "src/../headers/esp8266.h" 1
-# 17 "src/../headers/esp8266.h"
-void ESP8266_init();
-void ESP8266_connect(char * name, char * pass);
-void ESP8266_open_socket(int socket_type, char * ip, int port);
-void ESP8266_send_data(char * data, int len);
-void ESP8266_close_socket();
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 1 3
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 409 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 2 3
+
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+# 65 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 3
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
 # 2 "src/esp8266.c" 2
+
+# 1 "src/../headers/util.h" 1
+# 15 "src/../headers/util.h"
+void itoa(int num, char * buf, int radix);
+# 3 "src/esp8266.c" 2
+
+# 1 "src/../headers/esp8266.h" 1
+# 19 "src/../headers/esp8266.h"
+typedef enum {
+    TCP, UDP
+}ESP8266_socket_type;
+
+
+void ESP8266_init(void);
+void ESP8266_connect(char * name, char * pass);
+void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
+void ESP8266_send_data(char * data);
+void ESP8266_close_socket(void);
+char ESP8266_responseOK(void);
+# 4 "src/esp8266.c" 2
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
-void UART_init();
-void UART_RX_ISR();
-void UART_TX_ISR();
+void UART_init(void);
+void UART_RX_ISR(void);
+void UART_TX_ISR(void);
 void UART_putc(char data);
-void UART_puts(char * data, int len);
-char UART_getc();
+void UART_puts(char * data);
+char UART_getc(void);
 void UART_gets(char * buf, int len);
-char UART_can_tx();
-char UART_can_rx();
-# 3 "src/esp8266.c" 2
+char UART_can_tx(void);
+char UART_can_rx(void);
+# 5 "src/esp8266.c" 2
 
 
 
 
+
+
+static char is_connected = 0;
+char * SOCKETS[] = {"TCP", "UDP"};
+void ESP8266_init(void) {
+    UART_puts("AT+CWMODE_CUR=");
+    UART_putc('1');
+    UART_puts("\r\n");
+}
 
 void ESP8266_connect(char * name, char * pass) {
+    if(is_connected) {
+        return;
+    }
+    UART_puts("AT+CWJAP=");
+    UART_putc('\"');UART_puts(name);UART_putc('\"');
+    UART_putc(',');
+    UART_putc('\"');UART_puts(pass);UART_putc('\"');
+    UART_puts("\r\n");
+    is_connected = 1;
 
+}
+
+void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
+    char buffer[10];
+    itoa(port, buffer, 10);
+    UART_puts("AT+CIPSTART=");
+    UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
+    UART_putc(',');
+    UART_putc('\"');UART_puts(ip);UART_putc('\"');
+    UART_putc(',');
+    UART_puts(buffer);
+    UART_puts("\r\n");
+}
+
+void ESP8266_send_data(char * data) {
+    char buffer[10];
+    int len = strlen(data);
+    itoa(len, buffer, 10);
+    UART_puts("AT+CIPSEND=");
+    UART_puts(buffer);
+    UART_puts("\r\n");
+
+    UART_puts(data);
+    UART_putc('\n');
+}
+void ESP8266_close_socket(){
+    UART_puts("AT+CIPClOSE");
+    UART_puts("\r\n");
+}
+char ESP8266_responseOK() {
+    while(UART_can_rx()) {
+        if(UART_getc() == 'O') {
+            if(UART_getc() == 'K') {
+                return 1;
+            }
+        }
+    }
+    return 0;
 }

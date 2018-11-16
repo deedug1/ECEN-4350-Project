@@ -15646,16 +15646,29 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
-void UART_init();
-void UART_RX_ISR();
-void UART_TX_ISR();
+void UART_init(void);
+void UART_RX_ISR(void);
+void UART_TX_ISR(void);
 void UART_putc(char data);
-void UART_puts(char * data, int len);
-char UART_getc();
+void UART_puts(char * data);
+char UART_getc(void);
 void UART_gets(char * buf, int len);
-char UART_can_tx();
-char UART_can_rx();
+char UART_can_tx(void);
+char UART_can_rx(void);
 # 9 "src/uart.c" 2
+
+# 1 "src/../headers/lcd.h" 1
+# 49 "src/../headers/lcd.h"
+void lcd_putc(unsigned char c);
+void lcd_puts(unsigned char * s);
+void set_pixel(unsigned char i, unsigned char j, unsigned char val);
+void lcd_init(void);
+void lcd_update(void);
+void lcd_clear(void);
+void lcd_newline(void);
+void lcd_vertical_shift(void);
+# 10 "src/uart.c" 2
+
 
 
 
@@ -15746,9 +15759,9 @@ void UART_putc(char data) {
     }
     PIE3bits.TX1IE = 1;
 }
-void UART_puts(char * data, int len) {
+void UART_puts(char * data) {
 
-    while(len --> 0) {
+    while(*data != 0) {
         UART_putc(*data);
         data++;
     }
@@ -15772,10 +15785,11 @@ char UART_getc() {
     return data;
 }
 void UART_gets(char * buf, int len) {
-    while(len --> 0) {
+    do{
         *buf = UART_getc();
         buf++;
-    }
+    }while(len --> 0);
+    *buf = '\0';
 }
 char UART_can_rx() {
     return RX_buf.size > 0;

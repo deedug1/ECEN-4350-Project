@@ -8,7 +8,6 @@ void interrupt_init() {
     INTCONbits.PEIE = 1;
     INTCONbits.GIE = 1;
 }
-
 void __interrupt() MAIN_ISR() {
    
     if(INTCONbits.PEIE == 1) {

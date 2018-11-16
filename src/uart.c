@@ -7,9 +7,11 @@
 
 #include <xc.h>
 #include "../headers/uart.h"
+#include "../headers/lcd.h"
 #define UART_RECEIVE(A) (A = RC1REG) 
 #define UART_SEND(A) (TX1REG = A)
 #define UART_BUFFER_SIZE 8
+#define PRINT_LCD
 typedef struct {
     char buffer[UART_BUFFER_SIZE];
     int size;
@@ -122,10 +124,11 @@ char UART_getc() {
     return data;
 }
 void UART_gets(char * buf, int len) {
-    while(len --> 0) {
+    do{
         *buf = UART_getc();
         buf++;
-    }
+    }while(len --> 0);
+    *buf = '\0';
 }
 char UART_can_rx() {
     return RX_buf.size > 0;

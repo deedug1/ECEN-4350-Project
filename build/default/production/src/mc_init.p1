@@ -1444,60 +1444,60 @@ Version 4.0 HI-TECH Software Intermediate Code
 "50
 [; ;src/mc_init.c: 50:     RC1PPS = 0x09;
 [e = _RC1PPS -> -> 9 `i `uc ]
-"56
-[; ;src/mc_init.c: 56:     PPSLOCK = 0x55;
+"55
+[; ;src/mc_init.c: 55:     PPSLOCK = 0x55;
 [e = _PPSLOCK -> -> 85 `i `uc ]
-"57
-[; ;src/mc_init.c: 57:     PPSLOCK = 0XAA;
+"56
+[; ;src/mc_init.c: 56:     PPSLOCK = 0XAA;
 [e = _PPSLOCK -> -> 170 `i `uc ]
-"58
-[; ;src/mc_init.c: 58:     PPSLOCK = 0X01;
+"57
+[; ;src/mc_init.c: 57:     PPSLOCK = 0X01;
 [e = _PPSLOCK -> -> 1 `i `uc ]
-"59
-[; ;src/mc_init.c: 59:     GIE = state;
+"58
+[; ;src/mc_init.c: 58:     GIE = state;
 [e = _GIE -> _state `b ]
-"60
-[; ;src/mc_init.c: 60: }
+"59
+[; ;src/mc_init.c: 59: }
 [e :UE 1382 ]
 }
-"61
-[; ;src/mc_init.c: 61: void oscillator_init() {
+"60
+[; ;src/mc_init.c: 60: void oscillator_init() {
 [v _oscillator_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _oscillator_init ]
 [f ]
-"63
-[; ;src/mc_init.c: 63:     OSCCON1 = 0x60;
+"62
+[; ;src/mc_init.c: 62:     OSCCON1 = 0x60;
 [e = _OSCCON1 -> -> 96 `i `uc ]
-"64
-[; ;src/mc_init.c: 64:     OSCCON3 = 0x00;
+"63
+[; ;src/mc_init.c: 63:     OSCCON3 = 0x00;
 [e = _OSCCON3 -> -> 0 `i `uc ]
-"66
-[; ;src/mc_init.c: 66:     OSCFRQ = 0x05;
+"65
+[; ;src/mc_init.c: 65:     OSCFRQ = 0x05;
 [e = _OSCFRQ -> -> 5 `i `uc ]
-"68
-[; ;src/mc_init.c: 68:     OSCTUNE = 0x00;
+"67
+[; ;src/mc_init.c: 67:     OSCTUNE = 0x00;
 [e = _OSCTUNE -> -> 0 `i `uc ]
-"69
-[; ;src/mc_init.c: 69: }
+"68
+[; ;src/mc_init.c: 68: }
 [e :UE 1383 ]
 }
-"75
-[; ;src/mc_init.c: 75: void controller_init() {
+"74
+[; ;src/mc_init.c: 74: void controller_init() {
 [v _controller_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _controller_init ]
 [f ]
-"76
-[; ;src/mc_init.c: 76:     oscillator_init();
+"75
+[; ;src/mc_init.c: 75:     oscillator_init();
 [e ( _oscillator_init ..  ]
-"77
-[; ;src/mc_init.c: 77:     pps_init();
+"76
+[; ;src/mc_init.c: 76:     pps_init();
 [e ( _pps_init ..  ]
-"79
-[; ;src/mc_init.c: 79:     port_init();
+"78
+[; ;src/mc_init.c: 78:     port_init();
 [e ( _port_init ..  ]
-"80
-[; ;src/mc_init.c: 80: }
+"79
+[; ;src/mc_init.c: 79: }
 [e :UE 1384 ]
 }

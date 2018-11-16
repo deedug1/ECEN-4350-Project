@@ -15650,15 +15650,15 @@ I2C_master_result I2C_master_read(char * buffer, int length, char address);
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
-void UART_init();
-void UART_RX_ISR();
-void UART_TX_ISR();
+void UART_init(void);
+void UART_RX_ISR(void);
+void UART_TX_ISR(void);
 void UART_putc(char data);
-void UART_puts(char * data, int len);
-char UART_getc();
+void UART_puts(char * data);
+char UART_getc(void);
 void UART_gets(char * buf, int len);
-char UART_can_tx();
-char UART_can_rx();
+char UART_can_tx(void);
+char UART_can_rx(void);
 # 3 "src/interrupt.c" 2
 
 
@@ -15668,7 +15668,6 @@ void interrupt_init() {
     INTCONbits.PEIE = 1;
     INTCONbits.GIE = 1;
 }
-
 void __attribute__((picinterrupt(""))) MAIN_ISR() {
 
     if(INTCONbits.PEIE == 1) {

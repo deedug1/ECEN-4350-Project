@@ -11,6 +11,7 @@
       <itemPath>headers/interrupt.h</itemPath>
       <itemPath>headers/mc_init.h</itemPath>
       <itemPath>headers/uart.h</itemPath>
+      <itemPath>headers/util.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -26,6 +27,7 @@
       <itemPath>src/main.c</itemPath>
       <itemPath>src/mc_init.c</itemPath>
       <itemPath>src/uart.c</itemPath>
+      <itemPath>src/util.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

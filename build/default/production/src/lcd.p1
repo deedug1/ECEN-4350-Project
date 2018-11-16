@@ -1,11 +1,14 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "58 src/lcd.c
 [; ;src/lcd.c: 58:     I2C_master_write(msg, 2, 0x3C);
-[c E9294 0 1 2 3 .. ]
-[n E9294 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
+[c E9296 0 1 2 3 .. ]
+[n E9296 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
 "18 src/../headers/i2c_master.h
 [; ;src/../headers/i2c_master.h: 18: I2C_master_result I2C_master_write(char * data, int length, char address);
-[v _I2C_master_write `(E9294 ~T0 @X0 0 ef3`*uc`i`uc ]
+[v _I2C_master_write `(E9296 ~T0 @X0 0 ef3`*uc`i`uc ]
+"56 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 56: void lcd_vertical_shift(void);
+[v _lcd_vertical_shift `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1841,9 +1844,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 "12 src/lcd.c
-[; ;src/lcd.c: 12: char buffer [0x04 * 0x80] = {
-[v _buffer `uc ~T0 @X0 -> 512 `i e ]
-[i _buffer
+[; ;src/lcd.c: 12: char lcd_buffer [0x04 * 0x80] = {
+[v _lcd_buffer `uc ~T0 @X0 -> 512 `i e ]
+[i _lcd_buffer
 :U ..
 -> -> 128 `i `uc
 -> -> 128 `i `uc
@@ -2521,8 +2524,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 1388 ]
 {
 "118
-[; ;src/lcd.c: 118:             data[j + 1] = buffer[i + j];
-[e = *U + &U _data * -> -> + _j -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux *U + &U _buffer * -> -> + _i _j `ui `ux -> -> # *U &U _buffer `ui `ux ]
+[; ;src/lcd.c: 118:             data[j + 1] = lcd_buffer[i + j];
+[e = *U + &U _data * -> -> + _j -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux *U + &U _lcd_buffer * -> -> + _i _j `ui `ux -> -> # *U &U _lcd_buffer `ui `ux ]
 "119
 [; ;src/lcd.c: 119:         }
 }
@@ -2567,8 +2570,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _val `i -> 0 `i 1392  ]
 {
 "136
-[; ;src/lcd.c: 136:         buffer[index] &= ~(1 << offset);
-[e =& *U + &U _buffer * -> _index `ux -> -> # *U &U _buffer `ui `ux -> ~ << -> 1 `i _offset `uc ]
+[; ;src/lcd.c: 136:         lcd_buffer[index] &= ~(1 << offset);
+[e =& *U + &U _lcd_buffer * -> _index `ux -> -> # *U &U _lcd_buffer `ui `ux -> ~ << -> 1 `i _offset `uc ]
 "137
 [; ;src/lcd.c: 137:     } else if(val == 1 ) {
 }
@@ -2577,8 +2580,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _val `i -> 1 `i 1394  ]
 {
 "138
-[; ;src/lcd.c: 138:         buffer[index] |= (1 << offset);
-[e =| *U + &U _buffer * -> _index `ux -> -> # *U &U _buffer `ui `ux -> << -> 1 `i _offset `uc ]
+[; ;src/lcd.c: 138:         lcd_buffer[index] |= (1 << offset);
+[e =| *U + &U _lcd_buffer * -> _index `ux -> -> # *U &U _lcd_buffer `ui `ux -> << -> 1 `i _offset `uc ]
 "139
 [; ;src/lcd.c: 139:     } else {
 }
@@ -2586,8 +2589,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 1394 ]
 {
 "140
-[; ;src/lcd.c: 140:         buffer[index] ^= (1 << offset);
-[e =^ *U + &U _buffer * -> _index `ux -> -> # *U &U _buffer `ui `ux -> << -> 1 `i _offset `uc ]
+[; ;src/lcd.c: 140:         lcd_buffer[index] ^= (1 << offset);
+[e =^ *U + &U _lcd_buffer * -> _index `ux -> -> # *U &U _lcd_buffer `ui `ux -> << -> 1 `i _offset `uc ]
 "141
 [; ;src/lcd.c: 141:     }
 }
@@ -2615,8 +2618,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 1397 ]
 {
 "146
-[; ;src/lcd.c: 146:         buffer[i] = 0x00;
-[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `i `uc ]
+[; ;src/lcd.c: 146:         lcd_buffer[i] = 0x00;
+[e = *U + &U _lcd_buffer * -> -> _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux -> -> 0 `i `uc ]
 "147
 [; ;src/lcd.c: 147:     }
 }
@@ -2664,8 +2667,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 1402 ]
 {
 "156
-[; ;src/lcd.c: 156:      buffer[index + i] = lcd_font[char_index + i];
-[e = *U + &U _buffer * -> -> + _index _i `ui `ux -> -> # *U &U _buffer `ui `ux *U + &U _lcd_font * -> -> + _char_index _i `ui `ux -> -> # *U &U _lcd_font `ui `ux ]
+[; ;src/lcd.c: 156:      lcd_buffer[index + i] = lcd_font[char_index + i];
+[e = *U + &U _lcd_buffer * -> -> + _index _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux *U + &U _lcd_font * -> -> + _char_index _i `ui `ux -> -> # *U &U _lcd_font `ui `ux ]
 "157
 [; ;src/lcd.c: 157:     }
 }
@@ -2734,4 +2737,88 @@ Version 4.0 HI-TECH Software Intermediate Code
 "172
 [; ;src/lcd.c: 172: }
 [e :UE 1407 ]
+}
+"173
+[; ;src/lcd.c: 173: void lcd_newline() {
+[v _lcd_newline `(v ~T0 @X0 1 ef ]
+{
+[e :U _lcd_newline ]
+[f ]
+"174
+[; ;src/lcd.c: 174:     if(cursor_y >= 3) {
+[e $ ! >= _cursor_y -> 3 `i 1412  ]
+{
+"175
+[; ;src/lcd.c: 175:         cursor_y = 3;
+[e = _cursor_y -> 3 `i ]
+"176
+[; ;src/lcd.c: 176:         lcd_vertical_shift();
+[e ( _lcd_vertical_shift ..  ]
+"177
+[; ;src/lcd.c: 177:     } else {
+}
+[e $U 1413  ]
+[e :U 1412 ]
+{
+"178
+[; ;src/lcd.c: 178:         cursor_y += 1;
+[e =+ _cursor_y -> 1 `i ]
+"179
+[; ;src/lcd.c: 179:         cursor_x = 0;
+[e = _cursor_x -> 0 `i ]
+"180
+[; ;src/lcd.c: 180:     }
+}
+[e :U 1413 ]
+"181
+[; ;src/lcd.c: 181: }
+[e :UE 1411 ]
+}
+"182
+[; ;src/lcd.c: 182: void lcd_vertical_shift() {
+[v _lcd_vertical_shift `(v ~T0 @X0 1 ef ]
+{
+[e :U _lcd_vertical_shift ]
+[f ]
+"183
+[; ;src/lcd.c: 183:     int i = 0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+"184
+[; ;src/lcd.c: 184:     for(; i < 3 * 0x80; i++) {
+{
+[e $ < _i * -> 3 `i -> 128 `i 1415  ]
+[e $U 1416  ]
+[e :U 1415 ]
+{
+"185
+[; ;src/lcd.c: 185:         lcd_buffer[i] = lcd_buffer[i + 0x80];
+[e = *U + &U _lcd_buffer * -> -> _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux *U + &U _lcd_buffer * -> -> + _i -> 128 `i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux ]
+"186
+[; ;src/lcd.c: 186:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i * -> 3 `i -> 128 `i 1415  ]
+[e :U 1416 ]
+}
+"187
+[; ;src/lcd.c: 187:     for(; i < 0x04 * 0x80; i++) {
+{
+[e $ < _i * -> 4 `i -> 128 `i 1418  ]
+[e $U 1419  ]
+[e :U 1418 ]
+{
+"188
+[; ;src/lcd.c: 188:         lcd_buffer[i] = 0;
+[e = *U + &U _lcd_buffer * -> -> _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux -> -> 0 `i `uc ]
+"189
+[; ;src/lcd.c: 189:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i * -> 4 `i -> 128 `i 1418  ]
+[e :U 1419 ]
+}
+"190
+[; ;src/lcd.c: 190: }
+[e :UE 1414 ]
 }

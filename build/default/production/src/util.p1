@@ -1,0 +1,116 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h: 54: size_t strlen (const char *);
+[v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
+"6 src/util.c
+[; ;src/util.c: 6: void reverse(char * s) {
+[v _reverse `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _reverse ]
+[v _s `*uc ~T0 @X0 1 r1 ]
+[f ]
+"7
+[; ;src/util.c: 7:     int i = 0, j = strlen(s) - 1;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> - ( _strlen (1 -> _s `*Cuc -> -> 1 `i `ui `i ]
+"8
+[; ;src/util.c: 8:     char c;
+[v _c `uc ~T0 @X0 1 a ]
+"9
+[; ;src/util.c: 9:     for(; i < j; i++, j--) {
+{
+[e $U 6  ]
+[e :U 3 ]
+{
+"10
+[; ;src/util.c: 10:         c = s[j];
+[e = _c *U + _s * -> _j `x -> -> # *U _s `i `x ]
+"11
+[; ;src/util.c: 11:         s[j] = s[i];
+[e = *U + _s * -> _j `x -> -> # *U _s `i `x *U + _s * -> _i `x -> -> # *U _s `i `x ]
+"12
+[; ;src/util.c: 12:         s[i] = c;
+[e = *U + _s * -> _i `x -> -> # *U _s `i `x _c ]
+"13
+[; ;src/util.c: 13:     }
+}
+[e ; ++ _i -> 1 `i -- _j -> 1 `i ]
+[e :U 6 ]
+[e $ < _i _j 3  ]
+[e :U 4 ]
+}
+"14
+[; ;src/util.c: 14: }
+[e :UE 2 ]
+}
+"15
+[; ;src/util.c: 15: void itoa(int num, char * buf, int radix) {
+[v _itoa `(v ~T0 @X0 1 ef3`i`*uc`i ]
+{
+[e :U _itoa ]
+[v _num `i ~T0 @X0 1 r1 ]
+[v _buf `*uc ~T0 @X0 1 r2 ]
+[v _radix `i ~T0 @X0 1 r3 ]
+[f ]
+"16
+[; ;src/util.c: 16:     signed char sign;
+[v _sign `c ~T0 @X0 1 a ]
+"17
+[; ;src/util.c: 17:     if((sign = num) < 0) {
+[e $ ! < -> = _sign -> _num `c `i -> 0 `i 8  ]
+{
+"18
+[; ;src/util.c: 18:         num = -num;
+[e = _num -U _num ]
+"19
+[; ;src/util.c: 19:     }
+}
+[e :U 8 ]
+"20
+[; ;src/util.c: 20:     while(num > 0 ) {
+[e $U 9  ]
+[e :U 10 ]
+{
+"21
+[; ;src/util.c: 21:         *buf = (num % 10) | 0x30;
+[e = *U _buf -> | % _num -> 10 `i -> 48 `i `uc ]
+"22
+[; ;src/util.c: 22:         buf++;
+[e ++ _buf * -> -> 1 `i `x -> -> # *U _buf `i `x ]
+"23
+[; ;src/util.c: 23:         num /= 10;
+[e =/ _num -> 10 `i ]
+"24
+[; ;src/util.c: 24:     }
+}
+[e :U 9 ]
+"20
+[; ;src/util.c: 20:     while(num > 0 ) {
+[e $ > _num -> 0 `i 10  ]
+[e :U 11 ]
+"25
+[; ;src/util.c: 25:     if(sign < 0){
+[e $ ! < -> _sign `i -> 0 `i 12  ]
+{
+"26
+[; ;src/util.c: 26:         *buf = '-';
+[e = *U _buf -> -> 45 `ui `uc ]
+"27
+[; ;src/util.c: 27:         buf++;
+[e ++ _buf * -> -> 1 `i `x -> -> # *U _buf `i `x ]
+"28
+[; ;src/util.c: 28:     }
+}
+[e :U 12 ]
+"29
+[; ;src/util.c: 29:     *buf = '\0';
+[e = *U _buf -> -> 0 `ui `uc ]
+"30
+[; ;src/util.c: 30:     reverse(buf);
+[e ( _reverse (1 _buf ]
+"31
+[; ;src/util.c: 31: }
+[e :UE 7 ]
+}

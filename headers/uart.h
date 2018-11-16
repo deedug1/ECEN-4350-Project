@@ -14,15 +14,15 @@
 #define RX_INTF PIR3bits.RC1IF
 #define TX_INTF PIR3bits.TX1IF
 
-void UART_init();
-void UART_RX_ISR();
-void UART_TX_ISR();
+void UART_init(void);
+void UART_RX_ISR(void);
+void UART_TX_ISR(void);
 void UART_putc(char data);
 void UART_puts(char * data);
-char UART_getc();
+char UART_getc(void);
 void UART_gets(char * buf, int len);
-char UART_can_tx();
-char UART_can_rx();
+char UART_can_tx(void);
+char UART_can_rx(void);
 
 #ifdef	__cplusplus
 extern "C" {

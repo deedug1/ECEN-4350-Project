@@ -52,6 +52,8 @@ void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);
+void lcd_newline(void);
+void lcd_vertical_shift(void);
 #ifdef	__cplusplus
 extern "C" {
 #endif
