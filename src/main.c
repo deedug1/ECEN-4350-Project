@@ -12,9 +12,9 @@
 #include "../headers/interrupt.h"
 #include "../headers/uart.h"
 #include "../headers/esp8266.h"
+#include "../headers/util.h"
 
-
-char * garbage = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=21 \r\n";
+char * garbage = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=21/r/n/r/n";
 static char should_send = 0;
 void wait() {
     int i, j;
@@ -31,34 +31,49 @@ void empty_rx_buf() {
     }
     while(UART_can_rx()) {
         c = UART_getc();
+        if(c == '\n') {
+            lcd_newline();
+        } else if(c < 32 || c > 127) {
+            // do nothing
+        } else {
+            lcd_putc(c);
+        }
     }
-//    lcd_update();
+    lcd_update();
 }
 /*
  * 
  */
 int main() {
+//    char c;
     controller_init();
     interrupt_init();
     I2C_master_init();
     UART_init();
-//    lcd_init();
+    lcd_init();
     
-    
-    // Begin WIFI
+     lcd_clear();
+//     Begin WIFI
+    ESP8266_reset();
+    lcd_puts("RESET");
+    lcd_newline();
+    lcd_update();
     ESP8266_init();
-    empty_rx_buf();
+    lcd_puts("INIT");
+    lcd_newline();
+    lcd_update();
     ESP8266_connect("test_ap", "incredible14!");
-    empty_rx_buf();
+    lcd_puts("CONNECT");
+    lcd_newline();
+    lcd_update();
     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
-    empty_rx_buf();
+    lcd_puts("SOCKET");
+    lcd_newline();
+    lcd_update();
     ESP8266_send_data(garbage);
-    empty_rx_buf();
     ESP8266_close_socket();
-    empty_rx_buf();
     while(1) {
-        // Program complete
-        SLEEP();
+
     }
    
 }

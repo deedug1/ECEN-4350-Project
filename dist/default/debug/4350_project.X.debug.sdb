@@ -20,7 +20,7 @@ RECEIVE_DATA 4
 ACKNOWLEDGE_RECV 5
 STOPPED 6
 ]
-"47 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"43 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [e E9454 . `uc
 TCP 0
 UDP 1
@@ -32,7 +32,7 @@ SEND_ERROR 1
 RECEIVE_ERROR 2
 PENDING 3
 ]
-"69 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"72 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [e E9330 . `uc
 TCP 0
 UDP 1
@@ -73,17 +73,17 @@ UDP 1
 [v ___omul __omul `(uo  1 e 8 0 ]
 "15 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_init ESP8266_init `(v  1 e 1 0 ]
-"28
+"24
 [v _ESP8266_reset ESP8266_reset `(v  1 e 1 0 ]
-"33
+"29
 [v _ESP8266_connect ESP8266_connect `(v  1 e 1 0 ]
-"47
+"43
 [v _ESP8266_open_socket ESP8266_open_socket `(v  1 e 1 0 ]
-"62
+"56
 [v _ESP8266_send_data ESP8266_send_data `(v  1 e 1 0 ]
-"75
+"68
 [v _ESP8266_close_socket ESP8266_close_socket `(v  1 e 1 0 ]
-"79
+"72
 [v _ESP8266_waitfor ESP8266_waitfor `(uc  1 e 1 0 ]
 "29 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
 [v _I2C_master_init I2C_master_init `(v  1 e 1 0 ]
@@ -186,27 +186,27 @@ UDP 1
 ]
 [u S75 . 1 `S49 1 . 1 0 `S55 1 . 1 0 `S61 1 . 1 0 `S63 1 . 1 0 `S66 1 . 1 0 `S69 1 . 1 0 `S72 1 . 1 0 ]
 [v _PIE3bits PIE3bits `VES75  1 e 1 @3776 ]
-[s S464 . 1 `uc 1 SSPIF 1 0 :1:0 
+[s S461 . 1 `uc 1 SSPIF 1 0 :1:0 
 `uc 1 BCLIF 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 TXIF 1 0 :1:4 
 `uc 1 RCIF 1 0 :1:5 
 ]
 "3835
-[s S470 . 1 `uc 1 SSP1IF 1 0 :1:0 
+[s S467 . 1 `uc 1 SSP1IF 1 0 :1:0 
 `uc 1 BCL1IF 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[s S476 . 1 `uc 1 . 1 0 :1:0 
+[s S473 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RXBNIF 1 0 :1:1 
 ]
-[s S479 . 1 `uc 1 . 1 0 :4:0 
+[s S476 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TXBNIF 1 0 :1:4 
 ]
-[u S482 . 1 `S464 1 . 1 0 `S470 1 . 1 0 `S476 1 . 1 0 `S479 1 . 1 0 ]
-[v _PIR3bits PIR3bits `VES482  1 e 1 @3784 ]
+[u S479 . 1 `S461 1 . 1 0 `S467 1 . 1 0 `S473 1 . 1 0 `S476 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES479  1 e 1 @3784 ]
 "4623
 [v _OSCCON1 OSCCON1 `VEuc  1 e 1 @3795 ]
 "4763
@@ -346,7 +346,7 @@ UDP 1
 [v _TX1STA TX1STA `VEuc  1 e 1 @3997 ]
 "17567
 [v _BAUD1CON BAUD1CON `VEuc  1 e 1 @3998 ]
-[s S390 . 1 `uc 1 INT0EDG 1 0 :1:0 
+[s S387 . 1 `uc 1 INT0EDG 1 0 :1:0 
 `uc 1 INT1EDG 1 0 :1:1 
 `uc 1 INT2EDG 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -355,16 +355,16 @@ UDP 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "25416
-[s S398 . 1 `uc 1 . 1 0 :6:0 
+[s S395 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S402 . 1 `uc 1 . 1 0 :6:0 
+[s S399 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S406 . 1 `S390 1 . 1 0 `S398 1 . 1 0 `S402 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES406  1 e 1 @4082 ]
+[u S403 . 1 `S387 1 . 1 0 `S395 1 . 1 0 `S399 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES403  1 e 1 @4082 ]
 "27713
 [v _GIE GIE `VEb  1 e 0 @32663 ]
 "30254
@@ -390,15 +390,15 @@ UDP 1
 [v _cursor_y cursor_y `i  1 s 2 cursor_y ]
 "17 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _garbage garbage `*.25uc  1 e 2 0 ]
-[s S679 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
+[s S681 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
 "22 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
-[v _RX_buf RX_buf `VES679  1 s 14 RX_buf ]
+[v _RX_buf RX_buf `VES681  1 s 14 RX_buf ]
 "23
-[v _TX_buf TX_buf `VES679  1 s 14 TX_buf ]
+[v _TX_buf TX_buf `VES681  1 s 14 TX_buf ]
 "47 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
 {
-"79
+"81
 } 0
 "63 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
 [v _lcd_init lcd_init `(v  1 e 1 0 ]
@@ -449,35 +449,35 @@ UDP 1
 {
 "45
 } 0
-"62 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"56 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_send_data ESP8266_send_data `(v  1 e 1 0 ]
 {
-"63
+"57
 [v ESP8266_send_data@buffer buffer `[10]uc  1 a 10 67 ]
-"64
+"58
 [v ESP8266_send_data@len len `i  1 a 2 77 ]
-"62
+"56
 [v ESP8266_send_data@data data `*.25uc  1 p 2 63 ]
-"74
+"67
 } 0
-"28
+"24
 [v _ESP8266_reset ESP8266_reset `(v  1 e 1 0 ]
 {
-"32
+"28
 } 0
-"47
+"43
 [v _ESP8266_open_socket ESP8266_open_socket `(v  1 e 1 0 ]
 {
 [v ESP8266_open_socket@type type `E9454  1 a 1 wreg ]
-"48
+"44
 [v ESP8266_open_socket@buffer buffer `[10]uc  1 a 10 67 ]
-"47
+"43
 [v ESP8266_open_socket@type type `E9454  1 a 1 wreg ]
 [v ESP8266_open_socket@ip ip `*.25uc  1 p 2 63 ]
 [v ESP8266_open_socket@port port `i  1 p 2 65 ]
-"49
+"45
 [v ESP8266_open_socket@type type `E9454  1 a 1 77 ]
-"60
+"54
 } 0
 "15 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/util.c
 [v _itoa itoa `(v  1 e 1 0 ]
@@ -540,27 +540,27 @@ UDP 1
 "15 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_init ESP8266_init `(v  1 e 1 0 ]
 {
-"27
+"23
 } 0
-"33
+"29
 [v _ESP8266_connect ESP8266_connect `(v  1 e 1 0 ]
 {
 [v ESP8266_connect@name name `*.25uc  1 p 2 63 ]
 [v ESP8266_connect@pass pass `*.25uc  1 p 2 65 ]
-"45
+"41
 } 0
-"79
+"72
 [v _ESP8266_waitfor ESP8266_waitfor `(uc  1 e 1 0 ]
 {
-"80
+"73
 [v ESP8266_waitfor@buffer buffer `[64]uc  1 a 64 0 ]
-"82
+"75
 [v ESP8266_waitfor@i i `i  1 a 2 65 ]
-"81
+"74
 [v ESP8266_waitfor@c c `uc  1 a 1 64 ]
-"79
+"72
 [v ESP8266_waitfor@str str `*.25Cuc  1 p 2 61 ]
-"101
+"94
 } 0
 "3 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\strcmp.c
 [v _strcmp strcmp `(i  1 e 2 0 ]
@@ -673,10 +673,10 @@ UDP 1
 {
 "135
 } 0
-"75 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"68 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_close_socket ESP8266_close_socket `(v  1 e 1 0 ]
 {
-"78
+"71
 } 0
 "101 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
 [v _UART_puts UART_puts `(v  1 e 1 0 ]

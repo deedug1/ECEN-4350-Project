@@ -1,4 +1,4 @@
-# 1 "src/uart.c"
+# 1 "src/esp8266.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,14 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/uart.c" 2
-
-
-
-
-
-
-
+# 1 "src/esp8266.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15642,7 +15635,84 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 8 "src/uart.c" 2
+# 1 "src/esp8266.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 1 3
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 409 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 2 3
+
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+# 65 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 3
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 2 "src/esp8266.c" 2
+
+# 1 "src/../headers/util.h" 1
+# 15 "src/../headers/util.h"
+void itoa(int num, char * buf, int radix);
+# 3 "src/esp8266.c" 2
+
+# 1 "src/../headers/esp8266.h" 1
+# 19 "src/../headers/esp8266.h"
+typedef enum {
+    TCP, UDP
+}ESP8266_socket_type;
+
+void ESP8266_reset(void);
+void ESP8266_init(void);
+void ESP8266_connect(char * name, char * pass);
+void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
+void ESP8266_send_data(char * data);
+void ESP8266_close_socket(void);
+char ESP8266_responseOK(void);
+# 4 "src/esp8266.c" 2
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
@@ -15655,7 +15725,7 @@ char UART_getc(void);
 void UART_gets(char * buf, int len);
 char UART_can_tx(void);
 char UART_can_rx(void);
-# 9 "src/uart.c" 2
+# 5 "src/esp8266.c" 2
 
 # 1 "src/../headers/lcd.h" 1
 # 50 "src/../headers/lcd.h"
@@ -15667,133 +15737,93 @@ void lcd_update(void);
 void lcd_clear(void);
 void lcd_newline(void);
 void lcd_vertical_shift(void);
-# 10 "src/uart.c" 2
-
-
-
-
-
-typedef struct {
-    char buffer[8];
-    int size;
-    int head;
-    int tail;
-} UART_buf;
-
-static volatile UART_buf RX_buf;
-static volatile UART_buf TX_buf;
-void UART_init() {
-
-    PIE3bits.RC1IE = 0;
-    PIE3bits.TX1IE = 0;
-
-
-    BAUD1CON = 0x08;
-
-    RC1STA = 0x90;
-
-    TX1STA = 0x24;
+# 6 "src/esp8266.c" 2
 
 
 
 
 
 
-    SP1BRGH = 0x00;
+static char is_connected = 0;
+char * SOCKETS[] = {"TCP", "UDP"};
+char ESP8266_waitfor(const char * str);
+void ESP8266_init(void) {
+    UART_puts("ATE0");
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+    UART_puts("AT+CWMODE_CUR=");
+    UART_putc('1');
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+}
+void ESP8266_reset() {
+    UART_puts("AT+RST");
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+}
+void ESP8266_connect(char * name, char * pass) {
 
-    SP1BRGL = 0x22;
 
 
-    RX_buf.size = 0;
-    RX_buf.tail = 0;
-    RX_buf.head = 0;
-
-    TX_buf.size = 0;
-    TX_buf.tail = 0;
-    TX_buf.head = 0;
-
-    PIE3bits.RC1IE = 1;
+    UART_puts("AT+CWJAP_CUR=");
+    UART_putc('\"');UART_puts(name);UART_putc('\"');
+    UART_putc(',');
+    UART_putc('\"');UART_puts(pass);UART_putc('\"');
+    UART_puts("\r\n");
+    ESP8266_waitfor("WIFI CONNECTED");
+    is_connected = 1;
 
 }
-void UART_RX_ISR() {
 
-
-    (RX_buf.buffer[RX_buf.head++] = RC1REG);
-    RX_buf.size++;
-
-    if(RX_buf.head >= 8) {
-        RX_buf.head = 0;
-    }
+void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
+    char buffer[10];
+    itoa(port, buffer, 10);
+    UART_puts("AT+CIPSTART=");
+    UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
+    UART_putc(',');
+    UART_putc('\"');UART_puts(ip);UART_putc('\"');
+    UART_putc(',');
+    UART_puts(buffer);
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
 }
 
-void UART_TX_ISR() {
-    if(TX_buf.size != 0) {
+void ESP8266_send_data(char * data) {
+    char buffer[10];
+    int len = strlen(data);
+    itoa(len, buffer, 10);
+    UART_puts("AT+CIPSEND=");
+    UART_puts(buffer);
+    UART_puts("\r\n");
+    ESP8266_waitfor(">");
 
-        (TX1REG = TX_buf.buffer[TX_buf.tail++]);
-        TX_buf.size--;
+    UART_puts(data);
 
-        if(TX_buf.tail >= 8) {
-            TX_buf.tail = 0;
+}
+void ESP8266_close_socket(){
+    UART_puts("AT+CIPClOSE");
+    UART_puts("\r\n");
+}
+char ESP8266_waitfor(const char * str) {
+    char buffer[64];
+    char c;
+    int i = 0;
+    while(!UART_can_rx());
+    do {
+        i = 0;
+        buffer[0] = '\0';
+        while((c = UART_getc()) != '\n') {
+            if(c != '\r') {
+                buffer[i++] = c;
+            }
+            if(i >= 64) {
+                i = 0;
+            }
         }
-    } else {
-
-        PIE3bits.TX1IE = 0;
-    }
-}
-void UART_putc(char data) {
-    while(TX_buf.size >= 8) {
-
-    }
-
-    if(PIE3bits.TX1IE == 0){
-        (TX1REG = data);
-    } else {
-
-        PIE3bits.TX1IE = 0;
-        TX_buf.buffer[TX_buf.head++] = data;
-        TX_buf.size++;
-
-        if(TX_buf.head >= 8) {
-            TX_buf.head = 0;
-        }
-    }
-    PIE3bits.TX1IE = 1;
-}
-void UART_puts(char * data) {
-
-    while(*data != 0) {
-        UART_putc(*data);
-        data++;
-    }
-}
-
-char UART_getc() {
-    char data = 0;
-
-
-    while(RX_buf.size <= 0) {
-
-    }
-    PIE3bits.RC1IE = 0;
-    data = RX_buf.buffer[RX_buf.tail++];
-    RX_buf.size--;
-
-    if(RX_buf.tail >= 8) {
-        RX_buf.tail = 0;
-    }
-    PIE3bits.RC1IE = 1;
-    return data;
-}
-void UART_gets(char * buf, int len) {
-    do{
-        *buf = UART_getc();
-        buf++;
-    }while(len --> 0);
-    *buf = '\0';
-}
-char UART_can_rx() {
-    return RX_buf.size > 0;
-}
-char UART_can_tx() {
-    return TX_buf.size < 8;
+        buffer[i] = '\0';
+    } while(strcmp(buffer, str) != 0);
+    lcd_puts(buffer);
+    lcd_newline();
+    lcd_update();
+    return 0;
 }

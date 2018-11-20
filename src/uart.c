@@ -118,7 +118,7 @@ char UART_getc() {
     RX_buf.size--;
     // Wrap
     if(RX_buf.tail >= UART_BUFFER_SIZE) {
-        RX_buf.head = 0;
+        RX_buf.tail = 0;
     }
     RX_INTE = 1;
     return data;

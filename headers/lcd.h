@@ -33,6 +33,7 @@
 #define SET_PRECHARGE 0xD9 // 2 byte
 #define SET_VCOMH 0xDB // 2 byte
 #define SET_CHARGEPUMP 0x8D // 2 byte
+#define DISABLE_SCROLL 0x2E // 1 byte
 #define LCDNOP 0xE3 // Why though
 // Control
 #define CONTROL_CMD 0x00

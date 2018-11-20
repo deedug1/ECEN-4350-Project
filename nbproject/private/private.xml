@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/mc_init.c</file>
             <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/headers/esp8266.h</file>
-            <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/headers/uart.h</file>
+            <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/util.c</file>
             <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/esp8266.c</file>
+            <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/lcd.c</file>
+            <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/interrupt.c</file>
             <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/i2c_master.c</file>
+            <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/Makefile</file>
             <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/main.c</file>
             <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/headers/lcd.h</file>
             <file>file:/C:/Users/jstpa/MPLABXProjects/4350_project.X/src/uart.c</file>

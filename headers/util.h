@@ -8,7 +8,7 @@
 #ifndef UTIL_H
 #define	UTIL_H
 
-
+#define _XTAL_FREQ 16000000
 /*
  * Transforms the integer num into a string that is put into buf.
  */

@@ -8,6 +8,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "22
 [; ;src/../headers/uart.h: 22: char UART_getc(void);
 [v _UART_getc `(uc ~T0 @X0 0 ef ]
+"56 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 56: void lcd_newline(void);
+[v _lcd_newline `(v ~T0 @X0 0 ef ]
+"50
+[; ;src/../headers/lcd.h: 50: void lcd_putc(unsigned char c);
+[v _lcd_putc `(v ~T0 @X0 0 ef1`uc ]
+"54
+[; ;src/../headers/lcd.h: 54: void lcd_update(void);
+[v _lcd_update `(v ~T0 @X0 0 ef ]
 [p mainexit ]
 "20 src/../headers/mc_init.h
 [; ;src/../headers/mc_init.h: 20: void controller_init(void);
@@ -21,24 +30,36 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17 src/../headers/uart.h
 [; ;src/../headers/uart.h: 17: void UART_init(void);
 [v _UART_init `(v ~T0 @X0 0 ef ]
+"53 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 53: void lcd_init(void);
+[v _lcd_init `(v ~T0 @X0 0 ef ]
+"55
+[; ;src/../headers/lcd.h: 55: void lcd_clear(void);
+[v _lcd_clear `(v ~T0 @X0 0 ef ]
 "24 src/../headers/esp8266.h
-[; ;src/../headers/esp8266.h: 24: void ESP8266_init(void);
+[; ;src/../headers/esp8266.h: 24: void ESP8266_reset(void);
+[v _ESP8266_reset `(v ~T0 @X0 0 ef ]
+"51 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 51: void lcd_puts(unsigned char * s);
+[v _lcd_puts `(v ~T0 @X0 0 ef1`*uc ]
+"25 src/../headers/esp8266.h
+[; ;src/../headers/esp8266.h: 25: void ESP8266_init(void);
 [v _ESP8266_init `(v ~T0 @X0 0 ef ]
-"25
-[; ;src/../headers/esp8266.h: 25: void ESP8266_connect(char * name, char * pass);
+"26
+[; ;src/../headers/esp8266.h: 26: void ESP8266_connect(char * name, char * pass);
 [v _ESP8266_connect `(v ~T0 @X0 0 ef2`*uc`*uc ]
-"53 src/main.c
-[; ;src/main.c: 53:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
+"69 src/main.c
+[; ;src/main.c: 69:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
 [c E9330 0 1 .. ]
 [n E9330 . TCP UDP  ]
-"26 src/../headers/esp8266.h
-[; ;src/../headers/esp8266.h: 26: void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
+"27 src/../headers/esp8266.h
+[; ;src/../headers/esp8266.h: 27: void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 [v _ESP8266_open_socket `(v ~T0 @X0 0 ef3`E9330`*uc`i ]
-"27
-[; ;src/../headers/esp8266.h: 27: void ESP8266_send_data(char * data);
-[v _ESP8266_send_data `(v ~T0 @X0 0 ef1`*uc ]
 "28
-[; ;src/../headers/esp8266.h: 28: void ESP8266_close_socket(void);
+[; ;src/../headers/esp8266.h: 28: void ESP8266_send_data(char * data);
+[v _ESP8266_send_data `(v ~T0 @X0 0 ef1`*uc ]
+"29
+[; ;src/../headers/esp8266.h: 29: void ESP8266_close_socket(void);
 [v _ESP8266_close_socket `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
@@ -1292,7 +1313,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "17 src/main.c
-[; ;src/main.c: 17: char * garbage = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=21 \r\n";
+[; ;src/main.c: 17: char * garbage = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=21/r/n/r/n";
 [v _garbage `*uc ~T0 @X0 1 e ]
 [i _garbage
 :s 1C
@@ -1381,84 +1402,146 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/main.c: 33:         c = UART_getc();
 [e = _c ( _UART_getc ..  ]
 "34
-[; ;src/main.c: 34:     }
+[; ;src/main.c: 34:         if(c == '\n') {
+[e $ ! == -> _c `ui -> 10 `ui 1395  ]
+{
+"35
+[; ;src/main.c: 35:             lcd_newline();
+[e ( _lcd_newline ..  ]
+"36
+[; ;src/main.c: 36:         } else if(c < 32 || c > 127) {
+}
+[e $U 1396  ]
+[e :U 1395 ]
+[e $ ! || < -> _c `i -> 32 `i > -> _c `i -> 127 `i 1397  ]
+{
+"38
+[; ;src/main.c: 38:         } else {
+}
+[e $U 1398  ]
+[e :U 1397 ]
+{
+"39
+[; ;src/main.c: 39:             lcd_putc(c);
+[e ( _lcd_putc (1 -> _c `uc ]
+"40
+[; ;src/main.c: 40:         }
+}
+[e :U 1398 ]
+[e :U 1396 ]
+"41
+[; ;src/main.c: 41:     }
 }
 [e :U 1392 ]
 "32
 [; ;src/main.c: 32:     while(UART_can_rx()) {
 [e $ != -> ( _UART_can_rx ..  `i -> 0 `i 1393  ]
 [e :U 1394 ]
-"36
-[; ;src/main.c: 36: }
+"42
+[; ;src/main.c: 42:     lcd_update();
+[e ( _lcd_update ..  ]
+"43
+[; ;src/main.c: 43: }
 [e :UE 1388 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"40
-[; ;src/main.c: 40: int main() {
+"47
+[; ;src/main.c: 47: int main() {
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"41
-[; ;src/main.c: 41:     controller_init();
-[e ( _controller_init ..  ]
-"42
-[; ;src/main.c: 42:     interrupt_init();
-[e ( _interrupt_init ..  ]
-"43
-[; ;src/main.c: 43:     I2C_master_init();
-[e ( _I2C_master_init ..  ]
-"44
-[; ;src/main.c: 44:     UART_init();
-[e ( _UART_init ..  ]
 "49
-[; ;src/main.c: 49:     ESP8266_init();
-[e ( _ESP8266_init ..  ]
+[; ;src/main.c: 49:     controller_init();
+[e ( _controller_init ..  ]
 "50
-[; ;src/main.c: 50:     empty_rx_buf();
-[e ( _empty_rx_buf ..  ]
+[; ;src/main.c: 50:     interrupt_init();
+[e ( _interrupt_init ..  ]
 "51
-[; ;src/main.c: 51:     ESP8266_connect("test_ap", "incredible14!");
-[e ( _ESP8266_connect (2 , :s 2C :s 3C ]
+[; ;src/main.c: 51:     I2C_master_init();
+[e ( _I2C_master_init ..  ]
 "52
-[; ;src/main.c: 52:     empty_rx_buf();
-[e ( _empty_rx_buf ..  ]
+[; ;src/main.c: 52:     UART_init();
+[e ( _UART_init ..  ]
 "53
-[; ;src/main.c: 53:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
-[e ( _ESP8266_open_socket (3 , , . `E9330 0 :s 4C -> 80 `i ]
-"54
-[; ;src/main.c: 54:     empty_rx_buf();
-[e ( _empty_rx_buf ..  ]
+[; ;src/main.c: 53:     lcd_init();
+[e ( _lcd_init ..  ]
 "55
-[; ;src/main.c: 55:     ESP8266_send_data(garbage);
-[e ( _ESP8266_send_data (1 _garbage ]
-"56
-[; ;src/main.c: 56:     empty_rx_buf();
-[e ( _empty_rx_buf ..  ]
+[; ;src/main.c: 55:      lcd_clear();
+[e ( _lcd_clear ..  ]
 "57
-[; ;src/main.c: 57:     ESP8266_close_socket();
-[e ( _ESP8266_close_socket ..  ]
+[; ;src/main.c: 57:     ESP8266_reset();
+[e ( _ESP8266_reset ..  ]
 "58
-[; ;src/main.c: 58:     empty_rx_buf();
-[e ( _empty_rx_buf ..  ]
+[; ;src/main.c: 58:     lcd_puts("RESET");
+[e ( _lcd_puts (1 :s 2C ]
 "59
-[; ;src/main.c: 59:     while(1) {
-[e :U 1397 ]
-{
+[; ;src/main.c: 59:     lcd_newline();
+[e ( _lcd_newline ..  ]
+"60
+[; ;src/main.c: 60:     lcd_update();
+[e ( _lcd_update ..  ]
 "61
-[; ;src/main.c: 61:         __asm(" sleep");
-[; <"  sleep ;# ">
+[; ;src/main.c: 61:     ESP8266_init();
+[e ( _ESP8266_init ..  ]
 "62
-[; ;src/main.c: 62:     }
-}
-[e :U 1396 ]
-[e $U 1397  ]
-[e :U 1398 ]
+[; ;src/main.c: 62:     lcd_puts("INIT");
+[e ( _lcd_puts (1 :s 3C ]
+"63
+[; ;src/main.c: 63:     lcd_newline();
+[e ( _lcd_newline ..  ]
 "64
-[; ;src/main.c: 64: }
-[e :UE 1395 ]
+[; ;src/main.c: 64:     lcd_update();
+[e ( _lcd_update ..  ]
+"65
+[; ;src/main.c: 65:     ESP8266_connect("test_ap", "incredible14!");
+[e ( _ESP8266_connect (2 , :s 4C :s 5C ]
+"66
+[; ;src/main.c: 66:     lcd_puts("CONNECT");
+[e ( _lcd_puts (1 :s 6C ]
+"67
+[; ;src/main.c: 67:     lcd_newline();
+[e ( _lcd_newline ..  ]
+"68
+[; ;src/main.c: 68:     lcd_update();
+[e ( _lcd_update ..  ]
+"69
+[; ;src/main.c: 69:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
+[e ( _ESP8266_open_socket (3 , , . `E9330 0 :s 7C -> 80 `i ]
+"70
+[; ;src/main.c: 70:     lcd_puts("SOCKET");
+[e ( _lcd_puts (1 :s 8C ]
+"71
+[; ;src/main.c: 71:     lcd_newline();
+[e ( _lcd_newline ..  ]
+"72
+[; ;src/main.c: 72:     lcd_update();
+[e ( _lcd_update ..  ]
+"73
+[; ;src/main.c: 73:     ESP8266_send_data(garbage);
+[e ( _ESP8266_send_data (1 _garbage ]
+"74
+[; ;src/main.c: 74:     ESP8266_close_socket();
+[e ( _ESP8266_close_socket ..  ]
+"75
+[; ;src/main.c: 75:     while(1) {
+[e :U 1401 ]
+{
+"77
+[; ;src/main.c: 77:     }
 }
-[a 2C 116 101 115 116 95 97 112 0 ]
-[a 4C 97 112 105 46 116 104 105 110 103 115 112 101 97 107 46 99 111 109 0 ]
-[a 3C 105 110 99 114 101 100 105 98 108 101 49 52 33 0 ]
-[a 1C 71 69 84 32 47 117 112 100 97 116 101 63 97 112 105 95 107 101 121 61 79 78 70 56 52 70 78 81 49 88 68 90 66 53 75 72 38 102 105 101 108 100 49 61 50 49 32 13 10 0 ]
+[e :U 1400 ]
+[e $U 1401  ]
+[e :U 1402 ]
+"79
+[; ;src/main.c: 79: }
+[e :UE 1399 ]
+}
+[a 4C 116 101 115 116 95 97 112 0 ]
+[a 1C 71 69 84 32 47 117 112 100 97 116 101 63 97 112 105 95 107 101 121 61 79 78 70 56 52 70 78 81 49 88 68 90 66 53 75 72 38 102 105 101 108 100 49 61 50 49 47 114 47 110 47 114 47 110 0 ]
+[a 7C 97 112 105 46 116 104 105 110 103 115 112 101 97 107 46 99 111 109 0 ]
+[a 3C 73 78 73 84 0 ]
+[a 2C 82 69 83 69 84 0 ]
+[a 8C 83 79 67 75 69 84 0 ]
+[a 6C 67 79 78 78 69 67 84 0 ]
+[a 5C 105 110 99 114 101 100 105 98 108 101 49 52 33 0 ]

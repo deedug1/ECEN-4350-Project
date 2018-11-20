@@ -15700,12 +15700,12 @@ void itoa(int num, char * buf, int radix);
 # 3 "src/esp8266.c" 2
 
 # 1 "src/../headers/esp8266.h" 1
-# 19 "src/../headers/esp8266.h"
+# 20 "src/../headers/esp8266.h"
 typedef enum {
     TCP, UDP
 }ESP8266_socket_type;
 
-
+void ESP8266_reset(void);
 void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
@@ -15727,6 +15727,18 @@ char UART_can_tx(void);
 char UART_can_rx(void);
 # 5 "src/esp8266.c" 2
 
+# 1 "src/../headers/lcd.h" 1
+# 50 "src/../headers/lcd.h"
+void lcd_putc(unsigned char c);
+void lcd_puts(unsigned char * s);
+void set_pixel(unsigned char i, unsigned char j, unsigned char val);
+void lcd_init(void);
+void lcd_update(void);
+void lcd_clear(void);
+void lcd_newline(void);
+void lcd_vertical_shift(void);
+# 6 "src/esp8266.c" 2
+
 
 
 
@@ -15734,21 +15746,35 @@ char UART_can_rx(void);
 
 static char is_connected = 0;
 char * SOCKETS[] = {"TCP", "UDP"};
+char ESP8266_waitfor(const char * str);
 void ESP8266_init(void) {
-    UART_puts("AT+CWMODE_CUR=");
-    UART_putc('1');
+    UART_puts("ATE0");
     UART_puts("\r\n");
-}
+    ESP8266_waitfor("OK");
 
+    UART_puts("AT+CWMODE_CUR=1");
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+
+    UART_puts("AT+CIPMUX=0");
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+}
+void ESP8266_reset() {
+    UART_puts("AT+RST");
+    UART_puts("\r\n");
+    ESP8266_waitfor("ready");
+}
 void ESP8266_connect(char * name, char * pass) {
-    if(is_connected) {
-        return;
-    }
-    UART_puts("AT+CWJAP=");
+
+
+
+    UART_puts("AT+CWJAP_CUR=");
     UART_putc('\"');UART_puts(name);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(pass);UART_putc('\"');
     UART_puts("\r\n");
+    ESP8266_waitfor("WIFI GOT IP");
     is_connected = 1;
 
 }
@@ -15757,12 +15783,15 @@ void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
     UART_puts("AT+CIPSTART=");
+    UART_putc('0');
+    UART_putc(',');
     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(ip);UART_putc('\"');
     UART_putc(',');
     UART_puts(buffer);
     UART_puts("\r\n");
+    ESP8266_waitfor("OK");
 }
 
 void ESP8266_send_data(char * data) {
@@ -15771,22 +15800,37 @@ void ESP8266_send_data(char * data) {
     itoa(len, buffer, 10);
     UART_puts("AT+CIPSEND=");
     UART_puts(buffer);
+
     UART_puts("\r\n");
+    ESP8266_waitfor(">");
 
     UART_puts(data);
-    UART_putc('\n');
+
 }
 void ESP8266_close_socket(){
     UART_puts("AT+CIPClOSE");
     UART_puts("\r\n");
 }
-char ESP8266_responseOK() {
-    while(UART_can_rx()) {
-        if(UART_getc() == 'O') {
-            if(UART_getc() == 'K') {
-                return 1;
+char ESP8266_waitfor(const char * str) {
+    char buffer[64];
+    char c;
+    int i = 0;
+    while(!UART_can_rx());
+    do {
+        i = 0;
+        buffer[0] = '\0';
+        while((c = UART_getc()) != '\n') {
+            if(c != '\r') {
+                buffer[i++] = c;
+            }
+            if(i >= 64) {
+                i = 0;
             }
         }
-    }
+        buffer[i] = '\0';
+    } while(strcmp(buffer, str) != 0);
+    lcd_puts(buffer);
+    lcd_newline();
+    lcd_update();
     return 0;
 }

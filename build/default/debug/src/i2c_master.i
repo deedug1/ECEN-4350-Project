@@ -1,4 +1,4 @@
-# 1 "src/uart.c"
+# 1 "src/i2c_master.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,14 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/uart.c" 2
-
-
-
-
-
-
-
+# 1 "src/i2c_master.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15642,158 +15635,176 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 8 "src/uart.c" 2
+# 1 "src/i2c_master.c" 2
 
-# 1 "src/../headers/uart.h" 1
-# 17 "src/../headers/uart.h"
-void UART_init(void);
-void UART_RX_ISR(void);
-void UART_TX_ISR(void);
-void UART_putc(char data);
-void UART_puts(char * data);
-char UART_getc(void);
-void UART_gets(char * buf, int len);
-char UART_can_tx(void);
-char UART_can_rx(void);
-# 9 "src/uart.c" 2
-
-# 1 "src/../headers/lcd.h" 1
-# 50 "src/../headers/lcd.h"
-void lcd_putc(unsigned char c);
-void lcd_puts(unsigned char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
-void lcd_init(void);
-void lcd_update(void);
-void lcd_clear(void);
-void lcd_newline(void);
-void lcd_vertical_shift(void);
-# 10 "src/uart.c" 2
-
-
-
-
+# 1 "src/../headers/i2c_master.h" 1
+# 13 "src/../headers/i2c_master.h"
+typedef enum {
+    SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
+}I2C_master_result;
+void I2C_master_init(void);
+void I2C_MASTER_ISR(void);
+I2C_master_result I2C_master_write(char * data, int length, char address);
+I2C_master_result I2C_master_read(char * buffer, int length, char address);
+# 2 "src/i2c_master.c" 2
+# 15 "src/i2c_master.c"
+typedef enum {
+    IDLE, SEND_ADDRESS, ACKNOWLEDGE_ADDR, SEND_DATA, RECEIVE_DATA, ACKNOWLEDGE_RECV, STOPPED
+}I2C_master_status;
 
 typedef struct {
-    char buffer[8];
-    int size;
-    int head;
-    int tail;
-} UART_buf;
+    char * data;
+    int length;
+    char address;
+    I2C_master_result result;
+} I2C_transmit_data;
 
-static volatile UART_buf RX_buf;
-static volatile UART_buf TX_buf;
-void UART_init() {
+static volatile I2C_transmit_data current_packet;
+static volatile I2C_master_status I2C_status;
 
-    PIE3bits.RC1IE = 0;
-    PIE3bits.TX1IE = 0;
+void I2C_master_init() {
+    SSP1MSK = 0x00;
 
+    SSP1ADD = 0x03;
 
-    BAUD1CON = 0x08;
+    SSP1STAT = 0x80;
 
-    RC1STA = 0x90;
+    SSP1CON3 = 0x00;
 
-    TX1STA = 0x24;
+    SSP1CON2 = 0x00;
 
-
-
-
+    SSP1CON1 = 0x28;
 
 
-    SP1BRGH = 0x00;
-
-    SP1BRGL = 0x22;
-
-
-    RX_buf.size = 0;
-    RX_buf.tail = 0;
-    RX_buf.head = 0;
-
-    TX_buf.size = 0;
-    TX_buf.tail = 0;
-    TX_buf.head = 0;
-
-    PIE3bits.RC1IE = 1;
-
+    SSP1IF = 0;
+    PIE3bits.SSP1IE = 1;
 }
-void UART_RX_ISR() {
-
-
-    (RX_buf.buffer[RX_buf.head++] = RC1REG);
-    RX_buf.size++;
-
-    if(RX_buf.head >= 8) {
-        RX_buf.head = 0;
-    }
+void I2C_stop(I2C_master_result result) {
+    current_packet.result = result;
+    current_packet.length = 0;
+    SSP1CON2bits.PEN = 1;
+    I2C_status = STOP;
 }
-
-void UART_TX_ISR() {
-    if(TX_buf.size != 0) {
-
-        (TX1REG = TX_buf.buffer[TX_buf.tail++]);
-        TX_buf.size--;
-
-        if(TX_buf.tail >= 8) {
-            TX_buf.tail = 0;
-        }
-    } else {
-
-        PIE3bits.TX1IE = 0;
-    }
-}
-void UART_putc(char data) {
-    while(TX_buf.size >= 8) {
+void I2C_wait() {
+    while(current_packet.result == PENDING) {
 
     }
-
-    if(PIE3bits.TX1IE == 0){
-        (TX1REG = data);
-    } else {
-
-        PIE3bits.TX1IE = 0;
-        TX_buf.buffer[TX_buf.head++] = data;
-        TX_buf.size++;
-
-        if(TX_buf.head >= 8) {
-            TX_buf.head = 0;
-        }
-    }
-    PIE3bits.TX1IE = 1;
-}
-void UART_puts(char * data) {
-
-    while(*data != 0) {
-        UART_putc(*data);
-        data++;
-    }
-}
-
-char UART_getc() {
-    char data = 0;
-
-
-    while(RX_buf.size <= 0) {
+    while(I2C_status != IDLE) {
 
     }
-    PIE3bits.RC1IE = 0;
-    data = RX_buf.buffer[RX_buf.tail++];
-    RX_buf.size--;
+}
+void I2C_MASTER_ISR() {
+    static int xfer_count = 0;
 
-    if(RX_buf.tail >= 8) {
-        RX_buf.tail = 0;
+    SSP1IF = 0;
+    switch(I2C_status) {
+        case IDLE:
+            if(current_packet.length != 0) {
+
+                xfer_count = 0;
+                SSP1CON2bits.SEN = 1;
+                I2C_status = SEND_ADDRESS;
+            }
+            break;
+        case SEND_ADDRESS:
+            (SSP1BUF = current_packet.address);
+            if(current_packet.address & 0x1) {
+
+               I2C_status = ACKNOWLEDGE_ADDR;
+            } else {
+
+               I2C_status = SEND_DATA;
+            }
+            break;
+        case ACKNOWLEDGE_ADDR:
+            if(SSP1CON2bits.ACKSTAT) {
+
+                SSP1CON2bits.ACKSTAT = 0;
+                I2C_stop(RECEIVE_ERROR);
+            } else {
+
+                I2C_status = RECEIVE_DATA;
+            }
+            break;
+        case SEND_DATA:
+            if(SSP1CON2bits.ACKSTAT) {
+
+                SSP1CON2bits.ACKSTAT = 0;
+                I2C_stop(SEND_ERROR);
+            } else {
+
+                if(xfer_count < current_packet.length) {
+
+                    (SSP1BUF = *(current_packet.data + xfer_count));
+
+                    xfer_count++;
+                    I2C_status = SEND_DATA;
+                } else {
+
+                    I2C_stop(SUCCESS);
+                }
+            }
+            break;
+        case RECEIVE_DATA:
+            SSP1CON2bits.RCEN = 1;
+            I2C_status = ACKNOWLEDGE_RECV;
+            break;
+        case ACKNOWLEDGE_RECV:
+            (*(current_packet.data + xfer_count) = SSP1BUF);
+            xfer_count++;
+            if(xfer_count < current_packet.length) {
+
+                SSP1CON2bits.ACKDT = 0;
+                SSP1CON2bits.ACKEN = 1;
+                I2C_status = RECEIVE_DATA;
+            } else {
+
+                SSP1CON2bits.ACKDT = 1;
+                SSP1CON2bits.ACKEN = 1;
+                I2C_stop(SUCCESS);
+            }
+            break;
+        case STOPPED:
+            xfer_count = 0;
+            I2C_status = IDLE;
+            break;
+        default:
+            break;
     }
-    PIE3bits.RC1IE = 1;
-    return data;
 }
-void UART_gets(char * buf, int len) {
-    do{
-        *buf = UART_getc();
-        buf++;
-    }while(len --> 0);
-    *buf = '\0';
+char I2C_master_enabled() {
+    return (SSP1CON1bits.SSPEN);
 }
-char UART_can_rx() {
-    return RX_buf.size > 0;
+
+void create_read_packet(char * buffer, int length, char address) {
+    current_packet.data = buffer;
+    current_packet.length = length;
+    current_packet.address = (address << 1);
+    current_packet.address |= 0x01;
+    current_packet.result = PENDING;
 }
-char UART_can_tx() {
-    return TX_buf.size < 8;
+void create_write_packet(char * data, int length, char address) {
+    current_packet.data = data;
+    current_packet.length = length;
+    current_packet.address = (address << 1);
+    current_packet.result = PENDING;
+}
+
+I2C_master_result I2C_master_write(char * data, int length, char address) {
+    if(!I2C_master_enabled()) {
+        return SEND_ERROR;
+    }
+    create_write_packet(data, length, address);
+    SSP1IF = 1;
+    I2C_wait();
+    return current_packet.result;
+}
+I2C_master_result I2C_master_read(char * buffer, int length, char address) {
+    if(!I2C_master_enabled()) {
+        return RECEIVE_ERROR;
+    }
+    create_read_packet(buffer, length, address);
+    SSP1IF = 1;
+    I2C_wait();
+    return current_packet.result;
 }

@@ -2,11 +2,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21 src/../headers/uart.h
 [; ;src/../headers/uart.h: 21: void UART_puts(char * data);
 [v _UART_puts `(v ~T0 @X0 0 ef1`*uc ]
-"20
+"14 src/esp8266.c
+[; ;src/esp8266.c: 14: char ESP8266_waitfor(const char * str);
+[v _ESP8266_waitfor `(uc ~T0 @X0 0 ef1`*Cuc ]
+"20 src/../headers/uart.h
 [; ;src/../headers/uart.h: 20: void UART_putc(char data);
 [v _UART_putc `(v ~T0 @X0 0 ef1`uc ]
-"32 src/esp8266.c
-[; ;src/esp8266.c: 32: void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
+"47 src/esp8266.c
+[; ;src/esp8266.c: 47: void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
 [c E9454 0 1 .. ]
 [n E9454 . TCP UDP  ]
 "15 src/../headers/util.h
@@ -15,12 +18,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h: 54: size_t strlen (const char *);
 [v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
-"22 src/../headers/uart.h
-[; ;src/../headers/uart.h: 22: char UART_getc(void);
-[v _UART_getc `(uc ~T0 @X0 0 ef ]
-"25
+"25 src/../headers/uart.h
 [; ;src/../headers/uart.h: 25: char UART_can_rx(void);
 [v _UART_can_rx `(uc ~T0 @X0 0 ef ]
+"22
+[; ;src/../headers/uart.h: 22: char UART_getc(void);
+[v _UART_getc `(uc ~T0 @X0 0 ef ]
+"39 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h: 39: int strcmp (const char *, const char *);
+[v _strcmp `(i ~T0 @X0 0 ef2`*Cuc`*Cuc ]
+"51 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 51: void lcd_puts(unsigned char * s);
+[v _lcd_puts `(v ~T0 @X0 0 ef1`*uc ]
+"56
+[; ;src/../headers/lcd.h: 56: void lcd_newline(void);
+[v _lcd_newline `(v ~T0 @X0 0 ef ]
+"54
+[; ;src/../headers/lcd.h: 54: void lcd_update(void);
+[v _lcd_update `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1272,14 +1287,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"11 src/esp8266.c
-[; ;src/esp8266.c: 11: static char is_connected = 0;
+"12 src/esp8266.c
+[; ;src/esp8266.c: 12: static char is_connected = 0;
 [v _is_connected `uc ~T0 @X0 1 s ]
 [i _is_connected
 -> -> 0 `i `uc
 ]
-"12
-[; ;src/esp8266.c: 12: char * SOCKETS[] = {"TCP", "UDP"};
+"13
+[; ;src/esp8266.c: 13: char * SOCKETS[] = {"TCP", "UDP"};
 [v _SOCKETS `*uc ~T0 @X0 -> 2 `i e ]
 [i _SOCKETS
 :U ..
@@ -1287,72 +1302,101 @@ Version 4.0 HI-TECH Software Intermediate Code
 :s 2C
 ..
 ]
-"13
-[; ;src/esp8266.c: 13: void ESP8266_init(void) {
+"15
+[; ;src/esp8266.c: 15: void ESP8266_init(void) {
 [v _ESP8266_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _ESP8266_init ]
 [f ]
-"14
-[; ;src/esp8266.c: 14:     UART_puts("AT+CWMODE_CUR=");
-[e ( _UART_puts (1 :s 3C ]
-"15
-[; ;src/esp8266.c: 15:     UART_putc('1');
-[e ( _UART_putc (1 -> -> 49 `ui `uc ]
 "16
-[; ;src/esp8266.c: 16:     UART_puts("\r\n");
-[e ( _UART_puts (1 :s 4C ]
+[; ;src/esp8266.c: 16:     UART_puts("ATE0");
+[e ( _UART_puts (1 :s 3C ]
 "17
-[; ;src/esp8266.c: 17: }
+[; ;src/esp8266.c: 17:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 4C ]
+"18
+[; ;src/esp8266.c: 18:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 5C ]
+"20
+[; ;src/esp8266.c: 20:     UART_puts("AT+CWMODE_CUR=1");
+[e ( _UART_puts (1 :s 6C ]
+"21
+[; ;src/esp8266.c: 21:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 7C ]
+"22
+[; ;src/esp8266.c: 22:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 8C ]
+"24
+[; ;src/esp8266.c: 24:     UART_puts("AT+CIPMUX=0");
+[e ( _UART_puts (1 :s 9C ]
+"25
+[; ;src/esp8266.c: 25:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 10C ]
+"26
+[; ;src/esp8266.c: 26:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 11C ]
+"27
+[; ;src/esp8266.c: 27: }
 [e :UE 1382 ]
 }
-"19
-[; ;src/esp8266.c: 19: void ESP8266_connect(char * name, char * pass) {
+"28
+[; ;src/esp8266.c: 28: void ESP8266_reset() {
+[v _ESP8266_reset `(v ~T0 @X0 1 ef ]
+{
+[e :U _ESP8266_reset ]
+[f ]
+"29
+[; ;src/esp8266.c: 29:     UART_puts("AT+RST");
+[e ( _UART_puts (1 :s 12C ]
+"30
+[; ;src/esp8266.c: 30:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 13C ]
+"31
+[; ;src/esp8266.c: 31:     ESP8266_waitfor("ready");
+[e ( _ESP8266_waitfor (1 :s 14C ]
+"32
+[; ;src/esp8266.c: 32: }
+[e :UE 1383 ]
+}
+"33
+[; ;src/esp8266.c: 33: void ESP8266_connect(char * name, char * pass) {
 [v _ESP8266_connect `(v ~T0 @X0 1 ef2`*uc`*uc ]
 {
 [e :U _ESP8266_connect ]
 [v _name `*uc ~T0 @X0 1 r1 ]
 [v _pass `*uc ~T0 @X0 1 r2 ]
 [f ]
-"20
-[; ;src/esp8266.c: 20:     if(is_connected) {
-[e $ ! != -> _is_connected `i -> 0 `i 1384  ]
-{
-"21
-[; ;src/esp8266.c: 21:         return;
-[e $UE 1383  ]
-"22
-[; ;src/esp8266.c: 22:     }
-}
-[e :U 1384 ]
-"23
-[; ;src/esp8266.c: 23:     UART_puts("AT+CWJAP=");
-[e ( _UART_puts (1 :s 5C ]
-"24
-[; ;src/esp8266.c: 24:     UART_putc('\"');UART_puts(name);UART_putc('\"');
+"37
+[; ;src/esp8266.c: 37:     UART_puts("AT+CWJAP_CUR=");
+[e ( _UART_puts (1 :s 15C ]
+"38
+[; ;src/esp8266.c: 38:     UART_putc('\"');UART_puts(name);UART_putc('\"');
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
 [e ( _UART_puts (1 _name ]
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
-"25
-[; ;src/esp8266.c: 25:     UART_putc(',');
+"39
+[; ;src/esp8266.c: 39:     UART_putc(',');
 [e ( _UART_putc (1 -> -> 44 `ui `uc ]
-"26
-[; ;src/esp8266.c: 26:     UART_putc('\"');UART_puts(pass);UART_putc('\"');
+"40
+[; ;src/esp8266.c: 40:     UART_putc('\"');UART_puts(pass);UART_putc('\"');
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
 [e ( _UART_puts (1 _pass ]
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
-"27
-[; ;src/esp8266.c: 27:     UART_puts("\r\n");
-[e ( _UART_puts (1 :s 6C ]
-"28
-[; ;src/esp8266.c: 28:     is_connected = 1;
+"41
+[; ;src/esp8266.c: 41:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 16C ]
+"42
+[; ;src/esp8266.c: 42:     ESP8266_waitfor("WIFI GOT IP");
+[e ( _ESP8266_waitfor (1 :s 17C ]
+"43
+[; ;src/esp8266.c: 43:     is_connected = 1;
 [e = _is_connected -> -> 1 `i `uc ]
-"30
-[; ;src/esp8266.c: 30: }
-[e :UE 1383 ]
+"45
+[; ;src/esp8266.c: 45: }
+[e :UE 1384 ]
 }
-"32
-[; ;src/esp8266.c: 32: void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
+"47
+[; ;src/esp8266.c: 47: void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
 [v _ESP8266_open_socket `(v ~T0 @X0 1 ef3`E9454`*uc`i ]
 {
 [e :U _ESP8266_open_socket ]
@@ -1360,149 +1404,218 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _ip `*uc ~T0 @X0 1 r2 ]
 [v _port `i ~T0 @X0 1 r3 ]
 [f ]
-"33
-[; ;src/esp8266.c: 33:     char buffer[10];
+"48
+[; ;src/esp8266.c: 48:     char buffer[10];
 [v _buffer `uc ~T0 @X0 -> 10 `i a ]
-"34
-[; ;src/esp8266.c: 34:     itoa(port, buffer, 10);
+"49
+[; ;src/esp8266.c: 49:     itoa(port, buffer, 10);
 [e ( _itoa (3 , , _port &U _buffer -> 10 `i ]
-"35
-[; ;src/esp8266.c: 35:     UART_puts("AT+CIPSTART=");
-[e ( _UART_puts (1 :s 7C ]
-"36
-[; ;src/esp8266.c: 36:     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
+"50
+[; ;src/esp8266.c: 50:     UART_puts("AT+CIPSTART=");
+[e ( _UART_puts (1 :s 18C ]
+"51
+[; ;src/esp8266.c: 51:     UART_putc('0');
+[e ( _UART_putc (1 -> -> 48 `ui `uc ]
+"52
+[; ;src/esp8266.c: 52:     UART_putc(',');
+[e ( _UART_putc (1 -> -> 44 `ui `uc ]
+"53
+[; ;src/esp8266.c: 53:     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
 [e ( _UART_puts (1 *U + &U _SOCKETS * -> _type `ux -> -> # *U &U _SOCKETS `ui `ux ]
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
-"37
-[; ;src/esp8266.c: 37:     UART_putc(',');
+"54
+[; ;src/esp8266.c: 54:     UART_putc(',');
 [e ( _UART_putc (1 -> -> 44 `ui `uc ]
-"38
-[; ;src/esp8266.c: 38:     UART_putc('\"');UART_puts(ip);UART_putc('\"');
+"55
+[; ;src/esp8266.c: 55:     UART_putc('\"');UART_puts(ip);UART_putc('\"');
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
 [e ( _UART_puts (1 _ip ]
 [e ( _UART_putc (1 -> -> 34 `ui `uc ]
-"39
-[; ;src/esp8266.c: 39:     UART_putc(',');
+"56
+[; ;src/esp8266.c: 56:     UART_putc(',');
 [e ( _UART_putc (1 -> -> 44 `ui `uc ]
-"40
-[; ;src/esp8266.c: 40:     UART_puts(buffer);
+"57
+[; ;src/esp8266.c: 57:     UART_puts(buffer);
 [e ( _UART_puts (1 &U _buffer ]
-"41
-[; ;src/esp8266.c: 41:     UART_puts("\r\n");
-[e ( _UART_puts (1 :s 8C ]
-"42
-[; ;src/esp8266.c: 42: }
+"58
+[; ;src/esp8266.c: 58:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 19C ]
+"59
+[; ;src/esp8266.c: 59:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 20C ]
+"60
+[; ;src/esp8266.c: 60: }
 [e :UE 1385 ]
 }
-"44
-[; ;src/esp8266.c: 44: void ESP8266_send_data(char * data) {
+"62
+[; ;src/esp8266.c: 62: void ESP8266_send_data(char * data) {
 [v _ESP8266_send_data `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _ESP8266_send_data ]
 [v _data `*uc ~T0 @X0 1 r1 ]
 [f ]
-"45
-[; ;src/esp8266.c: 45:     char buffer[10];
+"63
+[; ;src/esp8266.c: 63:     char buffer[10];
 [v _buffer `uc ~T0 @X0 -> 10 `i a ]
-"46
-[; ;src/esp8266.c: 46:     int len = strlen(data);
+"64
+[; ;src/esp8266.c: 64:     int len = strlen(data);
 [v _len `i ~T0 @X0 1 a ]
 [e = _len -> ( _strlen (1 -> _data `*Cuc `i ]
-"47
-[; ;src/esp8266.c: 47:     itoa(len, buffer, 10);
+"65
+[; ;src/esp8266.c: 65:     itoa(len, buffer, 10);
 [e ( _itoa (3 , , _len &U _buffer -> 10 `i ]
-"48
-[; ;src/esp8266.c: 48:     UART_puts("AT+CIPSEND=");
-[e ( _UART_puts (1 :s 9C ]
-"49
-[; ;src/esp8266.c: 49:     UART_puts(buffer);
+"66
+[; ;src/esp8266.c: 66:     UART_puts("AT+CIPSEND=");
+[e ( _UART_puts (1 :s 21C ]
+"67
+[; ;src/esp8266.c: 67:     UART_puts(buffer);
 [e ( _UART_puts (1 &U _buffer ]
-"50
-[; ;src/esp8266.c: 50:     UART_puts("\r\n");
-[e ( _UART_puts (1 :s 10C ]
-"52
-[; ;src/esp8266.c: 52:     UART_puts(data);
+"69
+[; ;src/esp8266.c: 69:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 22C ]
+"70
+[; ;src/esp8266.c: 70:     ESP8266_waitfor(">");
+[e ( _ESP8266_waitfor (1 :s 23C ]
+"72
+[; ;src/esp8266.c: 72:     UART_puts(data);
 [e ( _UART_puts (1 _data ]
-"53
-[; ;src/esp8266.c: 53:     UART_putc('\n');
-[e ( _UART_putc (1 -> -> 10 `ui `uc ]
-"54
-[; ;src/esp8266.c: 54: }
+"74
+[; ;src/esp8266.c: 74: }
 [e :UE 1386 ]
 }
-"55
-[; ;src/esp8266.c: 55: void ESP8266_close_socket(){
+"75
+[; ;src/esp8266.c: 75: void ESP8266_close_socket(){
 [v _ESP8266_close_socket `(v ~T0 @X0 1 ef ]
 {
 [e :U _ESP8266_close_socket ]
 [f ]
-"56
-[; ;src/esp8266.c: 56:     UART_puts("AT+CIPClOSE");
-[e ( _UART_puts (1 :s 11C ]
-"57
-[; ;src/esp8266.c: 57:     UART_puts("\r\n");
-[e ( _UART_puts (1 :s 12C ]
-"58
-[; ;src/esp8266.c: 58: }
+"76
+[; ;src/esp8266.c: 76:     UART_puts("AT+CIPClOSE");
+[e ( _UART_puts (1 :s 24C ]
+"77
+[; ;src/esp8266.c: 77:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 25C ]
+"78
+[; ;src/esp8266.c: 78: }
 [e :UE 1387 ]
 }
-"59
-[; ;src/esp8266.c: 59: char ESP8266_responseOK() {
-[v _ESP8266_responseOK `(uc ~T0 @X0 1 ef ]
+"79
+[; ;src/esp8266.c: 79: char ESP8266_waitfor(const char * str) {
+[v _ESP8266_waitfor `(uc ~T0 @X0 1 ef1`*Cuc ]
 {
-[e :U _ESP8266_responseOK ]
+[e :U _ESP8266_waitfor ]
+[v _str `*Cuc ~T0 @X0 1 r1 ]
 [f ]
-"60
-[; ;src/esp8266.c: 60:     while(UART_can_rx()) {
+"80
+[; ;src/esp8266.c: 80:     char buffer[64];
+[v _buffer `uc ~T0 @X0 -> 64 `i a ]
+"81
+[; ;src/esp8266.c: 81:     char c;
+[v _c `uc ~T0 @X0 1 a ]
+"82
+[; ;src/esp8266.c: 82:     int i = 0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+"83
+[; ;src/esp8266.c: 83:     while(!UART_can_rx());
 [e $U 1389  ]
 [e :U 1390 ]
-{
-"61
-[; ;src/esp8266.c: 61:         if(UART_getc() == 'O') {
-[e $ ! == -> ( _UART_getc ..  `ui -> 79 `ui 1392  ]
-{
-"62
-[; ;src/esp8266.c: 62:             if(UART_getc() == 'K') {
-[e $ ! == -> ( _UART_getc ..  `ui -> 75 `ui 1393  ]
-{
-"63
-[; ;src/esp8266.c: 63:                 return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 1388  ]
-"64
-[; ;src/esp8266.c: 64:             }
-}
-[e :U 1393 ]
-"65
-[; ;src/esp8266.c: 65:         }
-}
-[e :U 1392 ]
-"66
-[; ;src/esp8266.c: 66:     }
-}
 [e :U 1389 ]
-"60
-[; ;src/esp8266.c: 60:     while(UART_can_rx()) {
-[e $ != -> ( _UART_can_rx ..  `i -> 0 `i 1390  ]
+[e $ ! != -> ( _UART_can_rx ..  `i -> 0 `i 1390  ]
 [e :U 1391 ]
-"67
-[; ;src/esp8266.c: 67:     return 0;
+"84
+[; ;src/esp8266.c: 84:     do {
+[e :U 1394 ]
+{
+"85
+[; ;src/esp8266.c: 85:         i = 0;
+[e = _i -> 0 `i ]
+"86
+[; ;src/esp8266.c: 86:         buffer[0] = '\0';
+[e = *U + &U _buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `ui `uc ]
+"87
+[; ;src/esp8266.c: 87:         while((c = UART_getc()) != '\n') {
+[e $U 1395  ]
+[e :U 1396 ]
+{
+"88
+[; ;src/esp8266.c: 88:             if(c != '\r') {
+[e $ ! != -> _c `ui -> 13 `ui 1398  ]
+{
+"89
+[; ;src/esp8266.c: 89:                 buffer[i++] = c;
+[e = *U + &U _buffer * -> -> ++ _i -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux _c ]
+"90
+[; ;src/esp8266.c: 90:             }
+}
+[e :U 1398 ]
+"91
+[; ;src/esp8266.c: 91:             if(i >= 64) {
+[e $ ! >= _i -> 64 `i 1399  ]
+{
+"92
+[; ;src/esp8266.c: 92:                 i = 0;
+[e = _i -> 0 `i ]
+"93
+[; ;src/esp8266.c: 93:             }
+}
+[e :U 1399 ]
+"94
+[; ;src/esp8266.c: 94:         }
+}
+[e :U 1395 ]
+"87
+[; ;src/esp8266.c: 87:         while((c = UART_getc()) != '\n') {
+[e $ != -> = _c ( _UART_getc ..  `ui -> 10 `ui 1396  ]
+[e :U 1397 ]
+"95
+[; ;src/esp8266.c: 95:         buffer[i] = '\0';
+[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `ui `uc ]
+"96
+[; ;src/esp8266.c: 96:     } while(strcmp(buffer, str) != 0);
+}
+[e $ != ( _strcmp (2 , -> &U _buffer `*Cuc _str -> 0 `i 1394  ]
+[e :U 1393 ]
+"97
+[; ;src/esp8266.c: 97:     lcd_puts(buffer);
+[e ( _lcd_puts (1 -> &U _buffer `*uc ]
+"98
+[; ;src/esp8266.c: 98:     lcd_newline();
+[e ( _lcd_newline ..  ]
+"99
+[; ;src/esp8266.c: 99:     lcd_update();
+[e ( _lcd_update ..  ]
+"100
+[; ;src/esp8266.c: 100:     return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 1388  ]
-"68
-[; ;src/esp8266.c: 68: }
+"101
+[; ;src/esp8266.c: 101: }
 [e :UE 1388 ]
 }
+[a 14C 114 101 97 100 121 0 ]
+[a 12C 65 84 43 82 83 84 0 ]
+[a 17C 87 73 70 73 32 71 79 84 32 73 80 0 ]
 [a 2C 85 68 80 0 ]
 [a 1C 84 67 80 0 ]
-[a 11C 65 84 43 67 73 80 67 108 79 83 69 0 ]
-[a 7C 65 84 43 67 73 80 83 84 65 82 84 61 0 ]
-[a 3C 65 84 43 67 87 77 79 68 69 95 67 85 82 61 0 ]
-[a 5C 65 84 43 67 87 74 65 80 61 0 ]
-[a 9C 65 84 43 67 73 80 83 69 78 68 61 0 ]
+[a 5C 79 75 0 ]
+[a 8C 79 75 0 ]
+[a 11C 79 75 0 ]
+[a 20C 79 75 0 ]
+[a 24C 65 84 43 67 73 80 67 108 79 83 69 0 ]
+[a 23C 62 0 ]
+[a 18C 65 84 43 67 73 80 83 84 65 82 84 61 0 ]
+[a 15C 65 84 43 67 87 74 65 80 95 67 85 82 61 0 ]
+[a 21C 65 84 43 67 73 80 83 69 78 68 61 0 ]
+[a 6C 65 84 43 67 87 77 79 68 69 95 67 85 82 61 49 0 ]
+[a 3C 65 84 69 48 0 ]
+[a 9C 65 84 43 67 73 80 77 85 88 61 48 0 ]
 [a 4C 13 10 0 ]
-[a 6C 13 10 0 ]
-[a 8C 13 10 0 ]
+[a 7C 13 10 0 ]
 [a 10C 13 10 0 ]
-[a 12C 13 10 0 ]
+[a 13C 13 10 0 ]
+[a 16C 13 10 0 ]
+[a 19C 13 10 0 ]
+[a 22C 13 10 0 ]
+[a 25C 13 10 0 ]

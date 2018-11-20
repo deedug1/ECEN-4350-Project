@@ -1,14 +1,41 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"58 src/lcd.c
-[; ;src/lcd.c: 58:     I2C_master_write(msg, 2, 0x3C);
-[c E9296 0 1 2 3 .. ]
-[n E9296 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
-"18 src/../headers/i2c_master.h
-[; ;src/../headers/i2c_master.h: 18: I2C_master_result I2C_master_write(char * data, int length, char address);
-[v _I2C_master_write `(E9296 ~T0 @X0 0 ef3`*uc`i`uc ]
-"57 src/../headers/lcd.h
-[; ;src/../headers/lcd.h: 57: void lcd_vertical_shift(void);
-[v _lcd_vertical_shift `(v ~T0 @X0 0 ef ]
+"21 src/../headers/uart.h
+[; ;src/../headers/uart.h: 21: void UART_puts(char * data);
+[v _UART_puts `(v ~T0 @X0 0 ef1`*uc ]
+"14 src/esp8266.c
+[; ;src/esp8266.c: 14: char ESP8266_waitfor(const char * str);
+[v _ESP8266_waitfor `(uc ~T0 @X0 0 ef1`*Cuc ]
+"20 src/../headers/uart.h
+[; ;src/../headers/uart.h: 20: void UART_putc(char data);
+[v _UART_putc `(v ~T0 @X0 0 ef1`uc ]
+"43 src/esp8266.c
+[; ;src/esp8266.c: 43: void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
+[c E9454 0 1 .. ]
+[n E9454 . TCP UDP  ]
+"15 src/../headers/util.h
+[; ;src/../headers/util.h: 15: void itoa(int num, char * buf, int radix);
+[v _itoa `(v ~T0 @X0 0 ef3`i`*uc`i ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h: 54: size_t strlen (const char *);
+[v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
+"25 src/../headers/uart.h
+[; ;src/../headers/uart.h: 25: char UART_can_rx(void);
+[v _UART_can_rx `(uc ~T0 @X0 0 ef ]
+"22
+[; ;src/../headers/uart.h: 22: char UART_getc(void);
+[v _UART_getc `(uc ~T0 @X0 0 ef ]
+"39 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h: 39: int strcmp (const char *, const char *);
+[v _strcmp `(i ~T0 @X0 0 ef2`*Cuc`*Cuc ]
+"51 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 51: void lcd_puts(unsigned char * s);
+[v _lcd_puts `(v ~T0 @X0 0 ef1`*uc ]
+"56
+[; ;src/../headers/lcd.h: 56: void lcd_newline(void);
+[v _lcd_newline `(v ~T0 @X0 0 ef ]
+"54
+[; ;src/../headers/lcd.h: 54: void lcd_update(void);
+[v _lcd_update `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1260,1578 +1287,320 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"13 src/../headers/character.h
-[; ;src/../headers/character.h: 13: static char lcd_font[] = {
-[v _lcd_font `uc ~T0 @X0 -> 576 `i s ]
-[i _lcd_font
+"12 src/esp8266.c
+[; ;src/esp8266.c: 12: static char is_connected = 0;
+[v _is_connected `uc ~T0 @X0 1 s ]
+[i _is_connected
+-> -> 0 `i `uc
+]
+"13
+[; ;src/esp8266.c: 13: char * SOCKETS[] = {"TCP", "UDP"};
+[v _SOCKETS `*uc ~T0 @X0 -> 2 `i e ]
+[i _SOCKETS
 :U ..
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 95 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 7 `i `uc
--> -> 0 `i `uc
--> -> 7 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 20 `i `uc
--> -> 127 `i `uc
--> -> 20 `i `uc
--> -> 127 `i `uc
--> -> 20 `i `uc
--> -> 0 `i `uc
--> -> 36 `i `uc
--> -> 42 `i `uc
--> -> 127 `i `uc
--> -> 42 `i `uc
--> -> 18 `i `uc
--> -> 0 `i `uc
--> -> 35 `i `uc
--> -> 19 `i `uc
--> -> 8 `i `uc
--> -> 100 `i `uc
--> -> 98 `i `uc
--> -> 0 `i `uc
--> -> 54 `i `uc
--> -> 73 `i `uc
--> -> 85 `i `uc
--> -> 34 `i `uc
--> -> 80 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 5 `i `uc
--> -> 3 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 28 `i `uc
--> -> 34 `i `uc
--> -> 65 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 65 `i `uc
--> -> 34 `i `uc
--> -> 28 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 8 `i `uc
--> -> 42 `i `uc
--> -> 28 `i `uc
--> -> 42 `i `uc
--> -> 8 `i `uc
--> -> 0 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 62 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 0 `i `uc
--> -> 160 `i `uc
--> -> 96 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 0 `i `uc
--> -> 96 `i `uc
--> -> 96 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 32 `i `uc
--> -> 16 `i `uc
--> -> 8 `i `uc
--> -> 4 `i `uc
--> -> 2 `i `uc
--> -> 0 `i `uc
--> -> 62 `i `uc
--> -> 81 `i `uc
--> -> 73 `i `uc
--> -> 69 `i `uc
--> -> 62 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 66 `i `uc
--> -> 127 `i `uc
--> -> 64 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 98 `i `uc
--> -> 81 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 70 `i `uc
--> -> 0 `i `uc
--> -> 34 `i `uc
--> -> 65 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 54 `i `uc
--> -> 0 `i `uc
--> -> 24 `i `uc
--> -> 20 `i `uc
--> -> 18 `i `uc
--> -> 127 `i `uc
--> -> 16 `i `uc
--> -> 0 `i `uc
--> -> 39 `i `uc
--> -> 69 `i `uc
--> -> 69 `i `uc
--> -> 69 `i `uc
--> -> 57 `i `uc
--> -> 0 `i `uc
--> -> 60 `i `uc
--> -> 74 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 48 `i `uc
--> -> 0 `i `uc
--> -> 1 `i `uc
--> -> 113 `i `uc
--> -> 9 `i `uc
--> -> 5 `i `uc
--> -> 3 `i `uc
--> -> 0 `i `uc
--> -> 54 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 54 `i `uc
--> -> 0 `i `uc
--> -> 6 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 41 `i `uc
--> -> 30 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 54 `i `uc
--> -> 54 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 172 `i `uc
--> -> 108 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 8 `i `uc
--> -> 20 `i `uc
--> -> 34 `i `uc
--> -> 65 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 20 `i `uc
--> -> 20 `i `uc
--> -> 20 `i `uc
--> -> 20 `i `uc
--> -> 20 `i `uc
--> -> 0 `i `uc
--> -> 65 `i `uc
--> -> 34 `i `uc
--> -> 20 `i `uc
--> -> 8 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 2 `i `uc
--> -> 1 `i `uc
--> -> 81 `i `uc
--> -> 9 `i `uc
--> -> 6 `i `uc
--> -> 0 `i `uc
--> -> 50 `i `uc
--> -> 73 `i `uc
--> -> 121 `i `uc
--> -> 65 `i `uc
--> -> 62 `i `uc
--> -> 0 `i `uc
--> -> 126 `i `uc
--> -> 9 `i `uc
--> -> 9 `i `uc
--> -> 9 `i `uc
--> -> 126 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 54 `i `uc
--> -> 0 `i `uc
--> -> 62 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 34 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 34 `i `uc
--> -> 28 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 65 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 9 `i `uc
--> -> 9 `i `uc
--> -> 9 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
--> -> 62 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 81 `i `uc
--> -> 114 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 8 `i `uc
--> -> 127 `i `uc
--> -> 0 `i `uc
--> -> 65 `i `uc
--> -> 127 `i `uc
--> -> 65 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 32 `i `uc
--> -> 64 `i `uc
--> -> 65 `i `uc
--> -> 63 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 8 `i `uc
--> -> 20 `i `uc
--> -> 34 `i `uc
--> -> 65 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 64 `i `uc
--> -> 64 `i `uc
--> -> 64 `i `uc
--> -> 64 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 2 `i `uc
--> -> 12 `i `uc
--> -> 2 `i `uc
--> -> 127 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 4 `i `uc
--> -> 8 `i `uc
--> -> 16 `i `uc
--> -> 127 `i `uc
--> -> 0 `i `uc
--> -> 62 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 62 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 9 `i `uc
--> -> 9 `i `uc
--> -> 9 `i `uc
--> -> 6 `i `uc
--> -> 0 `i `uc
--> -> 62 `i `uc
--> -> 65 `i `uc
--> -> 81 `i `uc
--> -> 33 `i `uc
--> -> 94 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 9 `i `uc
--> -> 25 `i `uc
--> -> 41 `i `uc
--> -> 70 `i `uc
--> -> 0 `i `uc
--> -> 38 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 73 `i `uc
--> -> 50 `i `uc
--> -> 0 `i `uc
--> -> 1 `i `uc
--> -> 1 `i `uc
--> -> 127 `i `uc
--> -> 1 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
--> -> 63 `i `uc
--> -> 64 `i `uc
--> -> 64 `i `uc
--> -> 64 `i `uc
--> -> 63 `i `uc
--> -> 0 `i `uc
--> -> 31 `i `uc
--> -> 32 `i `uc
--> -> 64 `i `uc
--> -> 32 `i `uc
--> -> 31 `i `uc
--> -> 0 `i `uc
--> -> 63 `i `uc
--> -> 64 `i `uc
--> -> 56 `i `uc
--> -> 64 `i `uc
--> -> 63 `i `uc
--> -> 0 `i `uc
--> -> 99 `i `uc
--> -> 20 `i `uc
--> -> 8 `i `uc
--> -> 20 `i `uc
--> -> 99 `i `uc
--> -> 0 `i `uc
--> -> 3 `i `uc
--> -> 4 `i `uc
--> -> 120 `i `uc
--> -> 4 `i `uc
--> -> 3 `i `uc
--> -> 0 `i `uc
--> -> 97 `i `uc
--> -> 81 `i `uc
--> -> 73 `i `uc
--> -> 69 `i `uc
--> -> 67 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 2 `i `uc
--> -> 4 `i `uc
--> -> 8 `i `uc
--> -> 16 `i `uc
--> -> 32 `i `uc
--> -> 0 `i `uc
--> -> 65 `i `uc
--> -> 65 `i `uc
--> -> 127 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 4 `i `uc
--> -> 2 `i `uc
--> -> 1 `i `uc
--> -> 2 `i `uc
--> -> 4 `i `uc
--> -> 0 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 0 `i `uc
--> -> 1 `i `uc
--> -> 2 `i `uc
--> -> 4 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 32 `i `uc
--> -> 84 `i `uc
--> -> 84 `i `uc
--> -> 84 `i `uc
--> -> 120 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 72 `i `uc
--> -> 68 `i `uc
--> -> 68 `i `uc
--> -> 56 `i `uc
--> -> 0 `i `uc
--> -> 56 `i `uc
--> -> 68 `i `uc
--> -> 68 `i `uc
--> -> 40 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 56 `i `uc
--> -> 68 `i `uc
--> -> 68 `i `uc
--> -> 72 `i `uc
--> -> 127 `i `uc
--> -> 0 `i `uc
--> -> 56 `i `uc
--> -> 84 `i `uc
--> -> 84 `i `uc
--> -> 84 `i `uc
--> -> 24 `i `uc
--> -> 0 `i `uc
--> -> 8 `i `uc
--> -> 126 `i `uc
--> -> 9 `i `uc
--> -> 2 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 24 `i `uc
--> -> 164 `i `uc
--> -> 164 `i `uc
--> -> 164 `i `uc
--> -> 124 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 8 `i `uc
--> -> 4 `i `uc
--> -> 4 `i `uc
--> -> 120 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 125 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 128 `i `uc
--> -> 132 `i `uc
--> -> 125 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 16 `i `uc
--> -> 40 `i `uc
--> -> 68 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 65 `i `uc
--> -> 127 `i `uc
--> -> 64 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 124 `i `uc
--> -> 4 `i `uc
--> -> 24 `i `uc
--> -> 4 `i `uc
--> -> 120 `i `uc
--> -> 0 `i `uc
--> -> 124 `i `uc
--> -> 8 `i `uc
--> -> 4 `i `uc
--> -> 124 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 56 `i `uc
--> -> 68 `i `uc
--> -> 68 `i `uc
--> -> 56 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 252 `i `uc
--> -> 36 `i `uc
--> -> 36 `i `uc
--> -> 24 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 24 `i `uc
--> -> 36 `i `uc
--> -> 36 `i `uc
--> -> 252 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 124 `i `uc
--> -> 8 `i `uc
--> -> 4 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 72 `i `uc
--> -> 84 `i `uc
--> -> 84 `i `uc
--> -> 36 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 4 `i `uc
--> -> 127 `i `uc
--> -> 68 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 60 `i `uc
--> -> 64 `i `uc
--> -> 64 `i `uc
--> -> 124 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 28 `i `uc
--> -> 32 `i `uc
--> -> 64 `i `uc
--> -> 32 `i `uc
--> -> 28 `i `uc
--> -> 0 `i `uc
--> -> 60 `i `uc
--> -> 64 `i `uc
--> -> 48 `i `uc
--> -> 64 `i `uc
--> -> 60 `i `uc
--> -> 0 `i `uc
--> -> 68 `i `uc
--> -> 40 `i `uc
--> -> 16 `i `uc
--> -> 40 `i `uc
--> -> 68 `i `uc
--> -> 0 `i `uc
--> -> 28 `i `uc
--> -> 160 `i `uc
--> -> 160 `i `uc
--> -> 124 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 68 `i `uc
--> -> 100 `i `uc
--> -> 84 `i `uc
--> -> 76 `i `uc
--> -> 68 `i `uc
--> -> 0 `i `uc
--> -> 8 `i `uc
--> -> 54 `i `uc
--> -> 65 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 127 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 65 `i `uc
--> -> 54 `i `uc
--> -> 8 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 2 `i `uc
--> -> 1 `i `uc
--> -> 1 `i `uc
--> -> 2 `i `uc
--> -> 1 `i `uc
--> -> 0 `i `uc
--> -> 2 `i `uc
--> -> 5 `i `uc
--> -> 5 `i `uc
--> -> 2 `i `uc
--> -> 0 `i `uc
+:s 1C
+:s 2C
 ..
 ]
-"12 src/lcd.c
-[; ;src/lcd.c: 12: char lcd_buffer [0x04 * 0x80] = {
-[v _lcd_buffer `uc ~T0 @X0 -> 512 `i e ]
-[i _lcd_buffer
-:U ..
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 128 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 192 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 224 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 240 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 248 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 252 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 254 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
-..
-]
-"47
-[; ;src/lcd.c: 47: static int cursor_x = 0;
-[v _cursor_x `i ~T0 @X0 1 s ]
-[i _cursor_x
--> 0 `i
-]
-"48
-[; ;src/lcd.c: 48: static int cursor_y = 0;
-[v _cursor_y `i ~T0 @X0 1 s ]
-[i _cursor_y
--> 0 `i
-]
-"54
-[; ;src/lcd.c: 54: void command(unsigned char cmd) {
-[v _command `(v ~T0 @X0 1 ef1`uc ]
+"15
+[; ;src/esp8266.c: 15: void ESP8266_init(void) {
+[v _ESP8266_init `(v ~T0 @X0 1 ef ]
 {
-[e :U _command ]
-[v _cmd `uc ~T0 @X0 1 r1 ]
+[e :U _ESP8266_init ]
 [f ]
-"55
-[; ;src/lcd.c: 55:     char msg[2];
-[v _msg `uc ~T0 @X0 -> 2 `i a ]
-"56
-[; ;src/lcd.c: 56:     msg[0] = 0x00;
-[e = *U + &U _msg * -> -> -> 0 `i `ui `ux -> -> # *U &U _msg `ui `ux -> -> 0 `i `uc ]
-"57
-[; ;src/lcd.c: 57:     msg[1] = cmd;
-[e = *U + &U _msg * -> -> -> 1 `i `ui `ux -> -> # *U &U _msg `ui `ux -> _cmd `uc ]
-"58
-[; ;src/lcd.c: 58:     I2C_master_write(msg, 2, 0x3C);
-[e ( _I2C_master_write (3 , , &U _msg -> 2 `i -> -> 60 `i `uc ]
-"59
-[; ;src/lcd.c: 59: }
-[e :UE 1381 ]
-}
-"63
-[; ;src/lcd.c: 63: void lcd_init() {
-[v _lcd_init `(v ~T0 @X0 1 ef ]
-{
-[e :U _lcd_init ]
-[f ]
-"64
-[; ;src/lcd.c: 64:     command(0xAE);
-[e ( _command (1 -> -> 174 `i `uc ]
-"65
-[; ;src/lcd.c: 65:     command(0xD5);
-[e ( _command (1 -> -> 213 `i `uc ]
-"66
-[; ;src/lcd.c: 66:     command(0x80);
-[e ( _command (1 -> -> 128 `i `uc ]
-"68
-[; ;src/lcd.c: 68:     command(0xD3);
-[e ( _command (1 -> -> 211 `i `uc ]
-"69
-[; ;src/lcd.c: 69:     command(0x00);
-[e ( _command (1 -> -> 0 `i `uc ]
-"71
-[; ;src/lcd.c: 71:     command(0xA8);
-[e ( _command (1 -> -> 168 `i `uc ]
-"72
-[; ;src/lcd.c: 72:     command(128 - 1);
-[e ( _command (1 -> - -> 128 `i -> 1 `i `uc ]
-"74
-[; ;src/lcd.c: 74:     command(0x40 | 0x0);
-[e ( _command (1 -> | -> 64 `i -> 0 `i `uc ]
-"76
-[; ;src/lcd.c: 76:     command(0x20);
-[e ( _command (1 -> -> 32 `i `uc ]
-"77
-[; ;src/lcd.c: 77:     command(0x00);
-[e ( _command (1 -> -> 0 `i `uc ]
-"79
-[; ;src/lcd.c: 79:     command(0xA0);
-[e ( _command (1 -> -> 160 `i `uc ]
-"81
-[; ;src/lcd.c: 81:     command(0xC0);
-[e ( _command (1 -> -> 192 `i `uc ]
-"83
-[; ;src/lcd.c: 83:     command(0xDA);
-[e ( _command (1 -> -> 218 `i `uc ]
-"84
-[; ;src/lcd.c: 84:     command(0x02);
-[e ( _command (1 -> -> 2 `i `uc ]
-"86
-[; ;src/lcd.c: 86:     command(0x81);
-[e ( _command (1 -> -> 129 `i `uc ]
-"87
-[; ;src/lcd.c: 87:     command(0xCF);
-[e ( _command (1 -> -> 207 `i `uc ]
-"89
-[; ;src/lcd.c: 89:     command(0xA4);
-[e ( _command (1 -> -> 164 `i `uc ]
-"91
-[; ;src/lcd.c: 91:     command(0xA6);
-[e ( _command (1 -> -> 166 `i `uc ]
-"93
-[; ;src/lcd.c: 93:     command(0x8D);
-[e ( _command (1 -> -> 141 `i `uc ]
-"94
-[; ;src/lcd.c: 94:     command(0x14);
-[e ( _command (1 -> -> 20 `i `uc ]
-"96
-[; ;src/lcd.c: 96:     command(0x2E);
-[e ( _command (1 -> -> 46 `i `uc ]
-"98
-[; ;src/lcd.c: 98:     command(0xAF);
-[e ( _command (1 -> -> 175 `i `uc ]
-"100
-[; ;src/lcd.c: 100: }
+"16
+[; ;src/esp8266.c: 16:     UART_puts("ATE0");
+[e ( _UART_puts (1 :s 3C ]
+"17
+[; ;src/esp8266.c: 17:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 4C ]
+"18
+[; ;src/esp8266.c: 18:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 5C ]
+"19
+[; ;src/esp8266.c: 19:     UART_puts("AT+CWMODE_CUR=");
+[e ( _UART_puts (1 :s 6C ]
+"20
+[; ;src/esp8266.c: 20:     UART_putc('1');
+[e ( _UART_putc (1 -> -> 49 `ui `uc ]
+"21
+[; ;src/esp8266.c: 21:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 7C ]
+"22
+[; ;src/esp8266.c: 22:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 8C ]
+"23
+[; ;src/esp8266.c: 23: }
 [e :UE 1382 ]
 }
-"104
-[; ;src/lcd.c: 104: void lcd_update() {
-[v _lcd_update `(v ~T0 @X0 1 ef ]
+"24
+[; ;src/esp8266.c: 24: void ESP8266_reset() {
+[v _ESP8266_reset `(v ~T0 @X0 1 ef ]
 {
-[e :U _lcd_update ]
+[e :U _ESP8266_reset ]
 [f ]
-"105
-[; ;src/lcd.c: 105:     int i, j, max;
-[v _i `i ~T0 @X0 1 a ]
-[v _j `i ~T0 @X0 1 a ]
-[v _max `i ~T0 @X0 1 a ]
-"106
-[; ;src/lcd.c: 106:     char data[33];
-[v _data `uc ~T0 @X0 -> 33 `i a ]
-"108
-[; ;src/lcd.c: 108:     command(0x21);
-[e ( _command (1 -> -> 33 `i `uc ]
-"109
-[; ;src/lcd.c: 109:     command(0x00);
-[e ( _command (1 -> -> 0 `i `uc ]
-"110
-[; ;src/lcd.c: 110:     command(128 - 1);
-[e ( _command (1 -> - -> 128 `i -> 1 `i `uc ]
-"113
-[; ;src/lcd.c: 113:     command(0x22);
-[e ( _command (1 -> -> 34 `i `uc ]
-"114
-[; ;src/lcd.c: 114:     command(0x00);
-[e ( _command (1 -> -> 0 `i `uc ]
-"115
-[; ;src/lcd.c: 115:     command(0xFF);
-[e ( _command (1 -> -> 255 `i `uc ]
-"116
-[; ;src/lcd.c: 116:     max = 0x04 * 0x80;
-[e = _max * -> 4 `i -> 128 `i ]
-"117
-[; ;src/lcd.c: 117:     for(i = 0; i < max; i += 32) {
-{
-[e = _i -> 0 `i ]
-[e $U 1387  ]
-[e :U 1384 ]
-{
-"118
-[; ;src/lcd.c: 118:         data[0] = 0x40;
-[e = *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux -> -> 64 `i `uc ]
-"119
-[; ;src/lcd.c: 119:         for(j = 0; j < 32; j++) {
-{
-[e = _j -> 0 `i ]
-[e $ < _j -> 32 `i 1388  ]
-[e $U 1389  ]
-[e :U 1388 ]
-{
-"120
-[; ;src/lcd.c: 120:             data[j + 1] = lcd_buffer[i + j];
-[e = *U + &U _data * -> -> + _j -> 1 `i `ui `ux -> -> # *U &U _data `ui `ux *U + &U _lcd_buffer * -> -> + _i _j `ui `ux -> -> # *U &U _lcd_buffer `ui `ux ]
-"121
-[; ;src/lcd.c: 121:         }
-}
-[e ++ _j -> 1 `i ]
-[e $ < _j -> 32 `i 1388  ]
-[e :U 1389 ]
-}
-"122
-[; ;src/lcd.c: 122:         I2C_master_write(data, 33, 0x3C);
-[e ( _I2C_master_write (3 , , &U _data -> 33 `i -> -> 60 `i `uc ]
-"123
-[; ;src/lcd.c: 123:     }
-}
-[e =+ _i -> 32 `i ]
-[e :U 1387 ]
-[e $ < _i _max 1384  ]
-[e :U 1385 ]
-}
-"124
-[; ;src/lcd.c: 124: }
+"25
+[; ;src/esp8266.c: 25:     UART_puts("AT+RST");
+[e ( _UART_puts (1 :s 9C ]
+"26
+[; ;src/esp8266.c: 26:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 10C ]
+"27
+[; ;src/esp8266.c: 27:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 11C ]
+"28
+[; ;src/esp8266.c: 28: }
 [e :UE 1383 ]
 }
-"134
-[; ;src/lcd.c: 134: void set_pixel(unsigned char i, unsigned char j, unsigned char val) {
-[v _set_pixel `(v ~T0 @X0 1 ef3`uc`uc`uc ]
+"29
+[; ;src/esp8266.c: 29: void ESP8266_connect(char * name, char * pass) {
+[v _ESP8266_connect `(v ~T0 @X0 1 ef2`*uc`*uc ]
 {
-[e :U _set_pixel ]
-[v _i `uc ~T0 @X0 1 r1 ]
-[v _j `uc ~T0 @X0 1 r2 ]
-[v _val `uc ~T0 @X0 1 r3 ]
+[e :U _ESP8266_connect ]
+[v _name `*uc ~T0 @X0 1 r1 ]
+[v _pass `*uc ~T0 @X0 1 r2 ]
 [f ]
-"135
-[; ;src/lcd.c: 135:     unsigned int index = j + (i/8) * 0x80;
-[v _index `ui ~T0 @X0 1 a ]
-[e = _index -> + -> _j `i * / -> _i `i -> 8 `i -> 128 `i `ui ]
-"136
-[; ;src/lcd.c: 136:     unsigned int offset = i % 8;
-[v _offset `ui ~T0 @X0 1 a ]
-[e = _offset -> % -> _i `i -> 8 `i `ui ]
-"137
-[; ;src/lcd.c: 137:     if( val == 0 ) {
-[e $ ! == -> _val `i -> 0 `i 1392  ]
-{
-"138
-[; ;src/lcd.c: 138:         lcd_buffer[index] &= ~(1 << offset);
-[e =& *U + &U _lcd_buffer * -> _index `ux -> -> # *U &U _lcd_buffer `ui `ux -> ~ << -> 1 `i _offset `uc ]
-"139
-[; ;src/lcd.c: 139:     } else if(val == 1 ) {
+"33
+[; ;src/esp8266.c: 33:     UART_puts("AT+CWJAP_CUR=");
+[e ( _UART_puts (1 :s 12C ]
+"34
+[; ;src/esp8266.c: 34:     UART_putc('\"');UART_puts(name);UART_putc('\"');
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+[e ( _UART_puts (1 _name ]
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+"35
+[; ;src/esp8266.c: 35:     UART_putc(',');
+[e ( _UART_putc (1 -> -> 44 `ui `uc ]
+"36
+[; ;src/esp8266.c: 36:     UART_putc('\"');UART_puts(pass);UART_putc('\"');
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+[e ( _UART_puts (1 _pass ]
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+"37
+[; ;src/esp8266.c: 37:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 13C ]
+"38
+[; ;src/esp8266.c: 38:     ESP8266_waitfor("WIFI CONNECTED");
+[e ( _ESP8266_waitfor (1 :s 14C ]
+"39
+[; ;src/esp8266.c: 39:     is_connected = 1;
+[e = _is_connected -> -> 1 `i `uc ]
+"41
+[; ;src/esp8266.c: 41: }
+[e :UE 1384 ]
 }
-[e $U 1393  ]
-[e :U 1392 ]
-[e $ ! == -> _val `i -> 1 `i 1394  ]
+"43
+[; ;src/esp8266.c: 43: void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
+[v _ESP8266_open_socket `(v ~T0 @X0 1 ef3`E9454`*uc`i ]
 {
-"140
-[; ;src/lcd.c: 140:         lcd_buffer[index] |= (1 << offset);
-[e =| *U + &U _lcd_buffer * -> _index `ux -> -> # *U &U _lcd_buffer `ui `ux -> << -> 1 `i _offset `uc ]
-"141
-[; ;src/lcd.c: 141:     } else {
+[e :U _ESP8266_open_socket ]
+[v _type `E9454 ~T0 @X0 1 r1 ]
+[v _ip `*uc ~T0 @X0 1 r2 ]
+[v _port `i ~T0 @X0 1 r3 ]
+[f ]
+"44
+[; ;src/esp8266.c: 44:     char buffer[10];
+[v _buffer `uc ~T0 @X0 -> 10 `i a ]
+"45
+[; ;src/esp8266.c: 45:     itoa(port, buffer, 10);
+[e ( _itoa (3 , , _port &U _buffer -> 10 `i ]
+"46
+[; ;src/esp8266.c: 46:     UART_puts("AT+CIPSTART=");
+[e ( _UART_puts (1 :s 15C ]
+"47
+[; ;src/esp8266.c: 47:     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+[e ( _UART_puts (1 *U + &U _SOCKETS * -> _type `ux -> -> # *U &U _SOCKETS `ui `ux ]
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+"48
+[; ;src/esp8266.c: 48:     UART_putc(',');
+[e ( _UART_putc (1 -> -> 44 `ui `uc ]
+"49
+[; ;src/esp8266.c: 49:     UART_putc('\"');UART_puts(ip);UART_putc('\"');
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+[e ( _UART_puts (1 _ip ]
+[e ( _UART_putc (1 -> -> 34 `ui `uc ]
+"50
+[; ;src/esp8266.c: 50:     UART_putc(',');
+[e ( _UART_putc (1 -> -> 44 `ui `uc ]
+"51
+[; ;src/esp8266.c: 51:     UART_puts(buffer);
+[e ( _UART_puts (1 &U _buffer ]
+"52
+[; ;src/esp8266.c: 52:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 16C ]
+"53
+[; ;src/esp8266.c: 53:     ESP8266_waitfor("OK");
+[e ( _ESP8266_waitfor (1 :s 17C ]
+"54
+[; ;src/esp8266.c: 54: }
+[e :UE 1385 ]
 }
-[e $U 1395  ]
+"56
+[; ;src/esp8266.c: 56: void ESP8266_send_data(char * data) {
+[v _ESP8266_send_data `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _ESP8266_send_data ]
+[v _data `*uc ~T0 @X0 1 r1 ]
+[f ]
+"57
+[; ;src/esp8266.c: 57:     char buffer[10];
+[v _buffer `uc ~T0 @X0 -> 10 `i a ]
+"58
+[; ;src/esp8266.c: 58:     int len = strlen(data);
+[v _len `i ~T0 @X0 1 a ]
+[e = _len -> ( _strlen (1 -> _data `*Cuc `i ]
+"59
+[; ;src/esp8266.c: 59:     itoa(len, buffer, 10);
+[e ( _itoa (3 , , _len &U _buffer -> 10 `i ]
+"60
+[; ;src/esp8266.c: 60:     UART_puts("AT+CIPSEND=");
+[e ( _UART_puts (1 :s 18C ]
+"61
+[; ;src/esp8266.c: 61:     UART_puts(buffer);
+[e ( _UART_puts (1 &U _buffer ]
+"62
+[; ;src/esp8266.c: 62:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 19C ]
+"63
+[; ;src/esp8266.c: 63:     ESP8266_waitfor(">");
+[e ( _ESP8266_waitfor (1 :s 20C ]
+"65
+[; ;src/esp8266.c: 65:     UART_puts(data);
+[e ( _UART_puts (1 _data ]
+"67
+[; ;src/esp8266.c: 67: }
+[e :UE 1386 ]
+}
+"68
+[; ;src/esp8266.c: 68: void ESP8266_close_socket(){
+[v _ESP8266_close_socket `(v ~T0 @X0 1 ef ]
+{
+[e :U _ESP8266_close_socket ]
+[f ]
+"69
+[; ;src/esp8266.c: 69:     UART_puts("AT+CIPClOSE");
+[e ( _UART_puts (1 :s 21C ]
+"70
+[; ;src/esp8266.c: 70:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 22C ]
+"71
+[; ;src/esp8266.c: 71: }
+[e :UE 1387 ]
+}
+"72
+[; ;src/esp8266.c: 72: char ESP8266_waitfor(const char * str) {
+[v _ESP8266_waitfor `(uc ~T0 @X0 1 ef1`*Cuc ]
+{
+[e :U _ESP8266_waitfor ]
+[v _str `*Cuc ~T0 @X0 1 r1 ]
+[f ]
+"73
+[; ;src/esp8266.c: 73:     char buffer[64];
+[v _buffer `uc ~T0 @X0 -> 64 `i a ]
+"74
+[; ;src/esp8266.c: 74:     char c;
+[v _c `uc ~T0 @X0 1 a ]
+"75
+[; ;src/esp8266.c: 75:     int i = 0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+"76
+[; ;src/esp8266.c: 76:     while(!UART_can_rx());
+[e $U 1389  ]
+[e :U 1390 ]
+[e :U 1389 ]
+[e $ ! != -> ( _UART_can_rx ..  `i -> 0 `i 1390  ]
+[e :U 1391 ]
+"77
+[; ;src/esp8266.c: 77:     do {
 [e :U 1394 ]
 {
-"142
-[; ;src/lcd.c: 142:         lcd_buffer[index] ^= (1 << offset);
-[e =^ *U + &U _lcd_buffer * -> _index `ux -> -> # *U &U _lcd_buffer `ui `ux -> << -> 1 `i _offset `uc ]
-"143
-[; ;src/lcd.c: 143:     }
+"78
+[; ;src/esp8266.c: 78:         i = 0;
+[e = _i -> 0 `i ]
+"79
+[; ;src/esp8266.c: 79:         buffer[0] = '\0';
+[e = *U + &U _buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `ui `uc ]
+"80
+[; ;src/esp8266.c: 80:         while((c = UART_getc()) != '\n') {
+[e $U 1395  ]
+[e :U 1396 ]
+{
+"81
+[; ;src/esp8266.c: 81:             if(c != '\r') {
+[e $ ! != -> _c `ui -> 13 `ui 1398  ]
+{
+"82
+[; ;src/esp8266.c: 82:                 buffer[i++] = c;
+[e = *U + &U _buffer * -> -> ++ _i -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux _c ]
+"83
+[; ;src/esp8266.c: 83:             }
+}
+[e :U 1398 ]
+"84
+[; ;src/esp8266.c: 84:             if(i >= 64) {
+[e $ ! >= _i -> 64 `i 1399  ]
+{
+"85
+[; ;src/esp8266.c: 85:                 i = 0;
+[e = _i -> 0 `i ]
+"86
+[; ;src/esp8266.c: 86:             }
+}
+[e :U 1399 ]
+"87
+[; ;src/esp8266.c: 87:         }
 }
 [e :U 1395 ]
-[e :U 1393 ]
-"144
-[; ;src/lcd.c: 144: }
-[e :UE 1391 ]
-}
-"145
-[; ;src/lcd.c: 145: void lcd_clear() {
-[v _lcd_clear `(v ~T0 @X0 1 ef ]
-{
-[e :U _lcd_clear ]
-[f ]
-"146
-[; ;src/lcd.c: 146:     int i;
-[v _i `i ~T0 @X0 1 a ]
-"147
-[; ;src/lcd.c: 147:     for(i = 0; i < 0x04 * 0x80; i++) {
-{
-[e = _i -> 0 `i ]
-[e $ < _i * -> 4 `i -> 128 `i 1397  ]
-[e $U 1398  ]
+"80
+[; ;src/esp8266.c: 80:         while((c = UART_getc()) != '\n') {
+[e $ != -> = _c ( _UART_getc ..  `ui -> 10 `ui 1396  ]
 [e :U 1397 ]
-{
-"148
-[; ;src/lcd.c: 148:         lcd_buffer[i] = 0x00;
-[e = *U + &U _lcd_buffer * -> -> _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux -> -> 0 `i `uc ]
-"149
-[; ;src/lcd.c: 149:     }
+"88
+[; ;src/esp8266.c: 88:         buffer[i] = '\0';
+[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `ui `uc ]
+"89
+[; ;src/esp8266.c: 89:     } while(strcmp(buffer, str) != 0);
 }
-[e ++ _i -> 1 `i ]
-[e $ < _i * -> 4 `i -> 128 `i 1397  ]
-[e :U 1398 ]
-}
-"150
-[; ;src/lcd.c: 150:     cursor_x = 0;
-[e = _cursor_x -> 0 `i ]
-"151
-[; ;src/lcd.c: 151:     cursor_y = 0;
-[e = _cursor_y -> 0 `i ]
-"152
-[; ;src/lcd.c: 152:     lcd_update();
+[e $ != ( _strcmp (2 , -> &U _buffer `*Cuc _str -> 0 `i 1394  ]
+[e :U 1393 ]
+"90
+[; ;src/esp8266.c: 90:     lcd_puts(buffer);
+[e ( _lcd_puts (1 -> &U _buffer `*uc ]
+"91
+[; ;src/esp8266.c: 91:     lcd_newline();
+[e ( _lcd_newline ..  ]
+"92
+[; ;src/esp8266.c: 92:     lcd_update();
 [e ( _lcd_update ..  ]
-"153
-[; ;src/lcd.c: 153: }
-[e :UE 1396 ]
+"93
+[; ;src/esp8266.c: 93:     return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 1388  ]
+"94
+[; ;src/esp8266.c: 94: }
+[e :UE 1388 ]
 }
-"154
-[; ;src/lcd.c: 154: void lcd_putc(unsigned char c) {
-[v _lcd_putc `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _lcd_putc ]
-[v _c `uc ~T0 @X0 1 r1 ]
-[f ]
-"155
-[; ;src/lcd.c: 155:     int i = 0, index = cursor_x + cursor_y * 0x80;
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[v _index `i ~T0 @X0 1 a ]
-[e = _index + _cursor_x * _cursor_y -> 128 `i ]
-"156
-[; ;src/lcd.c: 156:     int char_index;
-[v _char_index `i ~T0 @X0 1 a ]
-"157
-[; ;src/lcd.c: 157:     if (c < 32 || c > 127) c = ' ';
-[e $ ! || < -> _c `i -> 32 `i > -> _c `i -> 127 `i 1401  ]
-[e = _c -> -> 32 `ui `uc ]
-[e :U 1401 ]
-"158
-[; ;src/lcd.c: 158:  char_index = ((c - 32) * 6);
-[e = _char_index * - -> _c `i -> 32 `i -> 6 `i ]
-"159
-[; ;src/lcd.c: 159:     for(i = 0; i < 6; i++) {
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 6 `i 1402  ]
-[e $U 1403  ]
-[e :U 1402 ]
-{
-"160
-[; ;src/lcd.c: 160:      lcd_buffer[index + i] = lcd_font[char_index + i];
-[e = *U + &U _lcd_buffer * -> -> + _index _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux *U + &U _lcd_font * -> -> + _char_index _i `ui `ux -> -> # *U &U _lcd_font `ui `ux ]
-"161
-[; ;src/lcd.c: 161:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 6 `i 1402  ]
-[e :U 1403 ]
-}
-"162
-[; ;src/lcd.c: 162:     cursor_x += 6;
-[e =+ _cursor_x -> 6 `i ]
-"163
-[; ;src/lcd.c: 163:     if(cursor_x > 120) {
-[e $ ! > _cursor_x -> 120 `i 1405  ]
-{
-"164
-[; ;src/lcd.c: 164:         cursor_x = 0;
-[e = _cursor_x -> 0 `i ]
-"165
-[; ;src/lcd.c: 165:         cursor_y += 1;
-[e =+ _cursor_y -> 1 `i ]
-"166
-[; ;src/lcd.c: 166:     }
-}
-[e :U 1405 ]
-"167
-[; ;src/lcd.c: 167:     if(cursor_y > 3) {
-[e $ ! > _cursor_y -> 3 `i 1406  ]
-{
-"168
-[; ;src/lcd.c: 168:         cursor_y = 0;
-[e = _cursor_y -> 0 `i ]
-"169
-[; ;src/lcd.c: 169:     }
-}
-[e :U 1406 ]
-"170
-[; ;src/lcd.c: 170: }
-[e :UE 1400 ]
-}
-"171
-[; ;src/lcd.c: 171: void lcd_puts(unsigned char * s) {
-[v _lcd_puts `(v ~T0 @X0 1 ef1`*uc ]
-{
-[e :U _lcd_puts ]
-[v _s `*uc ~T0 @X0 1 r1 ]
-[f ]
-"172
-[; ;src/lcd.c: 172:     while(*s) {
-[e $U 1408  ]
-[e :U 1409 ]
-{
-"173
-[; ;src/lcd.c: 173:         lcd_putc(*s);
-[e ( _lcd_putc (1 *U _s ]
-"174
-[; ;src/lcd.c: 174:         s++;
-[e ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
-"175
-[; ;src/lcd.c: 175:     }
-}
-[e :U 1408 ]
-"172
-[; ;src/lcd.c: 172:     while(*s) {
-[e $ != -> *U _s `i -> 0 `i 1409  ]
-[e :U 1410 ]
-"176
-[; ;src/lcd.c: 176: }
-[e :UE 1407 ]
-}
-"177
-[; ;src/lcd.c: 177: void lcd_newline() {
-[v _lcd_newline `(v ~T0 @X0 1 ef ]
-{
-[e :U _lcd_newline ]
-[f ]
-"178
-[; ;src/lcd.c: 178:     if(cursor_y >= 3) {
-[e $ ! >= _cursor_y -> 3 `i 1412  ]
-{
-"179
-[; ;src/lcd.c: 179:         cursor_x = 0;
-[e = _cursor_x -> 0 `i ]
-"180
-[; ;src/lcd.c: 180:         cursor_y = 3;
-[e = _cursor_y -> 3 `i ]
-"181
-[; ;src/lcd.c: 181:         lcd_vertical_shift();
-[e ( _lcd_vertical_shift ..  ]
-"182
-[; ;src/lcd.c: 182:     } else {
-}
-[e $U 1413  ]
-[e :U 1412 ]
-{
-"183
-[; ;src/lcd.c: 183:         cursor_y += 1;
-[e =+ _cursor_y -> 1 `i ]
-"184
-[; ;src/lcd.c: 184:         cursor_x = 0;
-[e = _cursor_x -> 0 `i ]
-"185
-[; ;src/lcd.c: 185:     }
-}
-[e :U 1413 ]
-"186
-[; ;src/lcd.c: 186: }
-[e :UE 1411 ]
-}
-"187
-[; ;src/lcd.c: 187: void lcd_vertical_shift() {
-[v _lcd_vertical_shift `(v ~T0 @X0 1 ef ]
-{
-[e :U _lcd_vertical_shift ]
-[f ]
-"188
-[; ;src/lcd.c: 188:     int i = 0;
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-"189
-[; ;src/lcd.c: 189:     for(i = 0; i < 3 * 0x80; i++) {
-{
-[e = _i -> 0 `i ]
-[e $ < _i * -> 3 `i -> 128 `i 1415  ]
-[e $U 1416  ]
-[e :U 1415 ]
-{
-"190
-[; ;src/lcd.c: 190:         lcd_buffer[i] = lcd_buffer[i + 0x80];
-[e = *U + &U _lcd_buffer * -> -> _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux *U + &U _lcd_buffer * -> -> + _i -> 128 `i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux ]
-"191
-[; ;src/lcd.c: 191:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i * -> 3 `i -> 128 `i 1415  ]
-[e :U 1416 ]
-}
-"192
-[; ;src/lcd.c: 192:     for(; i < 0x04 * 0x80; i++) {
-{
-[e $ < _i * -> 4 `i -> 128 `i 1418  ]
-[e $U 1419  ]
-[e :U 1418 ]
-{
-"193
-[; ;src/lcd.c: 193:         lcd_buffer[i] = 0;
-[e = *U + &U _lcd_buffer * -> -> _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux -> -> 0 `i `uc ]
-"194
-[; ;src/lcd.c: 194:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i * -> 4 `i -> 128 `i 1418  ]
-[e :U 1419 ]
-}
-"195
-[; ;src/lcd.c: 195: }
-[e :UE 1414 ]
-}
+[a 9C 65 84 43 82 83 84 0 ]
+[a 2C 85 68 80 0 ]
+[a 1C 84 67 80 0 ]
+[a 5C 79 75 0 ]
+[a 8C 79 75 0 ]
+[a 11C 79 75 0 ]
+[a 17C 79 75 0 ]
+[a 21C 65 84 43 67 73 80 67 108 79 83 69 0 ]
+[a 14C 87 73 70 73 32 67 79 78 78 69 67 84 69 68 0 ]
+[a 20C 62 0 ]
+[a 15C 65 84 43 67 73 80 83 84 65 82 84 61 0 ]
+[a 12C 65 84 43 67 87 74 65 80 95 67 85 82 61 0 ]
+[a 6C 65 84 43 67 87 77 79 68 69 95 67 85 82 61 0 ]
+[a 18C 65 84 43 67 73 80 83 69 78 68 61 0 ]
+[a 3C 65 84 69 48 0 ]
+[a 4C 13 10 0 ]
+[a 7C 13 10 0 ]
+[a 10C 13 10 0 ]
+[a 13C 13 10 0 ]
+[a 16C 13 10 0 ]
+[a 19C 13 10 0 ]
+[a 22C 13 10 0 ]

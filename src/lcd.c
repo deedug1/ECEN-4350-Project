@@ -93,6 +93,8 @@ void lcd_init() {
     command(SET_CHARGEPUMP);
     command(0x14); // ON
     
+    command(DISABLE_SCROLL);
+    
     command(SET_DISPLAYON);
     
 }
@@ -145,6 +147,8 @@ void lcd_clear() {
     for(i = 0; i < ROWS * COLS; i++) {
         lcd_buffer[i] = 0x00;
     }
+    cursor_x = 0;
+    cursor_y = 0;
     lcd_update();
 }
 void lcd_putc(unsigned char c) {
@@ -172,6 +176,7 @@ void lcd_puts(unsigned char * s) {
 }
 void lcd_newline() {
     if(cursor_y >= 3) {
+        cursor_x = 0;
         cursor_y = 3;
         lcd_vertical_shift();
     } else {
@@ -181,7 +186,7 @@ void lcd_newline() {
 }
 void lcd_vertical_shift() {
     int i = 0;
-    for(; i < 3 * COLS; i++) {
+    for(i = 0; i < 3 * COLS; i++) {
         lcd_buffer[i] = lcd_buffer[i + COLS]; 
     }
     for(; i < ROWS * COLS; i++) {

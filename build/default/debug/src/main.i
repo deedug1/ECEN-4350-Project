@@ -1,4 +1,4 @@
-# 1 "src/uart.c"
+# 1 "src/main.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/uart.c" 2
+# 1 "src/main.c" 2
 
 
 
@@ -15642,7 +15642,43 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 8 "src/uart.c" 2
+# 8 "src/main.c" 2
+
+# 1 "src/../headers/mc_init.h" 1
+# 18 "src/../headers/mc_init.h"
+void pps_init(void);
+void port_init(void);
+void controller_init(void);
+void oscillator_init(void);
+# 9 "src/main.c" 2
+
+# 1 "src/../headers/lcd.h" 1
+# 50 "src/../headers/lcd.h"
+void lcd_putc(unsigned char c);
+void lcd_puts(unsigned char * s);
+void set_pixel(unsigned char i, unsigned char j, unsigned char val);
+void lcd_init(void);
+void lcd_update(void);
+void lcd_clear(void);
+void lcd_newline(void);
+void lcd_vertical_shift(void);
+# 10 "src/main.c" 2
+
+# 1 "src/../headers/i2c_master.h" 1
+# 13 "src/../headers/i2c_master.h"
+typedef enum {
+    SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
+}I2C_master_result;
+void I2C_master_init(void);
+void I2C_MASTER_ISR(void);
+I2C_master_result I2C_master_write(char * data, int length, char address);
+I2C_master_result I2C_master_read(char * buffer, int length, char address);
+# 11 "src/main.c" 2
+
+# 1 "src/../headers/interrupt.h" 1
+# 12 "src/../headers/interrupt.h"
+void interrupt_init(void);
+# 12 "src/main.c" 2
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
@@ -15655,145 +15691,91 @@ char UART_getc(void);
 void UART_gets(char * buf, int len);
 char UART_can_tx(void);
 char UART_can_rx(void);
-# 9 "src/uart.c" 2
+# 13 "src/main.c" 2
 
-# 1 "src/../headers/lcd.h" 1
-# 50 "src/../headers/lcd.h"
-void lcd_putc(unsigned char c);
-void lcd_puts(unsigned char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
-void lcd_init(void);
-void lcd_update(void);
-void lcd_clear(void);
-void lcd_newline(void);
-void lcd_vertical_shift(void);
-# 10 "src/uart.c" 2
+# 1 "src/../headers/esp8266.h" 1
+# 19 "src/../headers/esp8266.h"
+typedef enum {
+    TCP, UDP
+}ESP8266_socket_type;
 
+void ESP8266_reset(void);
+void ESP8266_init(void);
+void ESP8266_connect(char * name, char * pass);
+void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
+void ESP8266_send_data(char * data);
+void ESP8266_close_socket(void);
+char ESP8266_responseOK(void);
+# 14 "src/main.c" 2
 
-
-
-
-typedef struct {
-    char buffer[8];
-    int size;
-    int head;
-    int tail;
-} UART_buf;
-
-static volatile UART_buf RX_buf;
-static volatile UART_buf TX_buf;
-void UART_init() {
-
-    PIE3bits.RC1IE = 0;
-    PIE3bits.TX1IE = 0;
+# 1 "src/../headers/util.h" 1
+# 15 "src/../headers/util.h"
+void itoa(int num, char * buf, int radix);
+# 15 "src/main.c" 2
 
 
-    BAUD1CON = 0x08;
-
-    RC1STA = 0x90;
-
-    TX1STA = 0x24;
-
-
-
-
-
-
-    SP1BRGH = 0x00;
-
-    SP1BRGL = 0x22;
-
-
-    RX_buf.size = 0;
-    RX_buf.tail = 0;
-    RX_buf.head = 0;
-
-    TX_buf.size = 0;
-    TX_buf.tail = 0;
-    TX_buf.head = 0;
-
-    PIE3bits.RC1IE = 1;
-
-}
-void UART_RX_ISR() {
-
-
-    (RX_buf.buffer[RX_buf.head++] = RC1REG);
-    RX_buf.size++;
-
-    if(RX_buf.head >= 8) {
-        RX_buf.head = 0;
-    }
-}
-
-void UART_TX_ISR() {
-    if(TX_buf.size != 0) {
-
-        (TX1REG = TX_buf.buffer[TX_buf.tail++]);
-        TX_buf.size--;
-
-        if(TX_buf.tail >= 8) {
-            TX_buf.tail = 0;
-        }
-    } else {
-
-        PIE3bits.TX1IE = 0;
-    }
-}
-void UART_putc(char data) {
-    while(TX_buf.size >= 8) {
-
-    }
-
-    if(PIE3bits.TX1IE == 0){
-        (TX1REG = data);
-    } else {
-
-        PIE3bits.TX1IE = 0;
-        TX_buf.buffer[TX_buf.head++] = data;
-        TX_buf.size++;
-
-        if(TX_buf.head >= 8) {
-            TX_buf.head = 0;
+char * garbage = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=21 \r\n";
+static char should_send = 0;
+void wait() {
+    int i, j;
+    for(i = 0; i < 255; i++) {
+        for(j = 0; j < 255; j++) {
+            __nop();
         }
     }
-    PIE3bits.TX1IE = 1;
 }
-void UART_puts(char * data) {
-
-    while(*data != 0) {
-        UART_putc(*data);
-        data++;
-    }
-}
-
-char UART_getc() {
-    char data = 0;
-
-
-    while(RX_buf.size <= 0) {
+void empty_rx_buf() {
+    char c;
+    while(!UART_can_rx()) {
 
     }
-    PIE3bits.RC1IE = 0;
-    data = RX_buf.buffer[RX_buf.tail++];
-    RX_buf.size--;
+    while(UART_can_rx()) {
+        c = UART_getc();
+        if(c == '\n') {
+            lcd_newline();
+        } else if(c < 32 || c > 127) {
 
-    if(RX_buf.tail >= 8) {
-        RX_buf.tail = 0;
+        } else {
+            lcd_putc(c);
+        }
     }
-    PIE3bits.RC1IE = 1;
-    return data;
+    lcd_update();
 }
-void UART_gets(char * buf, int len) {
-    do{
-        *buf = UART_getc();
-        buf++;
-    }while(len --> 0);
-    *buf = '\0';
-}
-char UART_can_rx() {
-    return RX_buf.size > 0;
-}
-char UART_can_tx() {
-    return TX_buf.size < 8;
+
+
+
+int main() {
+
+    controller_init();
+    interrupt_init();
+    I2C_master_init();
+    UART_init();
+    lcd_init();
+
+     lcd_clear();
+
+    ESP8266_reset();
+    lcd_puts("RESET");
+    lcd_newline();
+    lcd_update();
+    _delay((unsigned long)((1000)*(16000000/4000.0)));
+    ESP8266_init();
+    lcd_puts("INIT");
+    lcd_newline();
+    lcd_update();
+    _delay((unsigned long)((1000)*(16000000/4000.0)));
+    ESP8266_connect("test_ap", "incredible14!");
+    lcd_puts("CONNECT");
+    lcd_newline();
+    lcd_update();
+    _delay((unsigned long)((1000)*(16000000/4000.0)));
+    ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
+    _delay((unsigned long)((1000)*(16000000/4000.0)));
+    ESP8266_send_data(garbage);
+    _delay((unsigned long)((1000)*(16000000/4000.0)));
+    ESP8266_close_socket();
+    while(1) {
+
+    }
+
 }

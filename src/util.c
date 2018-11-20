@@ -4,9 +4,9 @@
 
 
 void reverse(char * s) {
-    int i = 0, j = strlen(s) - 1;
+    int i, j; 
     char c;
-    for(; i < j; i++, j--) {
+    for(i = 0, j = strlen(s) - 1; i < j; i++, j--) {
         c = s[j];
         s[j] = s[i];
         s[i] = c;
@@ -14,19 +14,20 @@ void reverse(char * s) {
 }
 void itoa(int num, char * buf, int radix) {
     signed char sign;
+    int i = 0;
     if((sign = num) < 0) {
         num = -num;
     }
     while(num > 0 ) {
-        *buf = (num % 10) | 0x30;   // ASCII
-        buf++;
-        num /= 10;
+        *(buf + i) = (num % radix) | 0x30;   // ASCII
+        i++;
+        num /= radix;
     }
     if(sign < 0){
-        *buf = '-';
-        buf++;
+        *(buf + i) = '-';
+        i++;
     }
-    *buf = '\0';
+    *(buf + i) = '\0';
     reverse(buf);
 }
 
