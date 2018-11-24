@@ -68,52 +68,66 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/util.c: 19:         num = -num;
 [e = _num -U _num ]
 "20
-[; ;src/util.c: 20:     }
+[; ;src/util.c: 20:     } else if((num == 0)) {
 }
-[e :U 8 ]
-"21
-[; ;src/util.c: 21:     while(num > 0 ) {
 [e $U 9  ]
-[e :U 10 ]
+[e :U 8 ]
+[e $ ! == _num -> 0 `i 10  ]
 {
-"22
-[; ;src/util.c: 22:         *(buf + i) = (num % radix) | 0x30;
-[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> | % _num _radix -> 48 `i `uc ]
-"23
-[; ;src/util.c: 23:         i++;
-[e ++ _i -> 1 `i ]
-"24
-[; ;src/util.c: 24:         num /= radix;
-[e =/ _num _radix ]
-"25
-[; ;src/util.c: 25:     }
-}
-[e :U 9 ]
 "21
-[; ;src/util.c: 21:     while(num > 0 ) {
-[e $ > _num -> 0 `i 10  ]
-[e :U 11 ]
-"26
-[; ;src/util.c: 26:     if(sign < 0){
-[e $ ! < -> _sign `i -> 0 `i 12  ]
-{
-"27
-[; ;src/util.c: 27:         *(buf + i) = '-';
-[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 45 `ui `uc ]
-"28
-[; ;src/util.c: 28:         i++;
+[; ;src/util.c: 21:         *(buf + i) = '0';
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 48 `ui `uc ]
+"22
+[; ;src/util.c: 22:         i++;
 [e ++ _i -> 1 `i ]
-"29
-[; ;src/util.c: 29:     }
+"23
+[; ;src/util.c: 23:     }
 }
+[e :U 10 ]
+[e :U 9 ]
+"24
+[; ;src/util.c: 24:     while(num > 0 ) {
+[e $U 11  ]
 [e :U 12 ]
+{
+"25
+[; ;src/util.c: 25:         *(buf + i) = (num % radix) | 0x30;
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> | % _num _radix -> 48 `i `uc ]
+"26
+[; ;src/util.c: 26:         i++;
+[e ++ _i -> 1 `i ]
+"27
+[; ;src/util.c: 27:         num /= radix;
+[e =/ _num _radix ]
+"28
+[; ;src/util.c: 28:     }
+}
+[e :U 11 ]
+"24
+[; ;src/util.c: 24:     while(num > 0 ) {
+[e $ > _num -> 0 `i 12  ]
+[e :U 13 ]
+"29
+[; ;src/util.c: 29:     if(sign < 0){
+[e $ ! < -> _sign `i -> 0 `i 14  ]
+{
 "30
-[; ;src/util.c: 30:     *(buf + i) = '\0';
-[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 0 `ui `uc ]
+[; ;src/util.c: 30:         *(buf + i) = '-';
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 45 `ui `uc ]
 "31
-[; ;src/util.c: 31:     reverse(buf);
-[e ( _reverse (1 _buf ]
+[; ;src/util.c: 31:         i++;
+[e ++ _i -> 1 `i ]
 "32
-[; ;src/util.c: 32: }
+[; ;src/util.c: 32:     }
+}
+[e :U 14 ]
+"33
+[; ;src/util.c: 33:     *(buf + i) = '\0';
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 0 `ui `uc ]
+"34
+[; ;src/util.c: 34:     reverse(buf);
+[e ( _reverse (1 _buf ]
+"35
+[; ;src/util.c: 35: }
 [e :UE 7 ]
 }

@@ -1,4 +1,4 @@
-# 1 "src/i2c_master.c"
+# 1 "src/Si7021.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/i2c_master.c" 2
+# 1 "src/Si7021.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15635,7 +15635,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 1 "src/i2c_master.c" 2
+# 1 "src/Si7021.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
 # 13 "src/../headers/i2c_master.h"
@@ -15646,165 +15646,65 @@ void I2C_master_init(void);
 void I2C_MASTER_ISR(void);
 I2C_master_result I2C_master_write(char * data, int length, char address);
 I2C_master_result I2C_master_read(char * buffer, int length, char address);
-# 2 "src/i2c_master.c" 2
-# 15 "src/i2c_master.c"
-typedef enum {
-    IDLE, SEND_ADDRESS, ACKNOWLEDGE_ADDR, SEND_DATA, RECEIVE_DATA, ACKNOWLEDGE_RECV, STOPPED
-}I2C_master_status;
+# 2 "src/Si7021.c" 2
 
-typedef struct {
-    char * data;
-    int length;
-    char address;
-    I2C_master_result result;
-} I2C_transmit_data;
-
-static volatile I2C_transmit_data current_packet;
-static volatile I2C_master_status I2C_status;
-
-void I2C_master_init() {
-    SSP1MSK = 0x00;
-
-    SSP1ADD = 0x03;
-
-    SSP1STAT = 0x80;
-
-    SSP1CON3 = 0x00;
-
-    SSP1CON2 = 0x00;
-
-    SSP1CON1 = 0x28;
+# 1 "src/../headers/Si7021.h" 1
+# 19 "src/../headers/Si7021.h"
+void Si7021_reset(void);
+int Si7021_read_humidity(void);
+int Si7021_read_temp(void);
+int Si7021_set_heater(char heat);
+# 3 "src/Si7021.c" 2
 
 
-    SSP1IF = 0;
-    PIE3bits.SSP1IE = 1;
-}
-void I2C_stop(I2C_master_result result) {
-    current_packet.result = result;
-    current_packet.length = 0;
-    SSP1CON2bits.PEN = 1;
-    I2C_status = STOP;
-}
-void I2C_wait() {
-    while(current_packet.result == PENDING) {
 
-    }
-    while(I2C_status != IDLE) {
 
+
+
+
+
+static char Si7021_buf[2];
+
+int convert_humidity() {
+    int result, rh_code;
+    rh_code = Si7021_buf[1]; rh_code += (Si7021_buf[0] << 8);
+    result = (((long)125 * rh_code) >> 16) - 6;
+
+    if(result < 0) {
+        return 0;
+    } else if (result > 100) {
+        return 100;
+    } else {
+    return result;
     }
 }
-void I2C_MASTER_ISR() {
-    static int xfer_count = 0;
 
-    SSP1IF = 0;
-    switch(I2C_status) {
-        case IDLE:
-            if(current_packet.length != 0) {
-
-                xfer_count = 0;
-                SSP1CON2bits.SEN = 1;
-                I2C_status = SEND_ADDRESS;
-            }
-            break;
-        case SEND_ADDRESS:
-            (SSP1BUF = current_packet.address);
-            if(current_packet.address & 0x1) {
-
-               I2C_status = ACKNOWLEDGE_ADDR;
-            } else {
-
-               I2C_status = SEND_DATA;
-            }
-            break;
-        case ACKNOWLEDGE_ADDR:
-            if(SSP1CON2bits.ACKSTAT) {
-
-                SSP1CON2bits.ACKSTAT = 0;
-                I2C_stop(RECEIVE_ERROR);
-            } else {
-
-                I2C_status = RECEIVE_DATA;
-            }
-            break;
-        case SEND_DATA:
-            if(SSP1CON2bits.ACKSTAT) {
-
-                SSP1CON2bits.ACKSTAT = 0;
-                I2C_stop(SEND_ERROR);
-            } else {
-
-                if(xfer_count < current_packet.length) {
-
-                    (SSP1BUF = *(current_packet.data + xfer_count));
-
-                    xfer_count++;
-                    I2C_status = SEND_DATA;
-                } else {
-
-                    I2C_stop(SUCCESS);
-                }
-            }
-            break;
-        case RECEIVE_DATA:
-            SSP1CON2bits.RCEN = 1;
-            I2C_status = ACKNOWLEDGE_RECV;
-            break;
-        case ACKNOWLEDGE_RECV:
-            (*(current_packet.data + xfer_count) = SSP1BUF);
-            xfer_count++;
-            if(xfer_count < current_packet.length) {
-
-                SSP1CON2bits.ACKDT = 0;
-                SSP1CON2bits.ACKEN = 1;
-                I2C_status = RECEIVE_DATA;
-            } else {
-
-                SSP1CON2bits.ACKDT = 1;
-                SSP1CON2bits.ACKEN = 1;
-                I2C_stop(SUCCESS);
-            }
-            break;
-        case STOPPED:
-            xfer_count = 0;
-            I2C_status = IDLE;
-            break;
-        default:
-            break;
-    }
-}
-char I2C_master_enabled() {
-    return (SSP1CON1bits.SSPEN);
+int convert_temp() {
+    int result, temp_code;
+    temp_code = Si7021_buf[1]; temp_code += (Si7021_buf[0] << 8);
+    result = (((long)176 * temp_code) >> 16) - 47;
+    return result;
 }
 
-void create_read_packet(char * buffer, int length, char address) {
-    current_packet.data = buffer;
-    current_packet.length = length;
-    current_packet.address = (address << 1);
-    current_packet.address |= 0x01;
-    current_packet.result = PENDING;
-}
-void create_write_packet(char * data, int length, char address) {
-    current_packet.data = data;
-    current_packet.length = length;
-    current_packet.address = (address << 1);
-    current_packet.result = PENDING;
+void Si7021_reset() {
+    Si7021_buf[0] = 0xFE;
+    I2C_master_write(Si7021_buf, 1, 0x40);
 }
 
-I2C_master_result I2C_master_write(char * data, int length, char address) {
-    if(!I2C_master_enabled()) {
-        return SEND_ERROR;
-    }
-    create_write_packet(data, length, address);
-    SSP1IF = 1;
-    I2C_wait();
-    return current_packet.result;
+int Si7021_read_humidity() {
+    Si7021_buf[0] = 0xF5;
+    I2C_master_write(Si7021_buf, 1, 0x40);
+
+    while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
+
+    return convert_humidity();
 }
-I2C_master_result I2C_master_read(char * buffer, int length, char address) {
-    if(!I2C_master_enabled()) {
-        return RECEIVE_ERROR;
-    }
-    create_read_packet(buffer, length, address);
-    SSP1IF = 1;
-    I2C_wait();
-    return current_packet.result;
+
+int Si7021_read_temp() {
+    Si7021_buf[0] = 0xF3;
+    I2C_master_write(Si7021_buf, 1, 0x40);
+
+    while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
+
+    return convert_temp();
 }

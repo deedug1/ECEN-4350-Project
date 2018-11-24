@@ -9,7 +9,7 @@
 #define	ESP8266_H
 
 // AT-Commands
-#define ATCWMODE "AT+CWMODE_CUR=1"
+#define ATCWMODE "AT+CWMODE_CUR=3"
 #define ATCIPMUX "AT+CIPMUX=0"
 #define ATCWJAP "AT+CWJAP_CUR=" // Join access point
 #define ATCIPSTART "AT+CIPSTART=" // Start socket
@@ -22,6 +22,7 @@ typedef enum {
 }ESP8266_socket_type;
 
 void ESP8266_reset(void);
+void ESP8266_query(void);
 void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);

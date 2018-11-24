@@ -12,6 +12,18 @@
 static char is_connected = 0;
 char * SOCKETS[] = {"TCP", "UDP"};
 char ESP8266_waitfor(const char * str);
+
+void ESP8266_query(void) {
+    UART_puts("AT+CWMODE?");
+    ESP8266_COMMAND_END;
+    ESP8266_waitfor("OK");
+    UART_puts("AT+CIPMUX?");
+    ESP8266_COMMAND_END;
+    ESP8266_waitfor("OK");
+    UART_puts("AT+CIFSR");
+    ESP8266_COMMAND_END;
+    ESP8266_waitfor("OK");
+}
 void ESP8266_init(void) {
     UART_puts("ATE0");
     ESP8266_COMMAND_END;
@@ -48,8 +60,6 @@ void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
     UART_puts(ATCIPSTART);
-    UART_putc('0');
-    ESP8266_COMMA;
     ESP8266_SEND_STRING(SOCKETS[type]);
     ESP8266_COMMA;
     ESP8266_SEND_STRING(ip);
@@ -67,7 +77,7 @@ void ESP8266_send_data(char * data) {
     UART_puts(buffer);
     
     ESP8266_COMMAND_END;
-    ESP8266_waitfor(">");
+//    ESP8266_waitfor(">");
     // Send actual transmit data
     UART_puts(data);
 //    UART_getc();

@@ -15706,6 +15706,7 @@ typedef enum {
 }ESP8266_socket_type;
 
 void ESP8266_reset(void);
+void ESP8266_query(void);
 void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
@@ -15729,8 +15730,8 @@ char UART_can_rx(void);
 
 # 1 "src/../headers/lcd.h" 1
 # 50 "src/../headers/lcd.h"
-void lcd_putc(unsigned char c);
-void lcd_puts(unsigned char * s);
+void lcd_putc(char c);
+void lcd_puts(char * s);
 void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
@@ -15747,12 +15748,24 @@ void lcd_vertical_shift(void);
 static char is_connected = 0;
 char * SOCKETS[] = {"TCP", "UDP"};
 char ESP8266_waitfor(const char * str);
+
+void ESP8266_query(void) {
+    UART_puts("AT+CWMODE?");
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+    UART_puts("AT+CIPMUX?");
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+    UART_puts("AT+CIFSR");
+    UART_puts("\r\n");
+    ESP8266_waitfor("OK");
+}
 void ESP8266_init(void) {
     UART_puts("ATE0");
     UART_puts("\r\n");
     ESP8266_waitfor("OK");
 
-    UART_puts("AT+CWMODE_CUR=1");
+    UART_puts("AT+CWMODE_CUR=3");
     UART_puts("\r\n");
     ESP8266_waitfor("OK");
 
@@ -15783,8 +15796,6 @@ void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
     UART_puts("AT+CIPSTART=");
-    UART_putc('0');
-    UART_putc(',');
     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(ip);UART_putc('\"');
@@ -15802,7 +15813,7 @@ void ESP8266_send_data(char * data) {
     UART_puts(buffer);
 
     UART_puts("\r\n");
-    ESP8266_waitfor(">");
+
 
     UART_puts(data);
 

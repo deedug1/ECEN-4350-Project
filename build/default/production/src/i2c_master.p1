@@ -1386,8 +1386,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/i2c_master.c: 30:     SSP1MSK = 0x00;
 [e = _SSP1MSK -> -> 0 `i `uc ]
 "32
-[; ;src/i2c_master.c: 32:     SSP1ADD = 0x03;
-[e = _SSP1ADD -> -> 3 `i `uc ]
+[; ;src/i2c_master.c: 32:     SSP1ADD = 0x21;
+[e = _SSP1ADD -> -> 33 `i `uc ]
 "34
 [; ;src/i2c_master.c: 34:     SSP1STAT = 0x80;
 [e = _SSP1STAT -> -> 128 `i `uc ]
@@ -1559,9 +1559,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 1401  ]
 [e :U 1400 ]
 {
+"89
+[; ;src/i2c_master.c: 89:                 SSP1CON2bits.RCEN = 1;
+[e = . . _SSP1CON2bits 0 3 -> -> 1 `i `uc ]
 "90
-[; ;src/i2c_master.c: 90:                 I2C_status = RECEIVE_DATA;
-[e = _I2C_status . `E9299 4 ]
+[; ;src/i2c_master.c: 90:                 I2C_status = ACKNOWLEDGE_RECV;
+[e = _I2C_status . `E9299 5 ]
 "91
 [; ;src/i2c_master.c: 91:             }
 }

@@ -15659,8 +15659,8 @@ char UART_can_rx(void);
 
 # 1 "src/../headers/lcd.h" 1
 # 50 "src/../headers/lcd.h"
-void lcd_putc(unsigned char c);
-void lcd_puts(unsigned char * s);
+void lcd_putc(char c);
+void lcd_puts(char * s);
 void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);

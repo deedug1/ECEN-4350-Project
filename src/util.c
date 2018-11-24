@@ -17,6 +17,9 @@ void itoa(int num, char * buf, int radix) {
     int i = 0;
     if((sign = num) < 0) {
         num = -num;
+    } else if((num == 0)) {
+        *(buf + i) = '0';
+        i++;
     }
     while(num > 0 ) {
         *(buf + i) = (num % radix) | 0x30;   // ASCII

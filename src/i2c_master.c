@@ -10,7 +10,7 @@
 
 #define SEND(a) (SSP1BUF = a)
 #define RECEIVE(a) (a = SSP1BUF)
-#define I2C_MASTER_BAUD 0x03
+#define I2C_MASTER_BAUD 0x21
 
 typedef enum {
     IDLE, SEND_ADDRESS, ACKNOWLEDGE_ADDR, SEND_DATA, RECEIVE_DATA, ACKNOWLEDGE_RECV, STOPPED
@@ -86,8 +86,8 @@ void I2C_MASTER_ISR() {
                 ACKNOWLEDGE_STATUS = 0;
                 I2C_stop(RECEIVE_ERROR);
             } else {
-                
-                I2C_status = RECEIVE_DATA;
+                RECEIVE_ENABLE = 1;
+                I2C_status = ACKNOWLEDGE_RECV;
             }
             break;
         case SEND_DATA:

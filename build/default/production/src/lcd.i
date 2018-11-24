@@ -15640,8 +15640,8 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 # 1 "src/../headers/lcd.h" 1
 # 50 "src/../headers/lcd.h"
-void lcd_putc(unsigned char c);
-void lcd_puts(unsigned char * s);
+void lcd_putc(char c);
+void lcd_puts(char * s);
 void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
@@ -15903,13 +15903,13 @@ void lcd_clear() {
     cursor_y = 0;
     lcd_update();
 }
-void lcd_putc(unsigned char c) {
+void lcd_putc(char c) {
     int i = 0, index = cursor_x + cursor_y * 0x80;
     int char_index;
-    if (c < 32 || c > 127) c = ' ';
+    if (c < 32 ) c = ' ';
  char_index = ((c - 32) * 6);
     for(i = 0; i < 6; i++) {
-     lcd_buffer[index + i] = lcd_font[char_index + i];
+        lcd_buffer[index + i] = lcd_font[char_index + i];
     }
     cursor_x += 6;
     if(cursor_x > 120) {
@@ -15920,7 +15920,7 @@ void lcd_putc(unsigned char c) {
         cursor_y = 0;
     }
 }
-void lcd_puts(unsigned char * s) {
+void lcd_puts(char * s) {
     while(*s) {
         lcd_putc(*s);
         s++;

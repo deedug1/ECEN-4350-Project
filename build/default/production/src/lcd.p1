@@ -2644,7 +2644,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 1396 ]
 }
 "154
-[; ;src/lcd.c: 154: void lcd_putc(unsigned char c) {
+[; ;src/lcd.c: 154: void lcd_putc(char c) {
 [v _lcd_putc `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _lcd_putc ]
@@ -2660,8 +2660,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/lcd.c: 156:     int char_index;
 [v _char_index `i ~T0 @X0 1 a ]
 "157
-[; ;src/lcd.c: 157:     if (c < 32 || c > 127) c = ' ';
-[e $ ! || < -> _c `i -> 32 `i > -> _c `i -> 127 `i 1401  ]
+[; ;src/lcd.c: 157:     if (c < 32 ) c = ' ';
+[e $ ! < -> _c `i -> 32 `i 1401  ]
 [e = _c -> -> 32 `ui `uc ]
 [e :U 1401 ]
 "158
@@ -2676,7 +2676,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 1402 ]
 {
 "160
-[; ;src/lcd.c: 160:      lcd_buffer[index + i] = lcd_font[char_index + i];
+[; ;src/lcd.c: 160:         lcd_buffer[index + i] = lcd_font[char_index + i];
 [e = *U + &U _lcd_buffer * -> -> + _index _i `ui `ux -> -> # *U &U _lcd_buffer `ui `ux *U + &U _lcd_font * -> -> + _char_index _i `ui `ux -> -> # *U &U _lcd_font `ui `ux ]
 "161
 [; ;src/lcd.c: 161:     }
@@ -2718,7 +2718,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 1400 ]
 }
 "171
-[; ;src/lcd.c: 171: void lcd_puts(unsigned char * s) {
+[; ;src/lcd.c: 171: void lcd_puts(char * s) {
 [v _lcd_puts `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _lcd_puts ]

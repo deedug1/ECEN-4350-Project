@@ -15654,8 +15654,8 @@ void oscillator_init(void);
 
 # 1 "src/../headers/lcd.h" 1
 # 50 "src/../headers/lcd.h"
-void lcd_putc(unsigned char c);
-void lcd_puts(unsigned char * s);
+void lcd_putc(char c);
+void lcd_puts(char * s);
 void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
@@ -15700,6 +15700,7 @@ typedef enum {
 }ESP8266_socket_type;
 
 void ESP8266_reset(void);
+void ESP8266_query(void);
 void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
@@ -15713,9 +15714,15 @@ char ESP8266_responseOK(void);
 void itoa(int num, char * buf, int radix);
 # 15 "src/main.c" 2
 
+# 1 "src/../headers/Si7021.h" 1
+# 19 "src/../headers/Si7021.h"
+void Si7021_reset(void);
+int Si7021_read_humidity(void);
+int Si7021_read_temp(void);
+int Si7021_set_heater(char heat);
+# 16 "src/main.c" 2
 
-char * garbage = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=21/r/n/r/n";
-static char should_send = 0;
+
 void wait() {
     int i, j;
     for(i = 0; i < 255; i++) {
@@ -15746,34 +15753,31 @@ void empty_rx_buf() {
 
 int main() {
 
+    char buffer[10];
+    int humidity, temp;
     controller_init();
     interrupt_init();
     I2C_master_init();
-    UART_init();
     lcd_init();
+    lcd_clear();
 
-     lcd_clear();
-
-    ESP8266_reset();
-    lcd_puts("RESET");
-    lcd_newline();
-    lcd_update();
-    ESP8266_init();
-    lcd_puts("INIT");
-    lcd_newline();
-    lcd_update();
-    ESP8266_connect("test_ap", "incredible14!");
-    lcd_puts("CONNECT");
-    lcd_newline();
-    lcd_update();
-    ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
-    lcd_puts("SOCKET");
-    lcd_newline();
-    lcd_update();
-    ESP8266_send_data(garbage);
-    ESP8266_close_socket();
     while(1) {
-
+        humidity = Si7021_read_humidity();
+        temp = Si7021_read_temp();
+        itoa(humidity, buffer, 10);
+        lcd_puts("Humid: ");
+        lcd_puts(buffer);
+        itoa(temp, buffer, 10);
+        lcd_puts(" Temp: ");
+        lcd_puts(buffer);
+        lcd_newline();
+        lcd_update();
+        _delay((unsigned long)((2000)*(16000000/4000.0)));
     }
+
+
+
+
+
 
 }

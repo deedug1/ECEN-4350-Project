@@ -151,13 +151,13 @@ void lcd_clear() {
     cursor_y = 0;
     lcd_update();
 }
-void lcd_putc(unsigned char c) {
+void lcd_putc(char c) {
     int i = 0, index = cursor_x + cursor_y * COLS;
     int char_index;
-    if (c < 32 || c > 127) c = ' ';
+    if (c < 32 ) c = ' ';
 	char_index = ((c - 32) * 6);
     for(i = 0; i < 6; i++) {
-     lcd_buffer[index + i] = lcd_font[char_index + i];   
+        lcd_buffer[index + i] = lcd_font[char_index + i];   
     }
     cursor_x += CHAR_WIDTH;
     if(cursor_x > 120) {
@@ -168,7 +168,7 @@ void lcd_putc(unsigned char c) {
         cursor_y = 0;
     }
 }
-void lcd_puts(unsigned char * s) {
+void lcd_puts(char * s) {
     while(*s) {
         lcd_putc(*s);
         s++;

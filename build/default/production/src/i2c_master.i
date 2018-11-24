@@ -15665,7 +15665,7 @@ static volatile I2C_master_status I2C_status;
 void I2C_master_init() {
     SSP1MSK = 0x00;
 
-    SSP1ADD = 0x03;
+    SSP1ADD = 0x21;
 
     SSP1STAT = 0x80;
 
@@ -15722,8 +15722,8 @@ void I2C_MASTER_ISR() {
                 SSP1CON2bits.ACKSTAT = 0;
                 I2C_stop(RECEIVE_ERROR);
             } else {
-
-                I2C_status = RECEIVE_DATA;
+                SSP1CON2bits.RCEN = 1;
+                I2C_status = ACKNOWLEDGE_RECV;
             }
             break;
         case SEND_DATA:

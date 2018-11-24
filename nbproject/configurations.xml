@@ -12,6 +12,7 @@
       <itemPath>headers/mc_init.h</itemPath>
       <itemPath>headers/uart.h</itemPath>
       <itemPath>headers/util.h</itemPath>
+      <itemPath>headers/Si7021.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -28,6 +29,7 @@
       <itemPath>src/mc_init.c</itemPath>
       <itemPath>src/uart.c</itemPath>
       <itemPath>src/util.c</itemPath>
+      <itemPath>src/Si7021.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
