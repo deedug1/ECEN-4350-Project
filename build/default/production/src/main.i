@@ -15665,10 +15665,11 @@ void lcd_vertical_shift(void);
 # 10 "src/main.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
-# 13 "src/../headers/i2c_master.h"
+# 14 "src/../headers/i2c_master.h"
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
+
 void I2C_master_init(void);
 void I2C_MASTER_ISR(void);
 I2C_master_result I2C_master_write(char * data, int length, char address);
@@ -15696,7 +15697,7 @@ char UART_can_rx(void);
 # 1 "src/../headers/esp8266.h" 1
 # 20 "src/../headers/esp8266.h"
 typedef enum {
-    TCP, UDP
+    TCP, UDP, SSL
 }ESP8266_socket_type;
 
 void ESP8266_reset(void);
@@ -15741,54 +15742,44 @@ void STOPWATCH_ISR(void);
 # 18 "src/main.c" 2
 
 
-void wait() {
-    int i, j;
-    for(i = 0; i < 255; i++) {
-        for(j = 0; j < 255; j++) {
-            __nop();
-        }
-    }
-}
-void empty_rx_buf() {
-    char c;
-    while(!UART_can_rx()) {
 
-    }
-    while(UART_can_rx()) {
-        c = UART_getc();
-        if(c == '\n') {
-            lcd_newline();
-        } else if(c < 32 || c > 127) {
-
-        } else {
-            lcd_putc(c);
-        }
-    }
-    lcd_update();
-}
+int PORT = 80;
+char * SSID = "test_ap";
+char * PASS = "incredible14!";
+char * IP = "api.thingspeak.com";
+char * DATA = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=3.14\r\n\r\n";
 
 
 
 int main() {
 
-    char buffer[15];
-    double ph;
     controller_init();
     interrupt_init();
     I2C_master_init();
-    lcd_init();
     stopwatch_init();
+    UART_init();
+    lcd_init();
     lcd_clear();
     lcd_puts("Starting");
     lcd_newline();
     lcd_update();
-    stopwatch_start(1);
+
+
+
+    ESP8266_reset();
+
+    ESP8266_init();
+
+    ESP8266_connect(SSID, PASS);
+    ESP8266_query();
+    ESP8266_open_socket(TCP, IP, PORT);
+
+    ESP8266_send_data(DATA);
+    ESP8266_close_socket();
+
+
     while(1) {
-        if(stopwatch_is_stopped()){
-            stopwatch_start(5);
-            lcd_putc('.');
-            lcd_update();
-        }
+
     }
 
 

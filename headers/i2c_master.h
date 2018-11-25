@@ -10,9 +10,11 @@
 
 #define I2C_INTE PIE3bits.SSP1IE
 #define I2C_INTF SSP1IF
+
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
+
 void I2C_master_init(void);
 void I2C_MASTER_ISR(void);
 I2C_master_result I2C_master_write(char * data, int length, char address);

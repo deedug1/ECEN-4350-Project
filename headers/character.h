@@ -8,7 +8,7 @@
 #ifndef CHARACTER_H
 #define	CHARACTER_H
 
-#define CHAR_WIDTH 6
+#define CHAR_WIDTH  6
 #define CHAR_HEIGHT 8
 static char lcd_font[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

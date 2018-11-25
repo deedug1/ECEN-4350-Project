@@ -8,12 +8,12 @@
 #ifndef MC_INIT_H
 #define	MC_INIT_H
 
-#define LAT_DEFAULT 0x00
-#define ANSEL_DEFAULT 0xFF
-#define WPU_DEFAULT 0x00
-#define TRIS_DEFAULT 0xFF
-#define ODCON_DEFAULT 0x00
-#define SLRCON_DEFAULT 0xFF
+#define LAT_DEFAULT     0x00
+#define ANSEL_DEFAULT   0xFF
+#define WPU_DEFAULT     0x00
+#define TRIS_DEFAULT    0xFF
+#define ODCON_DEFAULT   0x00
+#define SLRCON_DEFAULT  0xFF
 
 void pps_init(void);
 void port_init(void);

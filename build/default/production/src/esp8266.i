@@ -15703,7 +15703,7 @@ void dtoa(double num, char * buf, int radix);
 # 1 "src/../headers/esp8266.h" 1
 # 20 "src/../headers/esp8266.h"
 typedef enum {
-    TCP, UDP
+    TCP, UDP, SSL
 }ESP8266_socket_type;
 
 void ESP8266_reset(void);
@@ -15741,43 +15741,43 @@ void lcd_newline(void);
 void lcd_vertical_shift(void);
 # 6 "src/esp8266.c" 2
 
-
-
-
-
-
+# 1 "src/../headers/stopwatch.h" 1
+# 19 "src/../headers/stopwatch.h"
+void stopwatch_init(void);
+void stopwatch_start(int seconds);
+void stopwatch_stop(void);
+char stopwatch_is_stopped(void);
+char stopwatch_is_started(void);
+int stopwatch_get_time(void);
+void STOPWATCH_ISR(void);
+# 7 "src/esp8266.c" 2
+# 18 "src/esp8266.c"
 static char is_connected = 0;
-char * SOCKETS[] = {"TCP", "UDP"};
-char ESP8266_lookfor(const char * str);
+char * SOCKETS[] = {"TCP", "UDP", "SSL"};
+char ESP8266_lookfor(const char * str, int timeout);
 
 void ESP8266_query(void) {
-    UART_puts("AT+CWMODE?");
-    UART_puts("\r\n");
-    ESP8266_lookfor("OK");
-    UART_puts("AT+CIPMUX?");
-    UART_puts("\r\n");
-    ESP8266_lookfor("OK");
     UART_puts("AT+CIFSR");
     UART_puts("\r\n");
-    ESP8266_lookfor("OK");
+    ESP8266_lookfor("OK", 10);
 }
 void ESP8266_init(void) {
     UART_puts("ATE0");
     UART_puts("\r\n");
-    ESP8266_lookfor("OK");
+    ESP8266_lookfor("OK", 10);
 
     UART_puts("AT+CWMODE_CUR=3");
     UART_puts("\r\n");
-    ESP8266_lookfor("OK");
+    ESP8266_lookfor("OK", 10);
 
-    UART_puts("AT+CIPMUX=0");
+    UART_puts("AT+CIPMUX=1");
     UART_puts("\r\n");
-    ESP8266_lookfor("OK");
+    ESP8266_lookfor("OK", 10);
 }
 void ESP8266_reset() {
     UART_puts("AT+RST");
     UART_puts("\r\n");
-    ESP8266_lookfor("ready");
+    ESP8266_lookfor("ready", 10);
 }
 void ESP8266_connect(char * name, char * pass) {
 
@@ -15788,7 +15788,8 @@ void ESP8266_connect(char * name, char * pass) {
     UART_putc(',');
     UART_putc('\"');UART_puts(pass);UART_putc('\"');
     UART_puts("\r\n");
-    ESP8266_lookfor("WIFI GOT IP");
+    while(!ESP8266_lookfor("WIFI GOT IP", 10));
+    while(!ESP8266_lookfor("OK", 10));
     is_connected = 1;
 
 }
@@ -15796,55 +15797,59 @@ void ESP8266_connect(char * name, char * pass) {
 void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
-    UART_puts("AT+CIPSTART=");
-    UART_putc('0');
-    UART_putc(',');
+    UART_puts("AT+CIPSTART=0,");
     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(ip);UART_putc('\"');
     UART_putc(',');
     UART_puts(buffer);
     UART_puts("\r\n");
-    ESP8266_lookfor("OK");
+    ESP8266_lookfor("OK", 10);
 }
 
 void ESP8266_send_data(char * data) {
     char buffer[10];
     int len = strlen(data);
     itoa(len, buffer, 10);
-    UART_puts("AT+CIPSEND=");
+    UART_puts("AT+CIPSEND=0,");
     UART_puts(buffer);
-
     UART_puts("\r\n");
-
-
+    ESP8266_lookfor(">", 10);
     UART_puts(data);
+    ESP8266_lookfor("SEND OK", 10);
 
 }
 void ESP8266_close_socket(){
     UART_puts("AT+CIPClOSE");
     UART_puts("\r\n");
 }
-char ESP8266_lookfor(const char * str) {
-    char buffer[64];
-    char c;
+char ESP8266_lookfor(const char * str, int timeout) {
+    char c = 0, found = 0;
+    char buffer[32];
     int i = 0;
-    while(!UART_can_rx());
-    do {
-        i = 0;
-        buffer[0] = '\0';
-        while((c = UART_getc()) != '\n') {
-            if(c != '\r') {
-                buffer[i++] = c;
+
+    stopwatch_start(timeout);
+    while(!found && stopwatch_is_started()) {
+        if(UART_can_rx()) {
+            c = UART_getc();
+
+            if( c == '\r' || c == '\n') {
+                buffer[i] = '\0';
+                found = strcmp(buffer, str) == 0;
+                i = 0;
+            } else {
+                buffer[i] = c;
+                i++;
             }
-            if(i >= 64) {
+            if(i >= 32) {
                 i = 0;
             }
         }
-        buffer[i] = '\0';
-    } while(strcmp(buffer, str) != 0);
-    lcd_puts(buffer);
-    lcd_newline();
-    lcd_update();
-    return 0;
+    }
+    if(found && 1) {
+        lcd_newline();
+        lcd_puts(buffer);
+        lcd_update();
+    }
+    return found;
 }

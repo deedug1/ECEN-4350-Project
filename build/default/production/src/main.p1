@@ -1,22 +1,4 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"50 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
-"25 src/../headers/uart.h
-[; ;src/../headers/uart.h: 25: char UART_can_rx(void);
-[v _UART_can_rx `(uc ~T0 @X0 0 ef ]
-"22
-[; ;src/../headers/uart.h: 22: char UART_getc(void);
-[v _UART_getc `(uc ~T0 @X0 0 ef ]
-"56 src/../headers/lcd.h
-[; ;src/../headers/lcd.h: 56: void lcd_newline(void);
-[v _lcd_newline `(v ~T0 @X0 0 ef ]
-"50
-[; ;src/../headers/lcd.h: 50: void lcd_putc(char c);
-[v _lcd_putc `(v ~T0 @X0 0 ef1`uc ]
-"54
-[; ;src/../headers/lcd.h: 54: void lcd_update(void);
-[v _lcd_update `(v ~T0 @X0 0 ef ]
 [p mainexit ]
 "20 src/../headers/mc_init.h
 [; ;src/../headers/mc_init.h: 20: void controller_init(void);
@@ -24,27 +6,55 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 src/../headers/interrupt.h
 [; ;src/../headers/interrupt.h: 12: void interrupt_init(void);
 [v _interrupt_init `(v ~T0 @X0 0 ef ]
-"16 src/../headers/i2c_master.h
-[; ;src/../headers/i2c_master.h: 16: void I2C_master_init(void);
+"18 src/../headers/i2c_master.h
+[; ;src/../headers/i2c_master.h: 18: void I2C_master_init(void);
 [v _I2C_master_init `(v ~T0 @X0 0 ef ]
-"53 src/../headers/lcd.h
-[; ;src/../headers/lcd.h: 53: void lcd_init(void);
-[v _lcd_init `(v ~T0 @X0 0 ef ]
 "19 src/../headers/stopwatch.h
 [; ;src/../headers/stopwatch.h: 19: void stopwatch_init(void);
 [v _stopwatch_init `(v ~T0 @X0 0 ef ]
-"55 src/../headers/lcd.h
+"17 src/../headers/uart.h
+[; ;src/../headers/uart.h: 17: void UART_init(void);
+[v _UART_init `(v ~T0 @X0 0 ef ]
+"53 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 53: void lcd_init(void);
+[v _lcd_init `(v ~T0 @X0 0 ef ]
+"55
 [; ;src/../headers/lcd.h: 55: void lcd_clear(void);
 [v _lcd_clear `(v ~T0 @X0 0 ef ]
 "51
 [; ;src/../headers/lcd.h: 51: void lcd_puts(char * s);
 [v _lcd_puts `(v ~T0 @X0 0 ef1`*uc ]
-"20 src/../headers/stopwatch.h
-[; ;src/../headers/stopwatch.h: 20: void stopwatch_start(int seconds);
-[v _stopwatch_start `(v ~T0 @X0 0 ef1`i ]
-"22
-[; ;src/../headers/stopwatch.h: 22: char stopwatch_is_stopped(void);
-[v _stopwatch_is_stopped `(uc ~T0 @X0 0 ef ]
+"56
+[; ;src/../headers/lcd.h: 56: void lcd_newline(void);
+[v _lcd_newline `(v ~T0 @X0 0 ef ]
+"54
+[; ;src/../headers/lcd.h: 54: void lcd_update(void);
+[v _lcd_update `(v ~T0 @X0 0 ef ]
+"24 src/../headers/esp8266.h
+[; ;src/../headers/esp8266.h: 24: void ESP8266_reset(void);
+[v _ESP8266_reset `(v ~T0 @X0 0 ef ]
+"26
+[; ;src/../headers/esp8266.h: 26: void ESP8266_init(void);
+[v _ESP8266_init `(v ~T0 @X0 0 ef ]
+"27
+[; ;src/../headers/esp8266.h: 27: void ESP8266_connect(char * name, char * pass);
+[v _ESP8266_connect `(v ~T0 @X0 0 ef2`*uc`*uc ]
+"25
+[; ;src/../headers/esp8266.h: 25: void ESP8266_query(void);
+[v _ESP8266_query `(v ~T0 @X0 0 ef ]
+"50 src/main.c
+[; ;src/main.c: 50:     ESP8266_open_socket(TCP, IP, PORT);
+[c E9330 0 1 2 .. ]
+[n E9330 . TCP UDP SSL  ]
+"28 src/../headers/esp8266.h
+[; ;src/../headers/esp8266.h: 28: void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
+[v _ESP8266_open_socket `(v ~T0 @X0 0 ef3`E9330`*uc`i ]
+"29
+[; ;src/../headers/esp8266.h: 29: void ESP8266_send_data(char * data);
+[v _ESP8266_send_data `(v ~T0 @X0 0 ef1`*uc ]
+"30
+[; ;src/../headers/esp8266.h: 30: void ESP8266_close_socket(void);
+[v _ESP8266_close_socket `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1296,198 +1306,110 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"20 src/main.c
-[; ;src/main.c: 20: void wait() {
-[v _wait `(v ~T0 @X0 1 ef ]
-{
-[e :U _wait ]
-[f ]
-"21
-[; ;src/main.c: 21:     int i, j;
-[v _i `i ~T0 @X0 1 a ]
-[v _j `i ~T0 @X0 1 a ]
+"21 src/main.c
+[; ;src/main.c: 21: int PORT = 80;
+[v _PORT `i ~T0 @X0 1 e ]
+[i _PORT
+-> 80 `i
+]
 "22
-[; ;src/main.c: 22:     for(i = 0; i < 255; i++) {
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 255 `i 1382  ]
-[e $U 1383  ]
-[e :U 1382 ]
-{
+[; ;src/main.c: 22: char * SSID = "test_ap";
+[v _SSID `*uc ~T0 @X0 1 e ]
+[i _SSID
+:s 1C
+]
 "23
-[; ;src/main.c: 23:         for(j = 0; j < 255; j++) {
-{
-[e = _j -> 0 `i ]
-[e $ < _j -> 255 `i 1385  ]
-[e $U 1386  ]
-[e :U 1385 ]
-{
+[; ;src/main.c: 23: char * PASS = "incredible14!";
+[v _PASS `*uc ~T0 @X0 1 e ]
+[i _PASS
+:s 2C
+]
 "24
-[; ;src/main.c: 24:             __nop();
-[e ( ___nop ..  ]
+[; ;src/main.c: 24: char * IP = "api.thingspeak.com";
+[v _IP `*uc ~T0 @X0 1 e ]
+[i _IP
+:s 3C
+]
 "25
-[; ;src/main.c: 25:         }
-}
-[e ++ _j -> 1 `i ]
-[e $ < _j -> 255 `i 1385  ]
-[e :U 1386 ]
-}
-"26
-[; ;src/main.c: 26:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 255 `i 1382  ]
-[e :U 1383 ]
-}
-"27
-[; ;src/main.c: 27: }
-[e :UE 1381 ]
-}
-"28
-[; ;src/main.c: 28: void empty_rx_buf() {
-[v _empty_rx_buf `(v ~T0 @X0 1 ef ]
-{
-[e :U _empty_rx_buf ]
-[f ]
-"29
-[; ;src/main.c: 29:     char c;
-[v _c `uc ~T0 @X0 1 a ]
-"30
-[; ;src/main.c: 30:     while(!UART_can_rx()) {
-[e $U 1389  ]
-[e :U 1390 ]
-{
-"32
-[; ;src/main.c: 32:     }
-}
-[e :U 1389 ]
-"30
-[; ;src/main.c: 30:     while(!UART_can_rx()) {
-[e $ ! != -> ( _UART_can_rx ..  `i -> 0 `i 1390  ]
-[e :U 1391 ]
-"33
-[; ;src/main.c: 33:     while(UART_can_rx()) {
-[e $U 1392  ]
-[e :U 1393 ]
-{
-"34
-[; ;src/main.c: 34:         c = UART_getc();
-[e = _c ( _UART_getc ..  ]
-"35
-[; ;src/main.c: 35:         if(c == '\n') {
-[e $ ! == -> _c `ui -> 10 `ui 1395  ]
-{
-"36
-[; ;src/main.c: 36:             lcd_newline();
-[e ( _lcd_newline ..  ]
-"37
-[; ;src/main.c: 37:         } else if(c < 32 || c > 127) {
-}
-[e $U 1396  ]
-[e :U 1395 ]
-[e $ ! || < -> _c `i -> 32 `i > -> _c `i -> 127 `i 1397  ]
-{
-"39
-[; ;src/main.c: 39:         } else {
-}
-[e $U 1398  ]
-[e :U 1397 ]
-{
-"40
-[; ;src/main.c: 40:             lcd_putc(c);
-[e ( _lcd_putc (1 _c ]
-"41
-[; ;src/main.c: 41:         }
-}
-[e :U 1398 ]
-[e :U 1396 ]
-"42
-[; ;src/main.c: 42:     }
-}
-[e :U 1392 ]
-"33
-[; ;src/main.c: 33:     while(UART_can_rx()) {
-[e $ != -> ( _UART_can_rx ..  `i -> 0 `i 1393  ]
-[e :U 1394 ]
-"43
-[; ;src/main.c: 43:     lcd_update();
-[e ( _lcd_update ..  ]
-"44
-[; ;src/main.c: 44: }
-[e :UE 1388 ]
-}
+[; ;src/main.c: 25: char * DATA = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=3.14\r\n\r\n";
+[v _DATA `*uc ~T0 @X0 1 e ]
+[i _DATA
+:s 4C
+]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"48
-[; ;src/main.c: 48: int main() {
+"29
+[; ;src/main.c: 29: int main() {
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"50
-[; ;src/main.c: 50:     char buffer[15];
-[v _buffer `uc ~T0 @X0 -> 15 `i a ]
-"51
-[; ;src/main.c: 51:     double ph;
-[v _ph `d ~T0 @X0 1 a ]
-"52
-[; ;src/main.c: 52:     controller_init();
+"31
+[; ;src/main.c: 31:     controller_init();
 [e ( _controller_init ..  ]
-"53
-[; ;src/main.c: 53:     interrupt_init();
+"32
+[; ;src/main.c: 32:     interrupt_init();
 [e ( _interrupt_init ..  ]
-"54
-[; ;src/main.c: 54:     I2C_master_init();
+"33
+[; ;src/main.c: 33:     I2C_master_init();
 [e ( _I2C_master_init ..  ]
-"55
-[; ;src/main.c: 55:     lcd_init();
-[e ( _lcd_init ..  ]
-"56
-[; ;src/main.c: 56:     stopwatch_init();
+"34
+[; ;src/main.c: 34:     stopwatch_init();
 [e ( _stopwatch_init ..  ]
-"57
-[; ;src/main.c: 57:     lcd_clear();
+"35
+[; ;src/main.c: 35:     UART_init();
+[e ( _UART_init ..  ]
+"36
+[; ;src/main.c: 36:     lcd_init();
+[e ( _lcd_init ..  ]
+"37
+[; ;src/main.c: 37:     lcd_clear();
 [e ( _lcd_clear ..  ]
-"58
-[; ;src/main.c: 58:     lcd_puts("Starting");
-[e ( _lcd_puts (1 :s 1C ]
-"59
-[; ;src/main.c: 59:     lcd_newline();
+"38
+[; ;src/main.c: 38:     lcd_puts("Starting");
+[e ( _lcd_puts (1 :s 5C ]
+"39
+[; ;src/main.c: 39:     lcd_newline();
 [e ( _lcd_newline ..  ]
-"60
-[; ;src/main.c: 60:     lcd_update();
+"40
+[; ;src/main.c: 40:     lcd_update();
 [e ( _lcd_update ..  ]
-"61
-[; ;src/main.c: 61:     stopwatch_start(1);
-[e ( _stopwatch_start (1 -> 1 `i ]
-"62
-[; ;src/main.c: 62:     while(1) {
-[e :U 1401 ]
+"44
+[; ;src/main.c: 44:     ESP8266_reset();
+[e ( _ESP8266_reset ..  ]
+"46
+[; ;src/main.c: 46:     ESP8266_init();
+[e ( _ESP8266_init ..  ]
+"48
+[; ;src/main.c: 48:     ESP8266_connect(SSID, PASS);
+[e ( _ESP8266_connect (2 , _SSID _PASS ]
+"49
+[; ;src/main.c: 49:     ESP8266_query();
+[e ( _ESP8266_query ..  ]
+"50
+[; ;src/main.c: 50:     ESP8266_open_socket(TCP, IP, PORT);
+[e ( _ESP8266_open_socket (3 , , . `E9330 0 _IP _PORT ]
+"52
+[; ;src/main.c: 52:     ESP8266_send_data(DATA);
+[e ( _ESP8266_send_data (1 _DATA ]
+"53
+[; ;src/main.c: 53:     ESP8266_close_socket();
+[e ( _ESP8266_close_socket ..  ]
+"56
+[; ;src/main.c: 56:     while(1) {
+[e :U 1383 ]
 {
-"63
-[; ;src/main.c: 63:         if(stopwatch_is_stopped()){
-[e $ ! != -> ( _stopwatch_is_stopped ..  `i -> 0 `i 1403  ]
-{
-"64
-[; ;src/main.c: 64:             stopwatch_start(5);
-[e ( _stopwatch_start (1 -> 5 `i ]
+"58
+[; ;src/main.c: 58:     }
+}
+[e :U 1382 ]
+[e $U 1383  ]
+[e :U 1384 ]
 "65
-[; ;src/main.c: 65:             lcd_putc('.');
-[e ( _lcd_putc (1 -> -> 46 `ui `uc ]
-"66
-[; ;src/main.c: 66:             lcd_update();
-[e ( _lcd_update ..  ]
-"67
-[; ;src/main.c: 67:         }
+[; ;src/main.c: 65: }
+[e :UE 1381 ]
 }
-[e :U 1403 ]
-"68
-[; ;src/main.c: 68:     }
-}
-[e :U 1400 ]
-[e $U 1401  ]
-[e :U 1402 ]
-"75
-[; ;src/main.c: 75: }
-[e :UE 1399 ]
-}
-[a 1C 83 116 97 114 116 105 110 103 0 ]
+[a 1C 116 101 115 116 95 97 112 0 ]
+[a 3C 97 112 105 46 116 104 105 110 103 115 112 101 97 107 46 99 111 109 0 ]
+[a 5C 83 116 97 114 116 105 110 103 0 ]
+[a 2C 105 110 99 114 101 100 105 98 108 101 49 52 33 0 ]
+[a 4C 71 69 84 32 47 117 112 100 97 116 101 63 97 112 105 95 107 101 121 61 79 78 70 56 52 70 78 81 49 88 68 90 66 53 75 72 38 102 105 101 108 100 49 61 51 46 49 52 13 10 13 10 0 ]

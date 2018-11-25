@@ -17,29 +17,44 @@
 #include "../headers/ph.h"
 #include "../headers/stopwatch.h"
 
+
+int PORT = 80;
+char * SSID = "test_ap";
+char * PASS = "incredible14!";
+char * IP = "api.thingspeak.com";
+char * DATA = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=3.14\r\n\r\n";
 /*
  * 
  */
 int main() {
 //    char c;
-    char buffer[15];
-    double ph;
     controller_init();
     interrupt_init();
     I2C_master_init();
-    lcd_init();
     stopwatch_init();
+    UART_init();
+    lcd_init();
     lcd_clear();
     lcd_puts("Starting");
     lcd_newline();
     lcd_update();
-    stopwatch_start(1);
+    
+    
+    // BEGIN WiFi
+    ESP8266_reset();
+    
+    ESP8266_init();
+    
+    ESP8266_connect(SSID, PASS);
+    ESP8266_query();
+    ESP8266_open_socket(TCP, IP, PORT);
+   
+    ESP8266_send_data(DATA);
+    ESP8266_close_socket();
+    
+    
     while(1) {
-        if(stopwatch_is_stopped()){
-            stopwatch_start(5);
-            lcd_putc('.');
-            lcd_update();
-        }
+        // END 
     }
     
     

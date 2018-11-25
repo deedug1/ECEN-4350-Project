@@ -9,16 +9,16 @@
 #define	ESP8266_H
 
 // AT-Commands
-#define ATCWMODE "AT+CWMODE_CUR=3"
-#define ATCIPMUX "AT+CIPMUX=0"
-#define ATCWJAP "AT+CWJAP_CUR=" // Join access point
-#define ATCIPSTART "AT+CIPSTART=" // Start socket
-#define ATCIPCLOSE "AT+CIPClOSE"  // Close socket 
-#define ATCIPSEND "AT+CIPSEND=" // Send data
-#define ATRESET "AT+RST" // Resets the module    
+#define ATCWMODE    "AT+CWMODE_CUR=3"   // Set as station / soft AP
+#define ATCIPMUX    "AT+CIPMUX=1"
+#define ATCWJAP     "AT+CWJAP_CUR="     // Join access point
+#define ATCIPSTART  "AT+CIPSTART=0,"    // Start socket /* NOTE: '0' is for link is invalid bug */
+#define ATCIPSEND   "AT+CIPSEND=0,"     // Send data /* NOTE: '0' is for link is invalid bug */
+#define ATCIPCLOSE  "AT+CIPClOSE"       // Close socket 
+#define ATRESET     "AT+RST"            // Resets the module    
 
 typedef enum {
-    TCP, UDP
+    TCP, UDP, SSL
 }ESP8266_socket_type;
 
 void ESP8266_reset(void);

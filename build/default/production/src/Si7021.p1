@@ -3,11 +3,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/Si7021.c: 36:     I2C_master_write(Si7021_buf, 1, 0x40);
 [c E9283 0 1 2 3 .. ]
 [n E9283 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
-"18 src/../headers/i2c_master.h
-[; ;src/../headers/i2c_master.h: 18: I2C_master_result I2C_master_write(char * data, int length, char address);
+"20 src/../headers/i2c_master.h
+[; ;src/../headers/i2c_master.h: 20: I2C_master_result I2C_master_write(char * data, int length, char address);
 [v _I2C_master_write `(E9283 ~T0 @X0 0 ef3`*uc`i`uc ]
-"19
-[; ;src/../headers/i2c_master.h: 19: I2C_master_result I2C_master_read(char * buffer, int length, char address);
+"21
+[; ;src/../headers/i2c_master.h: 21: I2C_master_result I2C_master_read(char * buffer, int length, char address);
 [v _I2C_master_read `(E9283 ~T0 @X0 0 ef3`*uc`i`uc ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");

@@ -8,13 +8,13 @@
 #ifndef STOPWATCH_H
 #define	STOPWATCH_H
 
-#define STOPWATCH_INTF PIR4bits.TMR2IF
-#define STOPWATCH_INTE PIE4bits.TMR2IE
-#define STOPWATCH_CON T2CON
-#define STOPWATCH_CMP T2PR
-#define STOPWATCH_HLT T2HLT
-#define STOPWATCH_CS T2CLKCON
-#define STOPWATCH_RST T2RST
+#define STOPWATCH_INTF  PIR4bits.TMR2IF
+#define STOPWATCH_INTE  PIE4bits.TMR2IE
+#define STOPWATCH_CON   T2CON
+#define STOPWATCH_CMP   T2PR
+#define STOPWATCH_HLT   T2HLT
+#define STOPWATCH_CS    T2CLKCON
+#define STOPWATCH_RST   T2RST
 
 void stopwatch_init(void);
 void stopwatch_start(int seconds);

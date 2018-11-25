@@ -8,12 +8,12 @@
 #ifndef SI7021_H
 #define	SI7021_H
 
-#define SI7021_ADDR 0x40
-#define CMD_RESET 0xFE
-#define CMD_READ_HUMIDITY 0xF5
-#define CMD_READ_TEMP 0xF3
-#define CMD_SET_HEATER 0x51
-#define CMD_READ_HEATER 0x11
+#define SI7021_ADDR         0x40
+#define CMD_RESET           0xFE
+#define CMD_READ_HUMIDITY   0xF5
+#define CMD_READ_TEMP       0xF3
+#define CMD_SET_HEATER      0x51
+#define CMD_READ_HEATER     0x11
 
 
 void Si7021_reset(void);
