@@ -64,8 +64,8 @@ void port_init() {
     
     // PORT A
     LATA = LAT_DEFAULT;
-    ANSELA = ANSEL_DEFAULT;
-    TRISA = TRIS_DEFAULT;
+    ANSELA = ANSEL_DEFAULT; // RA0 == Analog pH
+    TRISA = TRIS_DEFAULT;  // RA0 == INPUT
     WPUA = WPU_DEFAULT;
     ODCONA = ODCON_DEFAULT;
     SLRCONA = SLRCON_DEFAULT;

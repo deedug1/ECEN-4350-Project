@@ -12,8 +12,8 @@
 /*
  * Transforms the integer num into a string that is put into buf.
  */
-void itoa(int num, char * buf, int radix);
-
+int itoa(int num, char * buf, int radix);
+void dtoa(double num, char * buf, int radix);
 #ifdef	__cplusplus
 extern "C" {
 #endif

@@ -15696,7 +15696,8 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
 
 # 1 "src/../headers/util.h" 1
 # 15 "src/../headers/util.h"
-void itoa(int num, char * buf, int radix);
+int itoa(int num, char * buf, int radix);
+void dtoa(double num, char * buf, int radix);
 # 3 "src/esp8266.c" 2
 
 # 1 "src/../headers/esp8266.h" 1

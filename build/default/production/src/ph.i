@@ -1,4 +1,4 @@
-# 1 "src/main.c"
+# 1 "src/ph.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,14 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/main.c" 2
-
-
-
-
-
-
-
+# 1 "src/ph.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15642,147 +15635,37 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 8 "src/main.c" 2
-
-# 1 "src/../headers/mc_init.h" 1
-# 18 "src/../headers/mc_init.h"
-void pps_init(void);
-void port_init(void);
-void controller_init(void);
-void oscillator_init(void);
-# 9 "src/main.c" 2
-
-# 1 "src/../headers/lcd.h" 1
-# 50 "src/../headers/lcd.h"
-void lcd_putc(char c);
-void lcd_puts(char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
-void lcd_init(void);
-void lcd_update(void);
-void lcd_clear(void);
-void lcd_newline(void);
-void lcd_vertical_shift(void);
-# 10 "src/main.c" 2
-
-# 1 "src/../headers/i2c_master.h" 1
-# 13 "src/../headers/i2c_master.h"
-typedef enum {
-    SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
-}I2C_master_result;
-void I2C_master_init(void);
-void I2C_MASTER_ISR(void);
-I2C_master_result I2C_master_write(char * data, int length, char address);
-I2C_master_result I2C_master_read(char * buffer, int length, char address);
-# 11 "src/main.c" 2
-
-# 1 "src/../headers/interrupt.h" 1
-# 12 "src/../headers/interrupt.h"
-void interrupt_init(void);
-# 12 "src/main.c" 2
-
-# 1 "src/../headers/uart.h" 1
-# 17 "src/../headers/uart.h"
-void UART_init(void);
-void UART_RX_ISR(void);
-void UART_TX_ISR(void);
-void UART_putc(char data);
-void UART_puts(char * data);
-char UART_getc(void);
-void UART_gets(char * buf, int len);
-char UART_can_tx(void);
-char UART_can_rx(void);
-# 13 "src/main.c" 2
-
-# 1 "src/../headers/esp8266.h" 1
-# 20 "src/../headers/esp8266.h"
-typedef enum {
-    TCP, UDP
-}ESP8266_socket_type;
-
-void ESP8266_reset(void);
-void ESP8266_query(void);
-void ESP8266_init(void);
-void ESP8266_connect(char * name, char * pass);
-void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
-void ESP8266_send_data(char * data);
-void ESP8266_close_socket(void);
-char ESP8266_responseOK(void);
-# 14 "src/main.c" 2
-
-# 1 "src/../headers/util.h" 1
-# 15 "src/../headers/util.h"
-int itoa(int num, char * buf, int radix);
-void dtoa(double num, char * buf, int radix);
-# 15 "src/main.c" 2
-
-# 1 "src/../headers/Si7021.h" 1
-# 19 "src/../headers/Si7021.h"
-void Si7021_reset(void);
-int Si7021_read_humidity(void);
-int Si7021_read_temp(void);
-int Si7021_set_heater(char heat);
-# 16 "src/main.c" 2
-
-# 1 "src/../headers/ph.h" 1
-# 11 "src/../headers/ph.h"
-void ph_init(void);
-double ph_read(void);
-# 17 "src/main.c" 2
-
-
-void wait() {
-    int i, j;
-    for(i = 0; i < 255; i++) {
-        for(j = 0; j < 255; j++) {
-            __nop();
-        }
-    }
+# 1 "src/ph.c" 2
+# 12 "src/ph.c"
+static double ph_reads[8];
+void ph_init() {
+    ADCON0 = 0x94;
 }
-void empty_rx_buf() {
-    char c;
-    while(!UART_can_rx()) {
-
-    }
-    while(UART_can_rx()) {
-        c = UART_getc();
-        if(c == '\n') {
-            lcd_newline();
-        } else if(c < 32 || c > 127) {
-
-        } else {
-            lcd_putc(c);
-        }
-    }
-    lcd_update();
+double ptov(int ph) {
+    double result;
+    result = (double)ph / (double)310;
+    result = result * -5.0;
+    result = result + 19.25;
+    return result;
 }
+double ph_avg() {
+    int i;
+    double avg = 0.0;
+    for(i = 0; i < 8; i++) {
+        avg += ph_reads[i];
+    }
+    return avg / (double)8;
+}
+double ph_read() {
+    int result, i;
+    ADCON0bits.GO = 1;
+    for(i = 0; i < 8; i++) {
+        while(ADCON0bits.GO);
 
-
-
-int main() {
-
-    char buffer[15];
-    double ph;
-    controller_init();
-    interrupt_init();
-    I2C_master_init();
-    lcd_init();
-    ph_init();
-    lcd_clear();
-
-
-    while(1) {
-        ph = ph_read();
-        dtoa(ph, buffer, 10);
-        lcd_puts("pH: ");
-        lcd_puts(buffer);
-        lcd_newline();
-        lcd_update();
-        _delay((unsigned long)((2000)*(16000000/4000.0)));
+        result = ADRESL;
+        result += (ADRESH << 8);
+        ph_reads[i] = ptov(result);
     }
 
-
-
-
-
-
+    return ph_avg();
 }

@@ -1,4 +1,5 @@
 #include <string.h>
+#include <math.h>
 #include "../headers/util.h"
 
 
@@ -12,12 +13,12 @@ void reverse(char * s) {
         s[i] = c;
     }
 }
-void itoa(int num, char * buf, int radix) {
+int itoa(int num, char * buf, int radix) {
     signed char sign;
     int i = 0;
     if((sign = num) < 0) {
         num = -num;
-    } else if((num == 0)) {
+    } else if(num == 0) {
         *(buf + i) = '0';
         i++;
     }
@@ -32,5 +33,18 @@ void itoa(int num, char * buf, int radix) {
     }
     *(buf + i) = '\0';
     reverse(buf);
+    
+    return i;
 }
-
+void dtoa(double num, char * buf, int radix) {
+    int ipart = (int) num;
+    double dpart = num - (double)ipart;
+    int i = itoa(ipart, buf, radix);
+    *(buf + i) = '.';
+    
+    dpart = dpart  * pow(10, 2); // 2 decimal points
+    
+    itoa((int)dpart, buf + i + 1, 10);
+    
+    
+}

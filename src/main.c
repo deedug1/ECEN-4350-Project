@@ -14,6 +14,7 @@
 #include "../headers/esp8266.h"
 #include "../headers/util.h"
 #include "../headers/Si7021.h"
+#include "../headers/ph.h"
 
 void wait() {
     int i, j;
@@ -45,25 +46,23 @@ void empty_rx_buf() {
  */
 int main() {
 //    char c;
-    char buffer[10];
-    int humidity, temp;
+    char buffer[15];
+    double ph;
     controller_init();
     interrupt_init();
     I2C_master_init();
     lcd_init();
+    ph_init();
     lcd_clear();
     
+    
     while(1) {
-        humidity = Si7021_read_humidity();    
-        temp = Si7021_read_temp();
-        itoa(humidity, buffer, 10);
-        lcd_puts("Humid: ");
-        lcd_puts(buffer);
-        itoa(temp, buffer, 10);
-        lcd_puts(" Temp: ");
+        ph = ph_read();
+        dtoa(ph, buffer, 10);
+        lcd_puts("pH: ");
         lcd_puts(buffer);
         lcd_newline();
-        lcd_update();
+        lcd_update();    
         __delay_ms(2000);
     }
     

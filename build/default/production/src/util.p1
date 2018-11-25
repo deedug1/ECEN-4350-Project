@@ -2,132 +2,174 @@ Version 4.0 HI-TECH Software Intermediate Code
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\string.h: 54: size_t strlen (const char *);
 [v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
-"6 src/util.c
-[; ;src/util.c: 6: void reverse(char * s) {
+[v F508 `(f ~T0 @X0 1 tf2`f`f ]
+"499 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\math.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\c99\math.h: 499: __attribute__((nonreentrant)) float powf(float, float);
+[v _powf `JF508 ~T0 @X0 0 e ]
+"7 src/util.c
+[; ;src/util.c: 7: void reverse(char * s) {
 [v _reverse `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _reverse ]
 [v _s `*uc ~T0 @X0 1 r1 ]
 [f ]
-"7
-[; ;src/util.c: 7:     int i, j;
+"8
+[; ;src/util.c: 8:     int i, j;
 [v _i `i ~T0 @X0 1 a ]
 [v _j `i ~T0 @X0 1 a ]
-"8
-[; ;src/util.c: 8:     char c;
-[v _c `uc ~T0 @X0 1 a ]
 "9
-[; ;src/util.c: 9:     for(i = 0, j = strlen(s) - 1; i < j; i++, j--) {
+[; ;src/util.c: 9:     char c;
+[v _c `uc ~T0 @X0 1 a ]
+"10
+[; ;src/util.c: 10:     for(i = 0, j = strlen(s) - 1; i < j; i++, j--) {
 {
 [e ; = _i -> 0 `i = _j -> - ( _strlen (1 -> _s `*Cuc -> -> 1 `i `ui `i ]
 [e $U 6  ]
 [e :U 3 ]
 {
-"10
-[; ;src/util.c: 10:         c = s[j];
-[e = _c *U + _s * -> _j `x -> -> # *U _s `i `x ]
 "11
-[; ;src/util.c: 11:         s[j] = s[i];
-[e = *U + _s * -> _j `x -> -> # *U _s `i `x *U + _s * -> _i `x -> -> # *U _s `i `x ]
+[; ;src/util.c: 11:         c = s[j];
+[e = _c *U + _s * -> _j `x -> -> # *U _s `i `x ]
 "12
-[; ;src/util.c: 12:         s[i] = c;
-[e = *U + _s * -> _i `x -> -> # *U _s `i `x _c ]
+[; ;src/util.c: 12:         s[j] = s[i];
+[e = *U + _s * -> _j `x -> -> # *U _s `i `x *U + _s * -> _i `x -> -> # *U _s `i `x ]
 "13
-[; ;src/util.c: 13:     }
+[; ;src/util.c: 13:         s[i] = c;
+[e = *U + _s * -> _i `x -> -> # *U _s `i `x _c ]
+"14
+[; ;src/util.c: 14:     }
 }
 [e ; ++ _i -> 1 `i -- _j -> 1 `i ]
 [e :U 6 ]
 [e $ < _i _j 3  ]
 [e :U 4 ]
 }
-"14
-[; ;src/util.c: 14: }
+"15
+[; ;src/util.c: 15: }
 [e :UE 2 ]
 }
-"15
-[; ;src/util.c: 15: void itoa(int num, char * buf, int radix) {
-[v _itoa `(v ~T0 @X0 1 ef3`i`*uc`i ]
+"16
+[; ;src/util.c: 16: int itoa(int num, char * buf, int radix) {
+[v _itoa `(i ~T0 @X0 1 ef3`i`*uc`i ]
 {
 [e :U _itoa ]
 [v _num `i ~T0 @X0 1 r1 ]
 [v _buf `*uc ~T0 @X0 1 r2 ]
 [v _radix `i ~T0 @X0 1 r3 ]
 [f ]
-"16
-[; ;src/util.c: 16:     signed char sign;
-[v _sign `c ~T0 @X0 1 a ]
 "17
-[; ;src/util.c: 17:     int i = 0;
+[; ;src/util.c: 17:     signed char sign;
+[v _sign `c ~T0 @X0 1 a ]
+"18
+[; ;src/util.c: 18:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"18
-[; ;src/util.c: 18:     if((sign = num) < 0) {
+"19
+[; ;src/util.c: 19:     if((sign = num) < 0) {
 [e $ ! < -> = _sign -> _num `c `i -> 0 `i 8  ]
 {
-"19
-[; ;src/util.c: 19:         num = -num;
-[e = _num -U _num ]
 "20
-[; ;src/util.c: 20:     } else if((num == 0)) {
+[; ;src/util.c: 20:         num = -num;
+[e = _num -U _num ]
+"21
+[; ;src/util.c: 21:     } else if(num == 0) {
 }
 [e $U 9  ]
 [e :U 8 ]
 [e $ ! == _num -> 0 `i 10  ]
 {
-"21
-[; ;src/util.c: 21:         *(buf + i) = '0';
-[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 48 `ui `uc ]
 "22
-[; ;src/util.c: 22:         i++;
-[e ++ _i -> 1 `i ]
+[; ;src/util.c: 22:         *(buf + i) = '0';
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 48 `ui `uc ]
 "23
-[; ;src/util.c: 23:     }
+[; ;src/util.c: 23:         i++;
+[e ++ _i -> 1 `i ]
+"24
+[; ;src/util.c: 24:     }
 }
 [e :U 10 ]
 [e :U 9 ]
-"24
-[; ;src/util.c: 24:     while(num > 0 ) {
+"25
+[; ;src/util.c: 25:     while(num > 0 ) {
 [e $U 11  ]
 [e :U 12 ]
 {
-"25
-[; ;src/util.c: 25:         *(buf + i) = (num % radix) | 0x30;
-[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> | % _num _radix -> 48 `i `uc ]
 "26
-[; ;src/util.c: 26:         i++;
-[e ++ _i -> 1 `i ]
+[; ;src/util.c: 26:         *(buf + i) = (num % radix) | 0x30;
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> | % _num _radix -> 48 `i `uc ]
 "27
-[; ;src/util.c: 27:         num /= radix;
-[e =/ _num _radix ]
+[; ;src/util.c: 27:         i++;
+[e ++ _i -> 1 `i ]
 "28
-[; ;src/util.c: 28:     }
+[; ;src/util.c: 28:         num /= radix;
+[e =/ _num _radix ]
+"29
+[; ;src/util.c: 29:     }
 }
 [e :U 11 ]
-"24
-[; ;src/util.c: 24:     while(num > 0 ) {
+"25
+[; ;src/util.c: 25:     while(num > 0 ) {
 [e $ > _num -> 0 `i 12  ]
 [e :U 13 ]
-"29
-[; ;src/util.c: 29:     if(sign < 0){
+"30
+[; ;src/util.c: 30:     if(sign < 0){
 [e $ ! < -> _sign `i -> 0 `i 14  ]
 {
-"30
-[; ;src/util.c: 30:         *(buf + i) = '-';
-[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 45 `ui `uc ]
 "31
-[; ;src/util.c: 31:         i++;
-[e ++ _i -> 1 `i ]
+[; ;src/util.c: 31:         *(buf + i) = '-';
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 45 `ui `uc ]
 "32
-[; ;src/util.c: 32:     }
+[; ;src/util.c: 32:         i++;
+[e ++ _i -> 1 `i ]
+"33
+[; ;src/util.c: 33:     }
 }
 [e :U 14 ]
-"33
-[; ;src/util.c: 33:     *(buf + i) = '\0';
-[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 0 `ui `uc ]
 "34
-[; ;src/util.c: 34:     reverse(buf);
-[e ( _reverse (1 _buf ]
+[; ;src/util.c: 34:     *(buf + i) = '\0';
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 0 `ui `uc ]
 "35
-[; ;src/util.c: 35: }
+[; ;src/util.c: 35:     reverse(buf);
+[e ( _reverse (1 _buf ]
+"37
+[; ;src/util.c: 37:     return i;
+[e ) _i ]
+[e $UE 7  ]
+"38
+[; ;src/util.c: 38: }
 [e :UE 7 ]
+}
+"39
+[; ;src/util.c: 39: void dtoa(double num, char * buf, int radix) {
+[v _dtoa `(v ~T0 @X0 1 ef3`d`*uc`i ]
+{
+[e :U _dtoa ]
+[v _num `d ~T0 @X0 1 r1 ]
+[v _buf `*uc ~T0 @X0 1 r2 ]
+[v _radix `i ~T0 @X0 1 r3 ]
+[f ]
+"40
+[; ;src/util.c: 40:     int ipart = (int) num;
+[v _ipart `i ~T0 @X0 1 a ]
+[e = _ipart -> _num `i ]
+"41
+[; ;src/util.c: 41:     double dpart = num - (double)ipart;
+[v _dpart `d ~T0 @X0 1 a ]
+[e = _dpart - _num -> _ipart `d ]
+"42
+[; ;src/util.c: 42:     int i = itoa(ipart, buf, radix);
+[v _i `i ~T0 @X0 1 a ]
+[e = _i ( _itoa (3 , , _ipart _buf _radix ]
+"43
+[; ;src/util.c: 43:     *(buf + i) = '.';
+[e = *U + _buf * -> _i `x -> -> # *U _buf `i `x -> -> 46 `ui `uc ]
+"45
+[; ;src/util.c: 45:     dpart = dpart * powf(10,2);
+[e = _dpart * _dpart -> ( _powf (2 , -> -> 10 `i `f -> -> 2 `i `f `d ]
+"47
+[; ;src/util.c: 47:     itoa((int)dpart, buf + i + 1, 10);
+[e ( _itoa (3 , , -> _dpart `i + + _buf * -> _i `x -> -> # *U _buf `i `x * -> -> 1 `i `x -> -> # *U + _buf * -> _i `x -> -> # *U _buf `i `x `i `x -> 10 `i ]
+"50
+[; ;src/util.c: 50: }
+[e :UE 15 ]
 }
