@@ -15,10 +15,12 @@
 #define CMD_SET_HEATER      0x51
 #define CMD_READ_HEATER     0x11
 
-
+void Si7021_init(void);
 void Si7021_reset(void);
-int Si7021_read_humidity(void);
-int Si7021_read_temp(void);
+void Si7021_read_humidity(void);
+void Si7021_read_temp(void);
+int Si7021_avg_humidity(void);
+int Si7021_avg_temp(void);
 int Si7021_set_heater(char heat);
 #ifdef	__cplusplus
 extern "C" {

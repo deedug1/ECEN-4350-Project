@@ -2,7 +2,7 @@
 #include "../headers/i2c_master.h"
 #include "../headers/uart.h"
 #include "../headers/stopwatch.h"
-
+#include "../headers/timer0.h"
 void interrupt_init() {
     INTCONbits.IPEN = 0;
     INTCONbits.PEIE = 1;
@@ -19,8 +19,10 @@ void __interrupt() MAIN_ISR() {
             UART_TX_ISR();
         } else if(STOPWATCH_INTE == 1 && STOPWATCH_INTF == 1) {
             STOPWATCH_ISR();
+        } else if(TIMER0_INTE ==1 && TIMER0_INTF == 1) {
+            TIMER0_ISR();
         } else {
-            // Unhandled Interrupt
+            // Unhandled interrupt
         }
     }
 }

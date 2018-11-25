@@ -9,8 +9,8 @@
 #define	PH_H
 
 void ph_init(void);
-double ph_read(void);
-
+void ph_read(void);
+double ph_avg(void);
 
 #ifdef	__cplusplus
 extern "C" {

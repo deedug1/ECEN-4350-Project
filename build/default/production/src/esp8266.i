@@ -15822,6 +15822,7 @@ void ESP8266_send_data(char * data) {
 void ESP8266_close_socket(){
     UART_puts("AT+CIPClOSE");
     UART_puts("\r\n");
+    ESP8266_lookfor("OK", 10);
 }
 char ESP8266_lookfor(const char * str, int timeout) {
     char c = 0, found = 0;

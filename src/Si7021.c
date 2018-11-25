@@ -2,14 +2,16 @@
 #include "../headers/i2c_master.h"
 #include "../headers/Si7021.h"
 
-
+#define HUMIDITY_READ_LIMIT 5
+#define TEMP_READ_LIMIT 5
 
 #define SI7021_WRITE() I2C_master_write(Si7021_buf, 1, SI7021_ADDR)
 #define SI7021_READ() I2C_master_read(Si7021_buf, 2, SI7021_ADDR)
 #define SI7021_GET_CODE(A) A = Si7021_buf[1]; A += (Si7021_buf[0] << 8)
 
 static char Si7021_buf[2];
-
+static int  Si7021_temps[TEMP_READ_LIMIT];
+static int  Si7021_humids[HUMIDITY_READ_LIMIT];
 int convert_humidity() {
     int result, rh_code;
     SI7021_GET_CODE(rh_code);
@@ -30,27 +32,58 @@ int convert_temp() {
     result = (((long)176 * temp_code) >> 16) - 47;
     return result; 
 }
-
+void Si7021_init() {
+    int i;
+    // Populate buffers so that averages aren't garbage
+    for(i = 0; i < TEMP_READ_LIMIT; i++) {
+        Si7021_read_temp();
+    }
+    for(i = 0; i < HUMIDITY_READ_LIMIT; i++) {
+        Si7021_read_humidity();
+    }
+}
+int Si7021_avg_humidity() {
+    int i;
+    int result = 0;
+    for(i = 0; i < HUMIDITY_READ_LIMIT; i++) {
+        result += Si7021_humids[i];
+    }
+    result = result / HUMIDITY_READ_LIMIT;
+    return result;
+}
+int Si7021_avg_temp() {
+    int i;
+    int result = 0;
+    for(i = 0; i < TEMP_READ_LIMIT; i++) {
+        result += Si7021_temps[i];
+    }
+    result = result / TEMP_READ_LIMIT;
+    return result;
+}
 void Si7021_reset() {
     Si7021_buf[0] = CMD_RESET;
     SI7021_WRITE();
 }
 
-int Si7021_read_humidity() {
+void Si7021_read_humidity() {
+    static int i = 0;
     Si7021_buf[0] = CMD_READ_HUMIDITY;
     SI7021_WRITE();
     
     while(SI7021_READ() == RECEIVE_ERROR);
     
-    return convert_humidity();
+    Si7021_humids[i] = convert_humidity();
+    i = (i + 1) % HUMIDITY_READ_LIMIT;
 }
 
-int Si7021_read_temp() {
+void Si7021_read_temp() {
+    static int i = 0;
     Si7021_buf[0] = CMD_READ_TEMP;
     SI7021_WRITE();
     
     while(SI7021_READ() == RECEIVE_ERROR);
     
-    return convert_temp();
+    Si7021_temps[i] = convert_temp();
+    i = (i + 1) % TEMP_READ_LIMIT;
 }
 

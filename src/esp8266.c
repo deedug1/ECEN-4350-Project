@@ -85,6 +85,7 @@ void ESP8266_send_data(char * data) {
 void ESP8266_close_socket(){
     UART_puts(ATCIPCLOSE);
     ESP8266_COMMAND_END();
+    ESP8266_lookfor("OK", ESP8266_MAX_TIMEOUT);
 }
 char ESP8266_lookfor(const char * str, int timeout) {
     char c = 0, found = 0;

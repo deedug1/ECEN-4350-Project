@@ -15673,6 +15673,16 @@ int stopwatch_get_time(void);
 void STOPWATCH_ISR(void);
 # 4 "src/interrupt.c" 2
 
+# 1 "src/../headers/timer0.h" 1
+# 14 "src/../headers/timer0.h"
+void TIMER0_init(void);
+void TIMER0_ISR(void);
+void TIMER0_reset(void);
+int TIMER0_get_count(void);
+char TIMER0_is_read(void);
+void TIMER0_stop(void);
+void TIMER0_start(void);
+# 5 "src/interrupt.c" 2
 
 void interrupt_init() {
     INTCONbits.IPEN = 0;
@@ -15690,6 +15700,8 @@ void __attribute__((picinterrupt(""))) MAIN_ISR() {
             UART_TX_ISR();
         } else if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1) {
             STOPWATCH_ISR();
+        } else if(PIE0bits.TMR0IE ==1 && PIR0bits.TMR0IF == 1) {
+            TIMER0_ISR();
         } else {
 
         }

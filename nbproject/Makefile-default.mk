@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=src/i2c_master.c src/esp8266.c src/interrupt.c src/lcd.c src/main.c src/mc_init.c src/uart.c src/util.c src/Si7021.c src/ph.c src/stopwatch.c
+SOURCEFILES_QUOTED_IF_SPACED=src/i2c_master.c src/esp8266.c src/interrupt.c src/lcd.c src/main.c src/mc_init.c src/uart.c src/util.c src/Si7021.c src/ph.c src/stopwatch.c src/timer0.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/i2c_master.p1 ${OBJECTDIR}/src/esp8266.p1 ${OBJECTDIR}/src/interrupt.p1 ${OBJECTDIR}/src/lcd.p1 ${OBJECTDIR}/src/main.p1 ${OBJECTDIR}/src/mc_init.p1 ${OBJECTDIR}/src/uart.p1 ${OBJECTDIR}/src/util.p1 ${OBJECTDIR}/src/Si7021.p1 ${OBJECTDIR}/src/ph.p1 ${OBJECTDIR}/src/stopwatch.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/i2c_master.p1.d ${OBJECTDIR}/src/esp8266.p1.d ${OBJECTDIR}/src/interrupt.p1.d ${OBJECTDIR}/src/lcd.p1.d ${OBJECTDIR}/src/main.p1.d ${OBJECTDIR}/src/mc_init.p1.d ${OBJECTDIR}/src/uart.p1.d ${OBJECTDIR}/src/util.p1.d ${OBJECTDIR}/src/Si7021.p1.d ${OBJECTDIR}/src/ph.p1.d ${OBJECTDIR}/src/stopwatch.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/i2c_master.p1 ${OBJECTDIR}/src/esp8266.p1 ${OBJECTDIR}/src/interrupt.p1 ${OBJECTDIR}/src/lcd.p1 ${OBJECTDIR}/src/main.p1 ${OBJECTDIR}/src/mc_init.p1 ${OBJECTDIR}/src/uart.p1 ${OBJECTDIR}/src/util.p1 ${OBJECTDIR}/src/Si7021.p1 ${OBJECTDIR}/src/ph.p1 ${OBJECTDIR}/src/stopwatch.p1 ${OBJECTDIR}/src/timer0.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/i2c_master.p1.d ${OBJECTDIR}/src/esp8266.p1.d ${OBJECTDIR}/src/interrupt.p1.d ${OBJECTDIR}/src/lcd.p1.d ${OBJECTDIR}/src/main.p1.d ${OBJECTDIR}/src/mc_init.p1.d ${OBJECTDIR}/src/uart.p1.d ${OBJECTDIR}/src/util.p1.d ${OBJECTDIR}/src/Si7021.p1.d ${OBJECTDIR}/src/ph.p1.d ${OBJECTDIR}/src/stopwatch.p1.d ${OBJECTDIR}/src/timer0.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/i2c_master.p1 ${OBJECTDIR}/src/esp8266.p1 ${OBJECTDIR}/src/interrupt.p1 ${OBJECTDIR}/src/lcd.p1 ${OBJECTDIR}/src/main.p1 ${OBJECTDIR}/src/mc_init.p1 ${OBJECTDIR}/src/uart.p1 ${OBJECTDIR}/src/util.p1 ${OBJECTDIR}/src/Si7021.p1 ${OBJECTDIR}/src/ph.p1 ${OBJECTDIR}/src/stopwatch.p1
+OBJECTFILES=${OBJECTDIR}/src/i2c_master.p1 ${OBJECTDIR}/src/esp8266.p1 ${OBJECTDIR}/src/interrupt.p1 ${OBJECTDIR}/src/lcd.p1 ${OBJECTDIR}/src/main.p1 ${OBJECTDIR}/src/mc_init.p1 ${OBJECTDIR}/src/uart.p1 ${OBJECTDIR}/src/util.p1 ${OBJECTDIR}/src/Si7021.p1 ${OBJECTDIR}/src/ph.p1 ${OBJECTDIR}/src/stopwatch.p1 ${OBJECTDIR}/src/timer0.p1
 
 # Source Files
-SOURCEFILES=src/i2c_master.c src/esp8266.c src/interrupt.c src/lcd.c src/main.c src/mc_init.c src/uart.c src/util.c src/Si7021.c src/ph.c src/stopwatch.c
+SOURCEFILES=src/i2c_master.c src/esp8266.c src/interrupt.c src/lcd.c src/main.c src/mc_init.c src/uart.c src/util.c src/Si7021.c src/ph.c src/stopwatch.c src/timer0.c
 
 
 CFLAGS=
@@ -170,6 +170,13 @@ ${OBJECTDIR}/src/stopwatch.p1: src/stopwatch.c  nbproject/Makefile-${CND_CONF}.m
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/stopwatch.p1 src/stopwatch.c 
 	@${FIXDEPS} ${OBJECTDIR}/src/stopwatch.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/src/timer0.p1: src/timer0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/timer0.p1.d 
+	@${RM} ${OBJECTDIR}/src/timer0.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/timer0.p1 src/timer0.c 
+	@${FIXDEPS} ${OBJECTDIR}/src/timer0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/src/i2c_master.p1: src/i2c_master.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
@@ -247,6 +254,13 @@ ${OBJECTDIR}/src/stopwatch.p1: src/stopwatch.c  nbproject/Makefile-${CND_CONF}.m
 	@${RM} ${OBJECTDIR}/src/stopwatch.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/stopwatch.p1 src/stopwatch.c 
 	@${FIXDEPS} ${OBJECTDIR}/src/stopwatch.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/src/timer0.p1: src/timer0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/timer0.p1.d 
+	@${RM} ${OBJECTDIR}/src/timer0.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/src/timer0.p1 src/timer0.c 
+	@${FIXDEPS} ${OBJECTDIR}/src/timer0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

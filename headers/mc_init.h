@@ -19,6 +19,7 @@ void pps_init(void);
 void port_init(void);
 void controller_init(void);
 void oscillator_init(void);
+void system_init(void);
 #ifdef	__cplusplus
 extern "C" {
 #endif

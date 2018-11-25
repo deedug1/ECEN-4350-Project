@@ -115,6 +115,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25 src/../headers/stopwatch.h
 [; ;src/../headers/stopwatch.h: 25: void STOPWATCH_ISR(void);
 [v _STOPWATCH_ISR `(v ~T0 @X0 0 ef ]
+"3265 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3265:     struct {
+[s S202 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S202 . INT0IE INT1IE INT2IE . IOCIE TMR0IE ]
+"3264
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3264: typedef union {
+[u S201 `S202 1 ]
+[n S201 . . ]
+"3274
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3274: extern volatile PIE0bits_t PIE0bits __attribute__((address(0xEBD)));
+[v _PIE0bits `VS201 ~T0 @X0 0 e@3773 ]
+"3671
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3671:     struct {
+[s S227 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S227 . INT0IF INT1IF INT2IF . IOCIF TMR0IF ]
+"3670
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3670: typedef union {
+[u S226 `S227 1 ]
+[n S226 . . ]
+"3680
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3680: extern volatile PIR0bits_t PIR0bits __attribute__((address(0xEC5)));
+[v _PIR0bits `VS226 ~T0 @X0 0 e@3781 ]
+"15 src/../headers/timer0.h
+[; ;src/../headers/timer0.h: 15: void TIMER0_ISR(void);
+[v _TIMER0_ISR `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1434,23 +1459,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/interrupt.c: 21:             STOPWATCH_ISR();
 [e ( _STOPWATCH_ISR ..  ]
 "22
-[; ;src/interrupt.c: 22:         } else {
+[; ;src/interrupt.c: 22:         } else if(PIE0bits.TMR0IE ==1 && PIR0bits.TMR0IF == 1) {
 }
 [e $U 1391  ]
 [e :U 1390 ]
+[e $ ! && == -> . . _PIE0bits 0 5 `i -> 1 `i == -> . . _PIR0bits 0 5 `i -> 1 `i 1392  ]
 {
+"23
+[; ;src/interrupt.c: 23:             TIMER0_ISR();
+[e ( _TIMER0_ISR ..  ]
 "24
-[; ;src/interrupt.c: 24:         }
+[; ;src/interrupt.c: 24:         } else {
 }
+[e $U 1393  ]
+[e :U 1392 ]
+{
+"26
+[; ;src/interrupt.c: 26:         }
+}
+[e :U 1393 ]
 [e :U 1391 ]
 [e :U 1389 ]
 [e :U 1387 ]
 [e :U 1385 ]
-"25
-[; ;src/interrupt.c: 25:     }
+"27
+[; ;src/interrupt.c: 27:     }
 }
 [e :U 1383 ]
-"26
-[; ;src/interrupt.c: 26: }
+"28
+[; ;src/interrupt.c: 28: }
 [e :UE 1382 ]
 }

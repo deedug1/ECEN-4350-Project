@@ -15644,13 +15644,71 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
 # 8 "src/main.c" 2
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 1 3
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 409 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 25 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 2 3
+
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+# 65 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c99\\string.h" 3
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 9 "src/main.c" 2
+
 # 1 "src/../headers/mc_init.h" 1
 # 18 "src/../headers/mc_init.h"
 void pps_init(void);
 void port_init(void);
 void controller_init(void);
 void oscillator_init(void);
-# 9 "src/main.c" 2
+void system_init(void);
+# 10 "src/main.c" 2
 
 # 1 "src/../headers/lcd.h" 1
 # 50 "src/../headers/lcd.h"
@@ -15662,37 +15720,7 @@ void lcd_update(void);
 void lcd_clear(void);
 void lcd_newline(void);
 void lcd_vertical_shift(void);
-# 10 "src/main.c" 2
-
-# 1 "src/../headers/i2c_master.h" 1
-# 14 "src/../headers/i2c_master.h"
-typedef enum {
-    SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
-}I2C_master_result;
-
-void I2C_master_init(void);
-void I2C_MASTER_ISR(void);
-I2C_master_result I2C_master_write(char * data, int length, char address);
-I2C_master_result I2C_master_read(char * buffer, int length, char address);
 # 11 "src/main.c" 2
-
-# 1 "src/../headers/interrupt.h" 1
-# 12 "src/../headers/interrupt.h"
-void interrupt_init(void);
-# 12 "src/main.c" 2
-
-# 1 "src/../headers/uart.h" 1
-# 17 "src/../headers/uart.h"
-void UART_init(void);
-void UART_RX_ISR(void);
-void UART_TX_ISR(void);
-void UART_putc(char data);
-void UART_puts(char * data);
-char UART_getc(void);
-void UART_gets(char * buf, int len);
-char UART_can_tx(void);
-char UART_can_rx(void);
-# 13 "src/main.c" 2
 
 # 1 "src/../headers/esp8266.h" 1
 # 20 "src/../headers/esp8266.h"
@@ -15708,38 +15736,46 @@ void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data);
 void ESP8266_close_socket(void);
 char ESP8266_responseOK(void);
-# 14 "src/main.c" 2
+# 12 "src/main.c" 2
 
 # 1 "src/../headers/util.h" 1
 # 15 "src/../headers/util.h"
 int itoa(int num, char * buf, int radix);
 void dtoa(double num, char * buf, int radix);
-# 15 "src/main.c" 2
+# 13 "src/main.c" 2
 
 # 1 "src/../headers/Si7021.h" 1
-# 19 "src/../headers/Si7021.h"
+# 18 "src/../headers/Si7021.h"
+void Si7021_init(void);
 void Si7021_reset(void);
-int Si7021_read_humidity(void);
-int Si7021_read_temp(void);
+void Si7021_read_humidity(void);
+void Si7021_read_temp(void);
+int Si7021_avg_humidity(void);
+int Si7021_avg_temp(void);
 int Si7021_set_heater(char heat);
-# 16 "src/main.c" 2
+# 14 "src/main.c" 2
 
 # 1 "src/../headers/ph.h" 1
 # 11 "src/../headers/ph.h"
 void ph_init(void);
-double ph_read(void);
-# 17 "src/main.c" 2
+void ph_read(void);
+double ph_avg(void);
+# 15 "src/main.c" 2
 
-# 1 "src/../headers/stopwatch.h" 1
-# 19 "src/../headers/stopwatch.h"
-void stopwatch_init(void);
-void stopwatch_start(int seconds);
-void stopwatch_stop(void);
-char stopwatch_is_stopped(void);
-char stopwatch_is_started(void);
-int stopwatch_get_time(void);
-void STOPWATCH_ISR(void);
-# 18 "src/main.c" 2
+# 1 "src/../headers/timer0.h" 1
+# 14 "src/../headers/timer0.h"
+void TIMER0_init(void);
+void TIMER0_ISR(void);
+void TIMER0_reset(void);
+int TIMER0_get_count(void);
+char TIMER0_is_read(void);
+void TIMER0_stop(void);
+void TIMER0_start(void);
+# 16 "src/main.c" 2
+
+
+
+
 
 
 
@@ -15747,17 +15783,20 @@ int PORT = 80;
 char * SSID = "test_ap";
 char * PASS = "incredible14!";
 char * IP = "api.thingspeak.com";
-char * DATA = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=3.14\r\n\r\n";
+char * DATA = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=";
+
+void connect_to_wifi(void);
+
+void send_data_int(int field, int val);
 
 
 
 int main() {
 
-    controller_init();
-    interrupt_init();
-    I2C_master_init();
-    stopwatch_init();
-    UART_init();
+    int c = 0;
+    double ph;
+    int temp, humidity;
+    system_init();
     lcd_init();
     lcd_clear();
     lcd_puts("Starting");
@@ -15765,26 +15804,80 @@ int main() {
     lcd_update();
 
 
+    Si7021_init();
+    ph_init();
 
-    ESP8266_reset();
 
-    ESP8266_init();
-
-    ESP8266_connect(SSID, PASS);
-    ESP8266_query();
-    ESP8266_open_socket(TCP, IP, PORT);
-
-    ESP8266_send_data(DATA);
-    ESP8266_close_socket();
-
+    connect_to_wifi();
+    TIMER0_start();
 
     while(1) {
 
+        if(!TIMER0_is_read()) {
+            TIMER0_stop();
+            c = TIMER0_get_count();
+
+            if(c >= 5) {
+                TIMER0_reset();
+
+
+                temp = Si7021_avg_temp();
+                humidity = Si7021_avg_humidity();
+                ph = ph_avg();
+
+
+                send_data_int(3, temp);
+                send_data_int(2, humidity);
+                send_data_int(1, (int)ph);
+
+
+
+
+
+                lcd_newline();
+                lcd_puts("DATA SENT");
+                lcd_update();
+
+
+            } else {
+                ph_read();
+                Si7021_read_temp();
+                Si7021_read_humidity();
+                lcd_newline();
+                lcd_puts("DATA UPDATED");
+                lcd_update();
+            }
+            TIMER0_start();
+        }
     }
 
 
+}
+
+void connect_to_wifi() {
+    ESP8266_reset();
+    ESP8266_init();
+    ESP8266_connect(SSID, PASS);
+}
+
+void send_data_int(int field, int val) {
+    static char strbuf[60];
+    char numbuf[10];
+    strbuf[0] = '\0';
+
+    itoa(field, numbuf, 10);
+    strcat(strbuf, "GET /update?api_key=ONF84FNQ1XDZB5KH&field");
+    strcat(strbuf, numbuf);
+
+
+    strcat(strbuf, "=");
+    itoa(val, numbuf, 10);
+    strcat(strbuf, numbuf);
+    strcat(strbuf, "\r\n\r\n");
 
 
 
-
+    ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
+    ESP8266_send_data(strbuf);
+    ESP8266_close_socket();
 }

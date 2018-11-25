@@ -1,4 +1,22 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"20 src/../headers/mc_init.h
+[; ;src/../headers/mc_init.h: 20: void controller_init(void);
+[v _controller_init `(v ~T0 @X0 0 ef ]
+"12 src/../headers/interrupt.h
+[; ;src/../headers/interrupt.h: 12: void interrupt_init(void);
+[v _interrupt_init `(v ~T0 @X0 0 ef ]
+"17 src/../headers/uart.h
+[; ;src/../headers/uart.h: 17: void UART_init(void);
+[v _UART_init `(v ~T0 @X0 0 ef ]
+"18 src/../headers/i2c_master.h
+[; ;src/../headers/i2c_master.h: 18: void I2C_master_init(void);
+[v _I2C_master_init `(v ~T0 @X0 0 ef ]
+"19 src/../headers/stopwatch.h
+[; ;src/../headers/stopwatch.h: 19: void stopwatch_init(void);
+[v _stopwatch_init `(v ~T0 @X0 0 ef ]
+"14 src/../headers/timer0.h
+[; ;src/../headers/timer0.h: 14: void TIMER0_init(void);
+[v _TIMER0_init `(v ~T0 @X0 0 ef ]
 "14514 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 14514: extern volatile unsigned char LATA __attribute__((address(0xF82)));
 [v _LATA `Vuc ~T0 @X0 0 e@3970 ]
@@ -1340,229 +1358,254 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"7 src/mc_init.c
-[; ;src/mc_init.c: 7:     ODCONA = 0x00;
+"12 src/mc_init.c
+[; ;src/mc_init.c: 12:     LATA = 0x00;
 [p x FEXTOSC = OFF ]
-"8
-[; ;src/mc_init.c: 8:     SLRCONA = 0xFF;
-[p x RSTOSC = HFINTOSC_1MHZ ]
-"11
-[; ;src/mc_init.c: 11:     LATB = 0x00;
-[p x CLKOUTEN = OFF ]
-"12
-[; ;src/mc_init.c: 12:     ANSELB = 0xFF;
-[p x CSWEN = ON ]
 "13
-[; ;src/mc_init.c: 13:     TRISB = 0xFF;
-[p x FCMEN = ON ]
+[; ;src/mc_init.c: 13:     ANSELA = 0xFF;
+[p x RSTOSC = HFINTOSC_1MHZ ]
 "16
-[; ;src/mc_init.c: 16:     SLRCONB = 0xFF;
-[p x MCLRE = EXTMCLR ]
+[; ;src/mc_init.c: 16:     ODCONA = 0x00;
+[p x CLKOUTEN = OFF ]
 "17
-[; ;src/mc_init.c: 17: 
-[p x PWRTE = OFF ]
+[; ;src/mc_init.c: 17:     SLRCONA = 0xFF;
+[p x CSWEN = ON ]
 "18
 [; ;src/mc_init.c: 18: 
-[p x LPBOREN = OFF ]
-"19
-[; ;src/mc_init.c: 19:     LATC = 0x00;
-[p x BOREN = SBORDIS ]
+[p x FCMEN = ON ]
+"21
+[; ;src/mc_init.c: 21:     ANSELB = 0xFF;
+[p x MCLRE = EXTMCLR ]
 "22
-[; ;src/mc_init.c: 22:     WPUC = 0x00;
-[p x BORV = VBOR_190 ]
+[; ;src/mc_init.c: 22:     TRISB = 0xFF;
+[p x PWRTE = OFF ]
 "23
-[; ;src/mc_init.c: 23:     ODCONC = 0x00;
-[p x ZCD = OFF ]
+[; ;src/mc_init.c: 23:     WPUB = 0x00;
+[p x LPBOREN = OFF ]
 "24
-[; ;src/mc_init.c: 24:     SLRCONC = 0xFF;
-[p x PPS1WAY = ON ]
-"25
-[; ;src/mc_init.c: 25: 
-[p x STVREN = ON ]
-"26
-[; ;src/mc_init.c: 26: }
-[p x DEBUG = OFF ]
+[; ;src/mc_init.c: 24:     ODCONB = 0x00;
+[p x BOREN = SBORDIS ]
 "27
 [; ;src/mc_init.c: 27: 
-[p x XINST = OFF ]
+[p x BORV = VBOR_190 ]
+"28
+[; ;src/mc_init.c: 28:     LATC = 0x00;
+[p x ZCD = OFF ]
+"29
+[; ;src/mc_init.c: 29:     ANSELC = 0xF0;
+[p x PPS1WAY = ON ]
 "30
-[; ;src/mc_init.c: 30:     GIE = 0;
-[p x WDTCPS = WDTCPS_31 ]
+[; ;src/mc_init.c: 30:     TRISC = 0xFD;
+[p x STVREN = ON ]
 "31
-[; ;src/mc_init.c: 31:     PPSLOCK = 0x55;
-[p x WDTE = OFF ]
-"34
-[; ;src/mc_init.c: 34: 
-[p x WDTCWS = WDTCWS_7 ]
+[; ;src/mc_init.c: 31:     WPUC = 0x00;
+[p x DEBUG = OFF ]
+"32
+[; ;src/mc_init.c: 32:     ODCONC = 0x00;
+[p x XINST = OFF ]
 "35
-[; ;src/mc_init.c: 35: 
-[p x WDTCCS = SC ]
-"38
-[; ;src/mc_init.c: 38:     RC2PPS = 0x0E;
-[p x WRT0 = OFF ]
+[; ;src/mc_init.c: 35: }
+[p x WDTCPS = WDTCPS_31 ]
+"36
+[; ;src/mc_init.c: 36: 
+[p x WDTE = OFF ]
 "39
-[; ;src/mc_init.c: 39:     SSP1DATPPS = 0x12;
-[p x WRT1 = OFF ]
+[; ;src/mc_init.c: 39:     GIE = 0;
+[p x WDTCWS = WDTCWS_7 ]
 "40
-[; ;src/mc_init.c: 40:     RC3PPS = 0x0D;
-[p x WRT2 = OFF ]
-"41
-[; ;src/mc_init.c: 41:     SSP1CLKPPS = 0x13;
-[p x WRT3 = OFF ]
+[; ;src/mc_init.c: 40:     PPSLOCK = 0x55;
+[p x WDTCCS = SC ]
+"43
+[; ;src/mc_init.c: 43: 
+[p x WRT0 = OFF ]
 "44
-[; ;src/mc_init.c: 44:     RX1PPS = 0x10;
-[p x WRTC = OFF ]
+[; ;src/mc_init.c: 44: 
+[p x WRT1 = OFF ]
 "45
-[; ;src/mc_init.c: 45:     RC1PPS = 0x09;
-[p x WRTB = OFF ]
+[; ;src/mc_init.c: 45: 
+[p x WRT2 = OFF ]
 "46
 [; ;src/mc_init.c: 46: 
-[p x WRTD = OFF ]
-"47
-[; ;src/mc_init.c: 47: 
-[p x SCANE = ON ]
-"48
-[; ;src/mc_init.c: 48: 
-[p x LVP = ON ]
+[p x WRT3 = OFF ]
+"49
+[; ;src/mc_init.c: 49:     RC3PPS = 0x0D;
+[p x WRTC = OFF ]
+"50
+[; ;src/mc_init.c: 50:     SSP1CLKPPS = 0x13;
+[p x WRTB = OFF ]
 "51
-[; ;src/mc_init.c: 51:     PPSLOCK = 0XAA;
-[p x CP = OFF ]
+[; ;src/mc_init.c: 51: 
+[p x WRTD = OFF ]
 "52
-[; ;src/mc_init.c: 52:     PPSLOCK = 0X01;
-[p x CPD = OFF ]
-"55
-[; ;src/mc_init.c: 55: void oscillator_init() {
-[p x EBTR0 = OFF ]
+[; ;src/mc_init.c: 52: 
+[p x SCANE = ON ]
+"53
+[; ;src/mc_init.c: 53:     RX1PPS = 0x10;
+[p x LVP = ON ]
 "56
 [; ;src/mc_init.c: 56: 
-[p x EBTR1 = OFF ]
+[p x CP = OFF ]
 "57
-[; ;src/mc_init.c: 57:     OSCCON1 = 0x60;
-[p x EBTR2 = OFF ]
-"58
-[; ;src/mc_init.c: 58:     OSCCON3 = 0x00;
-[p x EBTR3 = OFF ]
+[; ;src/mc_init.c: 57: 
+[p x CPD = OFF ]
+"60
+[; ;src/mc_init.c: 60:     PPSLOCK = 0XAA;
+[p x EBTR0 = OFF ]
 "61
-[; ;src/mc_init.c: 61: 
-[p x EBTRB = OFF ]
+[; ;src/mc_init.c: 61:     PPSLOCK = 0X01;
+[p x EBTR1 = OFF ]
+"62
+[; ;src/mc_init.c: 62:     GIE = state;
+[p x EBTR2 = OFF ]
 "63
 [; ;src/mc_init.c: 63: }
+[p x EBTR3 = OFF ]
+"66
+[; ;src/mc_init.c: 66:     OSCCON1 = 0x60;
+[p x EBTRB = OFF ]
+"69
+[; ;src/mc_init.c: 69:     OSCFRQ = 0x05;
+[v _system_init `(v ~T0 @X0 1 ef ]
+{
+[e :U _system_init ]
+[f ]
+"70
+[; ;src/mc_init.c: 70: 
+[e ( _controller_init ..  ]
+"71
+[; ;src/mc_init.c: 71:     OSCTUNE = 0x00;
+[e ( _interrupt_init ..  ]
+"72
+[; ;src/mc_init.c: 72: }
+[e ( _UART_init ..  ]
+"73
+[; ;src/mc_init.c: 73: 
+[e ( _I2C_master_init ..  ]
+"74
+[; ;src/mc_init.c: 74: 
+[e ( _stopwatch_init ..  ]
+"75
+[; ;src/mc_init.c: 75: 
+[e ( _TIMER0_init ..  ]
+"76
+[; ;src/mc_init.c: 76: 
+[e :UE 1381 ]
+}
+"77
+[; ;src/mc_init.c: 77: 
 [v _port_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _port_init ]
 [f ]
-"66
-[; ;src/mc_init.c: 66: 
+"80
+[; ;src/mc_init.c: 80:     pps_init();
 [e = _LATA -> -> 0 `i `uc ]
-"67
-[; ;src/mc_init.c: 67: 
+"81
+[; ;src/mc_init.c: 81: 
 [e = _ANSELA -> -> 255 `i `uc ]
-"68
-[; ;src/mc_init.c: 68: 
-[e = _TRISA -> -> 255 `i `uc ]
-"69
-[; ;src/mc_init.c: 69: void controller_init() {
-[e = _WPUA -> -> 0 `i `uc ]
-"70
-[; ;src/mc_init.c: 70:     oscillator_init();
-[e = _ODCONA -> -> 0 `i `uc ]
-"71
-[; ;src/mc_init.c: 71:     pps_init();
-[e = _SLRCONA -> -> 255 `i `uc ]
-"74
-[; ;src/mc_init.c: 74: }
-[e = _LATB -> -> 0 `i `uc ]
-"75
-[e = _ANSELB -> -> 255 `i `uc ]
-"76
-[e = _TRISB -> -> 255 `i `uc ]
-"77
-[e = _WPUB -> -> 0 `i `uc ]
-"78
-[e = _ODCONB -> -> 0 `i `uc ]
-"79
-[e = _SLRCONB -> -> 255 `i `uc ]
 "82
-[e = _LATC -> -> 0 `i `uc ]
+[; ;src/mc_init.c: 82:     port_init();
+[e = _TRISA -> -> 255 `i `uc ]
 "83
-[e = _ANSELC -> -> 240 `i `uc ]
+[; ;src/mc_init.c: 83: }
+[e = _WPUA -> -> 0 `i `uc ]
 "84
-[e = _TRISC -> -> 253 `i `uc ]
+[e = _ODCONA -> -> 0 `i `uc ]
 "85
-[e = _WPUC -> -> 0 `i `uc ]
-"86
-[e = _ODCONC -> -> 0 `i `uc ]
-"87
-[e = _SLRCONC -> -> 255 `i `uc ]
+[e = _SLRCONA -> -> 255 `i `uc ]
+"88
+[e = _LATB -> -> 0 `i `uc ]
 "89
-[e :UE 1381 ]
-}
+[e = _ANSELB -> -> 255 `i `uc ]
+"90
+[e = _TRISB -> -> 255 `i `uc ]
 "91
+[e = _WPUB -> -> 0 `i `uc ]
+"92
+[e = _ODCONB -> -> 0 `i `uc ]
+"93
+[e = _SLRCONB -> -> 255 `i `uc ]
+"96
+[e = _LATC -> -> 0 `i `uc ]
+"97
+[e = _ANSELC -> -> 240 `i `uc ]
+"98
+[e = _TRISC -> -> 253 `i `uc ]
+"99
+[e = _WPUC -> -> 0 `i `uc ]
+"100
+[e = _ODCONC -> -> 0 `i `uc ]
+"101
+[e = _SLRCONC -> -> 255 `i `uc ]
+"103
+[e :UE 1382 ]
+}
+"105
 [v _pps_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _pps_init ]
 [f ]
-"92
+"106
 [v _state `uc ~T0 @X0 1 a ]
 [e = _state -> _GIE `uc ]
-"93
-[e = _GIE -> -> 0 `i `b ]
-"94
-[e = _PPSLOCK -> -> 85 `i `uc ]
-"95
-[e = _PPSLOCK -> -> 170 `i `uc ]
-"96
-[e = _PPSLOCK -> -> 0 `i `uc ]
-"101
-[e = _RC2PPS -> -> 14 `i `uc ]
-"102
-[e = _SSP1DATPPS -> -> 18 `i `uc ]
-"103
-[e = _RC3PPS -> -> 13 `i `uc ]
-"104
-[e = _SSP1CLKPPS -> -> 19 `i `uc ]
 "107
-[e = _RX1PPS -> -> 16 `i `uc ]
+[e = _GIE -> -> 0 `i `b ]
 "108
-[e = _RC1PPS -> -> 9 `i `uc ]
-"113
 [e = _PPSLOCK -> -> 85 `i `uc ]
-"114
+"109
 [e = _PPSLOCK -> -> 170 `i `uc ]
+"110
+[e = _PPSLOCK -> -> 0 `i `uc ]
 "115
-[e = _PPSLOCK -> -> 1 `i `uc ]
+[e = _RC2PPS -> -> 14 `i `uc ]
 "116
-[e = _GIE -> _state `b ]
+[e = _SSP1DATPPS -> -> 18 `i `uc ]
 "117
-[e :UE 1382 ]
-}
+[e = _RC3PPS -> -> 13 `i `uc ]
 "118
+[e = _SSP1CLKPPS -> -> 19 `i `uc ]
+"121
+[e = _RX1PPS -> -> 16 `i `uc ]
+"122
+[e = _RC1PPS -> -> 9 `i `uc ]
+"127
+[e = _PPSLOCK -> -> 85 `i `uc ]
+"128
+[e = _PPSLOCK -> -> 170 `i `uc ]
+"129
+[e = _PPSLOCK -> -> 1 `i `uc ]
+"130
+[e = _GIE -> _state `b ]
+"131
+[e :UE 1383 ]
+}
+"132
 [v _oscillator_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _oscillator_init ]
 [f ]
-"120
+"134
 [e = _OSCCON1 -> -> 96 `i `uc ]
-"121
+"135
 [e = _OSCCON3 -> -> 0 `i `uc ]
-"123
+"137
 [e = _OSCFRQ -> -> 5 `i `uc ]
-"125
+"139
 [e = _OSCTUNE -> -> 0 `i `uc ]
-"126
-[e :UE 1383 ]
+"140
+[e :UE 1384 ]
 }
-"132
+"146
 [v _controller_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _controller_init ]
 [f ]
-"133
+"147
 [e ( _oscillator_init ..  ]
-"134
+"148
 [e ( _pps_init ..  ]
-"136
+"150
 [e ( _port_init ..  ]
-"137
-[e :UE 1384 ]
+"151
+[e :UE 1385 ]
 }

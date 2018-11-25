@@ -15,6 +15,7 @@
       <itemPath>headers/Si7021.h</itemPath>
       <itemPath>headers/ph.h</itemPath>
       <itemPath>headers/stopwatch.h</itemPath>
+      <itemPath>headers/timer0.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -34,6 +35,7 @@
       <itemPath>src/Si7021.c</itemPath>
       <itemPath>src/ph.c</itemPath>
       <itemPath>src/stopwatch.c</itemPath>
+      <itemPath>src/timer0.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

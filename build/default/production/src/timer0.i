@@ -1,4 +1,4 @@
-# 1 "src/ph.c"
+# 1 "src/timer0.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "src/ph.c" 2
+# 1 "src/timer0.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15635,45 +15635,51 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 1 "src/ph.c" 2
+# 1 "src/timer0.c" 2
 
-# 1 "src/../headers/ph.h" 1
-# 11 "src/../headers/ph.h"
-void ph_init(void);
-void ph_read(void);
-double ph_avg(void);
-# 2 "src/ph.c" 2
-# 12 "src/ph.c"
-static double ph_reads[5];
-void ph_init() {
-    int i;
-    ADCON0 = 0x94;
-    for(i = 0; i < 5; i++) {
-        ph_read();
-    }
+# 1 "src/../headers/timer0.h" 1
+# 14 "src/../headers/timer0.h"
+void TIMER0_init(void);
+void TIMER0_ISR(void);
+void TIMER0_reset(void);
+int TIMER0_get_count(void);
+char TIMER0_is_read(void);
+void TIMER0_stop(void);
+void TIMER0_start(void);
+# 2 "src/timer0.c" 2
+
+
+
+static volatile int count = 0;
+static volatile char read = 1;
+void TIMER0_init() {
+
+    T0CON0 = 0x1E;
+    T0CON1 = 0x47;
+
 }
-double ptov(int ph) {
-    double result;
-    result = (double)ph / (double)310;
-    result = result * -5.0;
-    result = result + 19.25;
-    return result;
+
+void TIMER0_reset() {
+    read = 1;
+    count = 0;
 }
-double ph_avg() {
-    int i;
-    double avg = 0.0;
-    for(i = 0; i < 5; i++) {
-        avg += ph_reads[i];
-    }
-    return avg / (double)5;
+int TIMER0_get_count() {
+   read = 1;
+   return count;
 }
-void ph_read() {
-    static int i = 0;
-    int result;
-    ADCON0bits.GO = 1;
-    while(ADCON0bits.GO);
-    result = ADRESL;
-    result += (ADRESH << 8);
-    ph_reads[i] = ptov(result);
-    i = (i + 1) % 5;
+char TIMER0_is_read() {
+    return read;
+}
+void TIMER0_stop() {
+    PIE0bits.TMR0IE = 0;
+    T0CON0 &= 0x7F;
+}
+void TIMER0_start() {
+    T0CON0 |= 0x80;
+    PIE0bits.TMR0IE = 1;
+}
+void TIMER0_ISR() {
+    PIR0bits.TMR0IF = 0;
+    count++;
+    read = 0;
 }

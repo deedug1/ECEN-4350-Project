@@ -2,7 +2,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11935 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 11935: extern volatile unsigned char ADCON0 __attribute__((address(0xF5B)));
 [v _ADCON0 `Vuc ~T0 @X0 0 e@3931 ]
-"11941
+"12 src/../headers/ph.h
+[; ;src/../headers/ph.h: 12: void ph_read(void);
+[v _ph_read `(v ~T0 @X0 0 ef ]
+"11941 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 11941:     struct {
 [s S611 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S611 . ADGO . ADFM . ADCS . ADCONT ADON ]
@@ -1295,8 +1298,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "12 src/ph.c
-[; ;src/ph.c: 12: static double ph_reads[8];
-[v _ph_reads `d ~T0 @X0 -> 8 `i s ]
+[; ;src/ph.c: 12: static double ph_reads[5];
+[v _ph_reads `d ~T0 @X0 -> 5 `i s ]
 "13
 [; ;src/ph.c: 13: void ph_init() {
 [v _ph_init `(v ~T0 @X0 1 ef ]
@@ -1304,127 +1307,137 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _ph_init ]
 [f ]
 "14
-[; ;src/ph.c: 14:     ADCON0 = 0x94;
-[e = _ADCON0 -> -> 148 `i `uc ]
+[; ;src/ph.c: 14:     int i;
+[v _i `i ~T0 @X0 1 a ]
 "15
-[; ;src/ph.c: 15: }
+[; ;src/ph.c: 15:     ADCON0 = 0x94;
+[e = _ADCON0 -> -> 148 `i `uc ]
+"16
+[; ;src/ph.c: 16:     for(i = 0; i < 5; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 5 `i 1382  ]
+[e $U 1383  ]
+[e :U 1382 ]
+{
+"17
+[; ;src/ph.c: 17:         ph_read();
+[e ( _ph_read ..  ]
+"18
+[; ;src/ph.c: 18:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 5 `i 1382  ]
+[e :U 1383 ]
+}
+"19
+[; ;src/ph.c: 19: }
 [e :UE 1381 ]
 }
-"16
-[; ;src/ph.c: 16: double ptov(int ph) {
+"20
+[; ;src/ph.c: 20: double ptov(int ph) {
 [v _ptov `(d ~T0 @X0 1 ef1`i ]
 {
 [e :U _ptov ]
 [v _ph `i ~T0 @X0 1 r1 ]
 [f ]
-"17
-[; ;src/ph.c: 17:     double result;
-[v _result `d ~T0 @X0 1 a ]
-"18
-[; ;src/ph.c: 18:     result = (double)ph / (double)310;
-[e = _result / -> _ph `d -> -> 310 `i `d ]
-"19
-[; ;src/ph.c: 19:     result = result * -5.0;
-[e = _result * _result -U .5.0 ]
-"20
-[; ;src/ph.c: 20:     result = result + 19.25;
-[e = _result + _result .19.25 ]
 "21
-[; ;src/ph.c: 21:     return result;
-[e ) _result ]
-[e $UE 1382  ]
+[; ;src/ph.c: 21:     double result;
+[v _result `d ~T0 @X0 1 a ]
 "22
-[; ;src/ph.c: 22: }
-[e :UE 1382 ]
-}
+[; ;src/ph.c: 22:     result = (double)ph / (double)310;
+[e = _result / -> _ph `d -> -> 310 `i `d ]
 "23
-[; ;src/ph.c: 23: double ph_avg() {
+[; ;src/ph.c: 23:     result = result * -5.0;
+[e = _result * _result -U .5.0 ]
+"24
+[; ;src/ph.c: 24:     result = result + 19.25;
+[e = _result + _result .19.25 ]
+"25
+[; ;src/ph.c: 25:     return result;
+[e ) _result ]
+[e $UE 1385  ]
+"26
+[; ;src/ph.c: 26: }
+[e :UE 1385 ]
+}
+"27
+[; ;src/ph.c: 27: double ph_avg() {
 [v _ph_avg `(d ~T0 @X0 1 ef ]
 {
 [e :U _ph_avg ]
 [f ]
-"24
-[; ;src/ph.c: 24:     int i;
+"28
+[; ;src/ph.c: 28:     int i;
 [v _i `i ~T0 @X0 1 a ]
-"25
-[; ;src/ph.c: 25:     double avg = 0.0;
+"29
+[; ;src/ph.c: 29:     double avg = 0.0;
 [v _avg `d ~T0 @X0 1 a ]
 [e = _avg .0.0 ]
-"26
-[; ;src/ph.c: 26:     for(i = 0; i < 8; i++) {
+"30
+[; ;src/ph.c: 30:     for(i = 0; i < 5; i++) {
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 1384  ]
-[e $U 1385  ]
-[e :U 1384 ]
+[e $ < _i -> 5 `i 1387  ]
+[e $U 1388  ]
+[e :U 1387 ]
 {
-"27
-[; ;src/ph.c: 27:         avg += ph_reads[i];
+"31
+[; ;src/ph.c: 31:         avg += ph_reads[i];
 [e =+ _avg *U + &U _ph_reads * -> -> _i `ui `ux -> -> # *U &U _ph_reads `ui `ux ]
-"28
-[; ;src/ph.c: 28:     }
+"32
+[; ;src/ph.c: 32:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 1384  ]
-[e :U 1385 ]
+[e $ < _i -> 5 `i 1387  ]
+[e :U 1388 ]
 }
-"29
-[; ;src/ph.c: 29:     return avg / (double)8;
-[e ) / _avg -> -> 8 `i `d ]
-[e $UE 1383  ]
-"30
-[; ;src/ph.c: 30: }
-[e :UE 1383 ]
+"33
+[; ;src/ph.c: 33:     return avg / (double)5;
+[e ) / _avg -> -> 5 `i `d ]
+[e $UE 1386  ]
+"34
+[; ;src/ph.c: 34: }
+[e :UE 1386 ]
 }
-"31
-[; ;src/ph.c: 31: double ph_read() {
-[v _ph_read `(d ~T0 @X0 1 ef ]
+"35
+[; ;src/ph.c: 35: void ph_read() {
+[v _ph_read `(v ~T0 @X0 1 ef ]
 {
 [e :U _ph_read ]
 [f ]
-"32
-[; ;src/ph.c: 32:     int result, i;
+"36
+[; ;src/ph.c: 36:     static int i = 0;
+[v F9296 `i ~T0 @X0 1 s i ]
+[i F9296
+-> 0 `i
+]
+"37
+[; ;src/ph.c: 37:     int result;
 [v _result `i ~T0 @X0 1 a ]
-[v _i `i ~T0 @X0 1 a ]
-"33
-[; ;src/ph.c: 33:     ADCON0bits.GO = 1;
+"38
+[; ;src/ph.c: 38:     ADCON0bits.GO = 1;
 [e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
-"34
-[; ;src/ph.c: 34:     for(i = 0; i < 8; i++) {
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 1388  ]
-[e $U 1389  ]
-[e :U 1388 ]
-{
-"35
-[; ;src/ph.c: 35:         while(ADCON0bits.GO);
+"39
+[; ;src/ph.c: 39:     while(ADCON0bits.GO);
 [e $U 1391  ]
 [e :U 1392 ]
 [e :U 1391 ]
 [e $ != -> . . _ADCON0bits 1 0 `i -> 0 `i 1392  ]
 [e :U 1393 ]
-"37
-[; ;src/ph.c: 37:         result = ADRESL;
-[e = _result -> _ADRESL `i ]
-"38
-[; ;src/ph.c: 38:         result += (ADRESH << 8);
-[e =+ _result << -> _ADRESH `i -> 8 `i ]
-"39
-[; ;src/ph.c: 39:         ph_reads[i] = ptov(result);
-[e = *U + &U _ph_reads * -> -> _i `ui `ux -> -> # *U &U _ph_reads `ui `ux ( _ptov (1 _result ]
 "40
-[; ;src/ph.c: 40:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 1388  ]
-[e :U 1389 ]
-}
+[; ;src/ph.c: 40:     result = ADRESL;
+[e = _result -> _ADRESL `i ]
+"41
+[; ;src/ph.c: 41:     result += (ADRESH << 8);
+[e =+ _result << -> _ADRESH `i -> 8 `i ]
 "42
-[; ;src/ph.c: 42:     return ph_avg();
-[e ) ( _ph_avg ..  ]
-[e $UE 1387  ]
+[; ;src/ph.c: 42:     ph_reads[i] = ptov(result);
+[e = *U + &U _ph_reads * -> -> F9296 `ui `ux -> -> # *U &U _ph_reads `ui `ux ( _ptov (1 _result ]
 "43
-[; ;src/ph.c: 43: }
-[e :UE 1387 ]
+[; ;src/ph.c: 43:     i = (i + 1) % 5;
+[e = F9296 % + F9296 -> 1 `i -> 5 `i ]
+"44
+[; ;src/ph.c: 44: }
+[e :UE 1390 ]
 }

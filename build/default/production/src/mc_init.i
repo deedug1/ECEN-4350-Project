@@ -15643,7 +15643,60 @@ void pps_init(void);
 void port_init(void);
 void controller_init(void);
 void oscillator_init(void);
+void system_init(void);
 # 2 "src/mc_init.c" 2
+
+# 1 "src/../headers/i2c_master.h" 1
+# 14 "src/../headers/i2c_master.h"
+typedef enum {
+    SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
+}I2C_master_result;
+
+void I2C_master_init(void);
+void I2C_MASTER_ISR(void);
+I2C_master_result I2C_master_write(char * data, int length, char address);
+I2C_master_result I2C_master_read(char * buffer, int length, char address);
+# 3 "src/mc_init.c" 2
+
+# 1 "src/../headers/uart.h" 1
+# 17 "src/../headers/uart.h"
+void UART_init(void);
+void UART_RX_ISR(void);
+void UART_TX_ISR(void);
+void UART_putc(char data);
+void UART_puts(char * data);
+char UART_getc(void);
+void UART_gets(char * buf, int len);
+char UART_can_tx(void);
+char UART_can_rx(void);
+# 4 "src/mc_init.c" 2
+
+# 1 "src/../headers/interrupt.h" 1
+# 12 "src/../headers/interrupt.h"
+void interrupt_init(void);
+# 5 "src/mc_init.c" 2
+
+# 1 "src/../headers/stopwatch.h" 1
+# 19 "src/../headers/stopwatch.h"
+void stopwatch_init(void);
+void stopwatch_start(int seconds);
+void stopwatch_stop(void);
+char stopwatch_is_stopped(void);
+char stopwatch_is_started(void);
+int stopwatch_get_time(void);
+void STOPWATCH_ISR(void);
+# 6 "src/mc_init.c" 2
+
+# 1 "src/../headers/timer0.h" 1
+# 14 "src/../headers/timer0.h"
+void TIMER0_init(void);
+void TIMER0_ISR(void);
+void TIMER0_reset(void);
+int TIMER0_get_count(void);
+char TIMER0_is_read(void);
+void TIMER0_stop(void);
+void TIMER0_start(void);
+# 7 "src/mc_init.c" 2
 
 
 
@@ -15705,6 +15758,15 @@ void oscillator_init(void);
 
 #pragma config EBTRB = OFF
 
+
+void system_init() {
+    controller_init();
+    interrupt_init();
+    UART_init();
+    I2C_master_init();
+    stopwatch_init();
+    TIMER0_init();
+}
 void port_init() {
 
 

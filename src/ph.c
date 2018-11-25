@@ -1,5 +1,5 @@
 #include <xc.h>
-
+#include "../headers/ph.h"
 
 #define ANALOG_RIGHT_JUSTIFY ADCON0bits.ADFM
 #define ANALOG_CONVERT ADCON0bits.GO
@@ -8,10 +8,14 @@
 #define ANALOG_ON ADCON0bits.ADON
 #define RESULT_LOWER ADRESL
 #define RESULT_HIGHER ADRESH
-#define PH_READS 8
-static double ph_reads[PH_READS];
+#define PH_READ_LIMIT 5
+static double ph_reads[PH_READ_LIMIT];
 void ph_init() {
+    int i;
     ADCON0 = 0x94;
+    for(i = 0; i < PH_READ_LIMIT; i++) {
+        ph_read();
+    }
 }
 double ptov(int ph) {
     double result;
@@ -23,21 +27,18 @@ double ptov(int ph) {
 double ph_avg() {
     int i;
     double avg = 0.0;
-    for(i = 0; i < PH_READS; i++) {
+    for(i = 0; i < PH_READ_LIMIT; i++) {
         avg += ph_reads[i];
     }
-    return avg / (double)PH_READS;
+    return avg / (double)PH_READ_LIMIT;
 }
-double ph_read() {
-    int result, i;
+void ph_read() {
+    static int i = 0;
+    int result;
     ANALOG_CONVERT = 1;
-    for(i = 0; i < PH_READS; i++) {
-        while(ANALOG_CONVERT);
-    
-        result = RESULT_LOWER;
-        result += (RESULT_HIGHER << 8);
-        ph_reads[i] = ptov(result);
-    }
-    
-    return ph_avg();
+    while(ANALOG_CONVERT);
+    result = RESULT_LOWER;
+    result += (RESULT_HIGHER << 8);
+    ph_reads[i] = ptov(result);
+    i = (i + 1) % PH_READ_LIMIT;
 }

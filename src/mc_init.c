@@ -1,5 +1,10 @@
 #include <xc.h>
 #include "../headers/mc_init.h"
+#include "../headers/i2c_master.h"
+#include "../headers/uart.h"
+#include "../headers/interrupt.h"
+#include "../headers/stopwatch.h"
+#include "../headers/timer0.h"
 
 // Configuration bits: selected in the GUI
 
@@ -60,6 +65,15 @@
 // CONFIG6H
 #pragma config EBTRB = OFF    // Boot Block Table Read Protection bit->Boot Block (000000-0007FFh) not protected from table reads executed in other blocks
 
+
+void system_init() {
+    controller_init();
+    interrupt_init();
+    UART_init();
+    I2C_master_init();
+    stopwatch_init();
+    TIMER0_init();
+}
 void port_init() {
     
     // PORT A

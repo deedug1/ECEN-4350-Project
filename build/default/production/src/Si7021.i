@@ -15650,22 +15650,19 @@ I2C_master_result I2C_master_read(char * buffer, int length, char address);
 # 2 "src/Si7021.c" 2
 
 # 1 "src/../headers/Si7021.h" 1
-# 19 "src/../headers/Si7021.h"
+# 18 "src/../headers/Si7021.h"
+void Si7021_init(void);
 void Si7021_reset(void);
-int Si7021_read_humidity(void);
-int Si7021_read_temp(void);
+void Si7021_read_humidity(void);
+void Si7021_read_temp(void);
+int Si7021_avg_humidity(void);
+int Si7021_avg_temp(void);
 int Si7021_set_heater(char heat);
 # 3 "src/Si7021.c" 2
-
-
-
-
-
-
-
-
+# 12 "src/Si7021.c"
 static char Si7021_buf[2];
-
+static int Si7021_temps[5];
+static int Si7021_humids[5];
 int convert_humidity() {
     int result, rh_code;
     rh_code = Si7021_buf[1]; rh_code += (Si7021_buf[0] << 8);
@@ -15686,26 +15683,57 @@ int convert_temp() {
     result = (((long)176 * temp_code) >> 16) - 47;
     return result;
 }
+void Si7021_init() {
+    int i;
 
+    for(i = 0; i < 5; i++) {
+        Si7021_read_temp();
+    }
+    for(i = 0; i < 5; i++) {
+        Si7021_read_humidity();
+    }
+}
+int Si7021_avg_humidity() {
+    int i;
+    int result = 0;
+    for(i = 0; i < 5; i++) {
+        result += Si7021_humids[i];
+    }
+    result = result / 5;
+    return result;
+}
+int Si7021_avg_temp() {
+    int i;
+    int result = 0;
+    for(i = 0; i < 5; i++) {
+        result += Si7021_temps[i];
+    }
+    result = result / 5;
+    return result;
+}
 void Si7021_reset() {
     Si7021_buf[0] = 0xFE;
     I2C_master_write(Si7021_buf, 1, 0x40);
 }
 
-int Si7021_read_humidity() {
+void Si7021_read_humidity() {
+    static int i = 0;
     Si7021_buf[0] = 0xF5;
     I2C_master_write(Si7021_buf, 1, 0x40);
 
     while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
 
-    return convert_humidity();
+    Si7021_humids[i] = convert_humidity();
+    i = (i + 1) % 5;
 }
 
-int Si7021_read_temp() {
+void Si7021_read_temp() {
+    static int i = 0;
     Si7021_buf[0] = 0xF3;
     I2C_master_write(Si7021_buf, 1, 0x40);
 
     while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
 
-    return convert_temp();
+    Si7021_temps[i] = convert_temp();
+    i = (i + 1) % 5;
 }
