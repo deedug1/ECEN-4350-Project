@@ -15,32 +15,8 @@
 #include "../headers/util.h"
 #include "../headers/Si7021.h"
 #include "../headers/ph.h"
+#include "../headers/stopwatch.h"
 
-void wait() {
-    int i, j;
-    for(i = 0; i < 255; i++) {
-        for(j = 0; j < 255; j++) {
-            NOP();
-        }
-    }
-}
-void empty_rx_buf() {
-    char c;
-    while(!UART_can_rx()) {
-        
-    }
-    while(UART_can_rx()) {
-        c = UART_getc();
-        if(c == '\n') {
-            lcd_newline();
-        } else if(c < 32 || c > 127) {
-            // do nothing
-        } else {
-            lcd_putc(c);
-        }
-    }
-    lcd_update();
-}
 /*
  * 
  */
@@ -52,18 +28,18 @@ int main() {
     interrupt_init();
     I2C_master_init();
     lcd_init();
-    ph_init();
+    stopwatch_init();
     lcd_clear();
-    
-    
+    lcd_puts("Starting");
+    lcd_newline();
+    lcd_update();
+    stopwatch_start(1);
     while(1) {
-        ph = ph_read();
-        dtoa(ph, buffer, 10);
-        lcd_puts("pH: ");
-        lcd_puts(buffer);
-        lcd_newline();
-        lcd_update();    
-        __delay_ms(2000);
+        if(stopwatch_is_stopped()){
+            stopwatch_start(5);
+            lcd_putc('.');
+            lcd_update();
+        }
     }
     
     

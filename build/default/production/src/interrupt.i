@@ -15661,6 +15661,16 @@ char UART_can_tx(void);
 char UART_can_rx(void);
 # 3 "src/interrupt.c" 2
 
+# 1 "src/../headers/stopwatch.h" 1
+# 19 "src/../headers/stopwatch.h"
+void stopwatch_init(void);
+void stopwatch_start(int seconds);
+void stopwatch_stop(void);
+char stopwatch_is_stopped(void);
+char stopwatch_is_started(void);
+int stopwatch_get_time(void);
+void STOPWATCH_ISR(void);
+# 4 "src/interrupt.c" 2
 
 
 void interrupt_init() {
@@ -15677,6 +15687,8 @@ void __attribute__((picinterrupt(""))) MAIN_ISR() {
             UART_RX_ISR();
         } else if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1) {
             UART_TX_ISR();
+        } else if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1) {
+            STOPWATCH_ISR();
         } else {
 
         }

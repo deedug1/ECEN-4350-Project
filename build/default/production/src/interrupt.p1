@@ -90,6 +90,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 "19
 [; ;src/../headers/uart.h: 19: void UART_TX_ISR(void);
 [v _UART_TX_ISR `(v ~T0 @X0 0 ef ]
+"3516 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3516:     struct {
+[s S218 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S218 . TMR1IE TMR2IE TMR3IE TMR4IE TMR5IE TMR6IE ]
+"3515
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3515: typedef union {
+[u S217 `S218 1 ]
+[n S217 . . ]
+"3525
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3525: extern volatile PIE4bits_t PIE4bits __attribute__((address(0xEC1)));
+[v _PIE4bits `VS217 ~T0 @X0 0 e@3777 ]
+"3896
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3896:     struct {
+[s S240 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S240 . TMR1IF TMR2IF TMR3IF TMR4IF TMR5IF TMR6IF ]
+"3895
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3895: typedef union {
+[u S239 `S240 1 ]
+[n S239 . . ]
+"3905
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 3905: extern volatile PIR4bits_t PIR4bits __attribute__((address(0xEC9)));
+[v _PIR4bits `VS239 ~T0 @X0 0 e@3785 ]
+"25 src/../headers/stopwatch.h
+[; ;src/../headers/stopwatch.h: 25: void STOPWATCH_ISR(void);
+[v _STOPWATCH_ISR `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1399,22 +1424,33 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/interrupt.c: 19:             UART_TX_ISR();
 [e ( _UART_TX_ISR ..  ]
 "20
-[; ;src/interrupt.c: 20:         } else {
+[; ;src/interrupt.c: 20:         } else if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1) {
 }
 [e $U 1389  ]
 [e :U 1388 ]
+[e $ ! && == -> . . _PIE4bits 0 1 `i -> 1 `i == -> . . _PIR4bits 0 1 `i -> 1 `i 1390  ]
 {
+"21
+[; ;src/interrupt.c: 21:             STOPWATCH_ISR();
+[e ( _STOPWATCH_ISR ..  ]
 "22
-[; ;src/interrupt.c: 22:         }
+[; ;src/interrupt.c: 22:         } else {
 }
+[e $U 1391  ]
+[e :U 1390 ]
+{
+"24
+[; ;src/interrupt.c: 24:         }
+}
+[e :U 1391 ]
 [e :U 1389 ]
 [e :U 1387 ]
 [e :U 1385 ]
-"23
-[; ;src/interrupt.c: 23:     }
+"25
+[; ;src/interrupt.c: 25:     }
 }
 [e :U 1383 ]
-"24
-[; ;src/interrupt.c: 24: }
+"26
+[; ;src/interrupt.c: 26: }
 [e :UE 1382 ]
 }

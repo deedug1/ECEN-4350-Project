@@ -15748,36 +15748,36 @@ void lcd_vertical_shift(void);
 
 static char is_connected = 0;
 char * SOCKETS[] = {"TCP", "UDP"};
-char ESP8266_waitfor(const char * str);
+char ESP8266_lookfor(const char * str);
 
 void ESP8266_query(void) {
     UART_puts("AT+CWMODE?");
     UART_puts("\r\n");
-    ESP8266_waitfor("OK");
+    ESP8266_lookfor("OK");
     UART_puts("AT+CIPMUX?");
     UART_puts("\r\n");
-    ESP8266_waitfor("OK");
+    ESP8266_lookfor("OK");
     UART_puts("AT+CIFSR");
     UART_puts("\r\n");
-    ESP8266_waitfor("OK");
+    ESP8266_lookfor("OK");
 }
 void ESP8266_init(void) {
     UART_puts("ATE0");
     UART_puts("\r\n");
-    ESP8266_waitfor("OK");
+    ESP8266_lookfor("OK");
 
     UART_puts("AT+CWMODE_CUR=3");
     UART_puts("\r\n");
-    ESP8266_waitfor("OK");
+    ESP8266_lookfor("OK");
 
     UART_puts("AT+CIPMUX=0");
     UART_puts("\r\n");
-    ESP8266_waitfor("OK");
+    ESP8266_lookfor("OK");
 }
 void ESP8266_reset() {
     UART_puts("AT+RST");
     UART_puts("\r\n");
-    ESP8266_waitfor("ready");
+    ESP8266_lookfor("ready");
 }
 void ESP8266_connect(char * name, char * pass) {
 
@@ -15788,7 +15788,7 @@ void ESP8266_connect(char * name, char * pass) {
     UART_putc(',');
     UART_putc('\"');UART_puts(pass);UART_putc('\"');
     UART_puts("\r\n");
-    ESP8266_waitfor("WIFI GOT IP");
+    ESP8266_lookfor("WIFI GOT IP");
     is_connected = 1;
 
 }
@@ -15797,13 +15797,15 @@ void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
     UART_puts("AT+CIPSTART=");
+    UART_putc('0');
+    UART_putc(',');
     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(ip);UART_putc('\"');
     UART_putc(',');
     UART_puts(buffer);
     UART_puts("\r\n");
-    ESP8266_waitfor("OK");
+    ESP8266_lookfor("OK");
 }
 
 void ESP8266_send_data(char * data) {
@@ -15823,7 +15825,7 @@ void ESP8266_close_socket(){
     UART_puts("AT+CIPClOSE");
     UART_puts("\r\n");
 }
-char ESP8266_waitfor(const char * str) {
+char ESP8266_lookfor(const char * str) {
     char buffer[64];
     char c;
     int i = 0;
