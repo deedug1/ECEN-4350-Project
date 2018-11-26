@@ -15655,32 +15655,34 @@ void Si7021_init(void);
 void Si7021_reset(void);
 void Si7021_read_humidity(void);
 void Si7021_read_temp(void);
-int Si7021_avg_humidity(void);
-int Si7021_avg_temp(void);
+double Si7021_avg_humidity(void);
+double Si7021_avg_temp(void);
 int Si7021_set_heater(char heat);
 # 3 "src/Si7021.c" 2
 # 12 "src/Si7021.c"
 static char Si7021_buf[2];
-static int Si7021_temps[5];
-static int Si7021_humids[5];
-int convert_humidity() {
-    int result, rh_code;
+static double Si7021_temps[5];
+static double Si7021_humids[5];
+double convert_humidity() {
+    int rh_code;
+    double result;
     rh_code = Si7021_buf[1]; rh_code += (Si7021_buf[0] << 8);
-    result = (((long)125 * rh_code) >> 16) - 6;
+    result = ((125.0 * (double)rh_code) / 65536.0) - 6;
 
     if(result < 0) {
-        return 0;
+        return 0.0;
     } else if (result > 100) {
-        return 100;
+        return 100.0;
     } else {
-    return result;
+        return result;
     }
 }
 
-int convert_temp() {
-    int result, temp_code;
+double convert_temp() {
+    int temp_code;
+    double result;
     temp_code = Si7021_buf[1]; temp_code += (Si7021_buf[0] << 8);
-    result = (((long)176 * temp_code) >> 16) - 47;
+    result = ((176.0 * (double)temp_code) / 65536.0) - 47;
     return result;
 }
 void Si7021_init() {
@@ -15693,22 +15695,22 @@ void Si7021_init() {
         Si7021_read_humidity();
     }
 }
-int Si7021_avg_humidity() {
+double Si7021_avg_humidity() {
     int i;
-    int result = 0;
+    double result = 0;
     for(i = 0; i < 5; i++) {
         result += Si7021_humids[i];
     }
-    result = result / 5;
+    result = result / (double)5;
     return result;
 }
-int Si7021_avg_temp() {
+double Si7021_avg_temp() {
     int i;
-    int result = 0;
+    double result = 0;
     for(i = 0; i < 5; i++) {
         result += Si7021_temps[i];
     }
-    result = result / 5;
+    result = result / (double)5;
     return result;
 }
 void Si7021_reset() {

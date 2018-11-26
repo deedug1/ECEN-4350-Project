@@ -15750,8 +15750,8 @@ void Si7021_init(void);
 void Si7021_reset(void);
 void Si7021_read_humidity(void);
 void Si7021_read_temp(void);
-int Si7021_avg_humidity(void);
-int Si7021_avg_temp(void);
+double Si7021_avg_humidity(void);
+double Si7021_avg_temp(void);
 int Si7021_set_heater(char heat);
 # 14 "src/main.c" 2
 
@@ -15783,19 +15783,18 @@ int PORT = 80;
 char * SSID = "test_ap";
 char * PASS = "incredible14!";
 char * IP = "api.thingspeak.com";
-char * DATA = "GET /update?api_key=ONF84FNQ1XDZB5KH&field1=";
+
 
 void connect_to_wifi(void);
+void send_data_double(int field, double val);
 
-void send_data_int(int field, int val);
 
 
 
 int main() {
 
     int c = 0;
-    double ph;
-    int temp, humidity;
+    double ph, temp, humidity;
     system_init();
     lcd_init();
     lcd_clear();
@@ -15826,9 +15825,9 @@ int main() {
                 ph = ph_avg();
 
 
-                send_data_int(3, temp);
-                send_data_int(2, humidity);
-                send_data_int(1, (int)ph);
+                send_data_double(3, temp);
+                send_data_double(2, humidity);
+                send_data_double(1, ph);
 
 
 
@@ -15859,8 +15858,8 @@ void connect_to_wifi() {
     ESP8266_init();
     ESP8266_connect(SSID, PASS);
 }
-
-void send_data_int(int field, int val) {
+# 125 "src/main.c"
+void send_data_double(int field, double val) {
     static char strbuf[60];
     char numbuf[10];
     strbuf[0] = '\0';
@@ -15871,7 +15870,7 @@ void send_data_int(int field, int val) {
 
 
     strcat(strbuf, "=");
-    itoa(val, numbuf, 10);
+    dtoa(val, numbuf, 10);
     strcat(strbuf, numbuf);
     strcat(strbuf, "\r\n\r\n");
 

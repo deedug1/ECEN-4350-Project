@@ -5,8 +5,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "20
 [; ;src/../headers/Si7021.h: 20: void Si7021_read_humidity(void);
 [v _Si7021_read_humidity `(v ~T0 @X0 0 ef ]
-"65 src/Si7021.c
-[; ;src/Si7021.c: 65:     I2C_master_write(Si7021_buf, 1, 0x40);
+"67 src/Si7021.c
+[; ;src/Si7021.c: 67:     I2C_master_write(Si7021_buf, 1, 0x40);
 [c E9283 0 1 2 3 .. ]
 [n E9283 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
 "20 src/../headers/i2c_master.h
@@ -1270,307 +1270,311 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/Si7021.c: 12: static char Si7021_buf[2];
 [v _Si7021_buf `uc ~T0 @X0 -> 2 `i s ]
 "13
-[; ;src/Si7021.c: 13: static int Si7021_temps[5];
-[v _Si7021_temps `i ~T0 @X0 -> 5 `i s ]
+[; ;src/Si7021.c: 13: static double Si7021_temps[5];
+[v _Si7021_temps `d ~T0 @X0 -> 5 `i s ]
 "14
-[; ;src/Si7021.c: 14: static int Si7021_humids[5];
-[v _Si7021_humids `i ~T0 @X0 -> 5 `i s ]
+[; ;src/Si7021.c: 14: static double Si7021_humids[5];
+[v _Si7021_humids `d ~T0 @X0 -> 5 `i s ]
 "15
-[; ;src/Si7021.c: 15: int convert_humidity() {
-[v _convert_humidity `(i ~T0 @X0 1 ef ]
+[; ;src/Si7021.c: 15: double convert_humidity() {
+[v _convert_humidity `(d ~T0 @X0 1 ef ]
 {
 [e :U _convert_humidity ]
 [f ]
 "16
-[; ;src/Si7021.c: 16:     int result, rh_code;
-[v _result `i ~T0 @X0 1 a ]
+[; ;src/Si7021.c: 16:     int rh_code;
 [v _rh_code `i ~T0 @X0 1 a ]
 "17
-[; ;src/Si7021.c: 17:     rh_code = Si7021_buf[1]; rh_code += (Si7021_buf[0] << 8);
+[; ;src/Si7021.c: 17:     double result;
+[v _result `d ~T0 @X0 1 a ]
+"18
+[; ;src/Si7021.c: 18:     rh_code = Si7021_buf[1]; rh_code += (Si7021_buf[0] << 8);
 [e = _rh_code -> *U + &U _Si7021_buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux `i ]
 [e =+ _rh_code << -> *U + &U _Si7021_buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux `i -> 8 `i ]
-"18
-[; ;src/Si7021.c: 18:     result = (((long)125 * rh_code) >> 16) - 6;
-[e = _result -> - >> * -> -> 125 `i `l -> _rh_code `l -> 16 `i -> -> 6 `i `l `i ]
-"20
-[; ;src/Si7021.c: 20:     if(result < 0) {
-[e $ ! < _result -> 0 `i 1382  ]
-{
+"19
+[; ;src/Si7021.c: 19:     result = ((125.0 * (double)rh_code) / 65536.0) - 6;
+[e = _result - / * .125.0 -> _rh_code `d .65536.0 -> -> 6 `i `d ]
 "21
-[; ;src/Si7021.c: 21:         return 0;
-[e ) -> 0 `i ]
-[e $UE 1381  ]
+[; ;src/Si7021.c: 21:     if(result < 0) {
+[e $ ! < _result -> -> 0 `i `d 1382  ]
+{
 "22
-[; ;src/Si7021.c: 22:     } else if (result > 100) {
+[; ;src/Si7021.c: 22:         return 0.0;
+[e ) .0.0 ]
+[e $UE 1381  ]
+"23
+[; ;src/Si7021.c: 23:     } else if (result > 100) {
 }
 [e $U 1383  ]
 [e :U 1382 ]
-[e $ ! > _result -> 100 `i 1384  ]
+[e $ ! > _result -> -> 100 `i `d 1384  ]
 {
-"23
-[; ;src/Si7021.c: 23:         return 100;
-[e ) -> 100 `i ]
-[e $UE 1381  ]
 "24
-[; ;src/Si7021.c: 24:     } else {
+[; ;src/Si7021.c: 24:         return 100.0;
+[e ) .100.0 ]
+[e $UE 1381  ]
+"25
+[; ;src/Si7021.c: 25:     } else {
 }
 [e $U 1385  ]
 [e :U 1384 ]
 {
-"25
-[; ;src/Si7021.c: 25:     return result;
+"26
+[; ;src/Si7021.c: 26:         return result;
 [e ) _result ]
 [e $UE 1381  ]
-"26
-[; ;src/Si7021.c: 26:     }
+"27
+[; ;src/Si7021.c: 27:     }
 }
 [e :U 1385 ]
 [e :U 1383 ]
-"27
-[; ;src/Si7021.c: 27: }
+"28
+[; ;src/Si7021.c: 28: }
 [e :UE 1381 ]
 }
-"29
-[; ;src/Si7021.c: 29: int convert_temp() {
-[v _convert_temp `(i ~T0 @X0 1 ef ]
+"30
+[; ;src/Si7021.c: 30: double convert_temp() {
+[v _convert_temp `(d ~T0 @X0 1 ef ]
 {
 [e :U _convert_temp ]
 [f ]
-"30
-[; ;src/Si7021.c: 30:     int result, temp_code;
-[v _result `i ~T0 @X0 1 a ]
-[v _temp_code `i ~T0 @X0 1 a ]
 "31
-[; ;src/Si7021.c: 31:     temp_code = Si7021_buf[1]; temp_code += (Si7021_buf[0] << 8);
+[; ;src/Si7021.c: 31:     int temp_code;
+[v _temp_code `i ~T0 @X0 1 a ]
+"32
+[; ;src/Si7021.c: 32:     double result;
+[v _result `d ~T0 @X0 1 a ]
+"33
+[; ;src/Si7021.c: 33:     temp_code = Si7021_buf[1]; temp_code += (Si7021_buf[0] << 8);
 [e = _temp_code -> *U + &U _Si7021_buf * -> -> -> 1 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux `i ]
 [e =+ _temp_code << -> *U + &U _Si7021_buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux `i -> 8 `i ]
-"32
-[; ;src/Si7021.c: 32:     result = (((long)176 * temp_code) >> 16) - 47;
-[e = _result -> - >> * -> -> 176 `i `l -> _temp_code `l -> 16 `i -> -> 47 `i `l `i ]
-"33
-[; ;src/Si7021.c: 33:     return result;
+"34
+[; ;src/Si7021.c: 34:     result = ((176.0 * (double)temp_code) / 65536.0) - 47;
+[e = _result - / * .176.0 -> _temp_code `d .65536.0 -> -> 47 `i `d ]
+"35
+[; ;src/Si7021.c: 35:     return result;
 [e ) _result ]
 [e $UE 1386  ]
-"34
-[; ;src/Si7021.c: 34: }
+"36
+[; ;src/Si7021.c: 36: }
 [e :UE 1386 ]
 }
-"35
-[; ;src/Si7021.c: 35: void Si7021_init() {
+"37
+[; ;src/Si7021.c: 37: void Si7021_init() {
 [v _Si7021_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _Si7021_init ]
 [f ]
-"36
-[; ;src/Si7021.c: 36:     int i;
-[v _i `i ~T0 @X0 1 a ]
 "38
-[; ;src/Si7021.c: 38:     for(i = 0; i < 5; i++) {
+[; ;src/Si7021.c: 38:     int i;
+[v _i `i ~T0 @X0 1 a ]
+"40
+[; ;src/Si7021.c: 40:     for(i = 0; i < 5; i++) {
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 5 `i 1388  ]
 [e $U 1389  ]
 [e :U 1388 ]
 {
-"39
-[; ;src/Si7021.c: 39:         Si7021_read_temp();
+"41
+[; ;src/Si7021.c: 41:         Si7021_read_temp();
 [e ( _Si7021_read_temp ..  ]
-"40
-[; ;src/Si7021.c: 40:     }
+"42
+[; ;src/Si7021.c: 42:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 5 `i 1388  ]
 [e :U 1389 ]
 }
-"41
-[; ;src/Si7021.c: 41:     for(i = 0; i < 5; i++) {
+"43
+[; ;src/Si7021.c: 43:     for(i = 0; i < 5; i++) {
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 5 `i 1391  ]
 [e $U 1392  ]
 [e :U 1391 ]
 {
-"42
-[; ;src/Si7021.c: 42:         Si7021_read_humidity();
+"44
+[; ;src/Si7021.c: 44:         Si7021_read_humidity();
 [e ( _Si7021_read_humidity ..  ]
-"43
-[; ;src/Si7021.c: 43:     }
+"45
+[; ;src/Si7021.c: 45:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 5 `i 1391  ]
 [e :U 1392 ]
 }
-"44
-[; ;src/Si7021.c: 44: }
+"46
+[; ;src/Si7021.c: 46: }
 [e :UE 1387 ]
 }
-"45
-[; ;src/Si7021.c: 45: int Si7021_avg_humidity() {
-[v _Si7021_avg_humidity `(i ~T0 @X0 1 ef ]
+"47
+[; ;src/Si7021.c: 47: double Si7021_avg_humidity() {
+[v _Si7021_avg_humidity `(d ~T0 @X0 1 ef ]
 {
 [e :U _Si7021_avg_humidity ]
 [f ]
-"46
-[; ;src/Si7021.c: 46:     int i;
-[v _i `i ~T0 @X0 1 a ]
-"47
-[; ;src/Si7021.c: 47:     int result = 0;
-[v _result `i ~T0 @X0 1 a ]
-[e = _result -> 0 `i ]
 "48
-[; ;src/Si7021.c: 48:     for(i = 0; i < 5; i++) {
+[; ;src/Si7021.c: 48:     int i;
+[v _i `i ~T0 @X0 1 a ]
+"49
+[; ;src/Si7021.c: 49:     double result = 0;
+[v _result `d ~T0 @X0 1 a ]
+[e = _result -> -> 0 `i `d ]
+"50
+[; ;src/Si7021.c: 50:     for(i = 0; i < 5; i++) {
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 5 `i 1395  ]
 [e $U 1396  ]
 [e :U 1395 ]
 {
-"49
-[; ;src/Si7021.c: 49:         result += Si7021_humids[i];
+"51
+[; ;src/Si7021.c: 51:         result += Si7021_humids[i];
 [e =+ _result *U + &U _Si7021_humids * -> -> _i `ui `ux -> -> # *U &U _Si7021_humids `ui `ux ]
-"50
-[; ;src/Si7021.c: 50:     }
+"52
+[; ;src/Si7021.c: 52:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 5 `i 1395  ]
 [e :U 1396 ]
 }
-"51
-[; ;src/Si7021.c: 51:     result = result / 5;
-[e = _result / _result -> 5 `i ]
-"52
-[; ;src/Si7021.c: 52:     return result;
+"53
+[; ;src/Si7021.c: 53:     result = result / (double)5;
+[e = _result / _result -> -> 5 `i `d ]
+"54
+[; ;src/Si7021.c: 54:     return result;
 [e ) _result ]
 [e $UE 1394  ]
-"53
-[; ;src/Si7021.c: 53: }
+"55
+[; ;src/Si7021.c: 55: }
 [e :UE 1394 ]
 }
-"54
-[; ;src/Si7021.c: 54: int Si7021_avg_temp() {
-[v _Si7021_avg_temp `(i ~T0 @X0 1 ef ]
+"56
+[; ;src/Si7021.c: 56: double Si7021_avg_temp() {
+[v _Si7021_avg_temp `(d ~T0 @X0 1 ef ]
 {
 [e :U _Si7021_avg_temp ]
 [f ]
-"55
-[; ;src/Si7021.c: 55:     int i;
-[v _i `i ~T0 @X0 1 a ]
-"56
-[; ;src/Si7021.c: 56:     int result = 0;
-[v _result `i ~T0 @X0 1 a ]
-[e = _result -> 0 `i ]
 "57
-[; ;src/Si7021.c: 57:     for(i = 0; i < 5; i++) {
+[; ;src/Si7021.c: 57:     int i;
+[v _i `i ~T0 @X0 1 a ]
+"58
+[; ;src/Si7021.c: 58:     double result = 0;
+[v _result `d ~T0 @X0 1 a ]
+[e = _result -> -> 0 `i `d ]
+"59
+[; ;src/Si7021.c: 59:     for(i = 0; i < 5; i++) {
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 5 `i 1399  ]
 [e $U 1400  ]
 [e :U 1399 ]
 {
-"58
-[; ;src/Si7021.c: 58:         result += Si7021_temps[i];
+"60
+[; ;src/Si7021.c: 60:         result += Si7021_temps[i];
 [e =+ _result *U + &U _Si7021_temps * -> -> _i `ui `ux -> -> # *U &U _Si7021_temps `ui `ux ]
-"59
-[; ;src/Si7021.c: 59:     }
+"61
+[; ;src/Si7021.c: 61:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 5 `i 1399  ]
 [e :U 1400 ]
 }
-"60
-[; ;src/Si7021.c: 60:     result = result / 5;
-[e = _result / _result -> 5 `i ]
-"61
-[; ;src/Si7021.c: 61:     return result;
+"62
+[; ;src/Si7021.c: 62:     result = result / (double)5;
+[e = _result / _result -> -> 5 `i `d ]
+"63
+[; ;src/Si7021.c: 63:     return result;
 [e ) _result ]
 [e $UE 1398  ]
-"62
-[; ;src/Si7021.c: 62: }
+"64
+[; ;src/Si7021.c: 64: }
 [e :UE 1398 ]
 }
-"63
-[; ;src/Si7021.c: 63: void Si7021_reset() {
+"65
+[; ;src/Si7021.c: 65: void Si7021_reset() {
 [v _Si7021_reset `(v ~T0 @X0 1 ef ]
 {
 [e :U _Si7021_reset ]
 [f ]
-"64
-[; ;src/Si7021.c: 64:     Si7021_buf[0] = 0xFE;
-[e = *U + &U _Si7021_buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux -> -> 254 `i `uc ]
-"65
-[; ;src/Si7021.c: 65:     I2C_master_write(Si7021_buf, 1, 0x40);
-[e ( _I2C_master_write (3 , , &U _Si7021_buf -> 1 `i -> -> 64 `i `uc ]
 "66
-[; ;src/Si7021.c: 66: }
+[; ;src/Si7021.c: 66:     Si7021_buf[0] = 0xFE;
+[e = *U + &U _Si7021_buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux -> -> 254 `i `uc ]
+"67
+[; ;src/Si7021.c: 67:     I2C_master_write(Si7021_buf, 1, 0x40);
+[e ( _I2C_master_write (3 , , &U _Si7021_buf -> 1 `i -> -> 64 `i `uc ]
+"68
+[; ;src/Si7021.c: 68: }
 [e :UE 1402 ]
 }
-"68
-[; ;src/Si7021.c: 68: void Si7021_read_humidity() {
+"70
+[; ;src/Si7021.c: 70: void Si7021_read_humidity() {
 [v _Si7021_read_humidity `(v ~T0 @X0 1 ef ]
 {
 [e :U _Si7021_read_humidity ]
 [f ]
-"69
-[; ;src/Si7021.c: 69:     static int i = 0;
+"71
+[; ;src/Si7021.c: 71:     static int i = 0;
 [v F9326 `i ~T0 @X0 1 s i ]
 [i F9326
 -> 0 `i
 ]
-"70
-[; ;src/Si7021.c: 70:     Si7021_buf[0] = 0xF5;
+"72
+[; ;src/Si7021.c: 72:     Si7021_buf[0] = 0xF5;
 [e = *U + &U _Si7021_buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux -> -> 245 `i `uc ]
-"71
-[; ;src/Si7021.c: 71:     I2C_master_write(Si7021_buf, 1, 0x40);
-[e ( _I2C_master_write (3 , , &U _Si7021_buf -> 1 `i -> -> 64 `i `uc ]
 "73
-[; ;src/Si7021.c: 73:     while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
+[; ;src/Si7021.c: 73:     I2C_master_write(Si7021_buf, 1, 0x40);
+[e ( _I2C_master_write (3 , , &U _Si7021_buf -> 1 `i -> -> 64 `i `uc ]
+"75
+[; ;src/Si7021.c: 75:     while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
 [e $U 1404  ]
 [e :U 1405 ]
 [e :U 1404 ]
 [e $ == -> ( _I2C_master_read (3 , , &U _Si7021_buf -> 2 `i -> -> 64 `i `uc `ui -> . `E9283 2 `ui 1405  ]
 [e :U 1406 ]
-"75
-[; ;src/Si7021.c: 75:     Si7021_humids[i] = convert_humidity();
-[e = *U + &U _Si7021_humids * -> -> F9326 `ui `ux -> -> # *U &U _Si7021_humids `ui `ux ( _convert_humidity ..  ]
-"76
-[; ;src/Si7021.c: 76:     i = (i + 1) % 5;
-[e = F9326 % + F9326 -> 1 `i -> 5 `i ]
 "77
-[; ;src/Si7021.c: 77: }
+[; ;src/Si7021.c: 77:     Si7021_humids[i] = convert_humidity();
+[e = *U + &U _Si7021_humids * -> -> F9326 `ui `ux -> -> # *U &U _Si7021_humids `ui `ux ( _convert_humidity ..  ]
+"78
+[; ;src/Si7021.c: 78:     i = (i + 1) % 5;
+[e = F9326 % + F9326 -> 1 `i -> 5 `i ]
+"79
+[; ;src/Si7021.c: 79: }
 [e :UE 1403 ]
 }
-"79
-[; ;src/Si7021.c: 79: void Si7021_read_temp() {
+"81
+[; ;src/Si7021.c: 81: void Si7021_read_temp() {
 [v _Si7021_read_temp `(v ~T0 @X0 1 ef ]
 {
 [e :U _Si7021_read_temp ]
 [f ]
-"80
-[; ;src/Si7021.c: 80:     static int i = 0;
+"82
+[; ;src/Si7021.c: 82:     static int i = 0;
 [v F9328 `i ~T0 @X0 1 s i ]
 [i F9328
 -> 0 `i
 ]
-"81
-[; ;src/Si7021.c: 81:     Si7021_buf[0] = 0xF3;
+"83
+[; ;src/Si7021.c: 83:     Si7021_buf[0] = 0xF3;
 [e = *U + &U _Si7021_buf * -> -> -> 0 `i `ui `ux -> -> # *U &U _Si7021_buf `ui `ux -> -> 243 `i `uc ]
-"82
-[; ;src/Si7021.c: 82:     I2C_master_write(Si7021_buf, 1, 0x40);
-[e ( _I2C_master_write (3 , , &U _Si7021_buf -> 1 `i -> -> 64 `i `uc ]
 "84
-[; ;src/Si7021.c: 84:     while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
+[; ;src/Si7021.c: 84:     I2C_master_write(Si7021_buf, 1, 0x40);
+[e ( _I2C_master_write (3 , , &U _Si7021_buf -> 1 `i -> -> 64 `i `uc ]
+"86
+[; ;src/Si7021.c: 86:     while(I2C_master_read(Si7021_buf, 2, 0x40) == RECEIVE_ERROR);
 [e $U 1408  ]
 [e :U 1409 ]
 [e :U 1408 ]
 [e $ == -> ( _I2C_master_read (3 , , &U _Si7021_buf -> 2 `i -> -> 64 `i `uc `ui -> . `E9283 2 `ui 1409  ]
 [e :U 1410 ]
-"86
-[; ;src/Si7021.c: 86:     Si7021_temps[i] = convert_temp();
-[e = *U + &U _Si7021_temps * -> -> F9328 `ui `ux -> -> # *U &U _Si7021_temps `ui `ux ( _convert_temp ..  ]
-"87
-[; ;src/Si7021.c: 87:     i = (i + 1) % 5;
-[e = F9328 % + F9328 -> 1 `i -> 5 `i ]
 "88
-[; ;src/Si7021.c: 88: }
+[; ;src/Si7021.c: 88:     Si7021_temps[i] = convert_temp();
+[e = *U + &U _Si7021_temps * -> -> F9328 `ui `ux -> -> # *U &U _Si7021_temps `ui `ux ( _convert_temp ..  ]
+"89
+[; ;src/Si7021.c: 89:     i = (i + 1) % 5;
+[e = F9328 % + F9328 -> 1 `i -> 5 `i ]
+"90
+[; ;src/Si7021.c: 90: }
 [e :UE 1407 ]
 }

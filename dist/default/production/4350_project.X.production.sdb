@@ -33,13 +33,13 @@ SEND_ERROR 1
 RECEIVE_ERROR 2
 PENDING 3
 ]
-"121 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"142 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [e E9468 . `uc
 TCP 0
 UDP 1
 SSL 2
 ]
-"65 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+"67 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
 [e E9283 . `uc
 SUCCESS 0
 SEND_ERROR 1
@@ -156,10 +156,10 @@ PENDING 3
 [v _lcd_vertical_shift lcd_vertical_shift `(v  1 e 1 0 ]
 "35 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
-"98
+"97
 [v _connect_to_wifi connect_to_wifi `(v  1 e 1 0 ]
-"104
-[v _send_data_int send_data_int `(v  1 e 1 0 ]
+"125
+[v _send_data_double send_data_double `(v  1 e 1 0 ]
 "69 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
 [v _system_init system_init `(v  1 e 1 0 ]
 "77
@@ -179,18 +179,18 @@ PENDING 3
 "35
 [v _ph_read ph_read `(v  1 e 1 0 ]
 "15 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
-[v _convert_humidity convert_humidity `(i  1 e 2 0 ]
-"29
-[v _convert_temp convert_temp `(i  1 e 2 0 ]
-"35
+[v _convert_humidity convert_humidity `(d  1 e 4 0 ]
+"30
+[v _convert_temp convert_temp `(d  1 e 4 0 ]
+"37
 [v _Si7021_init Si7021_init `(v  1 e 1 0 ]
-"45
-[v _Si7021_avg_humidity Si7021_avg_humidity `(i  1 e 2 0 ]
-"54
-[v _Si7021_avg_temp Si7021_avg_temp `(i  1 e 2 0 ]
-"68
+"47
+[v _Si7021_avg_humidity Si7021_avg_humidity `(d  1 e 4 0 ]
+"56
+[v _Si7021_avg_temp Si7021_avg_temp `(d  1 e 4 0 ]
+"70
 [v _Si7021_read_humidity Si7021_read_humidity `(v  1 e 1 0 ]
-"79
+"81
 [v _Si7021_read_temp Si7021_read_temp `(v  1 e 1 0 ]
 "11 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
 [v _STOPWATCH_ISR STOPWATCH_ISR `(v  1 e 1 0 ]
@@ -232,6 +232,8 @@ PENDING 3
 [v _reverse reverse `(v  1 e 1 0 ]
 "16
 [v _itoa itoa `(i  1 e 2 0 ]
+"39
+[v _dtoa dtoa `(v  1 e 1 0 ]
 "52 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [v _PPSLOCK PPSLOCK `VEuc  1 e 1 @3739 ]
 "1716
@@ -370,7 +372,7 @@ PENDING 3
 [v _ANSELC ANSELC `VEuc  1 e 1 @3868 ]
 "11935
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @3931 ]
-[s S1023 . 1 `uc 1 ADGO 1 0 :1:0 
+[s S1028 . 1 `uc 1 ADGO 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADFM 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -380,24 +382,24 @@ PENDING 3
 `uc 1 ADON 1 0 :1:7 
 ]
 "11974
-[s S1032 . 1 `uc 1 GO 1 0 :1:0 
+[s S1037 . 1 `uc 1 GO 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADFM0 1 0 :1:2 
 ]
-[s S1036 . 1 `uc 1 DONE 1 0 :1:0 
+[s S1041 . 1 `uc 1 DONE 1 0 :1:0 
 ]
-[s S1038 . 1 `uc 1 GO_NOT_DONE 1 0 :1:0 
+[s S1043 . 1 `uc 1 GO_NOT_DONE 1 0 :1:0 
 ]
-[s S1040 . 1 `uc 1 GO_nDONE 1 0 :1:0 
+[s S1045 . 1 `uc 1 GO_nDONE 1 0 :1:0 
 ]
-[s S1042 . 1 `uc 1 . 1 0 :7:0 
+[s S1047 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 ADCAL 1 0 :1:7 
 ]
-[s S1045 . 1 `uc 1 . 1 0 :2:0 
+[s S1050 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 GODONE 1 0 :1:2 
 ]
-[u S1048 . 1 `S1023 1 . 1 0 `S1032 1 . 1 0 `S1036 1 . 1 0 `S1038 1 . 1 0 `S1040 1 . 1 0 `S1042 1 . 1 0 `S1045 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES1048  1 e 1 @3931 ]
+[u S1053 . 1 `S1028 1 . 1 0 `S1037 1 . 1 0 `S1041 1 . 1 0 `S1043 1 . 1 0 `S1045 1 . 1 0 `S1047 1 . 1 0 `S1050 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES1053  1 e 1 @3931 ]
 "12193
 [v _ADRESL ADRESL `VEuc  1 e 1 @3934 ]
 "12263
@@ -542,6 +544,64 @@ PENDING 3
 [v _SSP1IF SSP1IF `VEb  1 e 0 @30272 ]
 "30398
 [v _STOP STOP `VEb  1 e 0 @31908 ]
+"3 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\errno.c
+[v _errno errno `i  1 e 2 0 ]
+"19 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\powf.c
+[v _bp bp `C[2]f  1 s 8 bp ]
+"20
+[v _dp_h dp_h `C[2]f  1 s 8 dp_h ]
+"21
+[v _dp_l dp_l `C[2]f  1 s 8 dp_l ]
+"22
+[v _two24 two24 `Cf  1 s 4 two24 ]
+"23
+[v _huge huge `Cf  1 s 4 huge ]
+"24
+[v _tiny tiny `Cf  1 s 4 tiny ]
+"26
+[v _L1 L1 `Cf  1 s 4 L1 ]
+"27
+[v _L2 L2 `Cf  1 s 4 L2 ]
+"28
+[v _L3 L3 `Cf  1 s 4 L3 ]
+"29
+[v _L4 L4 `Cf  1 s 4 L4 ]
+"30
+[v _L5 L5 `Cf  1 s 4 L5 ]
+"31
+[v _L6 L6 `Cf  1 s 4 L6 ]
+"32
+[v _P1 P1 `Cf  1 s 4 P1 ]
+"33
+[v _P2 P2 `Cf  1 s 4 P2 ]
+"34
+[v _P3 P3 `Cf  1 s 4 P3 ]
+"35
+[v _P4 P4 `Cf  1 s 4 P4 ]
+"36
+[v _P5 P5 `Cf  1 s 4 P5 ]
+"37
+[v _lg2 lg2 `Cf  1 s 4 lg2 ]
+"38
+[v _lg2_h lg2_h `Cf  1 s 4 lg2_h ]
+"39
+[v _lg2_l lg2_l `Cf  1 s 4 lg2_l ]
+"40
+[v _ovt ovt `Cf  1 s 4 ovt ]
+"41
+[v _cp cp `Cf  1 s 4 cp ]
+"42
+[v _cp_h cp_h `Cf  1 s 4 cp_h ]
+"43
+[v _cp_l cp_l `Cf  1 s 4 cp_l ]
+"44
+[v _ivln2 ivln2 `Cf  1 s 4 ivln2 ]
+"45
+[v _ivln2_h ivln2_h `Cf  1 s 4 ivln2_h ]
+"46
+[v _ivln2_l ivln2_l `Cf  1 s 4 ivln2_l ]
+"22 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sqrtf.c
+[v sqrtf@tiny tiny `Cf  1 s 4 tiny ]
 "13 C:\Users\jstpa\MPLABXProjects\4350_project.X/headers/character.h
 [v _lcd_font lcd_font `[576]uc  1 s 576 lcd_font ]
 "18 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
@@ -568,32 +628,31 @@ PENDING 3
 "12 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
 [v _Si7021_buf Si7021_buf `[2]uc  1 s 2 Si7021_buf ]
 "13
-[v _Si7021_temps Si7021_temps `[5]i  1 s 10 Si7021_temps ]
+[v _Si7021_temps Si7021_temps `[5]d  1 s 20 Si7021_temps ]
 "14
-[v _Si7021_humids Si7021_humids `[5]i  1 s 10 Si7021_humids ]
-[s S1100 . 3 `uc 1 started 1 0 `i 1 time 2 1 ]
+[v _Si7021_humids Si7021_humids `[5]d  1 s 20 Si7021_humids ]
+[s S1105 . 3 `uc 1 started 1 0 `i 1 time 2 1 ]
 "10 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
-[v _global_stopwatch global_stopwatch `VES1100  1 s 3 global_stopwatch ]
+[v _global_stopwatch global_stopwatch `VES1105  1 s 3 global_stopwatch ]
 "5 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
 [v _count count `VEi  1 s 2 count ]
 "6
 [v _read read `VEuc  1 s 1 read ]
-[s S889 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
+[s S894 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
 "22 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
-[v _RX_buf RX_buf `VES889  1 s 14 RX_buf ]
+[v _RX_buf RX_buf `VES894  1 s 14 RX_buf ]
 "23
-[v _TX_buf TX_buf `VES889  1 s 14 TX_buf ]
+[v _TX_buf TX_buf `VES894  1 s 14 TX_buf ]
 "35 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
 {
 "38
-[v main@ph ph `d  1 a 4 54 ]
+[v main@humidity humidity `d  1 a 4 180 ]
+[v main@temp temp `d  1 a 4 176 ]
+[v main@ph ph `d  1 a 4 172 ]
 "37
-[v main@c c `i  1 a 2 62 ]
-"39
-[v main@humidity humidity `i  1 a 2 60 ]
-[v main@temp temp `i  1 a 2 58 ]
-"96
+[v main@c c `i  1 a 2 184 ]
+"95
 } 0
 "69 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
 [v _system_init system_init `(v  1 e 1 0 ]
@@ -647,17 +706,17 @@ PENDING 3
 {
 "45
 } 0
-"104 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
-[v _send_data_int send_data_int `(v  1 e 1 0 ]
+"125 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+[v _send_data_double send_data_double `(v  1 e 1 0 ]
 {
-"106
-[v send_data_int@numbuf numbuf `[10]uc  1 a 10 44 ]
-"104
-[v send_data_int@field field `i  1 p 2 40 ]
-[v send_data_int@val val `i  1 p 2 42 ]
-"105
-[v send_data_int@strbuf strbuf `[60]uc  1 s 60 strbuf ]
-"124
+"127
+[v send_data_double@numbuf numbuf `[10]uc  1 a 10 95 ]
+"125
+[v send_data_double@field field `i  1 p 2 89 ]
+[v send_data_double@val val `d  1 p 4 91 ]
+"126
+[v send_data_double@strbuf strbuf `[60]uc  1 s 60 strbuf ]
+"145
 } 0
 "3 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\strcat.c
 [v _strcat strcat `(*.39uc  1 e 2 0 ]
@@ -677,6 +736,168 @@ PENDING 3
 [v strcpy@dest dest `*.39uc  1 p 2 11 ]
 [v strcpy@src src `*.35Cuc  1 p 2 13 ]
 "18
+} 0
+"39 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/util.c
+[v _dtoa dtoa `(v  1 e 1 0 ]
+{
+"41
+[v dtoa@dpart dpart `d  1 a 4 85 ]
+"42
+[v dtoa@i i `i  1 a 2 83 ]
+"40
+[v dtoa@ipart ipart `i  1 a 2 81 ]
+"39
+[v dtoa@num num `d  1 p 4 69 ]
+[v dtoa@buf buf `*.39uc  1 p 2 73 ]
+[v dtoa@radix radix `i  1 p 2 75 ]
+"50
+} 0
+"52 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\powf.c
+[v _powf powf `JJ(f  1 e 4 0 ]
+{
+"153
+[v powf@s2 s2 `f  1 a 4 124 ]
+[v powf@s_h s_h `f  1 a 4 88 ]
+[v powf@t_h t_h `f  1 a 4 84 ]
+[v powf@t_l t_l `f  1 a 4 40 ]
+[v powf@s_l s_l `f  1 a 4 36 ]
+[u S1613 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+"59
+[v powf@__xc8_float_word __xc8_float_word `S1613  1 a 4 168 ]
+"54
+[v powf@z z `f  1 a 4 164 ]
+"55
+[v powf@t t `f  1 a 4 160 ]
+"56
+[v powf@j j `l  1 a 4 156 ]
+"57
+[v powf@ix ix `l  1 a 4 152 ]
+"56
+[v powf@k k `l  1 a 4 144 ]
+"54
+[v powf@p_h p_h `f  1 a 4 136 ]
+"57
+[v powf@is is `l  1 a 4 132 ]
+[v powf@iy iy `l  1 a 4 128 ]
+"55
+[v powf@sn sn `f  1 a 4 120 ]
+[v powf@t1 t1 `f  1 a 4 116 ]
+"56
+[v powf@n n `l  1 a 4 112 ]
+"57
+[v powf@hy hy `l  1 a 4 108 ]
+"55
+[v powf@v v `f  1 a 4 104 ]
+[v powf@u u `f  1 a 4 100 ]
+"54
+[v powf@ax ax `f  1 a 4 96 ]
+[v powf@p_l p_l `f  1 a 4 80 ]
+"57
+[v powf@hx hx `l  1 a 4 76 ]
+"55
+[v powf@s s `f  1 a 4 72 ]
+"56
+[v powf@yisint yisint `l  1 a 4 60 ]
+"55
+[v powf@r r `f  1 a 4 56 ]
+[v powf@w w `f  1 a 4 48 ]
+"56
+[v powf@i i `l  1 a 4 32 ]
+"55
+[v powf@y1 y1 `f  1 a 4 28 ]
+"54
+[v powf@z_l z_l `f  1 a 4 24 ]
+[v powf@z_h z_h `f  1 a 4 20 ]
+"55
+[v powf@t2 t2 `f  1 a 4 16 ]
+"52
+[v powf@x x `f  1 p 4 52 ]
+[v powf@y y `f  1 p 4 56 ]
+"266
+} 0
+"24 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sqrtf.c
+[v _sqrtf sqrtf `(f  1 e 4 0 ]
+{
+"28
+[v sqrtf@ix ix `l  1 a 4 48 ]
+"29
+[v sqrtf@r r `ul  1 a 4 44 ]
+"28
+[v sqrtf@m m `l  1 a 4 40 ]
+"26
+[v sqrtf@z z `f  1 a 4 36 ]
+"28
+[v sqrtf@t t `l  1 a 4 32 ]
+[v sqrtf@q q `l  1 a 4 28 ]
+[u S1613 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+"31
+[v sqrtf@__xc8_float_word __xc8_float_word `S1613  1 a 4 24 ]
+"28
+[v sqrtf@i i `l  1 a 4 20 ]
+[v sqrtf@s s `l  1 a 4 16 ]
+"27
+[v sqrtf@sign sign `l  1 a 4 12 ]
+"24
+[v sqrtf@x x `f  1 p 4 0 ]
+"97
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\nanf.c
+[v _nanf nanf `(f  1 e 4 0 ]
+{
+[u S1613 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+"7
+[v nanf@u u `S1613  1 a 4 9 ]
+"4
+[v nanf@s s `*.25Cuc  1 p 2 5 ]
+"13
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
+{
+[v ___flneg@f1 f1 `d  1 p 4 44 ]
+"20
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\scalbnf.c
+[v _scalbnf scalbnf `(f  1 e 4 0 ]
+{
+"7
+[v scalbnf@y y `f  1 a 4 58 ]
+[u S1613 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+"6
+[v scalbnf@u u `S1613  1 a 4 54 ]
+"4
+[v scalbnf@x x `f  1 p 4 44 ]
+[v scalbnf@n n `i  1 p 2 48 ]
+"31
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\fabsf.c
+[v _fabsf fabsf `(f  1 e 4 0 ]
+{
+[u S1613 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+"6
+[v fabsf@u u `S1613  1 a 4 9 ]
+"4
+[v fabsf@x x `f  1 p 4 5 ]
+"5
+[v fabsf@F459 F459 `S1613  1 s 4 F459 ]
+"9
+} 0
+"245 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcadd.c
+[v ___flsub __flsub `(d  1 e 4 0 ]
+{
+[v ___flsub@b b `d  1 p 4 68 ]
+[v ___flsub@a a `d  1 p 4 72 ]
+"250
+} 0
+"43 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 14 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 13 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 5 ]
+"70
 } 0
 "73 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_send_data ESP8266_send_data `(v  1 e 1 0 ]
@@ -746,14 +967,14 @@ PENDING 3
 [v _ph_init ph_init `(v  1 e 1 0 ]
 {
 "14
-[v ph_init@i i `i  1 a 2 56 ]
+[v ph_init@i i `i  1 a 2 23 ]
 "19
 } 0
 "35
 [v _ph_read ph_read `(v  1 e 1 0 ]
 {
 "37
-[v ph_read@result result `i  1 a 2 54 ]
+[v ph_read@result result `i  1 a 2 21 ]
 "36
 [v ph_read@i i `i  1 s 2 i ]
 "44
@@ -762,95 +983,19 @@ PENDING 3
 [v _ptov ptov `(d  1 e 4 0 ]
 {
 "21
-[v ptov@result result `d  1 a 4 48 ]
+[v ptov@result result `d  1 a 4 17 ]
 "20
-[v ptov@ph ph `i  1 p 2 44 ]
+[v ptov@ph ph `i  1 p 2 13 ]
 "26
 } 0
-"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\xxtofl.c
-[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-{
-[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
-"13
-[v ___xxtofl@arg arg `ul  1 a 4 15 ]
-"12
-[v ___xxtofl@exp exp `uc  1 a 1 14 ]
-"10
-[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
-[v ___xxtofl@val val `l  1 p 4 5 ]
-"15
-[v ___xxtofl@sign sign `uc  1 a 1 13 ]
-"44
-} 0
-"8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcmul.c
-[v ___flmul __flmul `(d  1 e 4 0 ]
-{
-[s S1473 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
-"13
-[s S1478 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
-[u S1481 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1473 1 fAsBytes 4 0 `S1478 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S1481  1 a 4 24 ]
-"12
-[v ___flmul@grs grs `ul  1 a 4 18 ]
-[s S1549 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
-"14
-[u S1552 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1549 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1552  1 a 2 28 ]
-"10
-[v ___flmul@bexp bexp `uc  1 a 1 23 ]
-"11
-[v ___flmul@aexp aexp `uc  1 a 1 22 ]
-"9
-[v ___flmul@sign sign `uc  1 a 1 17 ]
-"8
-[v ___flmul@b b `d  1 p 4 5 ]
-[v ___flmul@a a `d  1 p 4 9 ]
-"205
-} 0
-"27 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
+"27
 [v _ph_avg ph_avg `(d  1 e 4 0 ]
 {
 "29
-[v ph_avg@avg avg `d  1 a 4 50 ]
+[v ph_avg@avg avg `d  1 a 4 17 ]
 "28
-[v ph_avg@i i `i  1 a 2 54 ]
+[v ph_avg@i i `i  1 a 2 21 ]
 "34
-} 0
-"11 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcdiv.c
-[v ___fldiv __fldiv `(d  1 e 4 0 ]
-{
-"21
-[v ___fldiv@grs grs `ul  1 a 4 38 ]
-"22
-[v ___fldiv@rem rem `ul  1 a 4 31 ]
-"20
-[v ___fldiv@new_exp new_exp `s  1 a 2 36 ]
-"19
-[v ___fldiv@aexp aexp `uc  1 a 1 43 ]
-"18
-[v ___fldiv@bexp bexp `uc  1 a 1 42 ]
-"16
-[v ___fldiv@sign sign `uc  1 a 1 35 ]
-"11
-[v ___fldiv@b b `d  1 p 4 19 ]
-[v ___fldiv@a a `d  1 p 4 23 ]
-"185
-} 0
-"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcadd.c
-[v ___fladd __fladd `(d  1 e 4 0 ]
-{
-"17
-[v ___fladd@grs grs `uc  1 a 1 24 ]
-"15
-[v ___fladd@bexp bexp `uc  1 a 1 23 ]
-"16
-[v ___fladd@aexp aexp `uc  1 a 1 22 ]
-"13
-[v ___fladd@signs signs `uc  1 a 1 21 ]
-"10
-[v ___fladd@b b `d  1 p 4 5 ]
-[v ___fladd@a a `d  1 p 4 9 ]
-"237
 } 0
 "63 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
 [v _lcd_init lcd_init `(v  1 e 1 0 ]
@@ -864,10 +1009,10 @@ PENDING 3
 [v lcd_clear@i i `i  1 a 2 61 ]
 "153
 } 0
-"98 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"97 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _connect_to_wifi connect_to_wifi `(v  1 e 1 0 ]
 {
-"102
+"101
 } 0
 "40 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_reset ESP8266_reset `(v  1 e 1 0 ]
@@ -931,7 +1076,20 @@ PENDING 3
 [v stopwatch_start@seconds seconds `i  1 p 2 19 ]
 "39
 } 0
-"48
+"7 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 17 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 16 ]
+[v ___awdiv@counter counter `uc  1 a 1 15 ]
+"7
+[v ___awdiv@dividend dividend `i  1 p 2 11 ]
+[v ___awdiv@divisor divisor `i  1 p 2 13 ]
+"41
+} 0
+"48 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
 [v _stopwatch_is_started stopwatch_is_started `(uc  1 e 1 0 ]
 {
 "50
@@ -1014,16 +1172,6 @@ PENDING 3
 {
 "135
 } 0
-"43 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\fltol.c
-[v ___fltol __fltol `(l  1 e 4 0 ]
-{
-"45
-[v ___fltol@exp1 exp1 `uc  1 a 1 14 ]
-[v ___fltol@sign1 sign1 `uc  1 a 1 13 ]
-"43
-[v ___fltol@f1 f1 `d  1 p 4 5 ]
-"70
-} 0
 "25 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
 [v _TIMER0_stop TIMER0_stop `(v  1 e 1 0 ]
 {
@@ -1049,52 +1197,91 @@ PENDING 3
 {
 "21
 } 0
-"35 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+"37 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
 [v _Si7021_init Si7021_init `(v  1 e 1 0 ]
 {
-"36
-[v Si7021_init@i i `i  1 a 2 24 ]
-"44
+"38
+[v Si7021_init@i i `i  1 a 2 23 ]
+"46
 } 0
-"79
+"81
 [v _Si7021_read_temp Si7021_read_temp `(v  1 e 1 0 ]
 {
-"80
+"82
 [v Si7021_read_temp@i i `i  1 s 2 i ]
-"88
+"90
 } 0
-"29
-[v _convert_temp convert_temp `(i  1 e 2 0 ]
-{
 "30
-[v convert_temp@temp_code temp_code `i  1 a 2 22 ]
-[v convert_temp@result result `i  1 a 2 20 ]
-"34
+[v _convert_temp convert_temp `(d  1 e 4 0 ]
+{
+"32
+[v convert_temp@result result `d  1 a 4 17 ]
+"31
+[v convert_temp@temp_code temp_code `i  1 a 2 21 ]
+"36
 } 0
-"68
+"70
 [v _Si7021_read_humidity Si7021_read_humidity `(v  1 e 1 0 ]
 {
-"69
+"71
 [v Si7021_read_humidity@i i `i  1 s 2 i ]
-"77
+"79
 } 0
 "15
-[v _convert_humidity convert_humidity `(i  1 e 2 0 ]
-{
-"16
-[v convert_humidity@result result `i  1 a 2 22 ]
-[v convert_humidity@rh_code rh_code `i  1 a 2 20 ]
-"27
-} 0
-"15 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\Umul32.c
-[v ___lmul __lmul `(ul  1 e 4 0 ]
+[v _convert_humidity convert_humidity `(d  1 e 4 0 ]
 {
 "17
-[v ___lmul@product product `ul  1 a 4 13 ]
+[v convert_humidity@result result `d  1 a 4 19 ]
+"16
+[v convert_humidity@rh_code rh_code `i  1 a 2 17 ]
+"28
+} 0
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 15 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 14 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 5 ]
 "15
-[v ___lmul@multiplier multiplier `ul  1 p 4 5 ]
-[v ___lmul@multiplicand multiplicand `ul  1 p 4 9 ]
-"129
+[v ___xxtofl@sign sign `uc  1 a 1 13 ]
+"44
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+{
+[s S1478 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+"13
+[s S1483 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
+[u S1486 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1478 1 fAsBytes 4 0 `S1483 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S1486  1 a 4 38 ]
+"12
+[v ___flmul@grs grs `ul  1 a 4 33 ]
+[s S1554 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+"14
+[u S1557 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1554 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1557  1 a 2 42 ]
+"10
+[v ___flmul@bexp bexp `uc  1 a 1 37 ]
+"11
+[v ___flmul@aexp aexp `uc  1 a 1 32 ]
+"9
+[v ___flmul@sign sign `uc  1 a 1 31 ]
+"8
+[v ___flmul@b b `d  1 p 4 19 ]
+[v ___flmul@a a `d  1 p 4 23 ]
+"205
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+{
+[v ___flge@ff1 ff1 `d  1 p 4 68 ]
+[v ___flge@ff2 ff2 `d  1 p 4 72 ]
+"19
 } 0
 "7 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -1149,36 +1336,59 @@ PENDING 3
 {
 "141
 } 0
-"54 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
-[v _Si7021_avg_temp Si7021_avg_temp `(i  1 e 2 0 ]
+"56 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+[v _Si7021_avg_temp Si7021_avg_temp `(d  1 e 4 0 ]
 {
-"55
-[v Si7021_avg_temp@i i `i  1 a 2 23 ]
-"56
-[v Si7021_avg_temp@result result `i  1 a 2 21 ]
-"62
+"58
+[v Si7021_avg_temp@result result `d  1 a 4 19 ]
+"57
+[v Si7021_avg_temp@i i `i  1 a 2 17 ]
+"64
 } 0
-"45
-[v _Si7021_avg_humidity Si7021_avg_humidity `(i  1 e 2 0 ]
-{
-"46
-[v Si7021_avg_humidity@i i `i  1 a 2 23 ]
 "47
-[v Si7021_avg_humidity@result result `i  1 a 2 21 ]
-"53
-} 0
-"7 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
+[v _Si7021_avg_humidity Si7021_avg_humidity `(d  1 e 4 0 ]
 {
-"10
-[v ___awdiv@quotient quotient `i  1 a 2 17 ]
+"49
+[v Si7021_avg_humidity@result result `d  1 a 4 19 ]
+"48
+[v Si7021_avg_humidity@i i `i  1 a 2 17 ]
+"55
+} 0
+"11 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 7 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 0 ]
+"20
+[v ___fldiv@new_exp new_exp `s  1 a 2 5 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 12 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 11 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 4 ]
 "11
-[v ___awdiv@sign sign `uc  1 a 1 16 ]
-[v ___awdiv@counter counter `uc  1 a 1 15 ]
-"7
-[v ___awdiv@dividend dividend `i  1 p 2 11 ]
-[v ___awdiv@divisor divisor `i  1 p 2 13 ]
-"41
+[v ___fldiv@b b `d  1 p 4 68 ]
+[v ___fldiv@a a `d  1 p 4 72 ]
+"185
+} 0
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 67 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 66 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 65 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 64 ]
+"10
+[v ___fladd@b b `d  1 p 4 48 ]
+[v ___fladd@a a `d  1 p 4 52 ]
+"237
 } 0
 "11 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/interrupt.c
 [v _MAIN_ISR MAIN_ISR `IIH(v  1 e 1 0 ]
