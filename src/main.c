@@ -8,24 +8,27 @@
 #include <xc.h>
 #include <string.h>
 #include "../headers/mc_init.h"
+#include "../headers/uart.h"
 #include "../headers/lcd.h"
 #include "../headers/esp8266.h"
 #include "../headers/util.h"
 #include "../headers/Si7021.h"
 #include "../headers/ph.h"
 #include "../headers/timer0.h"
+#include "../headers/stopwatch.h"
 
 #define TEMP_FIELD 3
 #define HUMIDITY_FIELD 2
 #define PH_FIELD 1
 #define TEST_FIELD 4
 #define UPDATES 5
+#define types 3
 int PORT = 80;
 char * SSID = "test_ap";
 char * PASS = "incredible14!";
 char * IP = "api.thingspeak.com";
 
-
+char * labels[] = {"PH", "HUMIDITY", "TEMP"};
 void connect_to_wifi(void);
 void send_data_double(int field, double val); // FIX ME int -> double 
 //void send_data_int(int field, int val);
@@ -35,7 +38,7 @@ void send_data_double(int field, double val); // FIX ME int -> double
 int main() {
 //    char c;
     int c = 0;
-    double ph, temp, humidity;
+    double result;
     system_init();
     lcd_init();
     lcd_clear();
@@ -54,40 +57,42 @@ int main() {
     while(1) {
         // END 
         if(!TIMER0_is_read()) {
-            TIMER0_stop(); // Disable timer to do work
-            c = TIMER0_get_count();
-            // Open socket
-            if(c >= UPDATES) { // Every ~2 minutes
-                TIMER0_reset(); 
-                
-                // Process averages
-                temp = Si7021_avg_temp();
-                humidity = Si7021_avg_humidity();
-                ph = ph_avg();
-                
-                // Send data
-                send_data_double(TEMP_FIELD, temp);
-                send_data_double(HUMIDITY_FIELD, humidity);
-                send_data_double(PH_FIELD, ph);
-                
-                // Close socket
-                
-                
-                // Update lcd
-                lcd_newline();
-                lcd_puts("DATA SENT");
-                lcd_update();
-                
-                
-            } else { // Every ~30 seconds
-                ph_read();
-                Si7021_read_temp();
-                Si7021_read_humidity();
-                lcd_newline();
-                lcd_puts("DATA UPDATED");
-                lcd_update();
+            // Disable timer to do work
+            TIMER0_stop(); 
+            c = TIMER0_get_count() % 3;
+           
+            // Calculate one of the types
+            switch(c) {
+                case 0:
+                    result = ph_avg();
+                    break;
+                case 1:
+                    result = Si7021_avg_humidity();
+                    break;
+                case 2:
+                    result = Si7021_avg_temp();
+                    break;
+                default:
+                    result = ph_avg();
+                    c = 0;
             }
-            TIMER0_start(); // Enable timer
+            
+            // Send data
+            send_data_double(c + 1, result);
+            
+            // Update lcd
+            lcd_newline();
+            lcd_puts(labels[c]);
+            lcd_puts(" DATA SENT");
+            lcd_update();
+
+            // Update all values
+            ph_read();
+            Si7021_read_temp();
+            Si7021_read_humidity();
+            
+            // Enable timer
+            TIMER0_start(); 
         }
     }
     
@@ -141,5 +146,6 @@ void send_data_double(int field, double val) {
     // NOTE SOCKET MUST BE OPEN
     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
     ESP8266_send_data(strbuf);
-    ESP8266_close_socket();
+//    ESP8266_close_socket();
+    // delay 5 second
 }

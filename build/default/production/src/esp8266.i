@@ -15701,7 +15701,7 @@ void dtoa(double num, char * buf, int radix);
 # 3 "src/esp8266.c" 2
 
 # 1 "src/../headers/esp8266.h" 1
-# 20 "src/../headers/esp8266.h"
+# 23 "src/../headers/esp8266.h"
 typedef enum {
     TCP, UDP, SSL
 }ESP8266_socket_type;
@@ -15712,6 +15712,8 @@ void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data);
+void ESP8266_start_transparent_xmission(void);
+void ESP8266_end_transparent_xmission(void);
 void ESP8266_close_socket(void);
 char ESP8266_responseOK(void);
 # 4 "src/esp8266.c" 2
@@ -15770,7 +15772,7 @@ void ESP8266_init(void) {
     UART_puts("\r\n");
     ESP8266_lookfor("OK", 10);
 
-    UART_puts("AT+CIPMUX=1");
+    UART_puts("AT+CIPMUX=0");
     UART_puts("\r\n");
     ESP8266_lookfor("OK", 10);
 }
@@ -15797,7 +15799,7 @@ void ESP8266_connect(char * name, char * pass) {
 void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
-    UART_puts("AT+CIPSTART=0,");
+    UART_puts("AT+CIPSTART=");
     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(ip);UART_putc('\"');
@@ -15811,12 +15813,26 @@ void ESP8266_send_data(char * data) {
     char buffer[10];
     int len = strlen(data);
     itoa(len, buffer, 10);
-    UART_puts("AT+CIPSEND=0,");
+    UART_puts("AT+CIPSEND=");
     UART_puts(buffer);
     UART_puts("\r\n");
-    ESP8266_lookfor(">", 10);
+    ESP8266_lookfor("OK", 10);
     UART_puts(data);
     ESP8266_lookfor("SEND OK", 10);
+
+}
+void ESP8266_start_transparent_xmission() {
+    UART_puts("AT+CIPMODE=1");
+    UART_puts("\r\n");
+    ESP8266_lookfor("OK", 10);
+
+    UART_puts("AT+CIPSEND");
+    UART_puts("\r\n");
+
+}
+void ESP8266_end_transparent_xmission() {
+    UART_puts("+++");
+    UART_puts("AT+CIPMODE=0");
 
 }
 void ESP8266_close_socket(){
@@ -15852,5 +15868,6 @@ char ESP8266_lookfor(const char * str, int timeout) {
         lcd_puts(buffer);
         lcd_update();
     }
+    stopwatch_stop();
     return found;
 }

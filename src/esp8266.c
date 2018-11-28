@@ -77,10 +77,24 @@ void ESP8266_send_data(char * data) {
     UART_puts(ATCIPSEND);
     UART_puts(buffer);
     ESP8266_COMMAND_END();
-    ESP8266_lookfor(">", ESP8266_MAX_TIMEOUT);
+    ESP8266_lookfor("OK", ESP8266_MAX_TIMEOUT);
     UART_puts(data);
     ESP8266_lookfor("SEND OK", ESP8266_MAX_TIMEOUT);
 
+}
+void ESP8266_start_transparent_xmission() {
+    UART_puts(ATCIPMODE_ON);
+    ESP8266_COMMAND_END();
+    ESP8266_lookfor("OK", ESP8266_MAX_TIMEOUT);
+    
+    UART_puts(ATCIPSENDT);
+    ESP8266_COMMAND_END();
+    
+}
+void ESP8266_end_transparent_xmission() {
+    UART_puts("+++");
+    UART_puts(ATCIPMODE_OFF);
+    
 }
 void ESP8266_close_socket(){
     UART_puts(ATCIPCLOSE);
@@ -115,5 +129,6 @@ char ESP8266_lookfor(const char * str, int timeout) {
         lcd_puts(buffer);
         lcd_update();
     }
+    stopwatch_stop();
     return found;
 }

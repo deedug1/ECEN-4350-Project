@@ -42,6 +42,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "54
 [; ;src/../headers/lcd.h: 54: void lcd_update(void);
 [v _lcd_update `(v ~T0 @X0 0 ef ]
+"21 src/../headers/stopwatch.h
+[; ;src/../headers/stopwatch.h: 21: void stopwatch_stop(void);
+[v _stopwatch_stop `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1353,7 +1356,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/esp8266.c: 34:     ESP8266_lookfor("OK", 10);
 [e ( _ESP8266_lookfor (2 , :s 12C -> 10 `i ]
 "36
-[; ;src/esp8266.c: 36:     UART_puts("AT+CIPMUX=1");
+[; ;src/esp8266.c: 36:     UART_puts("AT+CIPMUX=0");
 [e ( _UART_puts (1 :s 13C ]
 "37
 [; ;src/esp8266.c: 37:     UART_puts("\r\n");
@@ -1448,7 +1451,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/esp8266.c: 62:     itoa(port, buffer, 10);
 [e ( _itoa (3 , , _port &U _buffer -> 10 `i ]
 "63
-[; ;src/esp8266.c: 63:     UART_puts("AT+CIPSTART=0,");
+[; ;src/esp8266.c: 63:     UART_puts("AT+CIPSTART=");
 [e ( _UART_puts (1 :s 25C ]
 "64
 [; ;src/esp8266.c: 64:     UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
@@ -1497,7 +1500,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/esp8266.c: 76:     itoa(len, buffer, 10);
 [e ( _itoa (3 , , _len &U _buffer -> 10 `i ]
 "77
-[; ;src/esp8266.c: 77:     UART_puts("AT+CIPSEND=0,");
+[; ;src/esp8266.c: 77:     UART_puts("AT+CIPSEND=");
 [e ( _UART_puts (1 :s 28C ]
 "78
 [; ;src/esp8266.c: 78:     UART_puts(buffer);
@@ -1506,7 +1509,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/esp8266.c: 79:     UART_puts("\r\n");
 [e ( _UART_puts (1 :s 29C ]
 "80
-[; ;src/esp8266.c: 80:     ESP8266_lookfor(">", 10);
+[; ;src/esp8266.c: 80:     ESP8266_lookfor("OK", 10);
 [e ( _ESP8266_lookfor (2 , :s 30C -> 10 `i ]
 "81
 [; ;src/esp8266.c: 81:     UART_puts(data);
@@ -1519,13 +1522,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 1393 ]
 }
 "85
-[; ;src/esp8266.c: 85: void ESP8266_close_socket(){
-[v _ESP8266_close_socket `(v ~T0 @X0 1 ef ]
+[; ;src/esp8266.c: 85: void ESP8266_start_transparent_xmission() {
+[v _ESP8266_start_transparent_xmission `(v ~T0 @X0 1 ef ]
 {
-[e :U _ESP8266_close_socket ]
+[e :U _ESP8266_start_transparent_xmission ]
 [f ]
 "86
-[; ;src/esp8266.c: 86:     UART_puts("AT+CIPClOSE");
+[; ;src/esp8266.c: 86:     UART_puts("AT+CIPMODE=1");
 [e ( _UART_puts (1 :s 32C ]
 "87
 [; ;src/esp8266.c: 87:     UART_puts("\r\n");
@@ -1533,122 +1536,166 @@ Version 4.0 HI-TECH Software Intermediate Code
 "88
 [; ;src/esp8266.c: 88:     ESP8266_lookfor("OK", 10);
 [e ( _ESP8266_lookfor (2 , :s 34C -> 10 `i ]
-"89
-[; ;src/esp8266.c: 89: }
+"90
+[; ;src/esp8266.c: 90:     UART_puts("AT+CIPSEND");
+[e ( _UART_puts (1 :s 35C ]
+"91
+[; ;src/esp8266.c: 91:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 36C ]
+"93
+[; ;src/esp8266.c: 93: }
 [e :UE 1394 ]
 }
-"90
-[; ;src/esp8266.c: 90: char ESP8266_lookfor(const char * str, int timeout) {
+"94
+[; ;src/esp8266.c: 94: void ESP8266_end_transparent_xmission() {
+[v _ESP8266_end_transparent_xmission `(v ~T0 @X0 1 ef ]
+{
+[e :U _ESP8266_end_transparent_xmission ]
+[f ]
+"95
+[; ;src/esp8266.c: 95:     UART_puts("+++");
+[e ( _UART_puts (1 :s 37C ]
+"96
+[; ;src/esp8266.c: 96:     UART_puts("AT+CIPMODE=0");
+[e ( _UART_puts (1 :s 38C ]
+"98
+[; ;src/esp8266.c: 98: }
+[e :UE 1395 ]
+}
+"99
+[; ;src/esp8266.c: 99: void ESP8266_close_socket(){
+[v _ESP8266_close_socket `(v ~T0 @X0 1 ef ]
+{
+[e :U _ESP8266_close_socket ]
+[f ]
+"100
+[; ;src/esp8266.c: 100:     UART_puts("AT+CIPClOSE");
+[e ( _UART_puts (1 :s 39C ]
+"101
+[; ;src/esp8266.c: 101:     UART_puts("\r\n");
+[e ( _UART_puts (1 :s 40C ]
+"102
+[; ;src/esp8266.c: 102:     ESP8266_lookfor("OK", 10);
+[e ( _ESP8266_lookfor (2 , :s 41C -> 10 `i ]
+"103
+[; ;src/esp8266.c: 103: }
+[e :UE 1396 ]
+}
+"104
+[; ;src/esp8266.c: 104: char ESP8266_lookfor(const char * str, int timeout) {
 [v _ESP8266_lookfor `(uc ~T0 @X0 1 ef2`*Cuc`i ]
 {
 [e :U _ESP8266_lookfor ]
 [v _str `*Cuc ~T0 @X0 1 r1 ]
 [v _timeout `i ~T0 @X0 1 r2 ]
 [f ]
-"91
-[; ;src/esp8266.c: 91:     char c = 0, found = 0;
+"105
+[; ;src/esp8266.c: 105:     char c = 0, found = 0;
 [v _c `uc ~T0 @X0 1 a ]
 [e = _c -> -> 0 `i `uc ]
 [v _found `uc ~T0 @X0 1 a ]
 [e = _found -> -> 0 `i `uc ]
-"92
-[; ;src/esp8266.c: 92:     char buffer[32];
+"106
+[; ;src/esp8266.c: 106:     char buffer[32];
 [v _buffer `uc ~T0 @X0 -> 32 `i a ]
-"93
-[; ;src/esp8266.c: 93:     int i = 0;
+"107
+[; ;src/esp8266.c: 107:     int i = 0;
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-"95
-[; ;src/esp8266.c: 95:     stopwatch_start(timeout);
-[e ( _stopwatch_start (1 _timeout ]
-"96
-[; ;src/esp8266.c: 96:     while(!found && stopwatch_is_started()) {
-[e $U 1396  ]
-[e :U 1397 ]
-{
-"97
-[; ;src/esp8266.c: 97:         if(UART_can_rx()) {
-[e $ ! != -> ( _UART_can_rx ..  `i -> 0 `i 1399  ]
-{
-"98
-[; ;src/esp8266.c: 98:             c = UART_getc();
-[e = _c ( _UART_getc ..  ]
-"100
-[; ;src/esp8266.c: 100:             if( c == '\r' || c == '\n') {
-[e $ ! || == -> _c `ui -> 13 `ui == -> _c `ui -> 10 `ui 1400  ]
-{
-"101
-[; ;src/esp8266.c: 101:                 buffer[i] = '\0';
-[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `ui `uc ]
-"102
-[; ;src/esp8266.c: 102:                 found = strcmp(buffer, str) == 0;
-[e = _found -> -> == ( _strcmp (2 , -> &U _buffer `*Cuc _str -> 0 `i `i `uc ]
-"103
-[; ;src/esp8266.c: 103:                 i = 0;
-[e = _i -> 0 `i ]
-"104
-[; ;src/esp8266.c: 104:             } else {
-}
-[e $U 1401  ]
-[e :U 1400 ]
-{
-"105
-[; ;src/esp8266.c: 105:                 buffer[i] = c;
-[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux _c ]
-"106
-[; ;src/esp8266.c: 106:                 i++;
-[e ++ _i -> 1 `i ]
-"107
-[; ;src/esp8266.c: 107:             }
-}
-[e :U 1401 ]
-"108
-[; ;src/esp8266.c: 108:             if(i >= 32) {
-[e $ ! >= _i -> 32 `i 1402  ]
-{
 "109
-[; ;src/esp8266.c: 109:                 i = 0;
-[e = _i -> 0 `i ]
+[; ;src/esp8266.c: 109:     stopwatch_start(timeout);
+[e ( _stopwatch_start (1 _timeout ]
 "110
-[; ;src/esp8266.c: 110:             }
-}
-[e :U 1402 ]
-"111
-[; ;src/esp8266.c: 111:         }
-}
+[; ;src/esp8266.c: 110:     while(!found && stopwatch_is_started()) {
+[e $U 1398  ]
 [e :U 1399 ]
-"112
-[; ;src/esp8266.c: 112:     }
-}
-[e :U 1396 ]
-"96
-[; ;src/esp8266.c: 96:     while(!found && stopwatch_is_started()) {
-[e $ && ! != -> _found `i -> 0 `i != -> ( _stopwatch_is_started ..  `i -> 0 `i 1397  ]
-[e :U 1398 ]
-"113
-[; ;src/esp8266.c: 113:     if(found && 1) {
-[e $ ! && != -> _found `i -> 0 `i != -> 1 `i -> 0 `i 1403  ]
 {
+"111
+[; ;src/esp8266.c: 111:         if(UART_can_rx()) {
+[e $ ! != -> ( _UART_can_rx ..  `i -> 0 `i 1401  ]
+{
+"112
+[; ;src/esp8266.c: 112:             c = UART_getc();
+[e = _c ( _UART_getc ..  ]
 "114
-[; ;src/esp8266.c: 114:         lcd_newline();
-[e ( _lcd_newline ..  ]
+[; ;src/esp8266.c: 114:             if( c == '\r' || c == '\n') {
+[e $ ! || == -> _c `ui -> 13 `ui == -> _c `ui -> 10 `ui 1402  ]
+{
 "115
-[; ;src/esp8266.c: 115:         lcd_puts(buffer);
-[e ( _lcd_puts (1 &U _buffer ]
+[; ;src/esp8266.c: 115:                 buffer[i] = '\0';
+[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `ui `uc ]
 "116
-[; ;src/esp8266.c: 116:         lcd_update();
-[e ( _lcd_update ..  ]
+[; ;src/esp8266.c: 116:                 found = strcmp(buffer, str) == 0;
+[e = _found -> -> == ( _strcmp (2 , -> &U _buffer `*Cuc _str -> 0 `i `i `uc ]
 "117
-[; ;src/esp8266.c: 117:     }
+[; ;src/esp8266.c: 117:                 i = 0;
+[e = _i -> 0 `i ]
+"118
+[; ;src/esp8266.c: 118:             } else {
+}
+[e $U 1403  ]
+[e :U 1402 ]
+{
+"119
+[; ;src/esp8266.c: 119:                 buffer[i] = c;
+[e = *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux _c ]
+"120
+[; ;src/esp8266.c: 120:                 i++;
+[e ++ _i -> 1 `i ]
+"121
+[; ;src/esp8266.c: 121:             }
 }
 [e :U 1403 ]
-"118
-[; ;src/esp8266.c: 118:     return found;
+"122
+[; ;src/esp8266.c: 122:             if(i >= 32) {
+[e $ ! >= _i -> 32 `i 1404  ]
+{
+"123
+[; ;src/esp8266.c: 123:                 i = 0;
+[e = _i -> 0 `i ]
+"124
+[; ;src/esp8266.c: 124:             }
+}
+[e :U 1404 ]
+"125
+[; ;src/esp8266.c: 125:         }
+}
+[e :U 1401 ]
+"126
+[; ;src/esp8266.c: 126:     }
+}
+[e :U 1398 ]
+"110
+[; ;src/esp8266.c: 110:     while(!found && stopwatch_is_started()) {
+[e $ && ! != -> _found `i -> 0 `i != -> ( _stopwatch_is_started ..  `i -> 0 `i 1399  ]
+[e :U 1400 ]
+"127
+[; ;src/esp8266.c: 127:     if(found && 1) {
+[e $ ! && != -> _found `i -> 0 `i != -> 1 `i -> 0 `i 1405  ]
+{
+"128
+[; ;src/esp8266.c: 128:         lcd_newline();
+[e ( _lcd_newline ..  ]
+"129
+[; ;src/esp8266.c: 129:         lcd_puts(buffer);
+[e ( _lcd_puts (1 &U _buffer ]
+"130
+[; ;src/esp8266.c: 130:         lcd_update();
+[e ( _lcd_update ..  ]
+"131
+[; ;src/esp8266.c: 131:     }
+}
+[e :U 1405 ]
+"132
+[; ;src/esp8266.c: 132:     stopwatch_stop();
+[e ( _stopwatch_stop ..  ]
+"133
+[; ;src/esp8266.c: 133:     return found;
 [e ) _found ]
-[e $UE 1395  ]
-"119
-[; ;src/esp8266.c: 119: }
-[e :UE 1395 ]
+[e $UE 1397  ]
+"134
+[; ;src/esp8266.c: 134: }
+[e :UE 1397 ]
 }
 [a 18C 114 101 97 100 121 0 ]
 [a 16C 65 84 43 82 83 84 0 ]
@@ -1666,15 +1713,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 23C 79 75 0 ]
 [a 24C 79 75 0 ]
 [a 27C 79 75 0 ]
+[a 30C 79 75 0 ]
 [a 34C 79 75 0 ]
-[a 32C 65 84 43 67 73 80 67 108 79 83 69 0 ]
-[a 30C 62 0 ]
+[a 41C 79 75 0 ]
+[a 39C 65 84 43 67 73 80 67 108 79 83 69 0 ]
+[a 35C 65 84 43 67 73 80 83 69 78 68 0 ]
+[a 25C 65 84 43 67 73 80 83 84 65 82 84 61 0 ]
 [a 19C 65 84 43 67 87 74 65 80 95 67 85 82 61 0 ]
+[a 28C 65 84 43 67 73 80 83 69 78 68 61 0 ]
 [a 10C 65 84 43 67 87 77 79 68 69 95 67 85 82 61 51 0 ]
-[a 13C 65 84 43 67 73 80 77 85 88 61 49 0 ]
+[a 32C 65 84 43 67 73 80 77 79 68 69 61 49 0 ]
 [a 7C 65 84 69 48 0 ]
-[a 25C 65 84 43 67 73 80 83 84 65 82 84 61 48 44 0 ]
-[a 28C 65 84 43 67 73 80 83 69 78 68 61 48 44 0 ]
+[a 13C 65 84 43 67 73 80 77 85 88 61 48 0 ]
+[a 38C 65 84 43 67 73 80 77 79 68 69 61 48 0 ]
+[a 37C 43 43 43 0 ]
 [a 5C 13 10 0 ]
 [a 8C 13 10 0 ]
 [a 11C 13 10 0 ]
@@ -1684,3 +1736,5 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 26C 13 10 0 ]
 [a 29C 13 10 0 ]
 [a 33C 13 10 0 ]
+[a 36C 13 10 0 ]
+[a 40C 13 10 0 ]

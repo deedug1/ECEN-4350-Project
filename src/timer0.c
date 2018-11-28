@@ -5,9 +5,9 @@
 static volatile int count = 0;
 static volatile char read = 1;
 void TIMER0_init() {
-    // Setup ~1 minute timer
-    T0CON0 = 0x1E; // POST-SCALER 15
-    T0CON1 = 0x47; // PRE-SCALER 128
+    // Setup ~7/60 minute timer
+    T0CON0 = 0x1F; // POST-SCALER 15
+    T0CON1 = 0x46; // PRE-SCALER 32
     
 }
 

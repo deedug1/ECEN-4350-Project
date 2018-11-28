@@ -1364,8 +1364,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 1385 ]
 "31
-[; ;src/stopwatch.c: 31:     cmp = (char)((seconds * 31250) / 1920);
-[e = _cmp -> / * _seconds -> 31250 `i -> 1920 `i `uc ]
+[; ;src/stopwatch.c: 31:     cmp = (char)(seconds * 16);
+[e = _cmp -> * _seconds -> 16 `i `uc ]
 "32
 [; ;src/stopwatch.c: 32:     T2PR = cmp;
 [e = _T2PR -> _cmp `uc ]
@@ -1395,54 +1395,57 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/stopwatch.c: 41:     PIE4bits.TMR2IE = 0;
 [e = . . _PIE4bits 0 1 -> -> 0 `i `uc ]
 "42
-[; ;src/stopwatch.c: 42:     T2CON &= 0x7F;
-[e =& _T2CON -> -> 127 `i `Vuc ]
+[; ;src/stopwatch.c: 42:     PIR4bits.TMR2IF = 0;
+[e = . . _PIR4bits 0 1 -> -> 0 `i `uc ]
 "43
-[; ;src/stopwatch.c: 43:     global_stopwatch.started = 0;
-[e = . _global_stopwatch 0 -> -> 0 `i `uc ]
+[; ;src/stopwatch.c: 43:     T2CON &= 0x7F;
+[e =& _T2CON -> -> 127 `i `Vuc ]
 "44
-[; ;src/stopwatch.c: 44: }
+[; ;src/stopwatch.c: 44:     global_stopwatch.started = 0;
+[e = . _global_stopwatch 0 -> -> 0 `i `uc ]
+"45
+[; ;src/stopwatch.c: 45: }
 [e :UE 1386 ]
 }
-"45
-[; ;src/stopwatch.c: 45: int stopwatch_get_time() {
+"46
+[; ;src/stopwatch.c: 46: int stopwatch_get_time() {
 [v _stopwatch_get_time `(i ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_get_time ]
 [f ]
-"46
-[; ;src/stopwatch.c: 46:     return global_stopwatch.time;
+"47
+[; ;src/stopwatch.c: 47:     return global_stopwatch.time;
 [e ) . _global_stopwatch 1 ]
 [e $UE 1387  ]
-"47
-[; ;src/stopwatch.c: 47: }
+"48
+[; ;src/stopwatch.c: 48: }
 [e :UE 1387 ]
 }
-"48
-[; ;src/stopwatch.c: 48: char stopwatch_is_started() {
+"49
+[; ;src/stopwatch.c: 49: char stopwatch_is_started() {
 [v _stopwatch_is_started `(uc ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_is_started ]
 [f ]
-"49
-[; ;src/stopwatch.c: 49:     return global_stopwatch.started;
+"50
+[; ;src/stopwatch.c: 50:     return global_stopwatch.started;
 [e ) . _global_stopwatch 0 ]
 [e $UE 1388  ]
-"50
-[; ;src/stopwatch.c: 50: }
+"51
+[; ;src/stopwatch.c: 51: }
 [e :UE 1388 ]
 }
-"51
-[; ;src/stopwatch.c: 51: char stopwatch_is_stopped() {
+"52
+[; ;src/stopwatch.c: 52: char stopwatch_is_stopped() {
 [v _stopwatch_is_stopped `(uc ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_is_stopped ]
 [f ]
-"52
-[; ;src/stopwatch.c: 52:     return !global_stopwatch.started;
+"53
+[; ;src/stopwatch.c: 53:     return !global_stopwatch.started;
 [e ) -> -> ! != -> . _global_stopwatch 0 `i -> 0 `i `i `uc ]
 [e $UE 1389  ]
-"53
-[; ;src/stopwatch.c: 53: }
+"54
+[; ;src/stopwatch.c: 54: }
 [e :UE 1389 ]
 }

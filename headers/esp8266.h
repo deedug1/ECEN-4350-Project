@@ -9,13 +9,16 @@
 #define	ESP8266_H
 
 // AT-Commands
-#define ATCWMODE    "AT+CWMODE_CUR=3"   // Set as station / soft AP
-#define ATCIPMUX    "AT+CIPMUX=1"
-#define ATCWJAP     "AT+CWJAP_CUR="     // Join access point
-#define ATCIPSTART  "AT+CIPSTART=0,"    // Start socket /* NOTE: '0' is for link is invalid bug */
-#define ATCIPSEND   "AT+CIPSEND=0,"     // Send data /* NOTE: '0' is for link is invalid bug */
-#define ATCIPCLOSE  "AT+CIPClOSE"       // Close socket 
-#define ATRESET     "AT+RST"            // Resets the module    
+#define ATCWMODE        "AT+CWMODE_CUR=3"   // Set as station / soft AP
+#define ATCIPMODE_ON    "AT+CIPMODE=1"      // Set transparent transmission mode
+#define ATCIPMODE_OFF   "AT+CIPMODE=0"      // Disable transparent transmission mode
+#define ATCIPMUX        "AT+CIPMUX=0"       // Set single connection mode
+#define ATCWJAP         "AT+CWJAP_CUR="     // Join access point
+#define ATCIPSTART      "AT+CIPSTART="      // Start socket /* NOTE: '0' is for link is invalid bug */
+#define ATCIPSEND       "AT+CIPSEND="
+#define ATCIPSENDT      "AT+CIPSEND"  
+#define ATCIPCLOSE      "AT+CIPClOSE"       // Close socket 
+#define ATRESET         "AT+RST"            // Resets the module    
 
 typedef enum {
     TCP, UDP, SSL
@@ -27,6 +30,8 @@ void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data);
+void ESP8266_start_transparent_xmission(void);
+void ESP8266_end_transparent_xmission(void);
 void ESP8266_close_socket(void);
 char ESP8266_responseOK(void);
 

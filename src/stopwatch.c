@@ -28,7 +28,7 @@ void stopwatch_start(int seconds) {
         return; // Timer already started do not restart
     }
     // Calculate tmr register compare value
-    cmp = (char)((seconds * 31250) / 1920); // t * 31250 / (128 * 15)
+    cmp = (char)(seconds * 16); // t * 31250 / (128 * 15)
     STOPWATCH_CMP = cmp;
     // Set stopwatch values
     global_stopwatch.time = seconds;
@@ -39,6 +39,7 @@ void stopwatch_start(int seconds) {
 }
 void stopwatch_stop() {
     STOPWATCH_INTE = 0;
+    STOPWATCH_INTF = 0;
     STOPWATCH_CON &= 0x7F;
     global_stopwatch.started = 0;
 }

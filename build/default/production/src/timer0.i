@@ -15654,8 +15654,8 @@ static volatile int count = 0;
 static volatile char read = 1;
 void TIMER0_init() {
 
-    T0CON0 = 0x1E;
-    T0CON1 = 0x47;
+    T0CON0 = 0x1F;
+    T0CON1 = 0x46;
 
 }
 

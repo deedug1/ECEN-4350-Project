@@ -15710,6 +15710,19 @@ void oscillator_init(void);
 void system_init(void);
 # 10 "src/main.c" 2
 
+# 1 "src/../headers/uart.h" 1
+# 17 "src/../headers/uart.h"
+void UART_init(void);
+void UART_RX_ISR(void);
+void UART_TX_ISR(void);
+void UART_putc(char data);
+void UART_puts(char * data);
+char UART_getc(void);
+void UART_gets(char * buf, int len);
+char UART_can_tx(void);
+char UART_can_rx(void);
+# 11 "src/main.c" 2
+
 # 1 "src/../headers/lcd.h" 1
 # 50 "src/../headers/lcd.h"
 void lcd_putc(char c);
@@ -15720,10 +15733,10 @@ void lcd_update(void);
 void lcd_clear(void);
 void lcd_newline(void);
 void lcd_vertical_shift(void);
-# 11 "src/main.c" 2
+# 12 "src/main.c" 2
 
 # 1 "src/../headers/esp8266.h" 1
-# 20 "src/../headers/esp8266.h"
+# 23 "src/../headers/esp8266.h"
 typedef enum {
     TCP, UDP, SSL
 }ESP8266_socket_type;
@@ -15734,15 +15747,17 @@ void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data);
+void ESP8266_start_transparent_xmission(void);
+void ESP8266_end_transparent_xmission(void);
 void ESP8266_close_socket(void);
 char ESP8266_responseOK(void);
-# 12 "src/main.c" 2
+# 13 "src/main.c" 2
 
 # 1 "src/../headers/util.h" 1
 # 15 "src/../headers/util.h"
 int itoa(int num, char * buf, int radix);
 void dtoa(double num, char * buf, int radix);
-# 13 "src/main.c" 2
+# 14 "src/main.c" 2
 
 # 1 "src/../headers/Si7021.h" 1
 # 18 "src/../headers/Si7021.h"
@@ -15753,14 +15768,14 @@ void Si7021_read_temp(void);
 double Si7021_avg_humidity(void);
 double Si7021_avg_temp(void);
 int Si7021_set_heater(char heat);
-# 14 "src/main.c" 2
+# 15 "src/main.c" 2
 
 # 1 "src/../headers/ph.h" 1
 # 11 "src/../headers/ph.h"
 void ph_init(void);
 void ph_read(void);
 double ph_avg(void);
-# 15 "src/main.c" 2
+# 16 "src/main.c" 2
 
 # 1 "src/../headers/timer0.h" 1
 # 14 "src/../headers/timer0.h"
@@ -15771,7 +15786,19 @@ int TIMER0_get_count(void);
 char TIMER0_is_read(void);
 void TIMER0_stop(void);
 void TIMER0_start(void);
-# 16 "src/main.c" 2
+# 17 "src/main.c" 2
+
+# 1 "src/../headers/stopwatch.h" 1
+# 19 "src/../headers/stopwatch.h"
+void stopwatch_init(void);
+void stopwatch_start(int seconds);
+void stopwatch_stop(void);
+char stopwatch_is_stopped(void);
+char stopwatch_is_started(void);
+int stopwatch_get_time(void);
+void STOPWATCH_ISR(void);
+# 18 "src/main.c" 2
+
 
 
 
@@ -15784,7 +15811,7 @@ char * SSID = "test_ap";
 char * PASS = "incredible14!";
 char * IP = "api.thingspeak.com";
 
-
+char * labels[] = {"PH", "HUMIDITY", "TEMP"};
 void connect_to_wifi(void);
 void send_data_double(int field, double val);
 
@@ -15794,7 +15821,7 @@ void send_data_double(int field, double val);
 int main() {
 
     int c = 0;
-    double ph, temp, humidity;
+    double result;
     system_init();
     lcd_init();
     lcd_clear();
@@ -15814,38 +15841,38 @@ int main() {
 
         if(!TIMER0_is_read()) {
             TIMER0_stop();
-            c = TIMER0_get_count();
-
-            if(c >= 5) {
-                TIMER0_reset();
+            c = TIMER0_get_count() % 3;
 
 
-                temp = Si7021_avg_temp();
-                humidity = Si7021_avg_humidity();
-                ph = ph_avg();
-
-
-                send_data_double(3, temp);
-                send_data_double(2, humidity);
-                send_data_double(1, ph);
-
-
-
-
-
-                lcd_newline();
-                lcd_puts("DATA SENT");
-                lcd_update();
-
-
-            } else {
-                ph_read();
-                Si7021_read_temp();
-                Si7021_read_humidity();
-                lcd_newline();
-                lcd_puts("DATA UPDATED");
-                lcd_update();
+            switch(c) {
+                case 0:
+                    result = ph_avg();
+                    break;
+                case 1:
+                    result = Si7021_avg_humidity();
+                    break;
+                case 2:
+                    result = Si7021_avg_temp();
+                    break;
+                default:
+                    result = ph_avg();
+                    c = 0;
             }
+
+
+            send_data_double(c + 1, result);
+
+
+            lcd_newline();
+            lcd_puts(labels[c]);
+            lcd_puts(" DATA SENT");
+            lcd_update();
+
+
+
+            ph_read();
+            Si7021_read_temp();
+            Si7021_read_humidity();
             TIMER0_start();
         }
     }
@@ -15858,7 +15885,7 @@ void connect_to_wifi() {
     ESP8266_init();
     ESP8266_connect(SSID, PASS);
 }
-# 125 "src/main.c"
+# 128 "src/main.c"
 void send_data_double(int field, double val) {
     static char strbuf[60];
     char numbuf[10];
@@ -15878,5 +15905,6 @@ void send_data_double(int field, double val) {
 
     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
     ESP8266_send_data(strbuf);
-    ESP8266_close_socket();
+
+
 }

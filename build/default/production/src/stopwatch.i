@@ -15676,7 +15676,7 @@ void stopwatch_start(int seconds) {
         return;
     }
 
-    cmp = (char)((seconds * 31250) / 1920);
+    cmp = (char)(seconds * 16);
     T2PR = cmp;
 
     global_stopwatch.time = seconds;
@@ -15687,6 +15687,7 @@ void stopwatch_start(int seconds) {
 }
 void stopwatch_stop() {
     PIE4bits.TMR2IE = 0;
+    PIR4bits.TMR2IF = 0;
     T2CON &= 0x7F;
     global_stopwatch.started = 0;
 }

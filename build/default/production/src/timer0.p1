@@ -1297,11 +1297,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _TIMER0_init ]
 [f ]
 "9
-[; ;src/timer0.c: 9:     T0CON0 = 0x1E;
-[e = _T0CON0 -> -> 30 `i `uc ]
+[; ;src/timer0.c: 9:     T0CON0 = 0x1F;
+[e = _T0CON0 -> -> 31 `i `uc ]
 "10
-[; ;src/timer0.c: 10:     T0CON1 = 0x47;
-[e = _T0CON1 -> -> 71 `i `uc ]
+[; ;src/timer0.c: 10:     T0CON1 = 0x46;
+[e = _T0CON1 -> -> 70 `i `uc ]
 "12
 [; ;src/timer0.c: 12: }
 [e :UE 1381 ]
