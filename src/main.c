@@ -144,6 +144,7 @@ void send_data_double(int field, double val) {
     
     // Transmit data
     // NOTE SOCKET MUST BE OPEN
+    
     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
     ESP8266_send_data(strbuf);
 //    ESP8266_close_socket();

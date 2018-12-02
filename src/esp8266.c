@@ -6,18 +6,35 @@
 #include "../headers/lcd.h"
 #include "../headers/stopwatch.h"
 
-
-#define DEBUG 1
-
-
+// Helper macros
 #define ESP8266_SEND_STRING(A) UART_putc('\"');UART_puts(A);UART_putc('\"')
 #define ESP8266_COMMA() UART_putc(',')
 #define ESP8266_COMMAND_END() UART_puts("\r\n")
+
+// AT-Commands
+#define ATCWMODE        "AT+CWMODE_CUR=3"   // Set as station / soft AP
+#define ATCIPMODE_ON    "AT+CIPMODE=1"      // Set transparent transmission mode
+#define ATCIPMODE_OFF   "AT+CIPMODE=0"      // Disable transparent transmission mode
+#define ATCIPMUX        "AT+CIPMUX=0"       // Set single connection mode
+#define ATCWJAP         "AT+CWJAP_CUR="     // Join access point
+#define ATCIPSTART      "AT+CIPSTART="      // Start socket /* NOTE: '0' is for link is invalid bug */
+#define ATCIPSEND       "AT+CIPSEND="
+#define ATCIPSENDT      "AT+CIPSEND"  
+#define ATCIPCLOSE      "AT+CIPClOSE"       // Close socket 
+#define ATRESET         "AT+RST"            // Resets the module    
+
+// Preprocessor constants
 #define ESP8266_LINE_LIMIT 32
 #define ESP8266_MAX_TIMEOUT 10
-static char is_connected = 0;
-char * SOCKETS[] = {"TCP", "UDP", "SSL"};
+
+// Debug
+#define DEBUG 1
+
+// Helper functions
 char ESP8266_lookfor(const char * str, int timeout);
+
+// Constants
+char * SOCKET_TYPES[] = {"TCP", "UDP", "SSL"};
 
 void ESP8266_query(void) {
     UART_puts("AT+CIFSR");
@@ -40,33 +57,31 @@ void ESP8266_init(void) {
 void ESP8266_reset() {
     UART_puts(ATRESET);
     ESP8266_COMMAND_END();
+    
     ESP8266_lookfor("ready", ESP8266_MAX_TIMEOUT);
 }
 void ESP8266_connect(char * name, char * pass) {
-//    if(is_connected) {
-//        return;
-//    }
     UART_puts(ATCWJAP);
     ESP8266_SEND_STRING(name);
     ESP8266_COMMA();
     ESP8266_SEND_STRING(pass);
     ESP8266_COMMAND_END();
-    while(!ESP8266_lookfor("WIFI GOT IP", 10));
-    while(!ESP8266_lookfor("OK", 10));
-    is_connected = 1;
-//    is_connected = ESP8266_responseOK();
+    
+    while(!ESP8266_lookfor("WIFI GOT IP", 1)); // Must wait
+    while(!ESP8266_lookfor("OK", 1)); // Must wait
 }
 
 void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
     UART_puts(ATCIPSTART);
-    ESP8266_SEND_STRING(SOCKETS[type]);
+    ESP8266_SEND_STRING(SOCKET_TYPES[type]);
     ESP8266_COMMA();
     ESP8266_SEND_STRING(ip);
     ESP8266_COMMA();
     UART_puts(buffer);
     ESP8266_COMMAND_END();
+    
     ESP8266_lookfor("OK", ESP8266_MAX_TIMEOUT);
 }
 
@@ -82,23 +97,11 @@ void ESP8266_send_data(char * data) {
     ESP8266_lookfor("SEND OK", ESP8266_MAX_TIMEOUT);
 
 }
-void ESP8266_start_transparent_xmission() {
-    UART_puts(ATCIPMODE_ON);
-    ESP8266_COMMAND_END();
-    ESP8266_lookfor("OK", ESP8266_MAX_TIMEOUT);
-    
-    UART_puts(ATCIPSENDT);
-    ESP8266_COMMAND_END();
-    
-}
-void ESP8266_end_transparent_xmission() {
-    UART_puts("+++");
-    UART_puts(ATCIPMODE_OFF);
-    
-}
+
 void ESP8266_close_socket(){
     UART_puts(ATCIPCLOSE);
     ESP8266_COMMAND_END();
+    
     ESP8266_lookfor("OK", ESP8266_MAX_TIMEOUT);
 }
 char ESP8266_lookfor(const char * str, int timeout) {
@@ -119,16 +122,21 @@ char ESP8266_lookfor(const char * str, int timeout) {
                 buffer[i] = c;
                 i++;
             }
-            if(i >= ESP8266_LINE_LIMIT) { // Oh no! Buffer overflow!
+            // Stop buffer overflow
+            if(i >= ESP8266_LINE_LIMIT) { 
                 i = 0;
             }
         }
     }
-    if(found && DEBUG) {
+    
+#if DEBUG
+    if(found) {
         lcd_newline();
         lcd_puts(buffer);
         lcd_update();
     }
+#endif
+    
     stopwatch_stop();
     return found;
 }

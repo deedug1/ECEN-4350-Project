@@ -30,8 +30,6 @@ void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data);
-void ESP8266_start_transparent_xmission(void);
-void ESP8266_end_transparent_xmission(void);
 void ESP8266_close_socket(void);
 char ESP8266_responseOK(void);
 
