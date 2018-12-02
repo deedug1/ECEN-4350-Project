@@ -1,17 +1,20 @@
 #include <xc.h>
 #include "../headers/i2c_master.h"
 
-#define START_ENABLE SSP1CON2bits.SEN
-#define STOP_ENABLE  SSP1CON2bits.PEN
-#define RECEIVE_ENABLE SSP1CON2bits.RCEN
-#define ACKNOWLEDGE_STATUS SSP1CON2bits.ACKSTAT
-#define ACKNOWLEDGE_ENABLE SSP1CON2bits.ACKEN
-#define ACKNOWLEDGE_DATA SSP1CON2bits.ACKDT
+// Required register bits
+#define START_ENABLE        SSP1CON2bits.SEN
+#define STOP_ENABLE         SSP1CON2bits.PEN
+#define RECEIVE_ENABLE      SSP1CON2bits.RCEN
+#define ACKNOWLEDGE_STATUS  SSP1CON2bits.ACKSTAT
+#define ACKNOWLEDGE_ENABLE  SSP1CON2bits.ACKEN
+#define ACKNOWLEDGE_DATA    SSP1CON2bits.ACKDT
 
+// Helper macros
 #define SEND(a) (SSP1BUF = a)
 #define RECEIVE(a) (a = SSP1BUF)
 #define I2C_MASTER_BAUD 0x21
 
+// Module types
 typedef enum {
     IDLE, SEND_ADDRESS, ACKNOWLEDGE_ADDR, SEND_DATA, RECEIVE_DATA, ACKNOWLEDGE_RECV, STOPPED
 }I2C_master_status;
@@ -23,6 +26,11 @@ typedef struct {
     I2C_master_result result;
 } I2C_transmit_data;
 
+// Helper functions
+void create_read_packet(char * buffer, int length, char address);
+void create_write_packet(char * data, int length, char address);
+
+// Module variables
 static volatile I2C_transmit_data current_packet;
 static volatile I2C_master_status I2C_status;
 
@@ -140,20 +148,6 @@ char I2C_master_enabled() {
     return (SSP1CON1bits.SSPEN);
 }
 
-void create_read_packet(char * buffer, int length, char address) {
-    current_packet.data = buffer;
-    current_packet.length = length;
-    current_packet.address = (address << 1);
-    current_packet.address |= 0x01; // Make read packet
-    current_packet.result = PENDING;
-}
-void create_write_packet(char * data, int length, char address) {
-    current_packet.data = data;
-    current_packet.length = length;
-    current_packet.address = (address << 1); // Make write packet
-    current_packet.result = PENDING;
-}
-
 I2C_master_result I2C_master_write(char * data, int length, char address) {
     if(!I2C_master_enabled()) {
         return SEND_ERROR;
@@ -163,6 +157,7 @@ I2C_master_result I2C_master_write(char * data, int length, char address) {
     I2C_wait();
     return current_packet.result;
 }
+
 I2C_master_result I2C_master_read(char * buffer, int length, char address) {
     if(!I2C_master_enabled()) {
         return RECEIVE_ERROR;
@@ -173,3 +168,17 @@ I2C_master_result I2C_master_read(char * buffer, int length, char address) {
     return current_packet.result;
 }
 
+void create_read_packet(char * buffer, int length, char address) {
+    current_packet.data = buffer;
+    current_packet.length = length;
+    current_packet.address = (address << 1);
+    current_packet.address |= 0x01; // Make read packet
+    current_packet.result = PENDING;
+}
+
+void create_write_packet(char * data, int length, char address) {
+    current_packet.data = data;
+    current_packet.length = length;
+    current_packet.address = (address << 1); // Make write packet
+    current_packet.result = PENDING;
+}

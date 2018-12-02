@@ -8,9 +8,11 @@
 #ifndef I2C_MASTER_H
 #define	I2C_MASTER_H
 
+// Interrupt bits
 #define I2C_INTE PIE3bits.SSP1IE
 #define I2C_INTF SSP1IF
 
+// I2C result enum
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;

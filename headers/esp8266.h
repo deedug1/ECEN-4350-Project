@@ -8,17 +8,6 @@
 #ifndef ESP8266_H
 #define	ESP8266_H
 
-// AT-Commands
-#define ATCWMODE        "AT+CWMODE_CUR=3"   // Set as station / soft AP
-#define ATCIPMODE_ON    "AT+CIPMODE=1"      // Set transparent transmission mode
-#define ATCIPMODE_OFF   "AT+CIPMODE=0"      // Disable transparent transmission mode
-#define ATCIPMUX        "AT+CIPMUX=0"       // Set single connection mode
-#define ATCWJAP         "AT+CWJAP_CUR="     // Join access point
-#define ATCIPSTART      "AT+CIPSTART="      // Start socket /* NOTE: '0' is for link is invalid bug */
-#define ATCIPSEND       "AT+CIPSEND="
-#define ATCIPSENDT      "AT+CIPSEND"  
-#define ATCIPCLOSE      "AT+CIPClOSE"       // Close socket 
-#define ATRESET         "AT+RST"            // Resets the module    
 
 typedef enum {
     TCP, UDP, SSL
