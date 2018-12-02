@@ -8,9 +8,9 @@
 #ifndef UART_H
 #define	UART_H
 
+// Interrupt bits
 #define RX_INTE PIE3bits.RC1IE
 #define TX_INTE PIE3bits.TX1IE
-
 #define RX_INTF PIR3bits.RC1IF
 #define TX_INTF PIR3bits.TX1IF
 

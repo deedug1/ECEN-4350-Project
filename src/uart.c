@@ -1,17 +1,14 @@
-/* 
- * File:   uart.c
- * Author: jstpa
- *
- * Created on November 12, 2018, 6:08 PM
- */
-
 #include <xc.h>
 #include "../headers/uart.h"
 #include "../headers/lcd.h"
+
+// Helper macros
 #define UART_RECEIVE(A) (A = RC1REG) 
 #define UART_SEND(A) (TX1REG = A)
+
+// Preprocessor constants
 #define UART_BUFFER_SIZE 8
-#define PRINT_LCD
+
 typedef struct {
     char buffer[UART_BUFFER_SIZE];
     int size;
@@ -54,6 +51,7 @@ void UART_init() {
     RX_INTE = 1;
     
 }
+
 void UART_RX_ISR() {
     
     // Buffer overwrites are ignored
@@ -79,6 +77,7 @@ void UART_TX_ISR() {
         TX_INTE = 0;
     }
 }
+
 void UART_putc(char data) {
     while(TX_buf.size >= UART_BUFFER_SIZE) {
         // Wait for room in TX_buf
@@ -98,6 +97,7 @@ void UART_putc(char data) {
     }
     TX_INTE = 1;
 }
+
 void UART_puts(char * data) {
     
     while(*data != 0) {
@@ -123,6 +123,7 @@ char UART_getc() {
     RX_INTE = 1;
     return data;
 }
+
 void UART_gets(char * buf, int len) {
     do{
         *buf = UART_getc();
@@ -130,9 +131,11 @@ void UART_gets(char * buf, int len) {
     }while(len --> 0);
     *buf = '\0';
 }
+
 char UART_can_rx() {
     return RX_buf.size > 0;
 }
+
 char UART_can_tx() {
     return TX_buf.size < UART_BUFFER_SIZE;
 }
