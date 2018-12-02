@@ -105,28 +105,6 @@ void connect_to_wifi() {
     ESP8266_connect(SSID, PASS);
 }
 
-//void send_data_int(int field, int val) {
-//    static char strbuf[60];
-//    char numbuf[10];
-//    strbuf[0] = '\0';
-//    // Get field number
-//    itoa(field, numbuf, 10);
-//    strcat(strbuf, "GET /update?api_key=ONF84FNQ1XDZB5KH&field");
-//    strcat(strbuf, numbuf);
-//    
-//    // Get send value
-//    strcat(strbuf, "=");
-//    itoa(val, numbuf, 10);
-//    strcat(strbuf, numbuf);
-//    strcat(strbuf, "\r\n\r\n");
-//    
-//    // Transmit data
-//    // NOTE SOCKET MUST BE OPEN
-//    ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
-//    ESP8266_send_data(strbuf);
-//    ESP8266_close_socket();
-//}
-
 void send_data_double(int field, double val) {
     static char strbuf[60];
     char numbuf[10];

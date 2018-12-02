@@ -8,6 +8,7 @@
 #ifndef TIMER0_H
 #define	TIMER0_H
 
+// Interrupt bits
 #define TIMER0_INTE PIE0bits.TMR0IE
 #define TIMER0_INTF PIR0bits.TMR0IF
 
