@@ -40,12 +40,12 @@
 // Preprocesser Constants
 #define CONTROL_CMD             0x00
 #define CONTROL_DATA            0x40
-#define LCD_ADDR 0x3C
-#define ROWS 0x04
-#define COLS 0x80
-#define PAGES 0x04
-#define LCDWIDTH 128
-#define LCDHEIGHT 32
+#define LCD_ADDR                0x3C
+#define ROWS                    0x04
+#define COLS                    0x80
+#define PAGES                   0x04
+#define LCDWIDTH                128
+#define LCDHEIGHT               32
 
 // LCD buffer
 char lcd_buffer [ROWS * COLS] = {

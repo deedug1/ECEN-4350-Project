@@ -1,14 +1,18 @@
 #include <xc.h>
 #include "../headers/ph.h"
 
-#define ANALOG_RIGHT_JUSTIFY ADCON0bits.ADFM
-#define ANALOG_CONVERT ADCON0bits.GO
-#define ANALOG_CLOCK_SELECT ADCON0bits.ADCS
-#define ANALOG_CHANNEL_SELECT ADPCH
-#define ANALOG_ON ADCON0bits.ADON
-#define RESULT_LOWER ADRESL
-#define RESULT_HIGHER ADRESH
-#define PH_READ_LIMIT 5
+// Required register bits
+#define ANALOG_RIGHT_JUSTIFY    ADCON0bits.ADFM
+#define ANALOG_CONVERT          ADCON0bits.GO
+#define ANALOG_CLOCK_SELECT     ADCON0bits.ADCS
+#define ANALOG_CHANNEL_SELECT   ADPCH
+#define ANALOG_ON               ADCON0bits.ADON
+#define RESULT_LOWER            ADRESL
+#define RESULT_HIGHER           ADRESH
+
+// Preprocessor constants
+#define PH_READ_LIMIT           5
+
 static double ph_reads[PH_READ_LIMIT];
 void ph_init() {
     int i;
@@ -17,6 +21,7 @@ void ph_init() {
         ph_read();
     }
 }
+
 double ptov(int ph) {
     double result;
     result = (double)ph / (double)310;
@@ -24,6 +29,7 @@ double ptov(int ph) {
     result = result + 19.25;
     return result;
 }
+
 double ph_avg() {
     int i;
     double avg = 0.0;
@@ -32,6 +38,7 @@ double ph_avg() {
     }
     return avg / (double)PH_READ_LIMIT;
 }
+
 void ph_read() {
     static int i = 0;
     int result;

@@ -24,7 +24,7 @@
 #define ATRESET         "AT+RST"            // Resets the module    
 
 // Preprocessor constants
-#define ESP8266_LINE_LIMIT 32
+#define ESP8266_LINE_LIMIT  32
 #define ESP8266_MAX_TIMEOUT 10
 
 // Debug

@@ -13,14 +13,11 @@
 #define WHITE 1
 #define INVER 2
 
-#define SETBIT(A, O) A |= (1 << O)
-#define CLEARBIT(A, O) A &= ~(1 << O)
-#define INVBIT(A, O)  A ^= (1 << O)
+
 
 
 void lcd_putc(char c);
 void lcd_puts(char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);

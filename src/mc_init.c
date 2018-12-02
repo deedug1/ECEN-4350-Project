@@ -121,7 +121,6 @@ void pps_init() {
     RX1PPS = 0x10;      // RC0 --> Rx
     RC1PPS = 0x09;      // RC1 --> Tx
 
-    
     // End PPS
     
     PPSLOCK = 0x55; // Lock PPS
@@ -133,19 +132,16 @@ void oscillator_init() {
     // HFINTOSC
     OSCCON1 =   0x60;
     OSCCON3 =   0x00;
+    
     // 16 Mhz
     OSCFRQ =    0x05;
+   
     // Center frequency
     OSCTUNE =   0x00; 
 }
-//void timer_init() {
-//    T0CON0 = 0x11;
-//    T0CON1 = 0X40;
-//    T0CON0 = 0x91;
-//}
+
 void controller_init() {
     oscillator_init();
     pps_init();
-//    timer_init();
     port_init();
 }
