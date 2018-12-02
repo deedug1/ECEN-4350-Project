@@ -1,13 +1,24 @@
 #include <xc.h>
 #include "../headers/stopwatch.h"
 
+// Required register bits
+#define STOPWATCH_INTF  PIR4bits.TMR2IF
+#define STOPWATCH_INTE  PIE4bits.TMR2IE
+#define STOPWATCH_CON   T2CON
+#define STOPWATCH_CMP   T2PR
+#define STOPWATCH_HLT   T2HLT
+#define STOPWATCH_CS    T2CLKCON
+#define STOPWATCH_RST   T2RST
 
+// Module types
 typedef struct {
     char started;
     int time;
 } stopwatch;
 
+// Module variables
 static volatile stopwatch global_stopwatch;
+
 void STOPWATCH_ISR() {
     // Stop stopwatch
     STOPWATCH_INTF = 0;
