@@ -3,23 +3,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 "22 src/../headers/mc_init.h
 [; ;src/../headers/mc_init.h: 22: void system_init(void);
 [v _system_init `(v ~T0 @X0 0 ef ]
-"53 src/../headers/lcd.h
-[; ;src/../headers/lcd.h: 53: void lcd_init(void);
+"21 src/../headers/lcd.h
+[; ;src/../headers/lcd.h: 21: void lcd_init(void);
 [v _lcd_init `(v ~T0 @X0 0 ef ]
-"55
-[; ;src/../headers/lcd.h: 55: void lcd_clear(void);
+"23
+[; ;src/../headers/lcd.h: 23: void lcd_clear(void);
 [v _lcd_clear `(v ~T0 @X0 0 ef ]
-"51
-[; ;src/../headers/lcd.h: 51: void lcd_puts(char * s);
+"20
+[; ;src/../headers/lcd.h: 20: void lcd_puts(char * s);
 [v _lcd_puts `(v ~T0 @X0 0 ef1`*uc ]
-"56
-[; ;src/../headers/lcd.h: 56: void lcd_newline(void);
+"24
+[; ;src/../headers/lcd.h: 24: void lcd_newline(void);
 [v _lcd_newline `(v ~T0 @X0 0 ef ]
-"54
-[; ;src/../headers/lcd.h: 54: void lcd_update(void);
+"22
+[; ;src/../headers/lcd.h: 22: void lcd_update(void);
 [v _lcd_update `(v ~T0 @X0 0 ef ]
-"18 src/../headers/Si7021.h
-[; ;src/../headers/Si7021.h: 18: void Si7021_init(void);
+"12 src/../headers/Si7021.h
+[; ;src/../headers/Si7021.h: 12: void Si7021_init(void);
 [v _Si7021_init `(v ~T0 @X0 0 ef ]
 "11 src/../headers/ph.h
 [; ;src/../headers/ph.h: 11: void ph_init(void);
@@ -27,26 +27,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 "32 src/main.c
 [; ;src/main.c: 32: void connect_to_wifi(void);
 [v _connect_to_wifi `(v ~T0 @X0 0 ef ]
-"20 src/../headers/timer0.h
-[; ;src/../headers/timer0.h: 20: void TIMER0_start(void);
+"21 src/../headers/timer0.h
+[; ;src/../headers/timer0.h: 21: void TIMER0_start(void);
 [v _TIMER0_start `(v ~T0 @X0 0 ef ]
-"18
-[; ;src/../headers/timer0.h: 18: char TIMER0_is_read(void);
-[v _TIMER0_is_read `(uc ~T0 @X0 0 ef ]
 "19
-[; ;src/../headers/timer0.h: 19: void TIMER0_stop(void);
+[; ;src/../headers/timer0.h: 19: char TIMER0_is_read(void);
+[v _TIMER0_is_read `(uc ~T0 @X0 0 ef ]
+"20
+[; ;src/../headers/timer0.h: 20: void TIMER0_stop(void);
 [v _TIMER0_stop `(v ~T0 @X0 0 ef ]
-"17
-[; ;src/../headers/timer0.h: 17: int TIMER0_get_count(void);
+"18
+[; ;src/../headers/timer0.h: 18: int TIMER0_get_count(void);
 [v _TIMER0_get_count `(i ~T0 @X0 0 ef ]
 "13 src/../headers/ph.h
 [; ;src/../headers/ph.h: 13: double ph_avg(void);
 [v _ph_avg `(d ~T0 @X0 0 ef ]
-"22 src/../headers/Si7021.h
-[; ;src/../headers/Si7021.h: 22: double Si7021_avg_humidity(void);
+"16 src/../headers/Si7021.h
+[; ;src/../headers/Si7021.h: 16: double Si7021_avg_humidity(void);
 [v _Si7021_avg_humidity `(d ~T0 @X0 0 ef ]
-"23
-[; ;src/../headers/Si7021.h: 23: double Si7021_avg_temp(void);
+"17
+[; ;src/../headers/Si7021.h: 17: double Si7021_avg_temp(void);
 [v _Si7021_avg_temp `(d ~T0 @X0 0 ef ]
 "33 src/main.c
 [; ;src/main.c: 33: void send_data_double(int field, double val);
@@ -54,20 +54,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 src/../headers/ph.h
 [; ;src/../headers/ph.h: 12: void ph_read(void);
 [v _ph_read `(v ~T0 @X0 0 ef ]
-"21 src/../headers/Si7021.h
-[; ;src/../headers/Si7021.h: 21: void Si7021_read_temp(void);
+"15 src/../headers/Si7021.h
+[; ;src/../headers/Si7021.h: 15: void Si7021_read_temp(void);
 [v _Si7021_read_temp `(v ~T0 @X0 0 ef ]
-"20
-[; ;src/../headers/Si7021.h: 20: void Si7021_read_humidity(void);
+"14
+[; ;src/../headers/Si7021.h: 14: void Si7021_read_humidity(void);
 [v _Si7021_read_humidity `(v ~T0 @X0 0 ef ]
-"27 src/../headers/esp8266.h
-[; ;src/../headers/esp8266.h: 27: void ESP8266_reset(void);
+"16 src/../headers/esp8266.h
+[; ;src/../headers/esp8266.h: 16: void ESP8266_reset(void);
 [v _ESP8266_reset `(v ~T0 @X0 0 ef ]
-"29
-[; ;src/../headers/esp8266.h: 29: void ESP8266_init(void);
+"18
+[; ;src/../headers/esp8266.h: 18: void ESP8266_init(void);
 [v _ESP8266_init `(v ~T0 @X0 0 ef ]
-"30
-[; ;src/../headers/esp8266.h: 30: void ESP8266_connect(char * name, char * pass);
+"19
+[; ;src/../headers/esp8266.h: 19: void ESP8266_connect(char * name, char * pass);
 [v _ESP8266_connect `(v ~T0 @X0 0 ef2`*uc`*uc ]
 "15 src/../headers/util.h
 [; ;src/../headers/util.h: 15: int itoa(int num, char * buf, int radix);
@@ -78,15 +78,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "16 src/../headers/util.h
 [; ;src/../headers/util.h: 16: void dtoa(double num, char * buf, int radix);
 [v _dtoa `(v ~T0 @X0 0 ef3`d`*uc`i ]
-"145 src/main.c
-[; ;src/main.c: 145:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
-[c E9481 0 1 2 .. ]
-[n E9481 . TCP UDP SSL  ]
-"31 src/../headers/esp8266.h
-[; ;src/../headers/esp8266.h: 31: void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
-[v _ESP8266_open_socket `(v ~T0 @X0 0 ef3`E9481`*uc`i ]
-"32
-[; ;src/../headers/esp8266.h: 32: void ESP8266_send_data(char * data);
+"126 src/main.c
+[; ;src/main.c: 126:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
+[c E9477 0 1 2 .. ]
+[n E9477 . TCP UDP SSL  ]
+"20 src/../headers/esp8266.h
+[; ;src/../headers/esp8266.h: 20: void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
+[v _ESP8266_open_socket `(v ~T0 @X0 0 ef3`E9477`*uc`i ]
+"21
+[; ;src/../headers/esp8266.h: 21: void ESP8266_send_data(char * data);
 [v _ESP8266_send_data `(v ~T0 @X0 0 ef1`*uc ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
@@ -1425,54 +1425,54 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/main.c: 59:         if(!TIMER0_is_read()) {
 [e $ ! ! != -> ( _TIMER0_is_read ..  `i -> 0 `i 1386  ]
 {
-"60
-[; ;src/main.c: 60:             TIMER0_stop();
-[e ( _TIMER0_stop ..  ]
 "61
-[; ;src/main.c: 61:             c = TIMER0_get_count() % 3;
+[; ;src/main.c: 61:             TIMER0_stop();
+[e ( _TIMER0_stop ..  ]
+"62
+[; ;src/main.c: 62:             c = TIMER0_get_count() % 3;
 [e = _c % ( _TIMER0_get_count ..  -> 3 `i ]
-"64
-[; ;src/main.c: 64:             switch(c) {
+"65
+[; ;src/main.c: 65:             switch(c) {
 [e $U 1388  ]
 {
-"65
-[; ;src/main.c: 65:                 case 0:
-[e :U 1389 ]
 "66
-[; ;src/main.c: 66:                     result = ph_avg();
-[e = _result ( _ph_avg ..  ]
+[; ;src/main.c: 66:                 case 0:
+[e :U 1389 ]
 "67
-[; ;src/main.c: 67:                     break;
-[e $U 1387  ]
-"68
-[; ;src/main.c: 68:                 case 1:
-[e :U 1390 ]
-"69
-[; ;src/main.c: 69:                     result = Si7021_avg_humidity();
-[e = _result ( _Si7021_avg_humidity ..  ]
-"70
-[; ;src/main.c: 70:                     break;
-[e $U 1387  ]
-"71
-[; ;src/main.c: 71:                 case 2:
-[e :U 1391 ]
-"72
-[; ;src/main.c: 72:                     result = Si7021_avg_temp();
-[e = _result ( _Si7021_avg_temp ..  ]
-"73
-[; ;src/main.c: 73:                     break;
-[e $U 1387  ]
-"74
-[; ;src/main.c: 74:                 default:
-[e :U 1392 ]
-"75
-[; ;src/main.c: 75:                     result = ph_avg();
+[; ;src/main.c: 67:                     result = ph_avg();
 [e = _result ( _ph_avg ..  ]
+"68
+[; ;src/main.c: 68:                     break;
+[e $U 1387  ]
+"69
+[; ;src/main.c: 69:                 case 1:
+[e :U 1390 ]
+"70
+[; ;src/main.c: 70:                     result = Si7021_avg_humidity();
+[e = _result ( _Si7021_avg_humidity ..  ]
+"71
+[; ;src/main.c: 71:                     break;
+[e $U 1387  ]
+"72
+[; ;src/main.c: 72:                 case 2:
+[e :U 1391 ]
+"73
+[; ;src/main.c: 73:                     result = Si7021_avg_temp();
+[e = _result ( _Si7021_avg_temp ..  ]
+"74
+[; ;src/main.c: 74:                     break;
+[e $U 1387  ]
+"75
+[; ;src/main.c: 75:                 default:
+[e :U 1392 ]
 "76
-[; ;src/main.c: 76:                     c = 0;
-[e = _c -> 0 `i ]
+[; ;src/main.c: 76:                     result = ph_avg();
+[e = _result ( _ph_avg ..  ]
 "77
-[; ;src/main.c: 77:             }
+[; ;src/main.c: 77:                     c = 0;
+[e = _c -> 0 `i ]
+"78
+[; ;src/main.c: 78:             }
 }
 [e $U 1387  ]
 [e :U 1388 ]
@@ -1481,20 +1481,20 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 2 `i 1391
  1392 ]
 [e :U 1387 ]
-"80
-[; ;src/main.c: 80:             send_data_double(c + 1, result);
+"81
+[; ;src/main.c: 81:             send_data_double(c + 1, result);
 [e ( _send_data_double (2 , + _c -> 1 `i _result ]
-"83
-[; ;src/main.c: 83:             lcd_newline();
-[e ( _lcd_newline ..  ]
 "84
-[; ;src/main.c: 84:             lcd_puts(labels[c]);
-[e ( _lcd_puts (1 *U + &U _labels * -> -> _c `ui `ux -> -> # *U &U _labels `ui `ux ]
+[; ;src/main.c: 84:             lcd_newline();
+[e ( _lcd_newline ..  ]
 "85
-[; ;src/main.c: 85:             lcd_puts(" DATA SENT");
-[e ( _lcd_puts (1 :s 8C ]
+[; ;src/main.c: 85:             lcd_puts(labels[c]);
+[e ( _lcd_puts (1 *U + &U _labels * -> -> _c `ui `ux -> -> # *U &U _labels `ui `ux ]
 "86
-[; ;src/main.c: 86:             lcd_update();
+[; ;src/main.c: 86:             lcd_puts(" DATA SENT");
+[e ( _lcd_puts (1 :s 8C ]
+"87
+[; ;src/main.c: 87:             lcd_update();
 [e ( _lcd_update ..  ]
 "90
 [; ;src/main.c: 90:             ph_read();
@@ -1505,88 +1505,88 @@ Version 4.0 HI-TECH Software Intermediate Code
 "92
 [; ;src/main.c: 92:             Si7021_read_humidity();
 [e ( _Si7021_read_humidity ..  ]
-"93
-[; ;src/main.c: 93:             TIMER0_start();
+"95
+[; ;src/main.c: 95:             TIMER0_start();
 [e ( _TIMER0_start ..  ]
-"94
-[; ;src/main.c: 94:         }
+"96
+[; ;src/main.c: 96:         }
 }
 [e :U 1386 ]
-"95
-[; ;src/main.c: 95:     }
+"97
+[; ;src/main.c: 97:     }
 }
 [e :U 1383 ]
 [e $U 1384  ]
 [e :U 1385 ]
-"98
-[; ;src/main.c: 98: }
+"100
+[; ;src/main.c: 100: }
 [e :UE 1382 ]
 }
-"100
-[; ;src/main.c: 100: void connect_to_wifi() {
+"102
+[; ;src/main.c: 102: void connect_to_wifi() {
 [v _connect_to_wifi `(v ~T0 @X0 1 ef ]
 {
 [e :U _connect_to_wifi ]
 [f ]
-"101
-[; ;src/main.c: 101:     ESP8266_reset();
-[e ( _ESP8266_reset ..  ]
-"102
-[; ;src/main.c: 102:     ESP8266_init();
-[e ( _ESP8266_init ..  ]
 "103
-[; ;src/main.c: 103:     ESP8266_connect(SSID, PASS);
-[e ( _ESP8266_connect (2 , _SSID _PASS ]
+[; ;src/main.c: 103:     ESP8266_reset();
+[e ( _ESP8266_reset ..  ]
 "104
-[; ;src/main.c: 104: }
+[; ;src/main.c: 104:     ESP8266_init();
+[e ( _ESP8266_init ..  ]
+"105
+[; ;src/main.c: 105:     ESP8266_connect(SSID, PASS);
+[e ( _ESP8266_connect (2 , _SSID _PASS ]
+"106
+[; ;src/main.c: 106: }
 [e :UE 1393 ]
 }
-"128
-[; ;src/main.c: 128: void send_data_double(int field, double val) {
+"108
+[; ;src/main.c: 108: void send_data_double(int field, double val) {
 [v _send_data_double `(v ~T0 @X0 1 ef2`i`d ]
 {
 [e :U _send_data_double ]
 [v _field `i ~T0 @X0 1 r1 ]
 [v _val `d ~T0 @X0 1 r2 ]
 [f ]
-"129
-[; ;src/main.c: 129:     static char strbuf[60];
-[v F9552 `uc ~T0 @X0 -> 60 `i s strbuf ]
-"130
-[; ;src/main.c: 130:     char numbuf[10];
+"109
+[; ;src/main.c: 109:     static char strbuf[60];
+[v F9546 `uc ~T0 @X0 -> 60 `i s strbuf ]
+"110
+[; ;src/main.c: 110:     char numbuf[10];
 [v _numbuf `uc ~T0 @X0 -> 10 `i a ]
-"131
-[; ;src/main.c: 131:     strbuf[0] = '\0';
-[e = *U + &U F9552 * -> -> -> 0 `i `ui `ux -> -> # *U &U F9552 `ui `ux -> -> 0 `ui `uc ]
-"133
-[; ;src/main.c: 133:     itoa(field, numbuf, 10);
+"111
+[; ;src/main.c: 111:     strbuf[0] = '\0';
+[e = *U + &U F9546 * -> -> -> 0 `i `ui `ux -> -> # *U &U F9546 `ui `ux -> -> 0 `ui `uc ]
+"113
+[; ;src/main.c: 113:     itoa(field, numbuf, 10);
 [e ( _itoa (3 , , _field &U _numbuf -> 10 `i ]
-"134
-[; ;src/main.c: 134:     strcat(strbuf, "GET /update?api_key=ONF84FNQ1XDZB5KH&field");
-[e ( _strcat (2 , &U F9552 :s 9C ]
-"135
-[; ;src/main.c: 135:     strcat(strbuf, numbuf);
-[e ( _strcat (2 , &U F9552 -> &U _numbuf `*Cuc ]
-"138
-[; ;src/main.c: 138:     strcat(strbuf, "=");
-[e ( _strcat (2 , &U F9552 :s 10C ]
-"139
-[; ;src/main.c: 139:     dtoa(val, numbuf, 10);
+"114
+[; ;src/main.c: 114:     strcat(strbuf, "GET /update?api_key=ONF84FNQ1XDZB5KH&field");
+[e ( _strcat (2 , &U F9546 :s 9C ]
+"115
+[; ;src/main.c: 115:     strcat(strbuf, numbuf);
+[e ( _strcat (2 , &U F9546 -> &U _numbuf `*Cuc ]
+"118
+[; ;src/main.c: 118:     strcat(strbuf, "=");
+[e ( _strcat (2 , &U F9546 :s 10C ]
+"119
+[; ;src/main.c: 119:     dtoa(val, numbuf, 10);
 [e ( _dtoa (3 , , _val &U _numbuf -> 10 `i ]
-"140
-[; ;src/main.c: 140:     strcat(strbuf, numbuf);
-[e ( _strcat (2 , &U F9552 -> &U _numbuf `*Cuc ]
-"141
-[; ;src/main.c: 141:     strcat(strbuf, "\r\n\r\n");
-[e ( _strcat (2 , &U F9552 :s 11C ]
-"145
-[; ;src/main.c: 145:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
-[e ( _ESP8266_open_socket (3 , , . `E9481 0 :s 12C -> 80 `i ]
-"146
-[; ;src/main.c: 146:     ESP8266_send_data(strbuf);
-[e ( _ESP8266_send_data (1 &U F9552 ]
-"149
-[; ;src/main.c: 149: }
+"120
+[; ;src/main.c: 120:     strcat(strbuf, numbuf);
+[e ( _strcat (2 , &U F9546 -> &U _numbuf `*Cuc ]
+"121
+[; ;src/main.c: 121:     strcat(strbuf, "\r\n\r\n");
+[e ( _strcat (2 , &U F9546 :s 11C ]
+"126
+[; ;src/main.c: 126:     ESP8266_open_socket(TCP, "api.thingspeak.com", 80);
+[e ( _ESP8266_open_socket (3 , , . `E9477 0 :s 12C -> 80 `i ]
+"127
+[; ;src/main.c: 127:     ESP8266_send_data(strbuf);
+[e ( _ESP8266_send_data (1 &U F9546 ]
+"130
+[; ;src/main.c: 130: }
 [e :UE 1394 ]
 }
 [a 1C 116 101 115 116 95 97 112 0 ]

@@ -15701,7 +15701,7 @@ void dtoa(double num, char * buf, int radix);
 # 3 "src/esp8266.c" 2
 
 # 1 "src/../headers/esp8266.h" 1
-# 23 "src/../headers/esp8266.h"
+# 12 "src/../headers/esp8266.h"
 typedef enum {
     TCP, UDP, SSL
 }ESP8266_socket_type;
@@ -15712,8 +15712,6 @@ void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data);
-void ESP8266_start_transparent_xmission(void);
-void ESP8266_end_transparent_xmission(void);
 void ESP8266_close_socket(void);
 char ESP8266_responseOK(void);
 # 4 "src/esp8266.c" 2
@@ -15732,10 +15730,9 @@ char UART_can_rx(void);
 # 5 "src/esp8266.c" 2
 
 # 1 "src/../headers/lcd.h" 1
-# 50 "src/../headers/lcd.h"
+# 19 "src/../headers/lcd.h"
 void lcd_putc(char c);
 void lcd_puts(char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);
@@ -15744,7 +15741,7 @@ void lcd_vertical_shift(void);
 # 6 "src/esp8266.c" 2
 
 # 1 "src/../headers/stopwatch.h" 1
-# 19 "src/../headers/stopwatch.h"
+# 15 "src/../headers/stopwatch.h"
 void stopwatch_init(void);
 void stopwatch_start(int seconds);
 void stopwatch_stop(void);
@@ -15753,10 +15750,11 @@ char stopwatch_is_started(void);
 int stopwatch_get_time(void);
 void STOPWATCH_ISR(void);
 # 7 "src/esp8266.c" 2
-# 18 "src/esp8266.c"
-static char is_connected = 0;
-char * SOCKETS[] = {"TCP", "UDP", "SSL"};
+# 34 "src/esp8266.c"
 char ESP8266_lookfor(const char * str, int timeout);
+
+
+char * SOCKET_TYPES[] = {"TCP", "UDP", "SSL"};
 
 void ESP8266_query(void) {
     UART_puts("AT+CIFSR");
@@ -15779,33 +15777,31 @@ void ESP8266_init(void) {
 void ESP8266_reset() {
     UART_puts("AT+RST");
     UART_puts("\r\n");
+
     ESP8266_lookfor("ready", 10);
 }
 void ESP8266_connect(char * name, char * pass) {
-
-
-
     UART_puts("AT+CWJAP_CUR=");
     UART_putc('\"');UART_puts(name);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(pass);UART_putc('\"');
     UART_puts("\r\n");
-    while(!ESP8266_lookfor("WIFI GOT IP", 10));
-    while(!ESP8266_lookfor("OK", 10));
-    is_connected = 1;
 
+    while(!ESP8266_lookfor("WIFI GOT IP", 1));
+    while(!ESP8266_lookfor("OK", 1));
 }
 
 void ESP8266_open_socket(ESP8266_socket_type type, char * ip, int port) {
     char buffer[10];
     itoa(port, buffer, 10);
     UART_puts("AT+CIPSTART=");
-    UART_putc('\"');UART_puts(SOCKETS[type]);UART_putc('\"');
+    UART_putc('\"');UART_puts(SOCKET_TYPES[type]);UART_putc('\"');
     UART_putc(',');
     UART_putc('\"');UART_puts(ip);UART_putc('\"');
     UART_putc(',');
     UART_puts(buffer);
     UART_puts("\r\n");
+
     ESP8266_lookfor("OK", 10);
 }
 
@@ -15821,23 +15817,11 @@ void ESP8266_send_data(char * data) {
     ESP8266_lookfor("SEND OK", 10);
 
 }
-void ESP8266_start_transparent_xmission() {
-    UART_puts("AT+CIPMODE=1");
-    UART_puts("\r\n");
-    ESP8266_lookfor("OK", 10);
 
-    UART_puts("AT+CIPSEND");
-    UART_puts("\r\n");
-
-}
-void ESP8266_end_transparent_xmission() {
-    UART_puts("+++");
-    UART_puts("AT+CIPMODE=0");
-
-}
 void ESP8266_close_socket(){
     UART_puts("AT+CIPClOSE");
     UART_puts("\r\n");
+
     ESP8266_lookfor("OK", 10);
 }
 char ESP8266_lookfor(const char * str, int timeout) {
@@ -15858,16 +15842,21 @@ char ESP8266_lookfor(const char * str, int timeout) {
                 buffer[i] = c;
                 i++;
             }
+
             if(i >= 32) {
                 i = 0;
             }
         }
     }
-    if(found && 1) {
+
+
+    if(found) {
         lcd_newline();
         lcd_puts(buffer);
         lcd_update();
     }
+
+
     stopwatch_stop();
     return found;
 }

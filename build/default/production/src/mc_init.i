@@ -15647,7 +15647,7 @@ void system_init(void);
 # 2 "src/mc_init.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
-# 14 "src/../headers/i2c_master.h"
+# 16 "src/../headers/i2c_master.h"
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
@@ -15677,7 +15677,7 @@ void interrupt_init(void);
 # 5 "src/mc_init.c" 2
 
 # 1 "src/../headers/stopwatch.h" 1
-# 19 "src/../headers/stopwatch.h"
+# 15 "src/../headers/stopwatch.h"
 void stopwatch_init(void);
 void stopwatch_start(int seconds);
 void stopwatch_stop(void);
@@ -15688,7 +15688,7 @@ void STOPWATCH_ISR(void);
 # 6 "src/mc_init.c" 2
 
 # 1 "src/../headers/timer0.h" 1
-# 14 "src/../headers/timer0.h"
+# 15 "src/../headers/timer0.h"
 void TIMER0_init(void);
 void TIMER0_ISR(void);
 void TIMER0_reset(void);
@@ -15816,7 +15816,6 @@ void pps_init() {
 
 
 
-
     PPSLOCK = 0x55;
     PPSLOCK = 0XAA;
     PPSLOCK = 0X01;
@@ -15827,18 +15826,15 @@ void oscillator_init() {
     OSCCON1 = 0x60;
     OSCCON3 = 0x00;
 
+
     OSCFRQ = 0x05;
+
 
     OSCTUNE = 0x00;
 }
 
-
-
-
-
 void controller_init() {
     oscillator_init();
     pps_init();
-
     port_init();
 }

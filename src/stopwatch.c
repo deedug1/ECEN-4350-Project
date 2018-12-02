@@ -2,8 +2,6 @@
 #include "../headers/stopwatch.h"
 
 // Required register bits
-#define STOPWATCH_INTF  PIR4bits.TMR2IF
-#define STOPWATCH_INTE  PIE4bits.TMR2IE
 #define STOPWATCH_CON   T2CON
 #define STOPWATCH_CMP   T2PR
 #define STOPWATCH_HLT   T2HLT

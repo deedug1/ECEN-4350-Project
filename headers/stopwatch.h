@@ -8,6 +8,10 @@
 #ifndef STOPWATCH_H
 #define	STOPWATCH_H
 
+// Interrupt bits
+#define STOPWATCH_INTF  PIR4bits.TMR2IF
+#define STOPWATCH_INTE  PIE4bits.TMR2IE
+
 void stopwatch_init(void);
 void stopwatch_start(int seconds);
 void stopwatch_stop(void);

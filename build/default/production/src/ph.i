@@ -15643,7 +15643,7 @@ void ph_init(void);
 void ph_read(void);
 double ph_avg(void);
 # 2 "src/ph.c" 2
-# 12 "src/ph.c"
+# 16 "src/ph.c"
 static double ph_reads[5];
 void ph_init() {
     int i;
@@ -15652,6 +15652,7 @@ void ph_init() {
         ph_read();
     }
 }
+
 double ptov(int ph) {
     double result;
     result = (double)ph / (double)310;
@@ -15659,6 +15660,7 @@ double ptov(int ph) {
     result = result + 19.25;
     return result;
 }
+
 double ph_avg() {
     int i;
     double avg = 0.0;
@@ -15667,6 +15669,7 @@ double ph_avg() {
     }
     return avg / (double)5;
 }
+
 void ph_read() {
     static int i = 0;
     int result;

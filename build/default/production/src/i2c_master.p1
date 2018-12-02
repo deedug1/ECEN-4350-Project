@@ -1,14 +1,14 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"26 src/i2c_master.c
-[; ;src/i2c_master.c: 26: static volatile I2C_transmit_data current_packet;
+"34 src/i2c_master.c
+[; ;src/i2c_master.c: 34: static volatile I2C_transmit_data current_packet;
 [c E9283 0 1 2 3 .. ]
 [n E9283 . SUCCESS SEND_ERROR RECEIVE_ERROR PENDING  ]
-"19
-[; ;src/i2c_master.c: 19: typedef struct {
+"22
+[; ;src/i2c_master.c: 22: typedef struct {
 [s S1381 `*uc 1 `i 1 `uc 1 `E9283 1 ]
 [n S1381 . data length address result ]
-"27
-[; ;src/i2c_master.c: 27: static volatile I2C_master_status I2C_status;
+"35
+[; ;src/i2c_master.c: 35: static volatile I2C_master_status I2C_status;
 [c E9299 0 1 2 3 4 5 6 .. ]
 [n E9299 . IDLE SEND_ADDRESS ACKNOWLEDGE_ADDR SEND_DATA RECEIVE_DATA ACKNOWLEDGE_RECV STOPPED  ]
 "15706 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
@@ -119,6 +119,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "16260
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 16260: extern volatile SSP1CON1bits_t SSP1CON1bits __attribute__((address(0xF95)));
 [v _SSP1CON1bits `VS811 ~T0 @X0 0 e@3989 ]
+"31 src/i2c_master.c
+[; ;src/i2c_master.c: 31: void create_write_packet(char * data, int length, char address);
+[v _create_write_packet `(v ~T0 @X0 0 ef3`*uc`i`uc ]
+"30
+[; ;src/i2c_master.c: 30: void create_read_packet(char * buffer, int length, char address);
+[v _create_read_packet `(v ~T0 @X0 0 ef3`*uc`i`uc ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 54: __asm("PPSLOCK equ 0E9Bh");
 [; <" PPSLOCK equ 0E9Bh ;# ">
@@ -1370,336 +1376,336 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"26 src/i2c_master.c
-[; ;src/i2c_master.c: 26: static volatile I2C_transmit_data current_packet;
+"34 src/i2c_master.c
+[; ;src/i2c_master.c: 34: static volatile I2C_transmit_data current_packet;
 [v _current_packet `VS1381 ~T0 @X0 1 s ]
-"27
-[; ;src/i2c_master.c: 27: static volatile I2C_master_status I2C_status;
+"35
+[; ;src/i2c_master.c: 35: static volatile I2C_master_status I2C_status;
 [v _I2C_status `VE9299 ~T0 @X0 1 s ]
-"29
-[; ;src/i2c_master.c: 29: void I2C_master_init() {
+"37
+[; ;src/i2c_master.c: 37: void I2C_master_init() {
 [v _I2C_master_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C_master_init ]
 [f ]
-"30
-[; ;src/i2c_master.c: 30:     SSP1MSK = 0x00;
-[e = _SSP1MSK -> -> 0 `i `uc ]
-"32
-[; ;src/i2c_master.c: 32:     SSP1ADD = 0x21;
-[e = _SSP1ADD -> -> 33 `i `uc ]
-"34
-[; ;src/i2c_master.c: 34:     SSP1STAT = 0x80;
-[e = _SSP1STAT -> -> 128 `i `uc ]
-"36
-[; ;src/i2c_master.c: 36:     SSP1CON3 = 0x00;
-[e = _SSP1CON3 -> -> 0 `i `uc ]
 "38
-[; ;src/i2c_master.c: 38:     SSP1CON2 = 0x00;
-[e = _SSP1CON2 -> -> 0 `i `uc ]
+[; ;src/i2c_master.c: 38:     SSP1MSK = 0x00;
+[e = _SSP1MSK -> -> 0 `i `uc ]
 "40
-[; ;src/i2c_master.c: 40:     SSP1CON1 = 0x28;
-[e = _SSP1CON1 -> -> 40 `i `uc ]
-"43
-[; ;src/i2c_master.c: 43:     SSP1IF = 0;
-[e = _SSP1IF -> -> 0 `i `b ]
+[; ;src/i2c_master.c: 40:     SSP1ADD = 0x21;
+[e = _SSP1ADD -> -> 33 `i `uc ]
+"42
+[; ;src/i2c_master.c: 42:     SSP1STAT = 0x80;
+[e = _SSP1STAT -> -> 128 `i `uc ]
 "44
-[; ;src/i2c_master.c: 44:     PIE3bits.SSP1IE = 1;
+[; ;src/i2c_master.c: 44:     SSP1CON3 = 0x00;
+[e = _SSP1CON3 -> -> 0 `i `uc ]
+"46
+[; ;src/i2c_master.c: 46:     SSP1CON2 = 0x00;
+[e = _SSP1CON2 -> -> 0 `i `uc ]
+"48
+[; ;src/i2c_master.c: 48:     SSP1CON1 = 0x28;
+[e = _SSP1CON1 -> -> 40 `i `uc ]
+"51
+[; ;src/i2c_master.c: 51:     SSP1IF = 0;
+[e = _SSP1IF -> -> 0 `i `b ]
+"52
+[; ;src/i2c_master.c: 52:     PIE3bits.SSP1IE = 1;
 [e = . . _PIE3bits 1 0 -> -> 1 `i `uc ]
-"45
-[; ;src/i2c_master.c: 45: }
+"53
+[; ;src/i2c_master.c: 53: }
 [e :UE 1382 ]
 }
-"46
-[; ;src/i2c_master.c: 46: void I2C_stop(I2C_master_result result) {
+"54
+[; ;src/i2c_master.c: 54: void I2C_stop(I2C_master_result result) {
 [v _I2C_stop `(v ~T0 @X0 1 ef1`E9283 ]
 {
 [e :U _I2C_stop ]
 [v _result `E9283 ~T0 @X0 1 r1 ]
 [f ]
-"47
-[; ;src/i2c_master.c: 47:     current_packet.result = result;
+"55
+[; ;src/i2c_master.c: 55:     current_packet.result = result;
 [e = . _current_packet 3 _result ]
-"48
-[; ;src/i2c_master.c: 48:     current_packet.length = 0;
+"56
+[; ;src/i2c_master.c: 56:     current_packet.length = 0;
 [e = . _current_packet 1 -> 0 `i ]
-"49
-[; ;src/i2c_master.c: 49:     SSP1CON2bits.PEN = 1;
+"57
+[; ;src/i2c_master.c: 57:     SSP1CON2bits.PEN = 1;
 [e = . . _SSP1CON2bits 0 2 -> -> 1 `i `uc ]
-"50
-[; ;src/i2c_master.c: 50:     I2C_status = STOP;
+"58
+[; ;src/i2c_master.c: 58:     I2C_status = STOP;
 [e = _I2C_status -> _STOP `E9299 ]
-"51
-[; ;src/i2c_master.c: 51: }
+"59
+[; ;src/i2c_master.c: 59: }
 [e :UE 1383 ]
 }
-"52
-[; ;src/i2c_master.c: 52: void I2C_wait() {
+"60
+[; ;src/i2c_master.c: 60: void I2C_wait() {
 [v _I2C_wait `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C_wait ]
 [f ]
-"53
-[; ;src/i2c_master.c: 53:     while(current_packet.result == PENDING) {
+"61
+[; ;src/i2c_master.c: 61:     while(current_packet.result == PENDING) {
 [e $U 1385  ]
 [e :U 1386 ]
 {
-"55
-[; ;src/i2c_master.c: 55:     }
+"63
+[; ;src/i2c_master.c: 63:     }
 }
 [e :U 1385 ]
-"53
-[; ;src/i2c_master.c: 53:     while(current_packet.result == PENDING) {
+"61
+[; ;src/i2c_master.c: 61:     while(current_packet.result == PENDING) {
 [e $ == -> . _current_packet 3 `ui -> . `E9283 3 `ui 1386  ]
 [e :U 1387 ]
-"56
-[; ;src/i2c_master.c: 56:     while(I2C_status != IDLE) {
+"64
+[; ;src/i2c_master.c: 64:     while(I2C_status != IDLE) {
 [e $U 1388  ]
 [e :U 1389 ]
 {
-"58
-[; ;src/i2c_master.c: 58:     }
+"66
+[; ;src/i2c_master.c: 66:     }
 }
 [e :U 1388 ]
-"56
-[; ;src/i2c_master.c: 56:     while(I2C_status != IDLE) {
+"64
+[; ;src/i2c_master.c: 64:     while(I2C_status != IDLE) {
 [e $ != -> _I2C_status `ui -> . `E9299 0 `ui 1389  ]
 [e :U 1390 ]
-"59
-[; ;src/i2c_master.c: 59: }
+"67
+[; ;src/i2c_master.c: 67: }
 [e :UE 1384 ]
 }
-"60
-[; ;src/i2c_master.c: 60: void I2C_MASTER_ISR() {
+"68
+[; ;src/i2c_master.c: 68: void I2C_MASTER_ISR() {
 [v _I2C_MASTER_ISR `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C_MASTER_ISR ]
 [f ]
-"61
-[; ;src/i2c_master.c: 61:     static int xfer_count = 0;
-[v F9321 `i ~T0 @X0 1 s xfer_count ]
-[i F9321
+"69
+[; ;src/i2c_master.c: 69:     static int xfer_count = 0;
+[v F9329 `i ~T0 @X0 1 s xfer_count ]
+[i F9329
 -> 0 `i
 ]
-"63
-[; ;src/i2c_master.c: 63:     SSP1IF = 0;
+"71
+[; ;src/i2c_master.c: 71:     SSP1IF = 0;
 [e = _SSP1IF -> -> 0 `i `b ]
-"64
-[; ;src/i2c_master.c: 64:     switch(I2C_status) {
+"72
+[; ;src/i2c_master.c: 72:     switch(I2C_status) {
 [e $U 1393  ]
 {
-"65
-[; ;src/i2c_master.c: 65:         case IDLE:
+"73
+[; ;src/i2c_master.c: 73:         case IDLE:
 [e :U 1394 ]
-"66
-[; ;src/i2c_master.c: 66:             if(current_packet.length != 0) {
+"74
+[; ;src/i2c_master.c: 74:             if(current_packet.length != 0) {
 [e $ ! != . _current_packet 1 -> 0 `i 1395  ]
 {
-"68
-[; ;src/i2c_master.c: 68:                 xfer_count = 0;
-[e = F9321 -> 0 `i ]
-"69
-[; ;src/i2c_master.c: 69:                 SSP1CON2bits.SEN = 1;
+"76
+[; ;src/i2c_master.c: 76:                 xfer_count = 0;
+[e = F9329 -> 0 `i ]
+"77
+[; ;src/i2c_master.c: 77:                 SSP1CON2bits.SEN = 1;
 [e = . . _SSP1CON2bits 0 0 -> -> 1 `i `uc ]
-"70
-[; ;src/i2c_master.c: 70:                 I2C_status = SEND_ADDRESS;
+"78
+[; ;src/i2c_master.c: 78:                 I2C_status = SEND_ADDRESS;
 [e = _I2C_status . `E9299 1 ]
-"71
-[; ;src/i2c_master.c: 71:             }
+"79
+[; ;src/i2c_master.c: 79:             }
 }
 [e :U 1395 ]
-"72
-[; ;src/i2c_master.c: 72:             break;
+"80
+[; ;src/i2c_master.c: 80:             break;
 [e $U 1392  ]
-"73
-[; ;src/i2c_master.c: 73:         case SEND_ADDRESS:
+"81
+[; ;src/i2c_master.c: 81:         case SEND_ADDRESS:
 [e :U 1396 ]
-"74
-[; ;src/i2c_master.c: 74:             (SSP1BUF = current_packet.address);
+"82
+[; ;src/i2c_master.c: 82:             (SSP1BUF = current_packet.address);
 [e = _SSP1BUF -> . _current_packet 2 `uc ]
-"75
-[; ;src/i2c_master.c: 75:             if(current_packet.address & 0x1) {
+"83
+[; ;src/i2c_master.c: 83:             if(current_packet.address & 0x1) {
 [e $ ! != & -> . _current_packet 2 `i -> 1 `i -> 0 `i 1397  ]
 {
-"77
-[; ;src/i2c_master.c: 77:                I2C_status = ACKNOWLEDGE_ADDR;
+"85
+[; ;src/i2c_master.c: 85:                I2C_status = ACKNOWLEDGE_ADDR;
 [e = _I2C_status . `E9299 2 ]
-"78
-[; ;src/i2c_master.c: 78:             } else {
+"86
+[; ;src/i2c_master.c: 86:             } else {
 }
 [e $U 1398  ]
 [e :U 1397 ]
 {
-"80
-[; ;src/i2c_master.c: 80:                I2C_status = SEND_DATA;
+"88
+[; ;src/i2c_master.c: 88:                I2C_status = SEND_DATA;
 [e = _I2C_status . `E9299 3 ]
-"81
-[; ;src/i2c_master.c: 81:             }
+"89
+[; ;src/i2c_master.c: 89:             }
 }
 [e :U 1398 ]
-"82
-[; ;src/i2c_master.c: 82:             break;
+"90
+[; ;src/i2c_master.c: 90:             break;
 [e $U 1392  ]
-"83
-[; ;src/i2c_master.c: 83:         case ACKNOWLEDGE_ADDR:
+"91
+[; ;src/i2c_master.c: 91:         case ACKNOWLEDGE_ADDR:
 [e :U 1399 ]
-"84
-[; ;src/i2c_master.c: 84:             if(SSP1CON2bits.ACKSTAT) {
+"92
+[; ;src/i2c_master.c: 92:             if(SSP1CON2bits.ACKSTAT) {
 [e $ ! != -> . . _SSP1CON2bits 0 6 `i -> 0 `i 1400  ]
 {
-"86
-[; ;src/i2c_master.c: 86:                 SSP1CON2bits.ACKSTAT = 0;
+"94
+[; ;src/i2c_master.c: 94:                 SSP1CON2bits.ACKSTAT = 0;
 [e = . . _SSP1CON2bits 0 6 -> -> 0 `i `uc ]
-"87
-[; ;src/i2c_master.c: 87:                 I2C_stop(RECEIVE_ERROR);
+"95
+[; ;src/i2c_master.c: 95:                 I2C_stop(RECEIVE_ERROR);
 [e ( _I2C_stop (1 . `E9283 2 ]
-"88
-[; ;src/i2c_master.c: 88:             } else {
+"96
+[; ;src/i2c_master.c: 96:             } else {
 }
 [e $U 1401  ]
 [e :U 1400 ]
 {
-"89
-[; ;src/i2c_master.c: 89:                 SSP1CON2bits.RCEN = 1;
+"97
+[; ;src/i2c_master.c: 97:                 SSP1CON2bits.RCEN = 1;
 [e = . . _SSP1CON2bits 0 3 -> -> 1 `i `uc ]
-"90
-[; ;src/i2c_master.c: 90:                 I2C_status = ACKNOWLEDGE_RECV;
+"98
+[; ;src/i2c_master.c: 98:                 I2C_status = ACKNOWLEDGE_RECV;
 [e = _I2C_status . `E9299 5 ]
-"91
-[; ;src/i2c_master.c: 91:             }
+"99
+[; ;src/i2c_master.c: 99:             }
 }
 [e :U 1401 ]
-"92
-[; ;src/i2c_master.c: 92:             break;
+"100
+[; ;src/i2c_master.c: 100:             break;
 [e $U 1392  ]
-"93
-[; ;src/i2c_master.c: 93:         case SEND_DATA:
+"101
+[; ;src/i2c_master.c: 101:         case SEND_DATA:
 [e :U 1402 ]
-"94
-[; ;src/i2c_master.c: 94:             if(SSP1CON2bits.ACKSTAT) {
+"102
+[; ;src/i2c_master.c: 102:             if(SSP1CON2bits.ACKSTAT) {
 [e $ ! != -> . . _SSP1CON2bits 0 6 `i -> 0 `i 1403  ]
 {
-"96
-[; ;src/i2c_master.c: 96:                 SSP1CON2bits.ACKSTAT = 0;
+"104
+[; ;src/i2c_master.c: 104:                 SSP1CON2bits.ACKSTAT = 0;
 [e = . . _SSP1CON2bits 0 6 -> -> 0 `i `uc ]
-"97
-[; ;src/i2c_master.c: 97:                 I2C_stop(SEND_ERROR);
+"105
+[; ;src/i2c_master.c: 105:                 I2C_stop(SEND_ERROR);
 [e ( _I2C_stop (1 . `E9283 1 ]
-"98
-[; ;src/i2c_master.c: 98:             } else {
+"106
+[; ;src/i2c_master.c: 106:             } else {
 }
 [e $U 1404  ]
 [e :U 1403 ]
 {
-"100
-[; ;src/i2c_master.c: 100:                 if(xfer_count < current_packet.length) {
-[e $ ! < F9321 . _current_packet 1 1405  ]
+"108
+[; ;src/i2c_master.c: 108:                 if(xfer_count < current_packet.length) {
+[e $ ! < F9329 . _current_packet 1 1405  ]
 {
-"102
-[; ;src/i2c_master.c: 102:                     (SSP1BUF = *(current_packet.data + xfer_count));
-[e = _SSP1BUF -> *U + . _current_packet 0 * -> F9321 `x -> -> # *U . _current_packet 0 `i `x `uc ]
-"104
-[; ;src/i2c_master.c: 104:                     xfer_count++;
-[e ++ F9321 -> 1 `i ]
-"105
-[; ;src/i2c_master.c: 105:                     I2C_status = SEND_DATA;
+"110
+[; ;src/i2c_master.c: 110:                     (SSP1BUF = *(current_packet.data + xfer_count));
+[e = _SSP1BUF -> *U + . _current_packet 0 * -> F9329 `x -> -> # *U . _current_packet 0 `i `x `uc ]
+"112
+[; ;src/i2c_master.c: 112:                     xfer_count++;
+[e ++ F9329 -> 1 `i ]
+"113
+[; ;src/i2c_master.c: 113:                     I2C_status = SEND_DATA;
 [e = _I2C_status . `E9299 3 ]
-"106
-[; ;src/i2c_master.c: 106:                 } else {
+"114
+[; ;src/i2c_master.c: 114:                 } else {
 }
 [e $U 1406  ]
 [e :U 1405 ]
 {
-"108
-[; ;src/i2c_master.c: 108:                     I2C_stop(SUCCESS);
+"116
+[; ;src/i2c_master.c: 116:                     I2C_stop(SUCCESS);
 [e ( _I2C_stop (1 . `E9283 0 ]
-"109
-[; ;src/i2c_master.c: 109:                 }
+"117
+[; ;src/i2c_master.c: 117:                 }
 }
 [e :U 1406 ]
-"110
-[; ;src/i2c_master.c: 110:             }
+"118
+[; ;src/i2c_master.c: 118:             }
 }
 [e :U 1404 ]
-"111
-[; ;src/i2c_master.c: 111:             break;
-[e $U 1392  ]
-"112
-[; ;src/i2c_master.c: 112:         case RECEIVE_DATA:
-[e :U 1407 ]
-"113
-[; ;src/i2c_master.c: 113:             SSP1CON2bits.RCEN = 1;
-[e = . . _SSP1CON2bits 0 3 -> -> 1 `i `uc ]
-"114
-[; ;src/i2c_master.c: 114:             I2C_status = ACKNOWLEDGE_RECV;
-[e = _I2C_status . `E9299 5 ]
-"115
-[; ;src/i2c_master.c: 115:             break;
-[e $U 1392  ]
-"116
-[; ;src/i2c_master.c: 116:         case ACKNOWLEDGE_RECV:
-[e :U 1408 ]
-"117
-[; ;src/i2c_master.c: 117:             (*(current_packet.data + xfer_count) = SSP1BUF);
-[e = *U + . _current_packet 0 * -> F9321 `x -> -> # *U . _current_packet 0 `i `x -> _SSP1BUF `uc ]
-"118
-[; ;src/i2c_master.c: 118:             xfer_count++;
-[e ++ F9321 -> 1 `i ]
 "119
-[; ;src/i2c_master.c: 119:             if(xfer_count < current_packet.length) {
-[e $ ! < F9321 . _current_packet 1 1409  ]
-{
+[; ;src/i2c_master.c: 119:             break;
+[e $U 1392  ]
+"120
+[; ;src/i2c_master.c: 120:         case RECEIVE_DATA:
+[e :U 1407 ]
 "121
-[; ;src/i2c_master.c: 121:                 SSP1CON2bits.ACKDT = 0;
-[e = . . _SSP1CON2bits 0 5 -> -> 0 `i `uc ]
+[; ;src/i2c_master.c: 121:             SSP1CON2bits.RCEN = 1;
+[e = . . _SSP1CON2bits 0 3 -> -> 1 `i `uc ]
 "122
-[; ;src/i2c_master.c: 122:                 SSP1CON2bits.ACKEN = 1;
-[e = . . _SSP1CON2bits 0 4 -> -> 1 `i `uc ]
+[; ;src/i2c_master.c: 122:             I2C_status = ACKNOWLEDGE_RECV;
+[e = _I2C_status . `E9299 5 ]
 "123
-[; ;src/i2c_master.c: 123:                 I2C_status = RECEIVE_DATA;
-[e = _I2C_status . `E9299 4 ]
+[; ;src/i2c_master.c: 123:             break;
+[e $U 1392  ]
 "124
-[; ;src/i2c_master.c: 124:             } else {
+[; ;src/i2c_master.c: 124:         case ACKNOWLEDGE_RECV:
+[e :U 1408 ]
+"125
+[; ;src/i2c_master.c: 125:             (*(current_packet.data + xfer_count) = SSP1BUF);
+[e = *U + . _current_packet 0 * -> F9329 `x -> -> # *U . _current_packet 0 `i `x -> _SSP1BUF `uc ]
+"126
+[; ;src/i2c_master.c: 126:             xfer_count++;
+[e ++ F9329 -> 1 `i ]
+"127
+[; ;src/i2c_master.c: 127:             if(xfer_count < current_packet.length) {
+[e $ ! < F9329 . _current_packet 1 1409  ]
+{
+"129
+[; ;src/i2c_master.c: 129:                 SSP1CON2bits.ACKDT = 0;
+[e = . . _SSP1CON2bits 0 5 -> -> 0 `i `uc ]
+"130
+[; ;src/i2c_master.c: 130:                 SSP1CON2bits.ACKEN = 1;
+[e = . . _SSP1CON2bits 0 4 -> -> 1 `i `uc ]
+"131
+[; ;src/i2c_master.c: 131:                 I2C_status = RECEIVE_DATA;
+[e = _I2C_status . `E9299 4 ]
+"132
+[; ;src/i2c_master.c: 132:             } else {
 }
 [e $U 1410  ]
 [e :U 1409 ]
 {
-"126
-[; ;src/i2c_master.c: 126:                 SSP1CON2bits.ACKDT = 1;
+"134
+[; ;src/i2c_master.c: 134:                 SSP1CON2bits.ACKDT = 1;
 [e = . . _SSP1CON2bits 0 5 -> -> 1 `i `uc ]
-"127
-[; ;src/i2c_master.c: 127:                 SSP1CON2bits.ACKEN = 1;
+"135
+[; ;src/i2c_master.c: 135:                 SSP1CON2bits.ACKEN = 1;
 [e = . . _SSP1CON2bits 0 4 -> -> 1 `i `uc ]
-"128
-[; ;src/i2c_master.c: 128:                 I2C_stop(SUCCESS);
+"136
+[; ;src/i2c_master.c: 136:                 I2C_stop(SUCCESS);
 [e ( _I2C_stop (1 . `E9283 0 ]
-"129
-[; ;src/i2c_master.c: 129:             }
+"137
+[; ;src/i2c_master.c: 137:             }
 }
 [e :U 1410 ]
-"130
-[; ;src/i2c_master.c: 130:             break;
+"138
+[; ;src/i2c_master.c: 138:             break;
 [e $U 1392  ]
-"131
-[; ;src/i2c_master.c: 131:         case STOPPED:
+"139
+[; ;src/i2c_master.c: 139:         case STOPPED:
 [e :U 1411 ]
-"132
-[; ;src/i2c_master.c: 132:             xfer_count = 0;
-[e = F9321 -> 0 `i ]
-"133
-[; ;src/i2c_master.c: 133:             I2C_status = IDLE;
+"140
+[; ;src/i2c_master.c: 140:             xfer_count = 0;
+[e = F9329 -> 0 `i ]
+"141
+[; ;src/i2c_master.c: 141:             I2C_status = IDLE;
 [e = _I2C_status . `E9299 0 ]
-"134
-[; ;src/i2c_master.c: 134:             break;
+"142
+[; ;src/i2c_master.c: 142:             break;
 [e $U 1392  ]
-"135
-[; ;src/i2c_master.c: 135:         default:
+"143
+[; ;src/i2c_master.c: 143:         default:
 [e :U 1412 ]
-"136
-[; ;src/i2c_master.c: 136:             break;
+"144
+[; ;src/i2c_master.c: 144:             break;
 [e $U 1392  ]
-"137
-[; ;src/i2c_master.c: 137:     }
+"145
+[; ;src/i2c_master.c: 145:     }
 }
 [e $U 1392  ]
 [e :U 1393 ]
@@ -1712,79 +1718,26 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> . `E9299 6 `ui 1411
  1412 ]
 [e :U 1392 ]
-"138
-[; ;src/i2c_master.c: 138: }
+"146
+[; ;src/i2c_master.c: 146: }
 [e :UE 1391 ]
 }
-"139
-[; ;src/i2c_master.c: 139: char I2C_master_enabled() {
+"147
+[; ;src/i2c_master.c: 147: char I2C_master_enabled() {
 [v _I2C_master_enabled `(uc ~T0 @X0 1 ef ]
 {
 [e :U _I2C_master_enabled ]
 [f ]
-"140
-[; ;src/i2c_master.c: 140:     return (SSP1CON1bits.SSPEN);
+"148
+[; ;src/i2c_master.c: 148:     return (SSP1CON1bits.SSPEN);
 [e ) -> . . _SSP1CON1bits 0 2 `uc ]
 [e $UE 1413  ]
-"141
-[; ;src/i2c_master.c: 141: }
-[e :UE 1413 ]
-}
-"143
-[; ;src/i2c_master.c: 143: void create_read_packet(char * buffer, int length, char address) {
-[v _create_read_packet `(v ~T0 @X0 1 ef3`*uc`i`uc ]
-{
-[e :U _create_read_packet ]
-[v _buffer `*uc ~T0 @X0 1 r1 ]
-[v _length `i ~T0 @X0 1 r2 ]
-[v _address `uc ~T0 @X0 1 r3 ]
-[f ]
-"144
-[; ;src/i2c_master.c: 144:     current_packet.data = buffer;
-[e = . _current_packet 0 _buffer ]
-"145
-[; ;src/i2c_master.c: 145:     current_packet.length = length;
-[e = . _current_packet 1 _length ]
-"146
-[; ;src/i2c_master.c: 146:     current_packet.address = (address << 1);
-[e = . _current_packet 2 -> << -> _address `i -> 1 `i `uc ]
-"147
-[; ;src/i2c_master.c: 147:     current_packet.address |= 0x01;
-[e =| . _current_packet 2 -> -> 1 `i `Vuc ]
-"148
-[; ;src/i2c_master.c: 148:     current_packet.result = PENDING;
-[e = . _current_packet 3 . `E9283 3 ]
 "149
 [; ;src/i2c_master.c: 149: }
-[e :UE 1414 ]
+[e :UE 1413 ]
 }
-"150
-[; ;src/i2c_master.c: 150: void create_write_packet(char * data, int length, char address) {
-[v _create_write_packet `(v ~T0 @X0 1 ef3`*uc`i`uc ]
-{
-[e :U _create_write_packet ]
-[v _data `*uc ~T0 @X0 1 r1 ]
-[v _length `i ~T0 @X0 1 r2 ]
-[v _address `uc ~T0 @X0 1 r3 ]
-[f ]
 "151
-[; ;src/i2c_master.c: 151:     current_packet.data = data;
-[e = . _current_packet 0 _data ]
-"152
-[; ;src/i2c_master.c: 152:     current_packet.length = length;
-[e = . _current_packet 1 _length ]
-"153
-[; ;src/i2c_master.c: 153:     current_packet.address = (address << 1);
-[e = . _current_packet 2 -> << -> _address `i -> 1 `i `uc ]
-"154
-[; ;src/i2c_master.c: 154:     current_packet.result = PENDING;
-[e = . _current_packet 3 . `E9283 3 ]
-"155
-[; ;src/i2c_master.c: 155: }
-[e :UE 1415 ]
-}
-"157
-[; ;src/i2c_master.c: 157: I2C_master_result I2C_master_write(char * data, int length, char address) {
+[; ;src/i2c_master.c: 151: I2C_master_result I2C_master_write(char * data, int length, char address) {
 [v _I2C_master_write `(E9283 ~T0 @X0 1 ef3`*uc`i`uc ]
 {
 [e :U _I2C_master_write ]
@@ -1792,37 +1745,37 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _length `i ~T0 @X0 1 r2 ]
 [v _address `uc ~T0 @X0 1 r3 ]
 [f ]
-"158
-[; ;src/i2c_master.c: 158:     if(!I2C_master_enabled()) {
-[e $ ! ! != -> ( _I2C_master_enabled ..  `i -> 0 `i 1417  ]
+"152
+[; ;src/i2c_master.c: 152:     if(!I2C_master_enabled()) {
+[e $ ! ! != -> ( _I2C_master_enabled ..  `i -> 0 `i 1415  ]
 {
-"159
-[; ;src/i2c_master.c: 159:         return SEND_ERROR;
+"153
+[; ;src/i2c_master.c: 153:         return SEND_ERROR;
 [e ) . `E9283 1 ]
-[e $UE 1416  ]
-"160
-[; ;src/i2c_master.c: 160:     }
+[e $UE 1414  ]
+"154
+[; ;src/i2c_master.c: 154:     }
 }
-[e :U 1417 ]
-"161
-[; ;src/i2c_master.c: 161:     create_write_packet(data, length, address);
+[e :U 1415 ]
+"155
+[; ;src/i2c_master.c: 155:     create_write_packet(data, length, address);
 [e ( _create_write_packet (3 , , _data _length _address ]
-"162
-[; ;src/i2c_master.c: 162:     SSP1IF = 1;
+"156
+[; ;src/i2c_master.c: 156:     SSP1IF = 1;
 [e = _SSP1IF -> -> 1 `i `b ]
-"163
-[; ;src/i2c_master.c: 163:     I2C_wait();
+"157
+[; ;src/i2c_master.c: 157:     I2C_wait();
 [e ( _I2C_wait ..  ]
-"164
-[; ;src/i2c_master.c: 164:     return current_packet.result;
+"158
+[; ;src/i2c_master.c: 158:     return current_packet.result;
 [e ) . _current_packet 3 ]
-[e $UE 1416  ]
-"165
-[; ;src/i2c_master.c: 165: }
-[e :UE 1416 ]
+[e $UE 1414  ]
+"159
+[; ;src/i2c_master.c: 159: }
+[e :UE 1414 ]
 }
-"166
-[; ;src/i2c_master.c: 166: I2C_master_result I2C_master_read(char * buffer, int length, char address) {
+"161
+[; ;src/i2c_master.c: 161: I2C_master_result I2C_master_read(char * buffer, int length, char address) {
 [v _I2C_master_read `(E9283 ~T0 @X0 1 ef3`*uc`i`uc ]
 {
 [e :U _I2C_master_read ]
@@ -1830,32 +1783,85 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _length `i ~T0 @X0 1 r2 ]
 [v _address `uc ~T0 @X0 1 r3 ]
 [f ]
-"167
-[; ;src/i2c_master.c: 167:     if(!I2C_master_enabled()) {
-[e $ ! ! != -> ( _I2C_master_enabled ..  `i -> 0 `i 1419  ]
+"162
+[; ;src/i2c_master.c: 162:     if(!I2C_master_enabled()) {
+[e $ ! ! != -> ( _I2C_master_enabled ..  `i -> 0 `i 1417  ]
 {
-"168
-[; ;src/i2c_master.c: 168:         return RECEIVE_ERROR;
+"163
+[; ;src/i2c_master.c: 163:         return RECEIVE_ERROR;
 [e ) . `E9283 2 ]
-[e $UE 1418  ]
-"169
-[; ;src/i2c_master.c: 169:     }
+[e $UE 1416  ]
+"164
+[; ;src/i2c_master.c: 164:     }
 }
-[e :U 1419 ]
-"170
-[; ;src/i2c_master.c: 170:     create_read_packet(buffer, length, address);
+[e :U 1417 ]
+"165
+[; ;src/i2c_master.c: 165:     create_read_packet(buffer, length, address);
 [e ( _create_read_packet (3 , , _buffer _length _address ]
-"171
-[; ;src/i2c_master.c: 171:     SSP1IF = 1;
+"166
+[; ;src/i2c_master.c: 166:     SSP1IF = 1;
 [e = _SSP1IF -> -> 1 `i `b ]
-"172
-[; ;src/i2c_master.c: 172:     I2C_wait();
+"167
+[; ;src/i2c_master.c: 167:     I2C_wait();
 [e ( _I2C_wait ..  ]
-"173
-[; ;src/i2c_master.c: 173:     return current_packet.result;
+"168
+[; ;src/i2c_master.c: 168:     return current_packet.result;
 [e ) . _current_packet 3 ]
-[e $UE 1418  ]
+[e $UE 1416  ]
+"169
+[; ;src/i2c_master.c: 169: }
+[e :UE 1416 ]
+}
+"171
+[; ;src/i2c_master.c: 171: void create_read_packet(char * buffer, int length, char address) {
+[v _create_read_packet `(v ~T0 @X0 1 ef3`*uc`i`uc ]
+{
+[e :U _create_read_packet ]
+[v _buffer `*uc ~T0 @X0 1 r1 ]
+[v _length `i ~T0 @X0 1 r2 ]
+[v _address `uc ~T0 @X0 1 r3 ]
+[f ]
+"172
+[; ;src/i2c_master.c: 172:     current_packet.data = buffer;
+[e = . _current_packet 0 _buffer ]
+"173
+[; ;src/i2c_master.c: 173:     current_packet.length = length;
+[e = . _current_packet 1 _length ]
 "174
-[; ;src/i2c_master.c: 174: }
+[; ;src/i2c_master.c: 174:     current_packet.address = (address << 1);
+[e = . _current_packet 2 -> << -> _address `i -> 1 `i `uc ]
+"175
+[; ;src/i2c_master.c: 175:     current_packet.address |= 0x01;
+[e =| . _current_packet 2 -> -> 1 `i `Vuc ]
+"176
+[; ;src/i2c_master.c: 176:     current_packet.result = PENDING;
+[e = . _current_packet 3 . `E9283 3 ]
+"177
+[; ;src/i2c_master.c: 177: }
 [e :UE 1418 ]
+}
+"179
+[; ;src/i2c_master.c: 179: void create_write_packet(char * data, int length, char address) {
+[v _create_write_packet `(v ~T0 @X0 1 ef3`*uc`i`uc ]
+{
+[e :U _create_write_packet ]
+[v _data `*uc ~T0 @X0 1 r1 ]
+[v _length `i ~T0 @X0 1 r2 ]
+[v _address `uc ~T0 @X0 1 r3 ]
+[f ]
+"180
+[; ;src/i2c_master.c: 180:     current_packet.data = data;
+[e = . _current_packet 0 _data ]
+"181
+[; ;src/i2c_master.c: 181:     current_packet.length = length;
+[e = . _current_packet 1 _length ]
+"182
+[; ;src/i2c_master.c: 182:     current_packet.address = (address << 1);
+[e = . _current_packet 2 -> << -> _address `i -> 1 `i `uc ]
+"183
+[; ;src/i2c_master.c: 183:     current_packet.result = PENDING;
+[e = . _current_packet 3 . `E9283 3 ]
+"184
+[; ;src/i2c_master.c: 184: }
+[e :UE 1419 ]
 }

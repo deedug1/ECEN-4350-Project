@@ -15638,7 +15638,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 1 "src/Si7021.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
-# 14 "src/../headers/i2c_master.h"
+# 16 "src/../headers/i2c_master.h"
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
@@ -15650,7 +15650,7 @@ I2C_master_result I2C_master_read(char * buffer, int length, char address);
 # 2 "src/Si7021.c" 2
 
 # 1 "src/../headers/Si7021.h" 1
-# 18 "src/../headers/Si7021.h"
+# 12 "src/../headers/Si7021.h"
 void Si7021_init(void);
 void Si7021_reset(void);
 void Si7021_read_humidity(void);
@@ -15659,32 +15659,16 @@ double Si7021_avg_humidity(void);
 double Si7021_avg_temp(void);
 int Si7021_set_heater(char heat);
 # 3 "src/Si7021.c" 2
-# 12 "src/Si7021.c"
+# 23 "src/Si7021.c"
+double convert_humidity(void);
+double convert_temp(void);
+
+
 static char Si7021_buf[2];
 static double Si7021_temps[5];
 static double Si7021_humids[5];
-double convert_humidity() {
-    int rh_code;
-    double result;
-    rh_code = Si7021_buf[1]; rh_code += (Si7021_buf[0] << 8);
-    result = ((125.0 * (double)rh_code) / 65536.0) - 6;
 
-    if(result < 0) {
-        return 0.0;
-    } else if (result > 100) {
-        return 100.0;
-    } else {
-        return result;
-    }
-}
 
-double convert_temp() {
-    int temp_code;
-    double result;
-    temp_code = Si7021_buf[1]; temp_code += (Si7021_buf[0] << 8);
-    result = ((176.0 * (double)temp_code) / 65536.0) - 47;
-    return result;
-}
 void Si7021_init() {
     int i;
 
@@ -15695,6 +15679,7 @@ void Si7021_init() {
         Si7021_read_humidity();
     }
 }
+
 double Si7021_avg_humidity() {
     int i;
     double result = 0;
@@ -15704,6 +15689,7 @@ double Si7021_avg_humidity() {
     result = result / (double)5;
     return result;
 }
+
 double Si7021_avg_temp() {
     int i;
     double result = 0;
@@ -15713,6 +15699,7 @@ double Si7021_avg_temp() {
     result = result / (double)5;
     return result;
 }
+
 void Si7021_reset() {
     Si7021_buf[0] = 0xFE;
     I2C_master_write(Si7021_buf, 1, 0x40);
@@ -15738,4 +15725,27 @@ void Si7021_read_temp() {
 
     Si7021_temps[i] = convert_temp();
     i = (i + 1) % 5;
+}
+
+double convert_humidity() {
+    int rh_code;
+    double result;
+    rh_code = Si7021_buf[1]; rh_code += (Si7021_buf[0] << 8);
+    result = ((125.0 * (double)rh_code) / 65536.0) - 6;
+
+    if(result < 0) {
+        return 0.0;
+    } else if (result > 100) {
+        return 100.0;
+    } else {
+        return result;
+    }
+}
+
+double convert_temp() {
+    int temp_code;
+    double result;
+    temp_code = Si7021_buf[1]; temp_code += (Si7021_buf[0] << 8);
+    result = ((176.0 * (double)temp_code) / 65536.0) - 47;
+    return result;
 }

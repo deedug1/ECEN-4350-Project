@@ -1,6 +1,6 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"5 src/stopwatch.c
-[; ;src/stopwatch.c: 5: typedef struct {
+"12 src/stopwatch.c
+[; ;src/stopwatch.c: 12: typedef struct {
 [s S1381 `uc 1 `i 1 ]
 [n S1381 . started time ]
 "3896 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
@@ -1291,161 +1291,161 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"10 src/stopwatch.c
-[; ;src/stopwatch.c: 10: static volatile stopwatch global_stopwatch;
+"18 src/stopwatch.c
+[; ;src/stopwatch.c: 18: static volatile stopwatch global_stopwatch;
 [v _global_stopwatch `VS1381 ~T0 @X0 1 s ]
-"11
-[; ;src/stopwatch.c: 11: void STOPWATCH_ISR() {
+"20
+[; ;src/stopwatch.c: 20: void STOPWATCH_ISR() {
 [v _STOPWATCH_ISR `(v ~T0 @X0 1 ef ]
 {
 [e :U _STOPWATCH_ISR ]
 [f ]
-"13
-[; ;src/stopwatch.c: 13:     PIR4bits.TMR2IF = 0;
+"22
+[; ;src/stopwatch.c: 22:     PIR4bits.TMR2IF = 0;
 [e = . . _PIR4bits 0 1 -> -> 0 `i `uc ]
-"14
-[; ;src/stopwatch.c: 14:     global_stopwatch.started = 0;
+"23
+[; ;src/stopwatch.c: 23:     global_stopwatch.started = 0;
 [e = . _global_stopwatch 0 -> -> 0 `i `uc ]
-"15
-[; ;src/stopwatch.c: 15:     T2CON &= 0x7F;
+"24
+[; ;src/stopwatch.c: 24:     T2CON &= 0x7F;
 [e =& _T2CON -> -> 127 `i `Vuc ]
-"16
-[; ;src/stopwatch.c: 16:     T2PR = 0;
+"25
+[; ;src/stopwatch.c: 25:     T2PR = 0;
 [e = _T2PR -> -> 0 `i `uc ]
-"17
-[; ;src/stopwatch.c: 17:     PIE4bits.TMR2IE = 0;
+"26
+[; ;src/stopwatch.c: 26:     PIE4bits.TMR2IE = 0;
 [e = . . _PIE4bits 0 1 -> -> 0 `i `uc ]
-"18
-[; ;src/stopwatch.c: 18: }
+"27
+[; ;src/stopwatch.c: 27: }
 [e :UE 1382 ]
 }
-"19
-[; ;src/stopwatch.c: 19: void stopwatch_init() {
+"28
+[; ;src/stopwatch.c: 28: void stopwatch_init() {
 [v _stopwatch_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_init ]
 [f ]
-"20
-[; ;src/stopwatch.c: 20:     T2CON = 0x7E;
+"29
+[; ;src/stopwatch.c: 29:     T2CON = 0x7E;
 [e = _T2CON -> -> 126 `i `uc ]
-"21
-[; ;src/stopwatch.c: 21:     T2HLT = 0x00;
+"30
+[; ;src/stopwatch.c: 30:     T2HLT = 0x00;
 [e = _T2HLT -> -> 0 `i `uc ]
-"22
-[; ;src/stopwatch.c: 22:     T2CLKCON = 0x05;
+"31
+[; ;src/stopwatch.c: 31:     T2CLKCON = 0x05;
 [e = _T2CLKCON -> -> 5 `i `uc ]
-"23
-[; ;src/stopwatch.c: 23:     T2RST = 0x00;
+"32
+[; ;src/stopwatch.c: 32:     T2RST = 0x00;
 [e = _T2RST -> -> 0 `i `uc ]
-"24
-[; ;src/stopwatch.c: 24: }
+"33
+[; ;src/stopwatch.c: 33: }
 [e :UE 1383 ]
 }
-"25
-[; ;src/stopwatch.c: 25: void stopwatch_start(int seconds) {
+"34
+[; ;src/stopwatch.c: 34: void stopwatch_start(int seconds) {
 [v _stopwatch_start `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _stopwatch_start ]
 [v _seconds `i ~T0 @X0 1 r1 ]
 [f ]
-"26
-[; ;src/stopwatch.c: 26:     char cmp = 0;
+"35
+[; ;src/stopwatch.c: 35:     char cmp = 0;
 [v _cmp `uc ~T0 @X0 1 a ]
 [e = _cmp -> -> 0 `i `uc ]
-"27
-[; ;src/stopwatch.c: 27:     if(global_stopwatch.started) {
+"36
+[; ;src/stopwatch.c: 36:     if(global_stopwatch.started) {
 [e $ ! != -> . _global_stopwatch 0 `i -> 0 `i 1385  ]
 {
-"28
-[; ;src/stopwatch.c: 28:         return;
+"37
+[; ;src/stopwatch.c: 37:         return;
 [e $UE 1384  ]
-"29
-[; ;src/stopwatch.c: 29:     }
+"38
+[; ;src/stopwatch.c: 38:     }
 }
 [e :U 1385 ]
-"31
-[; ;src/stopwatch.c: 31:     cmp = (char)(seconds * 16);
+"40
+[; ;src/stopwatch.c: 40:     cmp = (char)(seconds * 16);
 [e = _cmp -> * _seconds -> 16 `i `uc ]
-"32
-[; ;src/stopwatch.c: 32:     T2PR = cmp;
+"41
+[; ;src/stopwatch.c: 41:     T2PR = cmp;
 [e = _T2PR -> _cmp `uc ]
-"34
-[; ;src/stopwatch.c: 34:     global_stopwatch.time = seconds;
+"43
+[; ;src/stopwatch.c: 43:     global_stopwatch.time = seconds;
 [e = . _global_stopwatch 1 _seconds ]
-"35
-[; ;src/stopwatch.c: 35:     global_stopwatch.started = 1;
+"44
+[; ;src/stopwatch.c: 44:     global_stopwatch.started = 1;
 [e = . _global_stopwatch 0 -> -> 1 `i `uc ]
-"37
-[; ;src/stopwatch.c: 37:     PIE4bits.TMR2IE = 1;
+"46
+[; ;src/stopwatch.c: 46:     PIE4bits.TMR2IE = 1;
 [e = . . _PIE4bits 0 1 -> -> 1 `i `uc ]
-"38
-[; ;src/stopwatch.c: 38:     T2CON |= 0x80;
+"47
+[; ;src/stopwatch.c: 47:     T2CON |= 0x80;
 [e =| _T2CON -> -> 128 `i `Vuc ]
-"39
-[; ;src/stopwatch.c: 39: }
+"48
+[; ;src/stopwatch.c: 48: }
 [e :UE 1384 ]
 }
-"40
-[; ;src/stopwatch.c: 40: void stopwatch_stop() {
+"49
+[; ;src/stopwatch.c: 49: void stopwatch_stop() {
 [v _stopwatch_stop `(v ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_stop ]
 [f ]
-"41
-[; ;src/stopwatch.c: 41:     PIE4bits.TMR2IE = 0;
+"50
+[; ;src/stopwatch.c: 50:     PIE4bits.TMR2IE = 0;
 [e = . . _PIE4bits 0 1 -> -> 0 `i `uc ]
-"42
-[; ;src/stopwatch.c: 42:     PIR4bits.TMR2IF = 0;
+"51
+[; ;src/stopwatch.c: 51:     PIR4bits.TMR2IF = 0;
 [e = . . _PIR4bits 0 1 -> -> 0 `i `uc ]
-"43
-[; ;src/stopwatch.c: 43:     T2CON &= 0x7F;
+"52
+[; ;src/stopwatch.c: 52:     T2CON &= 0x7F;
 [e =& _T2CON -> -> 127 `i `Vuc ]
-"44
-[; ;src/stopwatch.c: 44:     global_stopwatch.started = 0;
+"53
+[; ;src/stopwatch.c: 53:     global_stopwatch.started = 0;
 [e = . _global_stopwatch 0 -> -> 0 `i `uc ]
-"45
-[; ;src/stopwatch.c: 45: }
+"54
+[; ;src/stopwatch.c: 54: }
 [e :UE 1386 ]
 }
-"46
-[; ;src/stopwatch.c: 46: int stopwatch_get_time() {
+"55
+[; ;src/stopwatch.c: 55: int stopwatch_get_time() {
 [v _stopwatch_get_time `(i ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_get_time ]
 [f ]
-"47
-[; ;src/stopwatch.c: 47:     return global_stopwatch.time;
+"56
+[; ;src/stopwatch.c: 56:     return global_stopwatch.time;
 [e ) . _global_stopwatch 1 ]
 [e $UE 1387  ]
-"48
-[; ;src/stopwatch.c: 48: }
+"57
+[; ;src/stopwatch.c: 57: }
 [e :UE 1387 ]
 }
-"49
-[; ;src/stopwatch.c: 49: char stopwatch_is_started() {
+"58
+[; ;src/stopwatch.c: 58: char stopwatch_is_started() {
 [v _stopwatch_is_started `(uc ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_is_started ]
 [f ]
-"50
-[; ;src/stopwatch.c: 50:     return global_stopwatch.started;
+"59
+[; ;src/stopwatch.c: 59:     return global_stopwatch.started;
 [e ) . _global_stopwatch 0 ]
 [e $UE 1388  ]
-"51
-[; ;src/stopwatch.c: 51: }
+"60
+[; ;src/stopwatch.c: 60: }
 [e :UE 1388 ]
 }
-"52
-[; ;src/stopwatch.c: 52: char stopwatch_is_stopped() {
+"61
+[; ;src/stopwatch.c: 61: char stopwatch_is_stopped() {
 [v _stopwatch_is_stopped `(uc ~T0 @X0 1 ef ]
 {
 [e :U _stopwatch_is_stopped ]
 [f ]
-"53
-[; ;src/stopwatch.c: 53:     return !global_stopwatch.started;
+"62
+[; ;src/stopwatch.c: 62:     return !global_stopwatch.started;
 [e ) -> -> ! != -> . _global_stopwatch 0 `i -> 0 `i `i `uc ]
 [e $UE 1389  ]
-"54
-[; ;src/stopwatch.c: 54: }
+"63
+[; ;src/stopwatch.c: 63: }
 [e :UE 1389 ]
 }

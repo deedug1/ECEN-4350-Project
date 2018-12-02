@@ -8,14 +8,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17 src/../headers/uart.h
 [; ;src/../headers/uart.h: 17: void UART_init(void);
 [v _UART_init `(v ~T0 @X0 0 ef ]
-"18 src/../headers/i2c_master.h
-[; ;src/../headers/i2c_master.h: 18: void I2C_master_init(void);
+"20 src/../headers/i2c_master.h
+[; ;src/../headers/i2c_master.h: 20: void I2C_master_init(void);
 [v _I2C_master_init `(v ~T0 @X0 0 ef ]
-"19 src/../headers/stopwatch.h
-[; ;src/../headers/stopwatch.h: 19: void stopwatch_init(void);
+"15 src/../headers/stopwatch.h
+[; ;src/../headers/stopwatch.h: 15: void stopwatch_init(void);
 [v _stopwatch_init `(v ~T0 @X0 0 ef ]
-"14 src/../headers/timer0.h
-[; ;src/../headers/timer0.h: 14: void TIMER0_init(void);
+"15 src/../headers/timer0.h
+[; ;src/../headers/timer0.h: 15: void TIMER0_init(void);
 [v _TIMER0_init `(v ~T0 @X0 0 ef ]
 "14514 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 14514: extern volatile unsigned char LATA __attribute__((address(0xF82)));
@@ -1449,19 +1449,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/mc_init.c: 57: 
 [p x CPD = OFF ]
 "60
-[; ;src/mc_init.c: 60:     PPSLOCK = 0XAA;
+[; ;src/mc_init.c: 60:     PPSLOCK = 0X01;
 [p x EBTR0 = OFF ]
 "61
-[; ;src/mc_init.c: 61:     PPSLOCK = 0X01;
+[; ;src/mc_init.c: 61:     GIE = state;
 [p x EBTR1 = OFF ]
 "62
-[; ;src/mc_init.c: 62:     GIE = state;
+[; ;src/mc_init.c: 62: }
 [p x EBTR2 = OFF ]
 "63
-[; ;src/mc_init.c: 63: }
+[; ;src/mc_init.c: 63: void oscillator_init() {
 [p x EBTR3 = OFF ]
 "66
-[; ;src/mc_init.c: 66:     OSCCON1 = 0x60;
+[; ;src/mc_init.c: 66:     OSCCON3 = 0x00;
 [p x EBTRB = OFF ]
 "69
 [; ;src/mc_init.c: 69:     OSCFRQ = 0x05;
@@ -1473,41 +1473,37 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/mc_init.c: 70: 
 [e ( _controller_init ..  ]
 "71
-[; ;src/mc_init.c: 71:     OSCTUNE = 0x00;
+[; ;src/mc_init.c: 71: 
 [e ( _interrupt_init ..  ]
 "72
-[; ;src/mc_init.c: 72: }
+[; ;src/mc_init.c: 72:     OSCTUNE = 0x00;
 [e ( _UART_init ..  ]
 "73
-[; ;src/mc_init.c: 73: 
+[; ;src/mc_init.c: 73: }
 [e ( _I2C_master_init ..  ]
 "74
 [; ;src/mc_init.c: 74: 
 [e ( _stopwatch_init ..  ]
 "75
-[; ;src/mc_init.c: 75: 
+[; ;src/mc_init.c: 75: void controller_init() {
 [e ( _TIMER0_init ..  ]
 "76
-[; ;src/mc_init.c: 76: 
+[; ;src/mc_init.c: 76:     oscillator_init();
 [e :UE 1381 ]
 }
 "77
-[; ;src/mc_init.c: 77: 
+[; ;src/mc_init.c: 77:     pps_init();
 [v _port_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _port_init ]
 [f ]
 "80
-[; ;src/mc_init.c: 80:     pps_init();
 [e = _LATA -> -> 0 `i `uc ]
 "81
-[; ;src/mc_init.c: 81: 
 [e = _ANSELA -> -> 255 `i `uc ]
 "82
-[; ;src/mc_init.c: 82:     port_init();
 [e = _TRISA -> -> 255 `i `uc ]
 "83
-[; ;src/mc_init.c: 83: }
 [e = _WPUA -> -> 0 `i `uc ]
 "84
 [e = _ODCONA -> -> 0 `i `uc ]
@@ -1568,44 +1564,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _RX1PPS -> -> 16 `i `uc ]
 "122
 [e = _RC1PPS -> -> 9 `i `uc ]
-"127
+"126
 [e = _PPSLOCK -> -> 85 `i `uc ]
-"128
+"127
 [e = _PPSLOCK -> -> 170 `i `uc ]
-"129
+"128
 [e = _PPSLOCK -> -> 1 `i `uc ]
-"130
+"129
 [e = _GIE -> _state `b ]
-"131
+"130
 [e :UE 1383 ]
 }
-"132
+"131
 [v _oscillator_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _oscillator_init ]
 [f ]
-"134
+"133
 [e = _OSCCON1 -> -> 96 `i `uc ]
-"135
+"134
 [e = _OSCCON3 -> -> 0 `i `uc ]
 "137
 [e = _OSCFRQ -> -> 5 `i `uc ]
-"139
-[e = _OSCTUNE -> -> 0 `i `uc ]
 "140
+[e = _OSCTUNE -> -> 0 `i `uc ]
+"141
 [e :UE 1384 ]
 }
-"146
+"143
 [v _controller_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _controller_init ]
 [f ]
-"147
+"144
 [e ( _oscillator_init ..  ]
-"148
+"145
 [e ( _pps_init ..  ]
-"150
+"146
 [e ( _port_init ..  ]
-"151
+"147
 [e :UE 1385 ]
 }

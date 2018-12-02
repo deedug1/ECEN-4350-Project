@@ -3,14 +3,14 @@
 [d edition pro ]
 [d chip 18F25Q10 ]
 [d frameptr 4065 ]
-"26 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
+"34 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
 [e E9283 . `uc
 SUCCESS 0
 SEND_ERROR 1
 RECEIVE_ERROR 2
 PENDING 3
 ]
-"27
+"35
 [e E9299 . `uc
 IDLE 0
 SEND_ADDRESS 1
@@ -20,26 +20,26 @@ RECEIVE_DATA 4
 ACKNOWLEDGE_RECV 5
 STOPPED 6
 ]
-"60 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"74 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [e E9458 . `uc
 TCP 0
 UDP 1
 SSL 2
 ]
-"58 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
-[e E9296 . `uc
+"99 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
+[e E9292 . `uc
 SUCCESS 0
 SEND_ERROR 1
 RECEIVE_ERROR 2
 PENDING 3
 ]
-"145 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
-[e E9481 . `uc
+"126 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+[e E9477 . `uc
 TCP 0
 UDP 1
 SSL 2
 ]
-"67 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+"65 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
 [e E9283 . `uc
 SUCCESS 0
 SEND_ERROR 1
@@ -102,61 +102,61 @@ PENDING 3
 [v ___omul __omul `(uo  1 e 8 0 ]
 "10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\xxtofl.c
 [v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-"27 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"44 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_init ESP8266_init `(v  1 e 1 0 ]
-"40
+"57
 [v _ESP8266_reset ESP8266_reset `(v  1 e 1 0 ]
-"45
+"63
 [v _ESP8266_connect ESP8266_connect `(v  1 e 1 0 ]
-"60
+"74
 [v _ESP8266_open_socket ESP8266_open_socket `(v  1 e 1 0 ]
-"73
+"88
 [v _ESP8266_send_data ESP8266_send_data `(v  1 e 1 0 ]
-"104
+"107
 [v _ESP8266_lookfor ESP8266_lookfor `(uc  1 e 1 0 ]
-"29 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
+"37 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
 [v _I2C_master_init I2C_master_init `(v  1 e 1 0 ]
-"46
+"54
 [v _I2C_stop I2C_stop `(v  1 e 1 0 ]
-"52
-[v _I2C_wait I2C_wait `(v  1 e 1 0 ]
 "60
+[v _I2C_wait I2C_wait `(v  1 e 1 0 ]
+"68
 [v _I2C_MASTER_ISR I2C_MASTER_ISR `(v  1 e 1 0 ]
-"139
+"147
 [v _I2C_master_enabled I2C_master_enabled `(uc  1 e 1 0 ]
-"143
-[v _create_read_packet create_read_packet `(v  1 e 1 0 ]
-"150
-[v _create_write_packet create_write_packet `(v  1 e 1 0 ]
-"157
+"151
 [v _I2C_master_write I2C_master_write `(E9283  1 e 1 0 ]
-"166
+"161
 [v _I2C_master_read I2C_master_read `(E9283  1 e 1 0 ]
+"171
+[v _create_read_packet create_read_packet `(v  1 e 1 0 ]
+"179
+[v _create_write_packet create_write_packet `(v  1 e 1 0 ]
 "6 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/interrupt.c
 [v _interrupt_init interrupt_init `(v  1 e 1 0 ]
 "11
 [v _MAIN_ISR MAIN_ISR `IIH(v  1 e 1 0 ]
-"54 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
+"95 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
 [v _command command `(v  1 e 1 0 ]
-"63
-[v _lcd_init lcd_init `(v  1 e 1 0 ]
 "104
+[v _lcd_init lcd_init `(v  1 e 1 0 ]
+"156
 [v _lcd_update lcd_update `(v  1 e 1 0 ]
-"145
+"178
 [v _lcd_clear lcd_clear `(v  1 e 1 0 ]
-"154
+"188
 [v _lcd_putc lcd_putc `(v  1 e 1 0 ]
-"171
+"206
 [v _lcd_puts lcd_puts `(v  1 e 1 0 ]
-"177
+"213
 [v _lcd_newline lcd_newline `(v  1 e 1 0 ]
-"187
+"224
 [v _lcd_vertical_shift lcd_vertical_shift `(v  1 e 1 0 ]
 "38 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
-"100
+"102
 [v _connect_to_wifi connect_to_wifi `(v  1 e 1 0 ]
-"128
+"108
 [v _send_data_double send_data_double `(v  1 e 1 0 ]
 "69 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
 [v _system_init system_init `(v  1 e 1 0 ]
@@ -164,67 +164,67 @@ PENDING 3
 [v _port_init port_init `(v  1 e 1 0 ]
 "105
 [v _pps_init pps_init `(v  1 e 1 0 ]
-"132
+"131
 [v _oscillator_init oscillator_init `(v  1 e 1 0 ]
-"146
+"143
 [v _controller_init controller_init `(v  1 e 1 0 ]
-"13 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
+"17 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
 [v _ph_init ph_init `(v  1 e 1 0 ]
-"20
+"25
 [v _ptov ptov `(d  1 e 4 0 ]
-"27
-[v _ph_avg ph_avg `(d  1 e 4 0 ]
-"35
-[v _ph_read ph_read `(v  1 e 1 0 ]
-"15 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
-[v _convert_humidity convert_humidity `(d  1 e 4 0 ]
-"30
-[v _convert_temp convert_temp `(d  1 e 4 0 ]
-"37
-[v _Si7021_init Si7021_init `(v  1 e 1 0 ]
-"47
-[v _Si7021_avg_humidity Si7021_avg_humidity `(d  1 e 4 0 ]
-"56
-[v _Si7021_avg_temp Si7021_avg_temp `(d  1 e 4 0 ]
-"70
-[v _Si7021_read_humidity Si7021_read_humidity `(v  1 e 1 0 ]
-"81
-[v _Si7021_read_temp Si7021_read_temp `(v  1 e 1 0 ]
-"11 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
-[v _STOPWATCH_ISR STOPWATCH_ISR `(v  1 e 1 0 ]
-"19
-[v _stopwatch_init stopwatch_init `(v  1 e 1 0 ]
-"25
-[v _stopwatch_start stopwatch_start `(v  1 e 1 0 ]
-"40
-[v _stopwatch_stop stopwatch_stop `(v  1 e 1 0 ]
-"49
-[v _stopwatch_is_started stopwatch_is_started `(uc  1 e 1 0 ]
-"7 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
-[v _TIMER0_init TIMER0_init `(v  1 e 1 0 ]
-"18
-[v _TIMER0_get_count TIMER0_get_count `(i  1 e 2 0 ]
-"22
-[v _TIMER0_is_read TIMER0_is_read `(uc  1 e 1 0 ]
-"25
-[v _TIMER0_stop TIMER0_stop `(v  1 e 1 0 ]
-"29
-[v _TIMER0_start TIMER0_start `(v  1 e 1 0 ]
 "33
-[v _TIMER0_ISR TIMER0_ISR `(v  1 e 1 0 ]
-"24 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
-[v _UART_init UART_init `(v  1 e 1 0 ]
-"57
-[v _UART_RX_ISR UART_RX_ISR `(v  1 e 1 0 ]
+[v _ph_avg ph_avg `(d  1 e 4 0 ]
+"42
+[v _ph_read ph_read `(v  1 e 1 0 ]
+"32 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+[v _Si7021_init Si7021_init `(v  1 e 1 0 ]
+"43
+[v _Si7021_avg_humidity Si7021_avg_humidity `(d  1 e 4 0 ]
+"53
+[v _Si7021_avg_temp Si7021_avg_temp `(d  1 e 4 0 ]
 "68
+[v _Si7021_read_humidity Si7021_read_humidity `(v  1 e 1 0 ]
+"79
+[v _Si7021_read_temp Si7021_read_temp `(v  1 e 1 0 ]
+"90
+[v _convert_humidity convert_humidity `(d  1 e 4 0 ]
+"105
+[v _convert_temp convert_temp `(d  1 e 4 0 ]
+"20 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
+[v _STOPWATCH_ISR STOPWATCH_ISR `(v  1 e 1 0 ]
+"28
+[v _stopwatch_init stopwatch_init `(v  1 e 1 0 ]
+"34
+[v _stopwatch_start stopwatch_start `(v  1 e 1 0 ]
+"49
+[v _stopwatch_stop stopwatch_stop `(v  1 e 1 0 ]
+"58
+[v _stopwatch_is_started stopwatch_is_started `(uc  1 e 1 0 ]
+"8 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
+[v _TIMER0_init TIMER0_init `(v  1 e 1 0 ]
+"19
+[v _TIMER0_get_count TIMER0_get_count `(i  1 e 2 0 ]
+"24
+[v _TIMER0_is_read TIMER0_is_read `(uc  1 e 1 0 ]
+"28
+[v _TIMER0_stop TIMER0_stop `(v  1 e 1 0 ]
+"32
+[v _TIMER0_start TIMER0_start `(v  1 e 1 0 ]
+"37
+[v _TIMER0_ISR TIMER0_ISR `(v  1 e 1 0 ]
+"21 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
+[v _UART_init UART_init `(v  1 e 1 0 ]
+"55
+[v _UART_RX_ISR UART_RX_ISR `(v  1 e 1 0 ]
+"66
 [v _UART_TX_ISR UART_TX_ISR `(v  1 e 1 0 ]
-"82
+"81
 [v _UART_putc UART_putc `(v  1 e 1 0 ]
 "101
 [v _UART_puts UART_puts `(v  1 e 1 0 ]
 "109
 [v _UART_getc UART_getc `(uc  1 e 1 0 ]
-"133
+"135
 [v _UART_can_rx UART_can_rx `(uc  1 e 1 0 ]
 "7 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/util.c
 [v _reverse reverse `(v  1 e 1 0 ]
@@ -240,7 +240,7 @@ PENDING 3
 [v _SSP1CLKPPS SSP1CLKPPS `VEuc  1 e 1 @3762 ]
 "2434
 [v _SSP1DATPPS SSP1DATPPS `VEuc  1 e 1 @3763 ]
-[s S588 . 1 `uc 1 INT0IE 1 0 :1:0 
+[s S590 . 1 `uc 1 INT0IE 1 0 :1:0 
 `uc 1 INT1IE 1 0 :1:1 
 `uc 1 INT2IE 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -248,8 +248,8 @@ PENDING 3
 `uc 1 TMR0IE 1 0 :1:5 
 ]
 "3274
-[u S595 . 1 `S588 1 . 1 0 ]
-[v _PIE0bits PIE0bits `VES595  1 e 1 @3773 ]
+[u S597 . 1 `S590 1 . 1 0 ]
+[v _PIE0bits PIE0bits `VES597  1 e 1 @3773 ]
 [s S49 . 1 `uc 1 SSPIE 1 0 :1:0 
 `uc 1 BCLIE 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
@@ -279,7 +279,7 @@ PENDING 3
 ]
 [u S75 . 1 `S49 1 . 1 0 `S55 1 . 1 0 `S61 1 . 1 0 `S63 1 . 1 0 `S66 1 . 1 0 `S69 1 . 1 0 `S72 1 . 1 0 ]
 [v _PIE3bits PIE3bits `VES75  1 e 1 @3776 ]
-[s S550 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S552 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 TMR3IE 1 0 :1:2 
 `uc 1 TMR4IE 1 0 :1:3 
@@ -287,9 +287,9 @@ PENDING 3
 `uc 1 TMR6IE 1 0 :1:5 
 ]
 "3525
-[u S557 . 1 `S550 1 . 1 0 ]
-[v _PIE4bits PIE4bits `VES557  1 e 1 @3777 ]
-[s S605 . 1 `uc 1 INT0IF 1 0 :1:0 
+[u S559 . 1 `S552 1 . 1 0 ]
+[v _PIE4bits PIE4bits `VES559  1 e 1 @3777 ]
+[s S607 . 1 `uc 1 INT0IF 1 0 :1:0 
 `uc 1 INT1IF 1 0 :1:1 
 `uc 1 INT2IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -297,30 +297,30 @@ PENDING 3
 `uc 1 TMR0IF 1 0 :1:5 
 ]
 "3680
-[u S612 . 1 `S605 1 . 1 0 ]
-[v _PIR0bits PIR0bits `VES612  1 e 1 @3781 ]
-[s S500 . 1 `uc 1 SSPIF 1 0 :1:0 
+[u S614 . 1 `S607 1 . 1 0 ]
+[v _PIR0bits PIR0bits `VES614  1 e 1 @3781 ]
+[s S502 . 1 `uc 1 SSPIF 1 0 :1:0 
 `uc 1 BCLIF 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 TXIF 1 0 :1:4 
 `uc 1 RCIF 1 0 :1:5 
 ]
 "3835
-[s S506 . 1 `uc 1 SSP1IF 1 0 :1:0 
+[s S508 . 1 `uc 1 SSP1IF 1 0 :1:0 
 `uc 1 BCL1IF 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[s S512 . 1 `uc 1 . 1 0 :1:0 
+[s S514 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RXBNIF 1 0 :1:1 
 ]
-[s S515 . 1 `uc 1 . 1 0 :4:0 
+[s S517 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TXBNIF 1 0 :1:4 
 ]
-[u S518 . 1 `S500 1 . 1 0 `S506 1 . 1 0 `S512 1 . 1 0 `S515 1 . 1 0 ]
-[v _PIR3bits PIR3bits `VES518  1 e 1 @3784 ]
-[s S567 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S520 . 1 `S502 1 . 1 0 `S508 1 . 1 0 `S514 1 . 1 0 `S517 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES520  1 e 1 @3784 ]
+[s S569 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 TMR3IF 1 0 :1:2 
 `uc 1 TMR4IF 1 0 :1:3 
@@ -328,8 +328,8 @@ PENDING 3
 `uc 1 TMR6IF 1 0 :1:5 
 ]
 "3905
-[u S574 . 1 `S567 1 . 1 0 ]
-[v _PIR4bits PIR4bits `VES574  1 e 1 @3785 ]
+[u S576 . 1 `S569 1 . 1 0 ]
+[v _PIR4bits PIR4bits `VES576  1 e 1 @3785 ]
 "4623
 [v _OSCCON1 OSCCON1 `VEuc  1 e 1 @3795 ]
 "4763
@@ -370,7 +370,7 @@ PENDING 3
 [v _ANSELC ANSELC `VEuc  1 e 1 @3868 ]
 "11935
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @3931 ]
-[s S1036 . 1 `uc 1 ADGO 1 0 :1:0 
+[s S1038 . 1 `uc 1 ADGO 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADFM 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -380,24 +380,24 @@ PENDING 3
 `uc 1 ADON 1 0 :1:7 
 ]
 "11974
-[s S1045 . 1 `uc 1 GO 1 0 :1:0 
+[s S1047 . 1 `uc 1 GO 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADFM0 1 0 :1:2 
 ]
-[s S1049 . 1 `uc 1 DONE 1 0 :1:0 
+[s S1051 . 1 `uc 1 DONE 1 0 :1:0 
 ]
-[s S1051 . 1 `uc 1 GO_NOT_DONE 1 0 :1:0 
+[s S1053 . 1 `uc 1 GO_NOT_DONE 1 0 :1:0 
 ]
-[s S1053 . 1 `uc 1 GO_nDONE 1 0 :1:0 
+[s S1055 . 1 `uc 1 GO_nDONE 1 0 :1:0 
 ]
-[s S1055 . 1 `uc 1 . 1 0 :7:0 
+[s S1057 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 ADCAL 1 0 :1:7 
 ]
-[s S1058 . 1 `uc 1 . 1 0 :2:0 
+[s S1060 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 GODONE 1 0 :1:2 
 ]
-[u S1061 . 1 `S1036 1 . 1 0 `S1045 1 . 1 0 `S1049 1 . 1 0 `S1051 1 . 1 0 `S1053 1 . 1 0 `S1055 1 . 1 0 `S1058 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES1061  1 e 1 @3931 ]
+[u S1063 . 1 `S1038 1 . 1 0 `S1047 1 . 1 0 `S1051 1 . 1 0 `S1053 1 . 1 0 `S1055 1 . 1 0 `S1057 1 . 1 0 `S1060 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES1063  1 e 1 @3931 ]
 "12193
 [v _ADRESL ADRESL `VEuc  1 e 1 @3934 ]
 "12263
@@ -517,7 +517,7 @@ PENDING 3
 [v _T0CON0 T0CON0 `VEuc  1 e 1 @4052 ]
 "24496
 [v _T0CON1 T0CON1 `VEuc  1 e 1 @4053 ]
-[s S426 . 1 `uc 1 INT0EDG 1 0 :1:0 
+[s S428 . 1 `uc 1 INT0EDG 1 0 :1:0 
 `uc 1 INT1EDG 1 0 :1:1 
 `uc 1 INT2EDG 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -526,16 +526,16 @@ PENDING 3
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "25416
-[s S434 . 1 `uc 1 . 1 0 :6:0 
+[s S436 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S438 . 1 `uc 1 . 1 0 :6:0 
+[s S440 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S442 . 1 `S426 1 . 1 0 `S434 1 . 1 0 `S438 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES442  1 e 1 @4082 ]
+[u S444 . 1 `S428 1 . 1 0 `S436 1 . 1 0 `S440 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES444  1 e 1 @4082 ]
 "27713
 [v _GIE GIE `VEb  1 e 0 @32663 ]
 "30254
@@ -602,20 +602,18 @@ PENDING 3
 [v sqrtf@tiny tiny `Cf  1 s 4 tiny ]
 "13 C:\Users\jstpa\MPLABXProjects\4350_project.X/headers/character.h
 [v _lcd_font lcd_font `[576]uc  1 s 576 lcd_font ]
-"18 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
-[v _is_connected is_connected `uc  1 s 1 is_connected ]
-"19
-[v _SOCKETS SOCKETS `[3]*.25uc  1 e 6 0 ]
+"37 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+[v _SOCKET_TYPES SOCKET_TYPES `[3]*.25uc  1 e 6 0 ]
 [s S29 . 6 `*.39uc 1 data 2 0 `i 1 length 2 2 `uc 1 address 1 4 `E9283 1 result 1 5 ]
-"26 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
+"34 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
 [v _current_packet current_packet `VES29  1 s 6 current_packet ]
-"27
+"35
 [v _I2C_status I2C_status `VEE9299  1 s 1 I2C_status ]
-"12 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
+"51 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
 [v _lcd_buffer lcd_buffer `[512]uc  1 e 512 0 ]
-"47
+"87
 [v _cursor_x cursor_x `i  1 s 2 cursor_x ]
-"48
+"88
 [v _cursor_y cursor_y `i  1 s 2 cursor_y ]
 "27 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _SSID SSID `*.25uc  1 e 2 0 ]
@@ -623,98 +621,98 @@ PENDING 3
 [v _PASS PASS `*.25uc  1 e 2 0 ]
 "31
 [v _labels labels `[3]*.25uc  1 e 6 0 ]
-"12 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
+"16 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
 [v _ph_reads ph_reads `[5]d  1 s 20 ph_reads ]
-"12 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+"27 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
 [v _Si7021_buf Si7021_buf `[2]uc  1 s 2 Si7021_buf ]
-"13
+"28
 [v _Si7021_temps Si7021_temps `[5]d  1 s 20 Si7021_temps ]
-"14
+"29
 [v _Si7021_humids Si7021_humids `[5]d  1 s 20 Si7021_humids ]
-[s S1113 . 3 `uc 1 started 1 0 `i 1 time 2 1 ]
-"10 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
-[v _global_stopwatch global_stopwatch `VES1113  1 s 3 global_stopwatch ]
+[s S1115 . 3 `uc 1 started 1 0 `i 1 time 2 1 ]
+"18 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
+[v _global_stopwatch global_stopwatch `VES1115  1 s 3 global_stopwatch ]
 "5 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
 [v _count count `VEi  1 s 2 count ]
 "6
 [v _read read `VEuc  1 s 1 read ]
-[s S902 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
-"22 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
-[v _RX_buf RX_buf `VES902  1 s 14 RX_buf ]
-"23
-[v _TX_buf TX_buf `VES902  1 s 14 TX_buf ]
+[s S898 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
+"19 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
+[v _RX_buf RX_buf `VES898  1 s 14 RX_buf ]
+"20
+[v _TX_buf TX_buf `VES898  1 s 14 TX_buf ]
 "38 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
 {
 "41
-[v main@result result `d  1 a 4 172 ]
+[v main@result result `d  1 a 4 0 ]
 "40
-[v main@c c `i  1 a 2 176 ]
-"98
+[v main@c c `i  1 a 2 4 ]
+"100
 } 0
 "69 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
 [v _system_init system_init `(v  1 e 1 0 ]
 {
 "76
 } 0
-"19 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
+"28 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
 [v _stopwatch_init stopwatch_init `(v  1 e 1 0 ]
 {
-"24
+"33
 } 0
 "6 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/interrupt.c
 [v _interrupt_init interrupt_init `(v  1 e 1 0 ]
 {
 "10
 } 0
-"146 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
+"143 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
 [v _controller_init controller_init `(v  1 e 1 0 ]
 {
-"151
+"147
 } 0
 "105
 [v _pps_init pps_init `(v  1 e 1 0 ]
 {
 "106
 [v pps_init@state state `uc  1 a 1 5 ]
-"131
+"130
 } 0
 "77
 [v _port_init port_init `(v  1 e 1 0 ]
 {
 "103
 } 0
-"132
+"131
 [v _oscillator_init oscillator_init `(v  1 e 1 0 ]
 {
-"140
+"141
 } 0
-"24 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
+"21 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
 [v _UART_init UART_init `(v  1 e 1 0 ]
 {
-"56
+"53
 } 0
-"7 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
+"8 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
 [v _TIMER0_init TIMER0_init `(v  1 e 1 0 ]
 {
 "12
 } 0
-"29 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
+"37 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
 [v _I2C_master_init I2C_master_init `(v  1 e 1 0 ]
 {
-"45
+"53
 } 0
-"128 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"108 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _send_data_double send_data_double `(v  1 e 1 0 ]
 {
-"130
+"110
 [v send_data_double@numbuf numbuf `[10]uc  1 a 10 95 ]
-"128
+"108
 [v send_data_double@field field `i  1 p 2 89 ]
 [v send_data_double@val val `d  1 p 4 91 ]
-"129
+"109
 [v send_data_double@strbuf strbuf `[60]uc  1 s 60 strbuf ]
-"149
+"130
 } 0
 "3 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\strcat.c
 [v _strcat strcat `(*.39uc  1 e 2 0 ]
@@ -759,9 +757,9 @@ PENDING 3
 [v powf@t_h t_h `f  1 a 4 84 ]
 [v powf@t_l t_l `f  1 a 4 40 ]
 [v powf@s_l s_l `f  1 a 4 36 ]
-[u S1621 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "59
-[v powf@__xc8_float_word __xc8_float_word `S1621  1 a 4 168 ]
+[v powf@__xc8_float_word __xc8_float_word `S1623  1 a 4 168 ]
 "54
 [v powf@z z `f  1 a 4 164 ]
 "55
@@ -827,9 +825,9 @@ PENDING 3
 "28
 [v sqrtf@t t `l  1 a 4 32 ]
 [v sqrtf@q q `l  1 a 4 28 ]
-[u S1621 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "31
-[v sqrtf@__xc8_float_word __xc8_float_word `S1621  1 a 4 24 ]
+[v sqrtf@__xc8_float_word __xc8_float_word `S1623  1 a 4 24 ]
 "28
 [v sqrtf@i i `l  1 a 4 20 ]
 [v sqrtf@s s `l  1 a 4 16 ]
@@ -842,9 +840,9 @@ PENDING 3
 "4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\nanf.c
 [v _nanf nanf `(f  1 e 4 0 ]
 {
-[u S1621 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "7
-[v nanf@u u `S1621  1 a 4 9 ]
+[v nanf@u u `S1623  1 a 4 9 ]
 "4
 [v nanf@s s `*.25Cuc  1 p 2 5 ]
 "13
@@ -860,9 +858,9 @@ PENDING 3
 {
 "7
 [v scalbnf@y y `f  1 a 4 58 ]
-[u S1621 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "6
-[v scalbnf@u u `S1621  1 a 4 54 ]
+[v scalbnf@u u `S1623  1 a 4 54 ]
 "4
 [v scalbnf@x x `f  1 p 4 44 ]
 [v scalbnf@n n `i  1 p 2 48 ]
@@ -871,13 +869,13 @@ PENDING 3
 "4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\fabsf.c
 [v _fabsf fabsf `(f  1 e 4 0 ]
 {
-[u S1621 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "6
-[v fabsf@u u `S1621  1 a 4 9 ]
+[v fabsf@u u `S1623  1 a 4 9 ]
 "4
 [v fabsf@x x `f  1 p 4 5 ]
 "5
-[v fabsf@F459 F459 `S1621  1 s 4 F459 ]
+[v fabsf@F459 F459 `S1623  1 s 4 F459 ]
 "9
 } 0
 "245 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcadd.c
@@ -897,30 +895,30 @@ PENDING 3
 [v ___fltol@f1 f1 `d  1 p 4 5 ]
 "70
 } 0
-"73 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"88 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_send_data ESP8266_send_data `(v  1 e 1 0 ]
 {
-"74
+"89
 [v ESP8266_send_data@buffer buffer `[10]uc  1 a 10 65 ]
-"75
+"90
 [v ESP8266_send_data@len len `i  1 a 2 75 ]
-"73
+"88
 [v ESP8266_send_data@data data `*.39uc  1 p 2 36 ]
-"84
+"99
 } 0
-"60
+"74
 [v _ESP8266_open_socket ESP8266_open_socket `(v  1 e 1 0 ]
 {
 [v ESP8266_open_socket@type type `E9458  1 a 1 wreg ]
-"61
+"75
 [v ESP8266_open_socket@buffer buffer `[10]uc  1 a 10 65 ]
-"60
+"74
 [v ESP8266_open_socket@type type `E9458  1 a 1 wreg ]
 [v ESP8266_open_socket@ip ip `*.25uc  1 p 2 36 ]
 [v ESP8266_open_socket@port port `i  1 p 2 38 ]
-"62
+"76
 [v ESP8266_open_socket@type type `E9458  1 a 1 75 ]
-"71
+"86
 } 0
 "16 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/util.c
 [v _itoa itoa `(i  1 e 2 0 ]
@@ -969,73 +967,73 @@ PENDING 3
 [v ___awdiv@divisor divisor `i  1 p 2 7 ]
 "41
 } 0
-"13 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
+"17 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
 [v _ph_init ph_init `(v  1 e 1 0 ]
 {
-"14
+"18
 [v ph_init@i i `i  1 a 2 23 ]
-"19
+"23
 } 0
-"35
+"42
 [v _ph_read ph_read `(v  1 e 1 0 ]
 {
-"37
-[v ph_read@result result `i  1 a 2 21 ]
-"36
-[v ph_read@i i `i  1 s 2 i ]
 "44
+[v ph_read@result result `i  1 a 2 21 ]
+"43
+[v ph_read@i i `i  1 s 2 i ]
+"51
 } 0
-"20
+"25
 [v _ptov ptov `(d  1 e 4 0 ]
 {
-"21
-[v ptov@result result `d  1 a 4 17 ]
-"20
-[v ptov@ph ph `i  1 p 2 13 ]
 "26
+[v ptov@result result `d  1 a 4 17 ]
+"25
+[v ptov@ph ph `i  1 p 2 13 ]
+"31
 } 0
-"27
+"33
 [v _ph_avg ph_avg `(d  1 e 4 0 ]
 {
-"29
+"35
 [v ph_avg@avg avg `d  1 a 4 17 ]
-"28
-[v ph_avg@i i `i  1 a 2 21 ]
 "34
+[v ph_avg@i i `i  1 a 2 21 ]
+"40
 } 0
-"63 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
+"104 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
 [v _lcd_init lcd_init `(v  1 e 1 0 ]
 {
-"100
+"152
 } 0
-"145
+"178
 [v _lcd_clear lcd_clear `(v  1 e 1 0 ]
 {
-"146
+"179
 [v lcd_clear@i i `i  1 a 2 61 ]
-"153
+"186
 } 0
-"100 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"102 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _connect_to_wifi connect_to_wifi `(v  1 e 1 0 ]
 {
-"104
+"106
 } 0
-"40 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"57 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_reset ESP8266_reset `(v  1 e 1 0 ]
 {
-"44
+"62
 } 0
-"27
+"44
 [v _ESP8266_init ESP8266_init `(v  1 e 1 0 ]
 {
-"39
+"56
 } 0
-"45
+"63
 [v _ESP8266_connect ESP8266_connect `(v  1 e 1 0 ]
 {
 [v ESP8266_connect@name name `*.25uc  1 p 2 36 ]
 [v ESP8266_connect@pass pass `*.25uc  1 p 2 38 ]
-"58
+"72
 } 0
 "101 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
 [v _UART_puts UART_puts `(v  1 e 1 0 ]
@@ -1043,28 +1041,28 @@ PENDING 3
 [v UART_puts@data data `*.35uc  1 p 2 6 ]
 "107
 } 0
-"82
+"81
 [v _UART_putc UART_putc `(v  1 e 1 0 ]
 {
 [v UART_putc@data data `uc  1 a 1 wreg ]
 [v UART_putc@data data `uc  1 a 1 wreg ]
 [v UART_putc@data data `uc  1 a 1 5 ]
-"100
+"99
 } 0
-"104 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
+"107 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_lookfor ESP8266_lookfor `(uc  1 e 1 0 ]
 {
-"106
+"109
 [v ESP8266_lookfor@buffer buffer `[32]uc  1 a 32 0 ]
-"107
+"110
 [v ESP8266_lookfor@i i `i  1 a 2 34 ]
-"105
+"108
 [v ESP8266_lookfor@found found `uc  1 a 1 33 ]
 [v ESP8266_lookfor@c c `uc  1 a 1 32 ]
-"104
+"107
 [v ESP8266_lookfor@str str `*.25Cuc  1 p 2 61 ]
 [v ESP8266_lookfor@timeout timeout `i  1 p 2 63 ]
-"134
+"142
 } 0
 "3 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\strcmp.c
 [v _strcmp strcmp `(i  1 e 2 0 ]
@@ -1073,68 +1071,68 @@ PENDING 3
 [v strcmp@r r `*.25Cuc  1 p 2 7 ]
 "7
 } 0
-"40 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
+"49 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
 [v _stopwatch_stop stopwatch_stop `(v  1 e 1 0 ]
 {
-"45
+"54
 } 0
-"25
+"34
 [v _stopwatch_start stopwatch_start `(v  1 e 1 0 ]
 {
-"26
+"35
 [v stopwatch_start@cmp cmp `uc  1 a 1 7 ]
-"25
+"34
 [v stopwatch_start@seconds seconds `i  1 p 2 5 ]
-"39
+"48
 } 0
-"49
+"58
 [v _stopwatch_is_started stopwatch_is_started `(uc  1 e 1 0 ]
 {
-"51
+"60
 } 0
-"104 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
+"156 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
 [v _lcd_update lcd_update `(v  1 e 1 0 ]
 {
-"106
+"158
 [v lcd_update@data data `[33]uc  1 a 33 22 ]
-"105
+"157
 [v lcd_update@j j `i  1 a 2 59 ]
 [v lcd_update@i i `i  1 a 2 57 ]
 [v lcd_update@max max `i  1 a 2 55 ]
-"124
+"176
 } 0
-"54
+"95
 [v _command command `(v  1 e 1 0 ]
 {
 [v command@cmd cmd `uc  1 a 1 wreg ]
-"55
+"96
 [v command@msg msg `[2]uc  1 a 2 16 ]
-"54
+"95
 [v command@cmd cmd `uc  1 a 1 wreg ]
-"56
+"97
 [v command@cmd cmd `uc  1 a 1 15 ]
-"59
+"100
 } 0
-"171
+"206
 [v _lcd_puts lcd_puts `(v  1 e 1 0 ]
 {
 [v lcd_puts@s s `*.35uc  1 p 2 22 ]
-"176
+"211
 } 0
-"154
+"188
 [v _lcd_putc lcd_putc `(v  1 e 1 0 ]
 {
 [v lcd_putc@c c `uc  1 a 1 wreg ]
-"155
+"189
 [v lcd_putc@i i `i  1 a 2 20 ]
-"156
+"190
 [v lcd_putc@char_index char_index `i  1 a 2 17 ]
-"155
+"189
 [v lcd_putc@index index `i  1 a 2 15 ]
-"154
+"188
 [v lcd_putc@c c `uc  1 a 1 wreg ]
 [v lcd_putc@c c `uc  1 a 1 19 ]
-"170
+"204
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -1146,17 +1144,17 @@ PENDING 3
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 7 ]
 "53
 } 0
-"177 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
+"213 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/lcd.c
 [v _lcd_newline lcd_newline `(v  1 e 1 0 ]
 {
-"186
+"222
 } 0
-"187
+"224
 [v _lcd_vertical_shift lcd_vertical_shift `(v  1 e 1 0 ]
 {
-"188
+"225
 [v lcd_vertical_shift@i i `i  1 a 2 7 ]
-"195
+"232
 } 0
 "109 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
 [v _UART_getc UART_getc `(uc  1 e 1 0 ]
@@ -1165,69 +1163,69 @@ PENDING 3
 [v UART_getc@data data `uc  1 a 1 5 ]
 "125
 } 0
-"133
+"135
 [v _UART_can_rx UART_can_rx `(uc  1 e 1 0 ]
 {
-"135
+"137
 } 0
-"25 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
+"28 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
 [v _TIMER0_stop TIMER0_stop `(v  1 e 1 0 ]
 {
-"28
+"31
 } 0
-"29
+"32
 [v _TIMER0_start TIMER0_start `(v  1 e 1 0 ]
 {
-"32
+"35
 } 0
-"22
+"24
 [v _TIMER0_is_read TIMER0_is_read `(uc  1 e 1 0 ]
 {
-"24
+"26
 } 0
-"18
+"19
 [v _TIMER0_get_count TIMER0_get_count `(i  1 e 2 0 ]
 {
-"21
+"22
 } 0
-"37 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+"32 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
 [v _Si7021_init Si7021_init `(v  1 e 1 0 ]
 {
-"38
+"33
 [v Si7021_init@i i `i  1 a 2 23 ]
-"46
+"41
 } 0
-"81
+"79
 [v _Si7021_read_temp Si7021_read_temp `(v  1 e 1 0 ]
 {
-"82
+"80
 [v Si7021_read_temp@i i `i  1 s 2 i ]
-"90
+"88
 } 0
-"30
+"105
 [v _convert_temp convert_temp `(d  1 e 4 0 ]
 {
-"32
+"107
 [v convert_temp@result result `d  1 a 4 17 ]
-"31
+"106
 [v convert_temp@temp_code temp_code `i  1 a 2 21 ]
-"36
+"111
 } 0
-"70
+"68
 [v _Si7021_read_humidity Si7021_read_humidity `(v  1 e 1 0 ]
 {
-"71
+"69
 [v Si7021_read_humidity@i i `i  1 s 2 i ]
-"79
+"77
 } 0
-"15
+"90
 [v _convert_humidity convert_humidity `(d  1 e 4 0 ]
 {
-"17
+"92
 [v convert_humidity@result result `d  1 a 4 19 ]
-"16
+"91
 [v convert_humidity@rh_code rh_code `i  1 a 2 17 ]
-"28
+"103
 } 0
 "10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\xxtofl.c
 [v ___xxtofl __xxtofl `(d  1 e 4 0 ]
@@ -1247,17 +1245,17 @@ PENDING 3
 "8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S1486 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S1488 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S1491 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
-[u S1494 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1486 1 fAsBytes 4 0 `S1491 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S1494  1 a 4 38 ]
+[s S1493 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
+[u S1496 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1488 1 fAsBytes 4 0 `S1493 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S1496  1 a 4 38 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 33 ]
-[s S1562 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1564 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1565 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1562 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1565  1 a 2 42 ]
+[u S1567 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1564 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1567  1 a 2 42 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 37 ]
 "11
@@ -1287,65 +1285,65 @@ PENDING 3
 [v ___awmod@divisor divisor `i  1 p 2 9 ]
 "34
 } 0
-"157 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
+"151 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
 [v _I2C_master_write I2C_master_write `(E9283  1 e 1 0 ]
 {
 [v I2C_master_write@data data `*.39uc  1 p 2 10 ]
 [v I2C_master_write@length length `i  1 p 2 12 ]
 [v I2C_master_write@address address `uc  1 p 1 14 ]
-"165
+"159
 } 0
-"150
+"179
 [v _create_write_packet create_write_packet `(v  1 e 1 0 ]
 {
 [v create_write_packet@data data `*.39uc  1 p 2 5 ]
 [v create_write_packet@length length `i  1 p 2 7 ]
 [v create_write_packet@address address `uc  1 p 1 9 ]
-"155
+"184
 } 0
-"166
+"161
 [v _I2C_master_read I2C_master_read `(E9283  1 e 1 0 ]
 {
 [v I2C_master_read@buffer buffer `*.39uc  1 p 2 10 ]
 [v I2C_master_read@length length `i  1 p 2 12 ]
 [v I2C_master_read@address address `uc  1 p 1 14 ]
-"174
+"169
 } 0
-"143
+"171
 [v _create_read_packet create_read_packet `(v  1 e 1 0 ]
 {
 [v create_read_packet@buffer buffer `*.39uc  1 p 2 5 ]
 [v create_read_packet@length length `i  1 p 2 7 ]
 [v create_read_packet@address address `uc  1 p 1 9 ]
-"149
+"177
 } 0
-"52
+"60
 [v _I2C_wait I2C_wait `(v  1 e 1 0 ]
 {
-"59
+"67
 } 0
-"139
+"147
 [v _I2C_master_enabled I2C_master_enabled `(uc  1 e 1 0 ]
 {
-"141
+"149
 } 0
-"56 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
+"53 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
 [v _Si7021_avg_temp Si7021_avg_temp `(d  1 e 4 0 ]
 {
-"58
+"55
 [v Si7021_avg_temp@result result `d  1 a 4 19 ]
-"57
+"54
 [v Si7021_avg_temp@i i `i  1 a 2 17 ]
-"64
+"61
 } 0
-"47
+"43
 [v _Si7021_avg_humidity Si7021_avg_humidity `(d  1 e 4 0 ]
 {
-"49
+"45
 [v Si7021_avg_humidity@result result `d  1 a 4 19 ]
-"48
+"44
 [v Si7021_avg_humidity@i i `i  1 a 2 17 ]
-"55
+"51
 } 0
 "11 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcdiv.c
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
@@ -1388,38 +1386,38 @@ PENDING 3
 {
 "28
 } 0
-"68 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
+"66 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
 [v _UART_TX_ISR UART_TX_ISR `(v  1 e 1 0 ]
 {
-"81
+"79
 } 0
-"57
+"55
 [v _UART_RX_ISR UART_RX_ISR `(v  1 e 1 0 ]
 {
-"66
+"64
 } 0
-"33 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
+"37 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
 [v _TIMER0_ISR TIMER0_ISR `(v  1 e 1 0 ]
 {
-"37
+"41
 } 0
-"11 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
+"20 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
 [v _STOPWATCH_ISR STOPWATCH_ISR `(v  1 e 1 0 ]
 {
-"18
+"27
 } 0
-"60 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
+"68 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c
 [v _I2C_MASTER_ISR I2C_MASTER_ISR `(v  1 e 1 0 ]
 {
-"61
+"69
 [v I2C_MASTER_ISR@xfer_count xfer_count `i  1 s 2 xfer_count ]
-"138
+"146
 } 0
-"46
+"54
 [v _I2C_stop I2C_stop `(v  1 e 1 0 ]
 {
 [v I2C_stop@result result `E9283  1 a 1 wreg ]
 [v I2C_stop@result result `E9283  1 a 1 wreg ]
 [v I2C_stop@result result `E9283  1 a 1 0 ]
-"51
+"59
 } 0

@@ -1,6 +1,6 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"15 src/uart.c
-[; ;src/uart.c: 15: typedef struct {
+"12 src/uart.c
+[; ;src/uart.c: 12: typedef struct {
 [s S1381 `uc -> 8 `i `i 1 `i 1 `i 1 ]
 [n S1381 . buffer size head tail ]
 "3406 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h
@@ -1310,197 +1310,197 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25839
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic18f25q10.h: 25839: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"22 src/uart.c
-[; ;src/uart.c: 22: static volatile UART_buf RX_buf;
+"19 src/uart.c
+[; ;src/uart.c: 19: static volatile UART_buf RX_buf;
 [v _RX_buf `VS1381 ~T0 @X0 1 s ]
-"23
-[; ;src/uart.c: 23: static volatile UART_buf TX_buf;
+"20
+[; ;src/uart.c: 20: static volatile UART_buf TX_buf;
 [v _TX_buf `VS1381 ~T0 @X0 1 s ]
-"24
-[; ;src/uart.c: 24: void UART_init() {
+"21
+[; ;src/uart.c: 21: void UART_init() {
 [v _UART_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _UART_init ]
 [f ]
-"26
-[; ;src/uart.c: 26:     PIE3bits.RC1IE = 0;
+"23
+[; ;src/uart.c: 23:     PIE3bits.RC1IE = 0;
 [e = . . _PIE3bits 1 4 -> -> 0 `i `uc ]
-"27
-[; ;src/uart.c: 27:     PIE3bits.TX1IE = 0;
+"24
+[; ;src/uart.c: 24:     PIE3bits.TX1IE = 0;
 [e = . . _PIE3bits 1 3 -> -> 0 `i `uc ]
-"30
-[; ;src/uart.c: 30:     BAUD1CON = 0x08;
+"27
+[; ;src/uart.c: 27:     BAUD1CON = 0x08;
 [e = _BAUD1CON -> -> 8 `i `uc ]
-"32
-[; ;src/uart.c: 32:     RC1STA = 0x90;
+"29
+[; ;src/uart.c: 29:     RC1STA = 0x90;
 [e = _RC1STA -> -> 144 `i `uc ]
-"34
-[; ;src/uart.c: 34:     TX1STA = 0x24;
+"31
+[; ;src/uart.c: 31:     TX1STA = 0x24;
 [e = _TX1STA -> -> 36 `i `uc ]
-"41
-[; ;src/uart.c: 41:     SP1BRGH = 0x00;
+"38
+[; ;src/uart.c: 38:     SP1BRGH = 0x00;
 [e = _SP1BRGH -> -> 0 `i `uc ]
-"43
-[; ;src/uart.c: 43:     SP1BRGL = 0x22;
+"40
+[; ;src/uart.c: 40:     SP1BRGL = 0x22;
 [e = _SP1BRGL -> -> 34 `i `uc ]
-"46
-[; ;src/uart.c: 46:     RX_buf.size = 0;
+"43
+[; ;src/uart.c: 43:     RX_buf.size = 0;
 [e = . _RX_buf 1 -> 0 `i ]
-"47
-[; ;src/uart.c: 47:     RX_buf.tail = 0;
+"44
+[; ;src/uart.c: 44:     RX_buf.tail = 0;
 [e = . _RX_buf 3 -> 0 `i ]
-"48
-[; ;src/uart.c: 48:     RX_buf.head = 0;
+"45
+[; ;src/uart.c: 45:     RX_buf.head = 0;
 [e = . _RX_buf 2 -> 0 `i ]
-"50
-[; ;src/uart.c: 50:     TX_buf.size = 0;
+"47
+[; ;src/uart.c: 47:     TX_buf.size = 0;
 [e = . _TX_buf 1 -> 0 `i ]
-"51
-[; ;src/uart.c: 51:     TX_buf.tail = 0;
+"48
+[; ;src/uart.c: 48:     TX_buf.tail = 0;
 [e = . _TX_buf 3 -> 0 `i ]
-"52
-[; ;src/uart.c: 52:     TX_buf.head = 0;
+"49
+[; ;src/uart.c: 49:     TX_buf.head = 0;
 [e = . _TX_buf 2 -> 0 `i ]
-"54
-[; ;src/uart.c: 54:     PIE3bits.RC1IE = 1;
+"51
+[; ;src/uart.c: 51:     PIE3bits.RC1IE = 1;
 [e = . . _PIE3bits 1 4 -> -> 1 `i `uc ]
-"56
-[; ;src/uart.c: 56: }
+"53
+[; ;src/uart.c: 53: }
 [e :UE 1382 ]
 }
-"57
-[; ;src/uart.c: 57: void UART_RX_ISR() {
+"55
+[; ;src/uart.c: 55: void UART_RX_ISR() {
 [v _UART_RX_ISR `(v ~T0 @X0 1 ef ]
 {
 [e :U _UART_RX_ISR ]
 [f ]
-"60
-[; ;src/uart.c: 60:     (RX_buf.buffer[RX_buf.head++] = RC1REG);
+"58
+[; ;src/uart.c: 58:     (RX_buf.buffer[RX_buf.head++] = RC1REG);
 [e = *U + &U . _RX_buf 0 * -> -> ++ . _RX_buf 2 -> -> 1 `i `Vi `ui `ux -> -> # *U &U . _RX_buf 0 `ui `ux -> _RC1REG `uc ]
-"61
-[; ;src/uart.c: 61:     RX_buf.size++;
+"59
+[; ;src/uart.c: 59:     RX_buf.size++;
 [e ++ . _RX_buf 1 -> -> 1 `i `Vi ]
-"63
-[; ;src/uart.c: 63:     if(RX_buf.head >= 8) {
+"61
+[; ;src/uart.c: 61:     if(RX_buf.head >= 8) {
 [e $ ! >= . _RX_buf 2 -> 8 `i 1384  ]
 {
-"64
-[; ;src/uart.c: 64:         RX_buf.head = 0;
+"62
+[; ;src/uart.c: 62:         RX_buf.head = 0;
 [e = . _RX_buf 2 -> 0 `i ]
-"65
-[; ;src/uart.c: 65:     }
+"63
+[; ;src/uart.c: 63:     }
 }
 [e :U 1384 ]
-"66
-[; ;src/uart.c: 66: }
+"64
+[; ;src/uart.c: 64: }
 [e :UE 1383 ]
 }
-"68
-[; ;src/uart.c: 68: void UART_TX_ISR() {
+"66
+[; ;src/uart.c: 66: void UART_TX_ISR() {
 [v _UART_TX_ISR `(v ~T0 @X0 1 ef ]
 {
 [e :U _UART_TX_ISR ]
 [f ]
-"69
-[; ;src/uart.c: 69:     if(TX_buf.size != 0) {
+"67
+[; ;src/uart.c: 67:     if(TX_buf.size != 0) {
 [e $ ! != . _TX_buf 1 -> 0 `i 1386  ]
 {
-"71
-[; ;src/uart.c: 71:         (TX1REG = TX_buf.buffer[TX_buf.tail++]);
+"69
+[; ;src/uart.c: 69:         (TX1REG = TX_buf.buffer[TX_buf.tail++]);
 [e = _TX1REG -> *U + &U . _TX_buf 0 * -> -> ++ . _TX_buf 3 -> -> 1 `i `Vi `ui `ux -> -> # *U &U . _TX_buf 0 `ui `ux `uc ]
-"72
-[; ;src/uart.c: 72:         TX_buf.size--;
+"70
+[; ;src/uart.c: 70:         TX_buf.size--;
 [e -- . _TX_buf 1 -> -> 1 `i `Vi ]
-"74
-[; ;src/uart.c: 74:         if(TX_buf.tail >= 8) {
+"72
+[; ;src/uart.c: 72:         if(TX_buf.tail >= 8) {
 [e $ ! >= . _TX_buf 3 -> 8 `i 1387  ]
 {
-"75
-[; ;src/uart.c: 75:             TX_buf.tail = 0;
+"73
+[; ;src/uart.c: 73:             TX_buf.tail = 0;
 [e = . _TX_buf 3 -> 0 `i ]
-"76
-[; ;src/uart.c: 76:         }
+"74
+[; ;src/uart.c: 74:         }
 }
 [e :U 1387 ]
-"77
-[; ;src/uart.c: 77:     } else {
+"75
+[; ;src/uart.c: 75:     } else {
 }
 [e $U 1388  ]
 [e :U 1386 ]
 {
-"79
-[; ;src/uart.c: 79:         PIE3bits.TX1IE = 0;
+"77
+[; ;src/uart.c: 77:         PIE3bits.TX1IE = 0;
 [e = . . _PIE3bits 1 3 -> -> 0 `i `uc ]
-"80
-[; ;src/uart.c: 80:     }
+"78
+[; ;src/uart.c: 78:     }
 }
 [e :U 1388 ]
-"81
-[; ;src/uart.c: 81: }
+"79
+[; ;src/uart.c: 79: }
 [e :UE 1385 ]
 }
-"82
-[; ;src/uart.c: 82: void UART_putc(char data) {
+"81
+[; ;src/uart.c: 81: void UART_putc(char data) {
 [v _UART_putc `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _UART_putc ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-"83
-[; ;src/uart.c: 83:     while(TX_buf.size >= 8) {
+"82
+[; ;src/uart.c: 82:     while(TX_buf.size >= 8) {
 [e $U 1390  ]
 [e :U 1391 ]
 {
-"85
-[; ;src/uart.c: 85:     }
+"84
+[; ;src/uart.c: 84:     }
 }
 [e :U 1390 ]
-"83
-[; ;src/uart.c: 83:     while(TX_buf.size >= 8) {
+"82
+[; ;src/uart.c: 82:     while(TX_buf.size >= 8) {
 [e $ >= . _TX_buf 1 -> 8 `i 1391  ]
 [e :U 1392 ]
-"87
-[; ;src/uart.c: 87:     if(PIE3bits.TX1IE == 0){
+"86
+[; ;src/uart.c: 86:     if(PIE3bits.TX1IE == 0){
 [e $ ! == -> . . _PIE3bits 1 3 `i -> 0 `i 1393  ]
 {
-"88
-[; ;src/uart.c: 88:         (TX1REG = data);
+"87
+[; ;src/uart.c: 87:         (TX1REG = data);
 [e = _TX1REG -> _data `uc ]
-"89
-[; ;src/uart.c: 89:     } else {
+"88
+[; ;src/uart.c: 88:     } else {
 }
 [e $U 1394  ]
 [e :U 1393 ]
 {
-"91
-[; ;src/uart.c: 91:         PIE3bits.TX1IE = 0;
+"90
+[; ;src/uart.c: 90:         PIE3bits.TX1IE = 0;
 [e = . . _PIE3bits 1 3 -> -> 0 `i `uc ]
-"92
-[; ;src/uart.c: 92:         TX_buf.buffer[TX_buf.head++] = data;
+"91
+[; ;src/uart.c: 91:         TX_buf.buffer[TX_buf.head++] = data;
 [e = *U + &U . _TX_buf 0 * -> -> ++ . _TX_buf 2 -> -> 1 `i `Vi `ui `ux -> -> # *U &U . _TX_buf 0 `ui `ux _data ]
-"93
-[; ;src/uart.c: 93:         TX_buf.size++;
+"92
+[; ;src/uart.c: 92:         TX_buf.size++;
 [e ++ . _TX_buf 1 -> -> 1 `i `Vi ]
-"95
-[; ;src/uart.c: 95:         if(TX_buf.head >= 8) {
+"94
+[; ;src/uart.c: 94:         if(TX_buf.head >= 8) {
 [e $ ! >= . _TX_buf 2 -> 8 `i 1395  ]
 {
-"96
-[; ;src/uart.c: 96:             TX_buf.head = 0;
+"95
+[; ;src/uart.c: 95:             TX_buf.head = 0;
 [e = . _TX_buf 2 -> 0 `i ]
-"97
-[; ;src/uart.c: 97:         }
+"96
+[; ;src/uart.c: 96:         }
 }
 [e :U 1395 ]
-"98
-[; ;src/uart.c: 98:     }
+"97
+[; ;src/uart.c: 97:     }
 }
 [e :U 1394 ]
-"99
-[; ;src/uart.c: 99:     PIE3bits.TX1IE = 1;
+"98
+[; ;src/uart.c: 98:     PIE3bits.TX1IE = 1;
 [e = . . _PIE3bits 1 3 -> -> 1 `i `uc ]
-"100
-[; ;src/uart.c: 100: }
+"99
+[; ;src/uart.c: 99: }
 [e :UE 1389 ]
 }
 "101
@@ -1587,61 +1587,61 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;src/uart.c: 125: }
 [e :UE 1400 ]
 }
-"126
-[; ;src/uart.c: 126: void UART_gets(char * buf, int len) {
+"127
+[; ;src/uart.c: 127: void UART_gets(char * buf, int len) {
 [v _UART_gets `(v ~T0 @X0 1 ef2`*uc`i ]
 {
 [e :U _UART_gets ]
 [v _buf `*uc ~T0 @X0 1 r1 ]
 [v _len `i ~T0 @X0 1 r2 ]
 [f ]
-"127
-[; ;src/uart.c: 127:     do{
+"128
+[; ;src/uart.c: 128:     do{
 [e :U 1408 ]
 {
-"128
-[; ;src/uart.c: 128:         *buf = UART_getc();
-[e = *U _buf ( _UART_getc ..  ]
 "129
-[; ;src/uart.c: 129:         buf++;
-[e ++ _buf * -> -> 1 `i `x -> -> # *U _buf `i `x ]
+[; ;src/uart.c: 129:         *buf = UART_getc();
+[e = *U _buf ( _UART_getc ..  ]
 "130
-[; ;src/uart.c: 130:     }while(len --> 0);
+[; ;src/uart.c: 130:         buf++;
+[e ++ _buf * -> -> 1 `i `x -> -> # *U _buf `i `x ]
+"131
+[; ;src/uart.c: 131:     }while(len --> 0);
 }
 [e $ > -- _len -> 1 `i -> 0 `i 1408  ]
 [e :U 1407 ]
-"131
-[; ;src/uart.c: 131:     *buf = '\0';
-[e = *U _buf -> -> 0 `ui `uc ]
 "132
-[; ;src/uart.c: 132: }
+[; ;src/uart.c: 132:     *buf = '\0';
+[e = *U _buf -> -> 0 `ui `uc ]
+"133
+[; ;src/uart.c: 133: }
 [e :UE 1405 ]
 }
-"133
-[; ;src/uart.c: 133: char UART_can_rx() {
+"135
+[; ;src/uart.c: 135: char UART_can_rx() {
 [v _UART_can_rx `(uc ~T0 @X0 1 ef ]
 {
 [e :U _UART_can_rx ]
 [f ]
-"134
-[; ;src/uart.c: 134:     return RX_buf.size > 0;
+"136
+[; ;src/uart.c: 136:     return RX_buf.size > 0;
 [e ) -> -> > . _RX_buf 1 -> 0 `i `i `uc ]
 [e $UE 1409  ]
-"135
-[; ;src/uart.c: 135: }
+"137
+[; ;src/uart.c: 137: }
 [e :UE 1409 ]
 }
-"136
-[; ;src/uart.c: 136: char UART_can_tx() {
+"139
+[; ;src/uart.c: 139: char UART_can_tx() {
 [v _UART_can_tx `(uc ~T0 @X0 1 ef ]
 {
 [e :U _UART_can_tx ]
 [f ]
-"137
-[; ;src/uart.c: 137:     return TX_buf.size < 8;
+"140
+[; ;src/uart.c: 140:     return TX_buf.size < 8;
 [e ) -> -> < . _TX_buf 1 -> 8 `i `i `uc ]
 [e $UE 1410  ]
-"138
-[; ;src/uart.c: 138: }
+"141
+[; ;src/uart.c: 141: }
 [e :UE 1410 ]
 }

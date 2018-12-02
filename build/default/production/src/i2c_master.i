@@ -15638,7 +15638,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 1 "src/i2c_master.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
-# 14 "src/../headers/i2c_master.h"
+# 16 "src/../headers/i2c_master.h"
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
@@ -15648,7 +15648,7 @@ void I2C_MASTER_ISR(void);
 I2C_master_result I2C_master_write(char * data, int length, char address);
 I2C_master_result I2C_master_read(char * buffer, int length, char address);
 # 2 "src/i2c_master.c" 2
-# 15 "src/i2c_master.c"
+# 18 "src/i2c_master.c"
 typedef enum {
     IDLE, SEND_ADDRESS, ACKNOWLEDGE_ADDR, SEND_DATA, RECEIVE_DATA, ACKNOWLEDGE_RECV, STOPPED
 }I2C_master_status;
@@ -15659,6 +15659,11 @@ typedef struct {
     char address;
     I2C_master_result result;
 } I2C_transmit_data;
+
+
+void create_read_packet(char * buffer, int length, char address);
+void create_write_packet(char * data, int length, char address);
+
 
 static volatile I2C_transmit_data current_packet;
 static volatile I2C_master_status I2C_status;
@@ -15777,20 +15782,6 @@ char I2C_master_enabled() {
     return (SSP1CON1bits.SSPEN);
 }
 
-void create_read_packet(char * buffer, int length, char address) {
-    current_packet.data = buffer;
-    current_packet.length = length;
-    current_packet.address = (address << 1);
-    current_packet.address |= 0x01;
-    current_packet.result = PENDING;
-}
-void create_write_packet(char * data, int length, char address) {
-    current_packet.data = data;
-    current_packet.length = length;
-    current_packet.address = (address << 1);
-    current_packet.result = PENDING;
-}
-
 I2C_master_result I2C_master_write(char * data, int length, char address) {
     if(!I2C_master_enabled()) {
         return SEND_ERROR;
@@ -15800,6 +15791,7 @@ I2C_master_result I2C_master_write(char * data, int length, char address) {
     I2C_wait();
     return current_packet.result;
 }
+
 I2C_master_result I2C_master_read(char * buffer, int length, char address) {
     if(!I2C_master_enabled()) {
         return RECEIVE_ERROR;
@@ -15808,4 +15800,19 @@ I2C_master_result I2C_master_read(char * buffer, int length, char address) {
     SSP1IF = 1;
     I2C_wait();
     return current_packet.result;
+}
+
+void create_read_packet(char * buffer, int length, char address) {
+    current_packet.data = buffer;
+    current_packet.length = length;
+    current_packet.address = (address << 1);
+    current_packet.address |= 0x01;
+    current_packet.result = PENDING;
+}
+
+void create_write_packet(char * data, int length, char address) {
+    current_packet.data = data;
+    current_packet.length = length;
+    current_packet.address = (address << 1);
+    current_packet.result = PENDING;
 }

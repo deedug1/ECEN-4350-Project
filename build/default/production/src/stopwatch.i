@@ -15638,7 +15638,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 1 "src/stopwatch.c" 2
 
 # 1 "src/../headers/stopwatch.h" 1
-# 19 "src/../headers/stopwatch.h"
+# 15 "src/../headers/stopwatch.h"
 void stopwatch_init(void);
 void stopwatch_start(int seconds);
 void stopwatch_stop(void);
@@ -15647,15 +15647,15 @@ char stopwatch_is_started(void);
 int stopwatch_get_time(void);
 void STOPWATCH_ISR(void);
 # 2 "src/stopwatch.c" 2
-
-
-
+# 12 "src/stopwatch.c"
 typedef struct {
     char started;
     int time;
 } stopwatch;
 
+
 static volatile stopwatch global_stopwatch;
+
 void STOPWATCH_ISR() {
 
     PIR4bits.TMR2IF = 0;

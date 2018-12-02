@@ -15638,7 +15638,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 1 "src/timer0.c" 2
 
 # 1 "src/../headers/timer0.h" 1
-# 14 "src/../headers/timer0.h"
+# 15 "src/../headers/timer0.h"
 void TIMER0_init(void);
 void TIMER0_ISR(void);
 void TIMER0_reset(void);
@@ -15652,24 +15652,27 @@ void TIMER0_start(void);
 
 static volatile int count = 0;
 static volatile char read = 1;
+
 void TIMER0_init() {
 
     T0CON0 = 0x1F;
     T0CON1 = 0x46;
-
 }
 
 void TIMER0_reset() {
     read = 1;
     count = 0;
 }
+
 int TIMER0_get_count() {
    read = 1;
    return count;
 }
+
 char TIMER0_is_read() {
     return read;
 }
+
 void TIMER0_stop() {
     PIE0bits.TMR0IE = 0;
     T0CON0 &= 0x7F;
@@ -15678,6 +15681,7 @@ void TIMER0_start() {
     T0CON0 |= 0x80;
     PIE0bits.TMR0IE = 1;
 }
+
 void TIMER0_ISR() {
     PIR0bits.TMR0IF = 0;
     count++;

@@ -15639,10 +15639,9 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 2 "src/lcd.c" 2
 
 # 1 "src/../headers/lcd.h" 1
-# 50 "src/../headers/lcd.h"
+# 19 "src/../headers/lcd.h"
 void lcd_putc(char c);
 void lcd_puts(char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);
@@ -15651,7 +15650,7 @@ void lcd_vertical_shift(void);
 # 3 "src/lcd.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
-# 14 "src/../headers/i2c_master.h"
+# 16 "src/../headers/i2c_master.h"
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
@@ -15763,13 +15762,7 @@ static char lcd_font[] = {
  0x00, 0x02, 0x05, 0x05, 0x02, 0x00,
 };
 # 5 "src/lcd.c" 2
-
-
-
-
-
-
-
+# 51 "src/lcd.c"
 char lcd_buffer [0x04 * 0x80] = {
    0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80,
    0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0,
@@ -15805,8 +15798,10 @@ char lcd_buffer [0x04 * 0x80] = {
    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
 };
 
+
 static int cursor_x = 0;
 static int cursor_y = 0;
+
 
 
 
@@ -15822,22 +15817,31 @@ void command(unsigned char cmd) {
 
 
 void lcd_init() {
+
     command(0xAE);
+
+
     command(0xD5);
     command(0x80);
+
 
     command(0xD3);
     command(0x00);
 
+
     command(0xA8);
     command(128 - 1);
 
+
     command(0x40 | 0x0);
+
 
     command(0x20);
     command(0x00);
 
+
     command(0xA0);
+
 
     command(0xC0);
 
@@ -15851,10 +15855,12 @@ void lcd_init() {
 
     command(0xA6);
 
+
     command(0x8D);
     command(0x14);
 
     command(0x2E);
+
 
     command(0xAF);
 
@@ -15883,18 +15889,7 @@ void lcd_update() {
         I2C_master_write(data, 33, 0x3C);
     }
 }
-# 134 "src/lcd.c"
-void set_pixel(unsigned char i, unsigned char j, unsigned char val) {
-    unsigned int index = j + (i/8) * 0x80;
-    unsigned int offset = i % 8;
-    if( val == 0 ) {
-        lcd_buffer[index] &= ~(1 << offset);
-    } else if(val == 1 ) {
-        lcd_buffer[index] |= (1 << offset);
-    } else {
-        lcd_buffer[index] ^= (1 << offset);
-    }
-}
+
 void lcd_clear() {
     int i;
     for(i = 0; i < 0x04 * 0x80; i++) {
@@ -15904,6 +15899,7 @@ void lcd_clear() {
     cursor_y = 0;
     lcd_update();
 }
+
 void lcd_putc(char c) {
     int i = 0, index = cursor_x + cursor_y * 0x80;
     int char_index;
@@ -15921,12 +15917,14 @@ void lcd_putc(char c) {
         cursor_y = 0;
     }
 }
+
 void lcd_puts(char * s) {
     while(*s) {
         lcd_putc(*s);
         s++;
     }
 }
+
 void lcd_newline() {
     if(cursor_y >= 3) {
         cursor_x = 0;
@@ -15937,6 +15935,7 @@ void lcd_newline() {
         cursor_x = 0;
     }
 }
+
 void lcd_vertical_shift() {
     int i = 0;
     for(i = 0; i < 3 * 0x80; i++) {

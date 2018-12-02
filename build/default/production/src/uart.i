@@ -7,13 +7,6 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "src/uart.c" 2
-
-
-
-
-
-
-
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -15642,7 +15635,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 8 "src/uart.c" 2
+# 1 "src/uart.c" 2
 
 # 1 "src/../headers/uart.h" 1
 # 17 "src/../headers/uart.h"
@@ -15655,24 +15648,19 @@ char UART_getc(void);
 void UART_gets(char * buf, int len);
 char UART_can_tx(void);
 char UART_can_rx(void);
-# 9 "src/uart.c" 2
+# 2 "src/uart.c" 2
 
 # 1 "src/../headers/lcd.h" 1
-# 50 "src/../headers/lcd.h"
+# 19 "src/../headers/lcd.h"
 void lcd_putc(char c);
 void lcd_puts(char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);
 void lcd_newline(void);
 void lcd_vertical_shift(void);
-# 10 "src/uart.c" 2
-
-
-
-
-
+# 3 "src/uart.c" 2
+# 12 "src/uart.c"
 typedef struct {
     char buffer[8];
     int size;
@@ -15715,6 +15703,7 @@ void UART_init() {
     PIE3bits.RC1IE = 1;
 
 }
+
 void UART_RX_ISR() {
 
 
@@ -15740,6 +15729,7 @@ void UART_TX_ISR() {
         PIE3bits.TX1IE = 0;
     }
 }
+
 void UART_putc(char data) {
     while(TX_buf.size >= 8) {
 
@@ -15759,6 +15749,7 @@ void UART_putc(char data) {
     }
     PIE3bits.TX1IE = 1;
 }
+
 void UART_puts(char * data) {
 
     while(*data != 0) {
@@ -15784,6 +15775,7 @@ char UART_getc() {
     PIE3bits.RC1IE = 1;
     return data;
 }
+
 void UART_gets(char * buf, int len) {
     do{
         *buf = UART_getc();
@@ -15791,9 +15783,11 @@ void UART_gets(char * buf, int len) {
     }while(len --> 0);
     *buf = '\0';
 }
+
 char UART_can_rx() {
     return RX_buf.size > 0;
 }
+
 char UART_can_tx() {
     return TX_buf.size < 8;
 }

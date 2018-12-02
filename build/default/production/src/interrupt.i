@@ -15638,7 +15638,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 1 "src/interrupt.c" 2
 
 # 1 "src/../headers/i2c_master.h" 1
-# 14 "src/../headers/i2c_master.h"
+# 16 "src/../headers/i2c_master.h"
 typedef enum {
     SUCCESS, SEND_ERROR, RECEIVE_ERROR, PENDING
 }I2C_master_result;
@@ -15663,7 +15663,7 @@ char UART_can_rx(void);
 # 3 "src/interrupt.c" 2
 
 # 1 "src/../headers/stopwatch.h" 1
-# 19 "src/../headers/stopwatch.h"
+# 15 "src/../headers/stopwatch.h"
 void stopwatch_init(void);
 void stopwatch_start(int seconds);
 void stopwatch_stop(void);
@@ -15674,7 +15674,7 @@ void STOPWATCH_ISR(void);
 # 4 "src/interrupt.c" 2
 
 # 1 "src/../headers/timer0.h" 1
-# 14 "src/../headers/timer0.h"
+# 15 "src/../headers/timer0.h"
 void TIMER0_init(void);
 void TIMER0_ISR(void);
 void TIMER0_reset(void);

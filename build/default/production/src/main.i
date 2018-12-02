@@ -15724,10 +15724,9 @@ char UART_can_rx(void);
 # 11 "src/main.c" 2
 
 # 1 "src/../headers/lcd.h" 1
-# 50 "src/../headers/lcd.h"
+# 19 "src/../headers/lcd.h"
 void lcd_putc(char c);
 void lcd_puts(char * s);
-void set_pixel(unsigned char i, unsigned char j, unsigned char val);
 void lcd_init(void);
 void lcd_update(void);
 void lcd_clear(void);
@@ -15736,7 +15735,7 @@ void lcd_vertical_shift(void);
 # 12 "src/main.c" 2
 
 # 1 "src/../headers/esp8266.h" 1
-# 23 "src/../headers/esp8266.h"
+# 12 "src/../headers/esp8266.h"
 typedef enum {
     TCP, UDP, SSL
 }ESP8266_socket_type;
@@ -15747,8 +15746,6 @@ void ESP8266_init(void);
 void ESP8266_connect(char * name, char * pass);
 void ESP8266_open_socket(ESP8266_socket_type socket_type, char * ip, int port);
 void ESP8266_send_data(char * data);
-void ESP8266_start_transparent_xmission(void);
-void ESP8266_end_transparent_xmission(void);
 void ESP8266_close_socket(void);
 char ESP8266_responseOK(void);
 # 13 "src/main.c" 2
@@ -15760,7 +15757,7 @@ void dtoa(double num, char * buf, int radix);
 # 14 "src/main.c" 2
 
 # 1 "src/../headers/Si7021.h" 1
-# 18 "src/../headers/Si7021.h"
+# 12 "src/../headers/Si7021.h"
 void Si7021_init(void);
 void Si7021_reset(void);
 void Si7021_read_humidity(void);
@@ -15778,7 +15775,7 @@ double ph_avg(void);
 # 16 "src/main.c" 2
 
 # 1 "src/../headers/timer0.h" 1
-# 14 "src/../headers/timer0.h"
+# 15 "src/../headers/timer0.h"
 void TIMER0_init(void);
 void TIMER0_ISR(void);
 void TIMER0_reset(void);
@@ -15789,7 +15786,7 @@ void TIMER0_start(void);
 # 17 "src/main.c" 2
 
 # 1 "src/../headers/stopwatch.h" 1
-# 19 "src/../headers/stopwatch.h"
+# 15 "src/../headers/stopwatch.h"
 void stopwatch_init(void);
 void stopwatch_start(int seconds);
 void stopwatch_stop(void);
@@ -15840,6 +15837,7 @@ int main() {
     while(1) {
 
         if(!TIMER0_is_read()) {
+
             TIMER0_stop();
             c = TIMER0_get_count() % 3;
 
@@ -15869,10 +15867,11 @@ int main() {
             lcd_update();
 
 
-
             ph_read();
             Si7021_read_temp();
             Si7021_read_humidity();
+
+
             TIMER0_start();
         }
     }
@@ -15885,7 +15884,7 @@ void connect_to_wifi() {
     ESP8266_init();
     ESP8266_connect(SSID, PASS);
 }
-# 128 "src/main.c"
+
 void send_data_double(int field, double val) {
     static char strbuf[60];
     char numbuf[10];
@@ -15900,6 +15899,7 @@ void send_data_double(int field, double val) {
     dtoa(val, numbuf, 10);
     strcat(strbuf, numbuf);
     strcat(strbuf, "\r\n\r\n");
+
 
 
 
