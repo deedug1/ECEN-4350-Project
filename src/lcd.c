@@ -3,12 +3,51 @@
 #include "../headers/lcd.h"
 #include "../headers/i2c_master.h"
 #include "../headers/character.h"
+
+// Helper macros
+#define SETBIT(A, O) A |= (1 << O)
+#define CLEARBIT(A, O) A &= ~(1 << O)
+#define INVBIT(A, O)  A ^= (1 << O)
+
+// LCD Commands
+#define SET_CONTRAST            0x81 // 2 byte
+#define SET_DISPLAYALLON_RESUME 0xA4 // 1 byte
+#define SET_DISPLAYALLON        0xA5 // 1 byte
+#define SET_NORMALDISPLAY       0xA6 // 1 byte
+#define SET_INVERSEDISPLAY      0xA7 // 1 byte
+#define SET_DISPLAYOFF          0xAE // 1 byte
+#define SET_DISPLAYON           0xAF // 1 byte
+#define SET_LOWCOL              0x00 // 1 byte
+#define SET_HIGHCOL             0x10 // 1 byte
+#define SET_MEMORYMODE          0x20 // 2 byte
+#define SET_COLADDR             0x21 // 3 byte
+#define SET_PAGEADDR            0x22 // 3 byte
+#define SET_PAGESTART           0xB0 // 1 byte
+#define SET_DISPLAYSTART        0x40 // 1 byte
+#define SET_SEGMENTREMAP        0xA0 // 1 byte
+#define SET_MULTIPLEX           0xA8 // 2 byte
+#define SET_COMOUTPUT           0xC0 // 1 byte
+#define SET_COMOUTPUT_REVERSE   0xC8 // 1 byte
+#define SET_DISPLAYOFFSET       0xD3 // 2 byte
+#define SET_COMPINS             0xDA // 2 byte
+#define SET_DISPLAYCLK          0xD5 // 2 byte
+#define SET_PRECHARGE           0xD9 // 2 byte
+#define SET_VCOMH               0xDB // 2 byte
+#define SET_CHARGEPUMP          0x8D // 2 byte
+#define DISABLE_SCROLL          0x2E // 1 byte
+#define LCDNOP                  0xE3 // Why though
+
+// Preprocesser Constants
+#define CONTROL_CMD             0x00
+#define CONTROL_DATA            0x40
 #define LCD_ADDR 0x3C
 #define ROWS 0x04
 #define COLS 0x80
 #define PAGES 0x04
 #define LCDWIDTH 128
 #define LCDHEIGHT 32
+
+// LCD buffer
 char lcd_buffer [ROWS * COLS] = {
    0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80,
    0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0,
@@ -44,8 +83,10 @@ char lcd_buffer [ROWS * COLS] = {
    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
 }; // 32 x 128 pixels    
 
+// Cursor variables
 static int cursor_x = 0;
 static int cursor_y = 0;
+
 /**
  * Writes a command to the LCD
  * @param cmd 
@@ -61,23 +102,32 @@ void command(unsigned char cmd) {
  * Initialize the display
  */
 void lcd_init() {
+    // Turn off the display to configure it
     command(SET_DISPLAYOFF);
-    command(SET_DISPLAYCLK);
-    command(0x80); // Recommended clock divider
     
+    // Set displays clock speed
+    command(SET_DISPLAYCLK);
+    command(0x80); // Recommended clock divider via datasheet
+    
+    // Set display cursor
     command(SET_DISPLAYOFFSET);
     command(0x00);
     
+    // Set display size
     command(SET_MULTIPLEX);
     command(LCDWIDTH - 1);
     
+    // Set display cursor
     command(SET_DISPLAYSTART | 0x0);
     
+    // Set display memory mode
     command(SET_MEMORYMODE);
     command(0x00);
     
+    // Set display segmentation mode
     command(SET_SEGMENTREMAP);
     
+    // Set dipslay height
     command(SET_COMOUTPUT);
     
     command(SET_COMPINS);
@@ -90,11 +140,13 @@ void lcd_init() {
     
     command(SET_NORMALDISPLAY);
     
+    // Turn on charge pump for 7.5V power
     command(SET_CHARGEPUMP);
     command(0x14); // ON
     
     command(DISABLE_SCROLL);
     
+    // Display init finished turn on display
     command(SET_DISPLAYON);
     
 }
@@ -122,26 +174,7 @@ void lcd_update() {
         I2C_master_write(data, 33, LCD_ADDR);
     }
 }
-/**
- * Sets a pixel to the designated color
- * @param i
- *  row: 0 - 64
- * @param j
- *  column: 0 - 127
- * @param val
- *  color: BLACK, WHITE, INVERT
- */
-void set_pixel(unsigned char i, unsigned char j, unsigned char val) {
-    unsigned int index = j + (i/8) * COLS;
-    unsigned int offset = i % 8;
-    if( val == BLACK ) {
-        CLEARBIT(lcd_buffer[index], offset);
-    } else if(val == WHITE ) {
-        SETBIT(lcd_buffer[index], offset);
-    } else { // Invert
-        INVBIT(lcd_buffer[index], offset);
-    }
-}
+
 void lcd_clear() {
     int i;
     for(i = 0; i < ROWS * COLS; i++) {
@@ -151,6 +184,7 @@ void lcd_clear() {
     cursor_y = 0;
     lcd_update();
 }
+
 void lcd_putc(char c) {
     int i = 0, index = cursor_x + cursor_y * COLS;
     int char_index;
@@ -168,12 +202,14 @@ void lcd_putc(char c) {
         cursor_y = 0;
     }
 }
+
 void lcd_puts(char * s) {
     while(*s) {
         lcd_putc(*s);
         s++;
     }
 }
+
 void lcd_newline() {
     if(cursor_y >= 3) {
         cursor_x = 0;
@@ -184,6 +220,7 @@ void lcd_newline() {
         cursor_x = 0;
     }
 }
+
 void lcd_vertical_shift() {
     int i = 0;
     for(i = 0; i < 3 * COLS; i++) {
