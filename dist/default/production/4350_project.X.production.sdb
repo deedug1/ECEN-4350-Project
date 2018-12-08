@@ -33,7 +33,7 @@ SEND_ERROR 1
 RECEIVE_ERROR 2
 PENDING 3
 ]
-"126 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"137 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [e E9477 . `uc
 TCP 0
 UDP 1
@@ -154,9 +154,9 @@ PENDING 3
 [v _lcd_vertical_shift lcd_vertical_shift `(v  1 e 1 0 ]
 "38 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
-"102
+"95
 [v _connect_to_wifi connect_to_wifi `(v  1 e 1 0 ]
-"108
+"101
 [v _send_data_double send_data_double `(v  1 e 1 0 ]
 "69 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
 [v _system_init system_init `(v  1 e 1 0 ]
@@ -370,7 +370,7 @@ PENDING 3
 [v _ANSELC ANSELC `VEuc  1 e 1 @3868 ]
 "11935
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @3931 ]
-[s S1038 . 1 `uc 1 ADGO 1 0 :1:0 
+[s S1049 . 1 `uc 1 ADGO 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADFM 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -380,24 +380,24 @@ PENDING 3
 `uc 1 ADON 1 0 :1:7 
 ]
 "11974
-[s S1047 . 1 `uc 1 GO 1 0 :1:0 
+[s S1058 . 1 `uc 1 GO 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADFM0 1 0 :1:2 
 ]
-[s S1051 . 1 `uc 1 DONE 1 0 :1:0 
+[s S1062 . 1 `uc 1 DONE 1 0 :1:0 
 ]
-[s S1053 . 1 `uc 1 GO_NOT_DONE 1 0 :1:0 
+[s S1064 . 1 `uc 1 GO_NOT_DONE 1 0 :1:0 
 ]
-[s S1055 . 1 `uc 1 GO_nDONE 1 0 :1:0 
+[s S1066 . 1 `uc 1 GO_nDONE 1 0 :1:0 
 ]
-[s S1057 . 1 `uc 1 . 1 0 :7:0 
+[s S1068 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 ADCAL 1 0 :1:7 
 ]
-[s S1060 . 1 `uc 1 . 1 0 :2:0 
+[s S1071 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 GODONE 1 0 :1:2 
 ]
-[u S1063 . 1 `S1038 1 . 1 0 `S1047 1 . 1 0 `S1051 1 . 1 0 `S1053 1 . 1 0 `S1055 1 . 1 0 `S1057 1 . 1 0 `S1060 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES1063  1 e 1 @3931 ]
+[u S1074 . 1 `S1049 1 . 1 0 `S1058 1 . 1 0 `S1062 1 . 1 0 `S1064 1 . 1 0 `S1066 1 . 1 0 `S1068 1 . 1 0 `S1071 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES1074  1 e 1 @3931 ]
 "12193
 [v _ADRESL ADRESL `VEuc  1 e 1 @3934 ]
 "12263
@@ -619,8 +619,6 @@ PENDING 3
 [v _SSID SSID `*.25uc  1 e 2 0 ]
 "28
 [v _PASS PASS `*.25uc  1 e 2 0 ]
-"31
-[v _labels labels `[3]*.25uc  1 e 6 0 ]
 "16 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/ph.c
 [v _ph_reads ph_reads `[5]d  1 s 20 ph_reads ]
 "27 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/Si7021.c
@@ -629,26 +627,28 @@ PENDING 3
 [v _Si7021_temps Si7021_temps `[5]d  1 s 20 Si7021_temps ]
 "29
 [v _Si7021_humids Si7021_humids `[5]d  1 s 20 Si7021_humids ]
-[s S1115 . 3 `uc 1 started 1 0 `i 1 time 2 1 ]
+[s S1126 . 3 `uc 1 started 1 0 `i 1 time 2 1 ]
 "18 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/stopwatch.c
-[v _global_stopwatch global_stopwatch `VES1115  1 s 3 global_stopwatch ]
+[v _global_stopwatch global_stopwatch `VES1126  1 s 3 global_stopwatch ]
 "5 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/timer0.c
 [v _count count `VEi  1 s 2 count ]
 "6
 [v _read read `VEuc  1 s 1 read ]
-[s S898 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
+[s S909 . 14 `[8]uc 1 buffer 8 0 `i 1 size 2 8 `i 1 head 2 10 `i 1 tail 2 12 ]
 "19 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/uart.c
-[v _RX_buf RX_buf `VES898  1 s 14 RX_buf ]
+[v _RX_buf RX_buf `VES909  1 s 14 RX_buf ]
 "20
-[v _TX_buf TX_buf `VES898  1 s 14 TX_buf ]
+[v _TX_buf TX_buf `VES909  1 s 14 TX_buf ]
 "38 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _main main `(i  1 e 2 0 ]
 {
 "41
-[v main@result result `d  1 a 4 0 ]
+[v main@temp temp `d  1 a 4 8 ]
+[v main@humid humid `d  1 a 4 4 ]
+[v main@ph ph `d  1 a 4 0 ]
 "40
-[v main@c c `i  1 a 2 4 ]
-"100
+[v main@c c `i  1 a 2 12 ]
+"93
 } 0
 "69 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/mc_init.c
 [v _system_init system_init `(v  1 e 1 0 ]
@@ -702,17 +702,18 @@ PENDING 3
 {
 "53
 } 0
-"108 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"101 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _send_data_double send_data_double `(v  1 e 1 0 ]
 {
-"110
-[v send_data_double@numbuf numbuf `[10]uc  1 a 10 95 ]
-"108
-[v send_data_double@field field `i  1 p 2 89 ]
-[v send_data_double@val val `d  1 p 4 91 ]
-"109
-[v send_data_double@strbuf strbuf `[60]uc  1 s 60 strbuf ]
-"130
+"103
+[v send_data_double@numbuf numbuf `[10]uc  1 a 10 101 ]
+"101
+[v send_data_double@ph ph `d  1 p 4 89 ]
+[v send_data_double@temp temp `d  1 p 4 93 ]
+[v send_data_double@humid humid `d  1 p 4 97 ]
+"102
+[v send_data_double@strbuf strbuf `[100]uc  1 s 100 strbuf ]
+"141
 } 0
 "3 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\strcat.c
 [v _strcat strcat `(*.39uc  1 e 2 0 ]
@@ -757,9 +758,9 @@ PENDING 3
 [v powf@t_h t_h `f  1 a 4 84 ]
 [v powf@t_l t_l `f  1 a 4 40 ]
 [v powf@s_l s_l `f  1 a 4 36 ]
-[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1634 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "59
-[v powf@__xc8_float_word __xc8_float_word `S1623  1 a 4 168 ]
+[v powf@__xc8_float_word __xc8_float_word `S1634  1 a 4 168 ]
 "54
 [v powf@z z `f  1 a 4 164 ]
 "55
@@ -825,9 +826,9 @@ PENDING 3
 "28
 [v sqrtf@t t `l  1 a 4 32 ]
 [v sqrtf@q q `l  1 a 4 28 ]
-[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1634 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "31
-[v sqrtf@__xc8_float_word __xc8_float_word `S1623  1 a 4 24 ]
+[v sqrtf@__xc8_float_word __xc8_float_word `S1634  1 a 4 24 ]
 "28
 [v sqrtf@i i `l  1 a 4 20 ]
 [v sqrtf@s s `l  1 a 4 16 ]
@@ -840,9 +841,9 @@ PENDING 3
 "4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\nanf.c
 [v _nanf nanf `(f  1 e 4 0 ]
 {
-[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1634 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "7
-[v nanf@u u `S1623  1 a 4 9 ]
+[v nanf@u u `S1634  1 a 4 9 ]
 "4
 [v nanf@s s `*.25Cuc  1 p 2 5 ]
 "13
@@ -858,9 +859,9 @@ PENDING 3
 {
 "7
 [v scalbnf@y y `f  1 a 4 58 ]
-[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1634 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "6
-[v scalbnf@u u `S1623  1 a 4 54 ]
+[v scalbnf@u u `S1634  1 a 4 54 ]
 "4
 [v scalbnf@x x `f  1 p 4 44 ]
 [v scalbnf@n n `i  1 p 2 48 ]
@@ -869,13 +870,13 @@ PENDING 3
 "4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\fabsf.c
 [v _fabsf fabsf `(f  1 e 4 0 ]
 {
-[u S1623 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[u S1634 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "6
-[v fabsf@u u `S1623  1 a 4 9 ]
+[v fabsf@u u `S1634  1 a 4 9 ]
 "4
 [v fabsf@x x `f  1 p 4 5 ]
 "5
-[v fabsf@F459 F459 `S1623  1 s 4 F459 ]
+[v fabsf@F459 F459 `S1634  1 s 4 F459 ]
 "9
 } 0
 "245 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcadd.c
@@ -1013,10 +1014,10 @@ PENDING 3
 [v lcd_clear@i i `i  1 a 2 61 ]
 "186
 } 0
-"102 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
+"95 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/main.c
 [v _connect_to_wifi connect_to_wifi `(v  1 e 1 0 ]
 {
-"106
+"99
 } 0
 "57 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/esp8266.c
 [v _ESP8266_reset ESP8266_reset `(v  1 e 1 0 ]
@@ -1245,17 +1246,17 @@ PENDING 3
 "8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S1488 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S1499 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S1493 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
-[u S1496 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1488 1 fAsBytes 4 0 `S1493 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S1496  1 a 4 38 ]
+[s S1504 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
+[u S1507 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1499 1 fAsBytes 4 0 `S1504 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S1507  1 a 4 38 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 33 ]
-[s S1564 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1575 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1567 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1564 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1567  1 a 2 42 ]
+[u S1578 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1575 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1578  1 a 2 42 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 37 ]
 "11
@@ -1278,11 +1279,11 @@ PENDING 3
 [v ___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v ___awmod@sign sign `uc  1 a 1 12 ]
-[v ___awmod@counter counter `uc  1 a 1 11 ]
+[v ___awmod@sign sign `uc  1 a 1 10 ]
+[v ___awmod@counter counter `uc  1 a 1 9 ]
 "7
-[v ___awmod@dividend dividend `i  1 p 2 7 ]
-[v ___awmod@divisor divisor `i  1 p 2 9 ]
+[v ___awmod@dividend dividend `i  1 p 2 5 ]
+[v ___awmod@divisor divisor `i  1 p 2 7 ]
 "34
 } 0
 "151 C:\Users\jstpa\MPLABXProjects\4350_project.X\src/i2c_master.c

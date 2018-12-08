@@ -15810,7 +15810,7 @@ char * IP = "api.thingspeak.com";
 
 char * labels[] = {"PH", "HUMIDITY", "TEMP"};
 void connect_to_wifi(void);
-void send_data_double(int field, double val);
+void send_data_double(double ph, double temp, double humid);
 
 
 
@@ -15818,7 +15818,7 @@ void send_data_double(int field, double val);
 int main() {
 
     int c = 0;
-    double result;
+    double ph, humid, temp;
     system_init();
     lcd_init();
     lcd_clear();
@@ -15838,39 +15838,32 @@ int main() {
 
         if(!TIMER0_is_read()) {
 
+            c = TIMER0_get_count();
             TIMER0_stop();
-            c = TIMER0_get_count() % 3;
+            if( c % 5 == 0) {
+
+                ph = ph_avg();
+                humid = Si7021_avg_humidity();
+                temp = Si7021_avg_temp();
 
 
-            switch(c) {
-                case 0:
-                    result = ph_avg();
-                    break;
-                case 1:
-                    result = Si7021_avg_humidity();
-                    break;
-                case 2:
-                    result = Si7021_avg_temp();
-                    break;
-                default:
-                    result = ph_avg();
-                    c = 0;
+                send_data_double(ph, temp, humid);
+
+
+                lcd_newline();
+                lcd_puts("DATA SENT");
+                lcd_update();
+
+            } else {
+
+                ph_read();
+                Si7021_read_temp();
+                Si7021_read_humidity();
+                lcd_newline();
+                lcd_puts("DATA UPDATED");
+                lcd_update();
+
             }
-
-
-            send_data_double(c + 1, result);
-
-
-            lcd_newline();
-            lcd_puts(labels[c]);
-            lcd_puts(" DATA SENT");
-            lcd_update();
-
-
-            ph_read();
-            Si7021_read_temp();
-            Si7021_read_humidity();
-
 
             TIMER0_start();
         }
@@ -15885,18 +15878,36 @@ void connect_to_wifi() {
     ESP8266_connect(SSID, PASS);
 }
 
-void send_data_double(int field, double val) {
-    static char strbuf[60];
+void send_data_double(double ph, double temp, double humid) {
+    static char strbuf[100];
     char numbuf[10];
     strbuf[0] = '\0';
 
-    itoa(field, numbuf, 10);
+    itoa(1, numbuf, 10);
     strcat(strbuf, "GET /update?api_key=ONF84FNQ1XDZB5KH&field");
     strcat(strbuf, numbuf);
 
 
     strcat(strbuf, "=");
-    dtoa(val, numbuf, 10);
+    dtoa(ph, numbuf, 10);
+    strcat(strbuf, numbuf);
+    strcat(strbuf, "&");
+
+
+    itoa(2, numbuf, 10);
+    strcat(strbuf, "field");
+    strcat(strbuf, numbuf);
+    dtoa(humid, numbuf, 10);
+    strcat(strbuf, "=");
+    strcat(strbuf, numbuf);
+    strcat(strbuf, "&");
+
+
+    itoa(3, numbuf, 10);
+    strcat(strbuf, "field");
+    strcat(strbuf, numbuf);
+    dtoa(temp, numbuf, 10);
+    strcat(strbuf, "=");
     strcat(strbuf, numbuf);
     strcat(strbuf, "\r\n\r\n");
 

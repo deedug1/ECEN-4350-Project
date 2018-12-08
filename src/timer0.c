@@ -8,7 +8,7 @@ static volatile char read = 1;
 void TIMER0_init() {
     // Setup ~7 second timer
     T0CON0 = 0x1F; // POST-SCALER 15
-    T0CON1 = 0x46; // PRE-SCALER 32
+    T0CON1 = 0x45; // PRE-SCALER 32
 }
 
 void TIMER0_reset() {

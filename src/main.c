@@ -30,7 +30,7 @@ char * IP = "api.thingspeak.com";
 
 char * labels[] = {"PH", "HUMIDITY", "TEMP"};
 void connect_to_wifi(void);
-void send_data_double(int field, double val); // FIX ME int -> double 
+void send_data_double(double ph, double temp, double humid); // FIX ME int -> double 
 //void send_data_int(int field, int val);
 /*
  * 
@@ -38,7 +38,7 @@ void send_data_double(int field, double val); // FIX ME int -> double
 int main() {
 //    char c;
     int c = 0;
-    double result;
+    double ph, humid, temp;
     system_init();
     lcd_init();
     lcd_clear();
@@ -55,42 +55,35 @@ int main() {
     TIMER0_start();
     
     while(1) {
-        // END 
+        // END
         if(!TIMER0_is_read()) {
             // Disable timer to do work
+            c = TIMER0_get_count();
             TIMER0_stop(); 
-            c = TIMER0_get_count() % 3;
-           
-            // Calculate one of the types
-            switch(c) {
-                case 0:
-                    result = ph_avg();
-                    break;
-                case 1:
-                    result = Si7021_avg_humidity();
-                    break;
-                case 2:
-                    result = Si7021_avg_temp();
-                    break;
-                default:
-                    result = ph_avg();
-                    c = 0;
-            }
-            
-            // Send data
-            send_data_double(c + 1, result);
-            
-            // Update lcd
-            lcd_newline();
-            lcd_puts(labels[c]);
-            lcd_puts(" DATA SENT");
-            lcd_update();
+            if( c % 5 == 0) {
+                // Calculate results
+                ph = ph_avg();
+                humid = Si7021_avg_humidity();
+                temp = Si7021_avg_temp();
 
-            // Update all values
-            ph_read();
-            Si7021_read_temp();
-            Si7021_read_humidity();
-            
+                // Send data
+                send_data_double(ph, temp, humid);
+
+                // Update lcd
+                lcd_newline();
+                lcd_puts("DATA SENT");
+                lcd_update();
+                
+            } else {
+                // Update all values
+                ph_read();
+                Si7021_read_temp();
+                Si7021_read_humidity();
+                lcd_newline();
+                lcd_puts("DATA UPDATED");
+                lcd_update();
+                
+            }
             // Enable timer
             TIMER0_start(); 
         }
@@ -105,18 +98,36 @@ void connect_to_wifi() {
     ESP8266_connect(SSID, PASS);
 }
 
-void send_data_double(int field, double val) {
-    static char strbuf[60];
+void send_data_double(double ph, double temp, double humid) {
+    static char strbuf[100];
     char numbuf[10];
     strbuf[0] = '\0';
     // Get field number
-    itoa(field, numbuf, 10);
+    itoa(PH_FIELD, numbuf, 10);
     strcat(strbuf, "GET /update?api_key=ONF84FNQ1XDZB5KH&field");
     strcat(strbuf, numbuf);
     
-    // Get send value
+    // Send ph value
     strcat(strbuf, "=");
-    dtoa(val, numbuf, 10);
+    dtoa(ph, numbuf, 10);
+    strcat(strbuf, numbuf);
+    strcat(strbuf, "&");
+    
+    // Send humid value
+    itoa(HUMIDITY_FIELD, numbuf, 10);
+    strcat(strbuf, "field");
+    strcat(strbuf, numbuf);
+    dtoa(humid, numbuf, 10);
+    strcat(strbuf, "=");
+    strcat(strbuf, numbuf);
+    strcat(strbuf, "&");
+    
+    // Send tmpe value
+    itoa(TEMP_FIELD, numbuf, 10);
+    strcat(strbuf, "field");
+    strcat(strbuf, numbuf);
+    dtoa(temp, numbuf, 10);
+    strcat(strbuf, "=");
     strcat(strbuf, numbuf);
     strcat(strbuf, "\r\n\r\n");
     
